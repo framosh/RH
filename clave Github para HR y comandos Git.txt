@@ -1,0 +1,9 @@
+6254a02bce1fc10009f5d1cc
+
+echo "# RH" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/framosh/RH.git
+git push -u origin main

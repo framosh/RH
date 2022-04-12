@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../css/stylesMaps.css">
+    <title>Pruebas con Google Maps</title>
+
+    <!-- <script type="text/javascript" src="progjs/Servidor.js" defer></script> -->
+    <!--  <script type="text/javascript" src="../js/pruebaMaps.js" defer></script> -->
+    <script type="text/javascript" src="../ts/ejemplo3.js" async></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+    <!-- <link href="../css/material-kit.css" rel="stylesheet" /> -->
+    <!--  -->
+</head>
+
+<body>
+    <h1>PRUEBA DE MAPS</h1>
+    <div class="grid-layout">
+        <div class="caja c1">
+            <div id="map"></div>
+            <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+            <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap&v=weekly" async>
+            </script>
+            <!-- <script type="text/javascript" src="../ts/ejemplo1.js" async></script> -->
+        </div>
+
+        <div class="caja c2">
+            <Table>
+                <tr style="background-color: rgb(235, 148, 91);">
+                    <td>Recorrido desde:</td>
+                    <td><input type="text" name="nombre1" id="nombre1" value="" required></td>
+                    <td>Latitud:</td>
+                    <td><input type="number" name="lat1" id="lat1" value="0"></td>
+                    <td>Longitud:</td>
+                    <td><input type="number" name="lon1" id="lon1" value="0"></td>
+                </tr>
+                <tr>
+                    <td>Hasta:</td>
+                    <td><input type="text" name="nombre2" id="nombre2" value="" required></td>
+                    <td>Latitud:</td>
+                    <td><input type="number" name="lat2" id="lat2" value="0"></td>
+                    <td>Longitud:</td>
+                    <td><input type="number" name="lon2" id="lon2" value="0"></td>
+                </tr>
+            </Table>
+            <div style="text-align:center;">
+                <button type="submit" id="calcula" onclick="calculaDistancia()">Calcula</button>
+            </div>
+
+        </div>
+
+        <div class="caja c3">
+            <Table>
+                <tr>
+                    <td>Distancia de recorrido:</td>
+                    <td><input type="text" name="distancia" id="distancia" value="" required></td>
+                </tr>
+            </Table>
+
+        </div>
+    </div>
+</body>
+
+</html>

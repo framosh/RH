@@ -1,0 +1,97 @@
+<script  language="JavaScript" type="text/javascript">
+function reporte() {
+var estatus = document.getElementById("Estatus").value;
+window.location.href = "httpdocs/rdva2.php?Estatus="+estatus;
+}
+
+function cargaDatos() 
+{
+var llave1 = document.getElementById("Clave").value;
+
+// alert("Entra a cargaDatos con clave: "+llave1);
+
+var archivo1 = "http://admonarh.arhsi.com.mx/httpdocs/consultav.php";
+var archivo2 = archivo1+"?Clave="+llave1;
+
+if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+    var xhttp=new XMLHttpRequest();
+    }
+else
+    {// code for IE6, IE5
+    var xhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+xhttp.open("GET", archivo2, true);
+xhttp.send();
+
+xhttp.onreadystatechange=function()
+  {
+//  alert("paso 1.7");
+  if (this.readyState==4 && this.status==200)
+    {
+ //   alert("paso 1.8");
+    var cadena = xhttp.responseText;
+    cadena="\""+cadena+"|\"";
+
+//    document.getElementById("demo").innerHTML=cadena;
+
+    var separador =0;
+    var posicion=0;
+    var lugar1 = 1;
+    var lugar2=0;
+    var lugar=0;
+    var dato="";
+    var campo=[];
+
+   while (separador <10)
+      {
+      lugar = cadena.indexOf("|",lugar1);
+      lugar2 =lugar;
+      if((lugar1+1)<lugar2) {
+             dato = cadena.substring(lugar1,lugar2);
+  //           alert("asigna valor de campo: ("+separador+")  campo:("+dato+") lugar1: ("+lugar1+")  lugar2: ("+lugar2+")");
+             }
+      else
+             dato = "vacio";
+
+     campo[separador]=dato;
+     separador++;
+     lugar1=lugar2+1;
+     }
+
+    document.getElementById("alta").reset();
+    var opcion="";
+    var opcion1=campo[9].replace(/\s/g,"");
+
+    switch (opcion1)
+        {
+        case "Activa":
+                            opcion = "0";
+                            break;
+        case "Cubierta":
+                            opcion = "1";
+                            break;
+       case "Cancelada":
+                           opcion = "2";
+                           break;
+      case "Stand by":
+                           opcion = "3";
+                           break;
+      default:
+                  opcion = "3";
+      }
+
+    document.getElementById("Clave").setAttribute('value',campo[0]);
+    document.getElementById("Empresa").innerHTML=campo[1];
+    document.getElementById("Puesto").innerHTML=campo[2];
+    document.getElementById("Nivel").innerHTML=campo[5];
+    document.getElementById("Requisitos").innerHTML=campo[4];
+    document.getElementById("Funciones").innerHTML=campo[3];
+    document.getElementById("Lugar").innerHTML=campo[6];
+    document.getElementById("Sueldo").innerHTML=campo[8];
+    document.getElementById("Estatus").selectedIndex=opcion;    
+   }
+ }
+}
+</script>

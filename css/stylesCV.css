@@ -1,0 +1,367 @@
+.layout {
+    font-family: arial, sans-serif, verdana;
+    display: block;
+    margin: auto;
+    font-size: 14px;
+    width: 100%;
+    overflow: auto;
+    height: 100%;
+    outline-offset: -1px;
+    /*    max-height: 10em; */
+}
+
+.container {
+    display: block;
+    /*    margin-left: 10%; */
+    /*    margin-right: 10%; */
+    overflow: auto;
+    font-size: 14px;
+    width: 100%;
+}
+
+#myDiv {
+    display: block;
+    overflow: auto;
+    width: 100%;
+    background-color: rgb(133, 228, 235);
+    /*    background-color: rgb(241, 183, 94);*/
+}
+
+#myDiv2 {
+    display: block;
+    overflow: auto;
+    width: 100%;
+    background-color: rgb(133, 228, 235);
+    /*    background-color: rgb(241, 183, 94);*/
+}
+
+thead.formato,
+thead th {
+    position: sticky;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    line-height: 25px;
+    font-size: 1.0em;
+    text-align: center;
+    background: #3e87e0;
+    border-bottom: solid 3px rgba(0, 0, 0, 0.4);
+    color: rgb(238, 238, 247);
+    text-shadow: 2px 2px 1px rgba(43, 37, 37, 0.4);
+    border-right: 2px solid white;
+}
+
+tbody td,
+thead th {
+    /*text-align: right; */
+    border-right: 2px solid white;
+    word-wrap: break-word;
+}
+
+tbody td:last-child,
+thead th:last-child {
+    border-right: 1px solid white;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.interlineado tr:hover {
+    background-color: #ddd;
+}
+
+#solido.nohover:hover {
+    background-color: #3e87e0;
+}
+
+body {
+    background-color: rgb(168, 187, 187);
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+
+.caja {
+    /*   width: 150px; */
+    /*  height: 150px; */
+    /*    border: 1px solid black; */
+    background-color: antiquewhite;
+    /*  margin: 15px; */
+    text-align: left;
+    padding: 10px;
+    /*    line-height: 150px; */
+    /*    float: left; */
+}
+
+.c0 {
+    grid-area: foto;
+    border-left: 0px;
+    /* grid-column: 1/4; */
+    /* grid-row: 1 / span 2; */
+    /*    grid-area: 1/1/3/4; */
+    /*    grid-column: 1 / span 2; */
+    background-color: rgb(220, 226, 240);
+}
+
+.c11 {
+    grid-area: logox;
+    border-right: 0px;
+    /* grid-column: 1/4; */
+    /* grid-row: 1 / span 2; */
+    /*    grid-area: 1/1/3/4; */
+    /*    grid-column: 1 / span 2; */
+    background-color: rgb(220, 226, 240);
+}
+
+.c1 {
+    grid-area: cabecera;
+    border-right: 0px;
+    border-left: 0px;
+    /* grid-column: 1/4; */
+    /* grid-row: 1 / span 2; */
+    /*    grid-area: 1/1/3/4; */
+    /*    grid-column: 1 / span 2; */
+    background-color: rgb(220, 226, 240);
+}
+
+.c2 {
+    grid-area: personal;
+    /*grid-column: 1/3; */
+    /*    grid-column: 1 / span 2; */
+    background-color: rgb(171, 192, 238);
+}
+
+.c3 {
+    grid-area: estudios;
+    /*grid-column: 3/4; */
+    /*    background-color: rgb(171, 192, 238);*/
+    background-color: cadetblue;
+}
+
+.c31 {
+    grid-area: profesion;
+    background-color: rgb(102, 241, 149);
+}
+
+.c32 {
+    grid-area: r-profesion;
+    background-color: rgb(102, 241, 149);
+}
+
+.c33 {
+    grid-area: colegio;
+    background-color: rgb(171, 192, 238);
+}
+
+.c34 {
+    grid-area: r-colegio;
+    background-color: rgb(171, 192, 238);
+}
+
+.c35 {
+    grid-area: campus;
+    background-color: rgb(171, 192, 238);
+}
+
+.c36 {
+    grid-area: r-campus;
+    background-color: rgb(171, 192, 238);
+}
+
+.c37 {
+    grid-area: periodo;
+    background-color: rgb(171, 192, 238);
+}
+
+.c38 {
+    grid-area: r-periodo;
+    background-color: rgb(171, 192, 238);
+}
+
+.c39 {
+    grid-area: certificado;
+    background-color: rgb(171, 192, 238);
+}
+
+.c40 {
+    grid-area: r-certificado;
+    background-color: rgb(171, 192, 238);
+}
+
+.grid-layout2 {
+    display: grid;
+    height: 200px;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    grid-template-areas: 'profesion r-profesion r-profesion r-profesion'
+        'colegio r-colegio r-colegio r-colegio'
+        'campus r-campus r-campus r-campus'
+        'periodo r-periodo certificado r-certificado';
+    grid-template-rows: 25% 25% 25% 25%;
+    grid-template-columns: 15% auto 15% auto;
+    background-color: chartreuse;
+    /*    border: 1px solid black; */
+}
+
+.grid-layout3 {
+    display: grid;
+    height: 200px;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    grid-template-areas: 'profesion r-profesion r-profesion r-profesion'
+        'colegio r-colegio r-colegio r-colegio'
+        'campus r-campus r-campus r-campus'
+        'periodo r-periodo certificado r-certificado';
+    grid-template-rows: 25% 25% 25% 25%;
+    grid-template-columns: 15% auto 15% auto;
+    background-color: chartreuse;
+    /*    border: 1px solid black; */
+}
+
+.c4 {
+    grid-area: cursos;
+    /*    grid-column: 1 / span 2; */
+    background-color: rgb(171, 192, 238);
+}
+
+.c5 {
+    grid-area: experiencia;
+    /* grid-column: 2/4; */
+    background-color: rgb(171, 192, 238);
+}
+
+.c6 {
+    grid-area: herramientas;
+    /*    width: 70%; */
+    /*    margin-left: 15%; */
+    /* margin-right: 15%; */
+    /* grid-column: 2/4; */
+    /*    background-color: rgb(171, 192, 238); */
+    background-color: cadetblue;
+}
+
+.c7 {
+    grid-area: idiomas;
+
+    /* grid-column: 2/4; */
+    background-color: rgb(171, 192, 238);
+}
+
+.c8 {
+    grid-area: comentarios;
+    /* grid-column: 2/4; */
+    background-color: rgb(171, 192, 238);
+}
+
+.grid-layout {
+    display: grid;
+    height: 1800px;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    grid-template-areas: 'logox cabecera foto'
+        'personal personal personal'
+        'estudios estudios estudios'
+        'cursos cursos cursos'
+        'experiencia experiencia experiencia'
+        'herramientas herramientas herramientas'
+        'idiomas idiomas idiomas'
+        'comentarios comentarios comentarios';
+    grid-template-rows: auto auto auto 15% auto auto 8% auto;
+    grid-template-columns: 25% auto 15%;
+    /*    grid-template-columns: 80% auto; */
+    /*    grid-template-rows: 20% 10% 60% auto; */
+    /* grid-template-rows: auto; */
+    /*    justify-content: stretch; */
+
+    /*    width: 80%; */
+    /*  margin: 0 auto; */
+    background-color: chartreuse;
+    /*    padding: 20px; */
+    /*    border: 1px solid black; */
+}
+
+.img-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.img-left {
+    display: block;
+    margin-left: 5px;
+    margin-right: auto;
+}
+
+.img-right {
+    display: block;
+    margin-left: auto;
+    margin-right: 5px;
+}
+
+.w-10 {
+    width: 10% !important;
+}
+
+.w-20 {
+    width: 20% !important;
+}
+
+.w-25 {
+    width: 25% !important;
+}
+
+.w-50 {
+    width: 50% !important;
+}
+
+.w-75 {
+    width: 75% !important;
+}
+
+.w-80 {
+    width: 80% !important;
+}
+
+.w-90 {
+    width: 90% !important;
+}
+
+.w-100 {
+    width: 100% !important;
+}
+
+.rounded {
+    border-radius: 0.25rem !important;
+}
+
+.rounded-top {
+    border-top-left-radius: 0.25rem !important;
+    border-top-right-radius: 0.25rem !important;
+}
+
+.rounded-right {
+    border-top-right-radius: 0.25rem !important;
+    border-bottom-right-radius: 0.25rem !important;
+}
+
+.rounded-bottom {
+    border-bottom-right-radius: 0.25rem !important;
+    border-bottom-left-radius: 0.25rem !important;
+}
+
+.rounded-left {
+    border-top-left-radius: 0.25rem !important;
+    border-bottom-left-radius: 0.25rem !important;
+}
+
+.rounded-circle {
+    border-radius: 50% !important;
+}
+
+.rounded-0 {
+    border-radius: 0 !important;
+}

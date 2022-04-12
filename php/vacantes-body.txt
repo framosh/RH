@@ -1,0 +1,47 @@
+
+<style>
+<div {
+display: block;
+font-family:verdana;
+color:black;
+}>
+</div>
+</style>
+
+<div id="pantalla1">
+<p id="demo"></p>
+</div>
+<div id="pantalla">
+<form action="http://admonarh.arhsi.com.mx/httpdocs/registrov2.php" method="post" id="alta">
+<fieldset>
+<Table id="vacante">
+<tr><td>Empresa:</td><td><textarea name="Empresa"  cols="45"  rows="1" id="Empresa" value=""></textarea></td></tr>
+<tr><td>Puesto:</td><td><textarea name="Puesto"   cols="35"  rows="1" id="Puesto" value=""></textarea></td></tr>
+<tr><td>Nivel:</td><td><textarea name="Nivel"  cols="15"  rows="1" id="Nivel" value=""></textarea></td></tr>
+<tr><td>Requisitos:</td><td><textarea name="Requisitos" cols="45"  rows="4" id="Requisitos" value=""></textarea></td></tr>
+<tr><td>Funciones:</td><td><textarea name="Funciones" cols="45"  rows="4" id="Funciones" value=""></textarea></td></tr>
+<tr><td>Lugar:</td><td><textarea  name="Lugar"  cols="45"  rows="1" id="Lugar" value=""></textarea></td></tr>
+<tr><td>Sueldo:</td><td><textarea  name="Sueldo"  cols="15"  rows="1" id="Sueldo" value=""></textarea></td></tr>
+<tr><td>Clave:</td><td><input type="text" name="Clave"  id="Clave" value="" maxlength="8" required></td></tr>
+
+<tr><td>Estatus:</td>
+<td><select id="Estatus" name="Estatus" size="1" required>
+   <option>Activa</option>
+   <option>Cubierta</option>
+   <option>Cancelada</option>  
+   <option>Stand by</option>
+</select></td></tr>
+</table>
+</fieldset>
+</form>
+</div>
+
+<br>
+<button type="submit" form="alta">Grabar datos</button>
+<button type="submit" form="sp">Archivo Excel</button>
+<button type="submit"  onclick="reporte()">Reporte</button>
+<button  type="submit"  onclick="cargaDatos()">Consulta</button>
+<br>
+
+<form action="http://admonarh.arhsi.com.mx/httpdocs/sp.php"  id="sp"></form>
+<form action="http://admonarh.arhsi.com.mx/httpdocs/rdva2.php"  method="post" id="rv"></form>

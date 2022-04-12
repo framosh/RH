@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../css/stylesCandidato.css">
+    <title>ABC de Candidatos</title>
+
+    <script type="text/javascript" src="progjs/Servidor.js" defer></script>
+    <script type="text/javascript" src="progjs/cv_arhsi.js?dev='+ Math.floor(Math.random()*100)+'" defer></script>
+    <script type="text/javascript" src="progjs/reporteCV.js?dev='+ Math.floor(Math.random()*100)+'" defer></script>
+    <script type="text/javascript" src="progjs/reporteRapCon.js?dev='+ Math.floor(Math.random()*100)+'" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- <link href="../css/material-kit.css" rel="stylesheet" /> -->
+    <!--  -->
+</head>
+
+<body>
+    <h1 style="color: blue;">CURRICULUM DE PERSONAL</h1>
+    <div class="grid-layout">
+
+        <div class="caja c2">
+            <div>
+                <h3 style="text-align: center;">
+                    <p>Información General del Candidato</p>
+                </h3>
+
+                <div>
+                    <form>
+                        <fieldset>
+                            <Table>
+
+                                <tr>
+                                    <td>Candidato : </td>
+                                    <td><select id="candidatos" onchange="consultaCandidato()" required>
+                                        </select></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Clave:</td>
+                                    <td><input type="text" name="cand_key" id="cand_key" value="0" disabled></td>
+                                </tr>
+                                <tr>
+                                    <td>Nombre:</td>
+                                    <td><input type="text" name="cand_nom" id="cand_nom" value="" size="40"
+                                            maxlength="80" required></td>
+                                </tr>
+                                <tr>
+                                    <td>Teléfono casa:</td>
+                                    <td><input type="text" name="cand_tel1" id="cand_tel1" value="" size="40"
+                                            maxlength="40" required></td>
+                                </tr>
+                                <tr>
+                                    <td>Celular:</td>
+                                    <td><input type="text" name="cand_tel2" id="cand_tel2" value="" size="40"
+                                            maxlength="40"></td>
+                                </tr>
+                                <tr>
+                                    <td>Correo:</td>
+                                    <td> <input type="text" name="cand_corr" id="cand_corr" value="" size="40"
+                                            maxlength="80" required></td>
+                                </tr>
+                                <tr>
+                                    <td>Skype:</td>
+                                    <td> <input type="text" name="skype" id="skype" value="" size="40" maxlength="25"
+                                            required></td>
+                                </tr>
+                                <tr>
+                                    <td>Fecha nacimiento:</td>
+                                    <td> <input type="date" name="fnac" id="fnac" value="" onchange="calcula_edad()"
+                                            required></td>
+                                </tr>
+                                <tr>
+                                    <td>Direccion:</td>
+                                    <td> <input type="text" name="direccion" id="direccion" value="" maxlength="200"
+                                            required></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Estado : </td>
+                                    <td><select id="estados" required>
+                                        </select></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Edad:</td>
+                                    <td><input type="text" name="edad" id="edad" value=""></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Estado civil: </td>
+                                    <td><select id="civil" required>
+                                            <option>Seleccione el estado civil</option>
+                                            <option>Soltero</option>
+                                            <option>Casado</option>
+                                            <option>Viudo</option>
+                                            <option>Divorciado</option>
+                                            <option>Unión libre</option>
+                                        </select></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Hijos:</td>
+                                    <td><input type="text" name="hijos" id="hijos" value="" maxlength="40"></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Estatus Candidato :</td>
+                                    <td><select id="estatus_cand">
+                                            <option>Seleccione el estatus del candidato</option>
+                                            <option>Aceptado</option>
+                                            <option>Viable</option>
+                                            <option>Entrevistar</option>
+                                            <option>Aplicar examen</option>
+                                            <option>No aplica</option>
+                                            <option>Fuera de presupuesto</option>
+                                            <option>Edad fuera de rango</option>
+                                        </select></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Sueldo solicitado:</td>
+                                    <td><input type="number" name="sdo1" id="sdo1" value="0" required></td>
+                                </tr>
+                            </Table>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="caja c1">
+            <div>
+                <form>
+                    <h3 style="text-align: center;">
+                        <p>Vacante</p>
+                    </h3>
+                    <fieldset>
+                        <Table>
+                            <tr>
+                                <td>Cliente :</td>
+                                <td><select id="empresas" onchange="leeVacantes2()" required>
+                                    </select></td>
+                            </tr>
+
+                            <tr>
+                                <td>Vacante solicitada : </td>
+                                <td><select id="vacantes" onchange="leeCandidatos2()" required>
+                                    </select></td>
+                            </tr>
+
+                            <tr>
+                                <td>Puesto:</td>
+                                <td><input type="text" name="puesto" id="puesto" value="" size="30" disabled></td>
+                            </tr>
+                            <tr>
+                                <td>Rango de Sueldo</td>
+                            </tr>
+                            <tr>
+                                <td><input type="number" name="sdo3" id="sdo3" value="0" disabled></td>
+                                <td><input type="number" name="sdo4" id="sdo4" value="0" disabled></td>
+                            </tr>
+                        </Table>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+
+        <div class="caja c3">
+            <div>
+                <br>
+                <br>
+                <form>
+                    <h3 style="text-align: center;">
+                        <p>Estatus del Proceso</p>
+                    </h3>
+
+                    <fieldset>
+                        <Table>
+                            <tr>
+                                <td>Ultimo sueldo:</td>
+                                <td><input type="number" name="sdo2" id="sdo2" value="0"></td>
+                            </tr>
+                            <tr>
+                                <td>Ultimo trabajo:</td>
+                                <td><input type="text" name="trabajo" id="trabajo" value="" required></td>
+                            </tr>
+                            <tr>
+                                <td>Ultimo puesto:</td>
+                                <td><input type="text" name="puesto2" id="puesto2" value="" required></td>
+                            </tr>
+
+                            <tr>
+                                <td>Estatus CV :</td>
+                                <td><select id="estatus_cv">
+                                        <option>Seleccione el estatus del cv</option>
+                                        <option>Solicitar</option>
+                                        <option>Recibido</option>
+                                        <option>Enviar a cliente</option>
+                                        <option>No aplica</option>
+                                    </select></td>
+                            </tr>
+
+                            <tr>
+                                <td>Estatus Entrevista :</td>
+                                <td><select id="estatus_entre">
+                                        <option>Seleccione el estatus de la entrevista</option>
+                                        <option>Programar entrevista</option>
+                                        <option>Entrevista cancelada</option>
+                                        <option>Candidato no asistio</option>
+                                        <option>Realizada</option>
+                                    </select></td>
+                            </tr>
+
+                            <tr>
+                                <td>Estatus Evaluación :</td>
+                                <td><select id="estatus_eval">
+                                        <option>Seleccione el estatus de la evaluacion</option>
+                                        <option>Programar evaluacion</option>
+                                        <option>Evaluacion cancelada</option>
+                                        <option>Aprobada</option>
+                                        <option>Reprobada</option>
+                                    </select></td>
+                            </tr>
+
+                            <tr>
+                                <td>Fecha envio de cv:</td>
+                                <td><input type="date" name="fecha1" id="fecha1" value=""></td>
+                            </tr>
+                            <tr>
+                                <td>Fecha contratación:</td>
+                                <td><input type="date" name="fecha2" id="fecha2" value=""></td>
+                            </tr>
+                            <tr>
+                                <td>Sueldo contratado:</td>
+                                <td><input type="number" name="sdo5" id="sdo5" value="0"></td>
+                            </tr>
+
+                        </Table>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+
+        <div class="caja c4">
+            <div>
+                <div>
+                    <h3 style="text-align: center;">Asignación de Conocimientos</h3>
+                </div>
+                <form>
+                    <fieldset>
+                        <Table>
+                            <tr>
+                                <td>Conocimiento :</td>
+                                <td><select id="conocimientos" onchange="consultaConocimiento()" required>
+                                    </select></td>
+                            </tr>
+
+                            <tr>
+                                <td>Nivel conocimientos :</td>
+                                <td><select id="nivel" required>
+                                        <option>Seleccione el nivel</option>
+                                        <option>Basico</option>
+                                        <option>Medio</option>
+                                        <option>Avanzado</option>
+                                    </select></td>
+                            </tr>
+
+                            <tr>
+                                <td>Años de experiencia:</td>
+                                <td><input type="number" name="anios" id="anios" value=""></td>
+                            </tr>
+                            <tr>
+                                <td>Meses de experiencia:</td>
+                                <td><input type="number" name="meses" id="meses" value=""></td>
+                            </tr>
+                        </table>
+                    </fieldset>
+                </form>
+            </div>
+
+            <br>
+            <div style="text-align:center;">
+                <button type="submit" id="altacon" onclick="altaConocim()">Alta</button>
+                <button type="submit" id="actuacon" onclick="actualizaConocim()">Actualiza</button>
+                <button type="submit" onclick="limpiaPantalla_Con()">Nuevo conocimiento</button>
+                <br>
+                <br>
+                <button type="submit" id="estudios" onclick="Estudios()">Estudios</button>
+                <button type="submit" id="experiencia" onclick="Experiencia()">Experiencia</button>
+                <br>
+            </div>
+
+            <div>
+                <p id="mensaje_conocimiento" style="color: red"></p>
+            </div>
+        </div>
+
+        <div class="caja c5">
+            <h3 style="text-align: center;">Conocimientos Asignados</h3>
+            <div>
+                <form>
+                    <fieldset>
+
+                        <div class="layout container">
+                            <body9></body9>
+                        </div>
+
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+
+        <div class="caja c6">
+            <div>
+                <form>
+                    <fieldset>
+                        <h3 style="color: blue; padding-left: 5px; padding-top: 5px; text-align: center;">IDIOMAS QUE
+                            CONOCE</h3>
+                        <Table style="width:80%; margin-left: 10%; margin-right: 10%;">
+                            <tr style="text-align: center;">
+                                <td style="border-right: 0px;">Ingles:</td>
+                                <td style="border-right: 0px;"><input type="text" name="ingles" id="ingles" value=""
+                                        size="20" maxlength="20" required></td>
+                                <td style="border-right: 0px;">Español:</td>
+                                <td style="border-right: 0px;"><input type="text" name="espaniol" id="espaniol" value=""
+                                        size="20" maxlength="20" required></td>
+                                <td style="border-right: 0px;">Otro:</td>
+                                <td style="border-right: 0px;"><input type="text" name="otro" id="otro" value=""
+                                        size="35" maxlength="35" required></td>
+                            </tr>
+                        </table>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+
+        <div class="caja c7">
+            <div>
+                <form>
+                    <fieldset>
+                        <h3 style="color: blue; padding-left: 5px; padding-top: 5px; text-align: center;">COMENTARIOS
+                        </h3>
+
+                        <Table>
+                            <tr>
+                                <td>Actividades Culturales:</td>
+                                <td><textarea name="cultura" cols="80" rows="3" id="cultura" value=""></textarea></td>
+                            </tr>
+
+                            <tr>
+                                <td>Actividades Deportivas:</td>
+                                <td><textarea name="deporte" cols="80" rows="3" id="deporte" value=""></textarea></td>
+                            </tr>
+
+                            <tr>
+                                <td>Comentarios Candidato:</td>
+                                <td><textarea name="cand_obs3" cols="80" rows="3" id="cand_obs3" value=""></textarea>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Comentarios Reclutador:</td>
+                                <td><textarea name="cand_obs1" cols="80" rows="3" id="cand_obs1" value=""></textarea>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Comentarios Evaluador:</td>
+                                <td><textarea name="cand_obs2" cols="80" rows="3" id="cand_obs2" value=""></textarea>
+                                </td>
+                            </tr>
+                        </table>
+                    </fieldset>
+                </form>
+            </div>
+            <br>
+            <div>
+                <button id="alta_cand" type="submit" onclick="altaCandidato()">Alta candidato</button>
+                <button id="act_cand" type="submit" onclick="actualizaCandidato()">Actualiza candidato</button>
+                <button id="act_cand" type="submit" onclick="generaCV()">Genera cv</button>
+                <button type="submit" onclick="limpiaPantalla2()">Nuevo candidato</button>
+            </div>
+            <div>
+                <p id="mensaje_gral" style="color: red"></p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

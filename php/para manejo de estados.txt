@@ -1,0 +1,120 @@
+<tr><td>Estado : </td>
+<td><select id="estado" name="estado" required>
+</select></td></tr>
+----------------------------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------------------
+/* CARGA CATALOGO DE ESTADOS */
+function nuevo2() {
+//alert("Limpia pantalla");
+
+var valor="";
+var opcion4=0;
+var opcion2=0;
+
+    document.getElementById("nombre").setAttribute('value',valor);
+    document.getElementById("direccion").setAttribute('value',valor);
+    document.getElementById("piso").setAttribute('value',valor);
+    document.getElementById("despacho").setAttribute('value',valor);
+    document.getElementById("colonia").setAttribute('value',valor);
+    document.getElementById("delegacion").setAttribute('value',valor);
+    document.getElementById("observaciones").innerHTML=valor;
+    document.getElementById("estado").selectedIndex=opcion4;
+    document.getElementById("estatus").selectedIndex=opcion2;
+
+    document.getElementById("demo2").innerHTML="";
+    document.getElementById("estado").innerHTML=leeEstados();  // Carga el catalogo de los estados del pais
+}
+----------------------------------------------------------------------------------------------------------------
+en alta de cliente
+
+var estado1 = document.getElementById("estado").value;
+
+if(estado1==" Seleccione un Estado")
+    {
+    var aviso = "Por favor seleccione un Estado Geografico";
+    document.getElementById("demo2").innerHTML=aviso;
+    return;
+    }
+
+----------------------------------------------------------------------------------------------
+en consulta de cliente
+
+var opcion3=0;
+var opcion4=0;
+
+    for (var i=0;i<estado2.length;i++){
+        var campo2 = estado2[i];
+        var clave = campo2.split("|");
+        if (campo2 && clave[0]!="0") {
+               opcion3++;
+               if (clave[0]==ids[9]) { 
+                     opcion4=opcion3;
+                     break; }
+              }
+      }
+
+//alert("Estado: "+estado2[opcion4]+"  opcion4:("+opcion4+")  ids[9]:("+ids[9]+")   longitud:"+estado2.length);
+
+    document.getElementById("estado").selectedIndex=opcion4;
+
+-----------------------------------------------------------------------------------------------
+var estado2=[];
+
+/* CARGA ESTADOS GEOGRAFICOS  */
+function leeEstados() 
+{
+//alert("Entra a Carga de Estados ");
+
+var archivo2 = "https://notaria.itbp.com.mx/httpdocs/consultaEstados.php";
+
+if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+    var xhttp=new XMLHttpRequest();
+    }
+else
+    {// code for IE6, IE5
+    var xhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+xhttp.open("GET", archivo2, true);
+xhttp.send();
+
+xhttp.onreadystatechange=function()
+  {
+//  alert("paso 1.7");
+  if (this.readyState==4 && this.status==200)
+    {
+ //   alert("paso 1.8");
+    var cadena = xhttp.responseText;
+
+//    document.getElementById("demo2").textContent=cadena+" longitud: ("+cadena.length+")";
+
+    var estados = cadena.split("\n");
+    var i2=0;
+
+    for (var i=0;i<estados.length;i++){
+        var campo = estados[i];
+        if (campo) {
+           estado2[i2]=campo.replace(/\"/g,"");
+           estado2[i2]=estado2[i2].trim();
+//           alert("campo: ("+i2+") - ("+estado2[i2]+")");
+           i2++;
+          }
+      }
+
+i2--;
+
+    var select = document.getElementById("estado");
+
+    for(var i1 = 0; i1 <=i2; i1++) {
+        var option = document.createElement('option');
+        var nombre = estado2[i1].split("|");
+        option.text = option.value = nombre[1];
+        select.add(option);
+        }
+      }
+   }
+}
+----------------------------------------------------------------------------------------
+

@@ -1,0 +1,114 @@
+<style>
+div {
+display: block;
+font-family:verdana;
+color:black;
+}
+</style>
+
+<div>
+<h3 style="text-align:center;">FORMACION ACADEMICA</h3>
+
+<form>
+<fieldset>
+<div>
+
+<table style="width: 100%;">
+<tbody>
+<tr>
+<td style="width: 60px;">Profesion:</td><td style="width: 300px;"><p  id="profesion" ></p></td>
+</tr>
+<tr>
+<td  style="width: 60px;">Colegio  :</td><td style="width: 300px;"><p  id="colegio" ></p></td>
+</tr>
+<tr>
+<td  style="width: 60px;">Campus  :</td><td style="width: 300px;"><p  id="campus" ></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div>
+<table style="width: 100%;">
+<tbody>
+<tr>
+<td  style="width: 60px;">Período:</td><td><p  id="periodo" ></p></td>
+<td style="width: 60px;">Cédula:</td><td><p  id="cedula" ></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div>
+<br>
+<table style="width: 100%;">
+<tbody>
+<tr>
+<td style="width: 60px;">Maestría :</td><td style="width: 300px;"><p  id="maestria" ></p></td>
+</tr>
+<tr>
+<td style="width: 60px;">Colegio  :</td><td style="width: 300px;"><p  id="colegio2" ></p></td>
+</tr>
+<tr>
+<td  style="width: 60px;">Campus  :</td><td style="width: 300px;"><p  id="campus2" ></p></td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+<div>
+<table style="width: 100%;">
+<tbody>
+<tr>
+<td style="width: 60px;">Periodo:</td><td><p  id="periodo2" ></p></td>
+<td style="width: 60px;">Certificado:</td><td><p  id="certificado" ></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+</div>
+</fieldset>
+</form>
+</div>
+
+
+
+
+
+<style>
+div {
+display: block;
+font-family:verdana;
+color:black;
+}
+</style>
+
+<div>
+<h3 style="text-align:center;">FORMACION ACADEMICA</h3>
+
+<form>
+<fieldset>
+
+<div class="grid-layout">
+        <div class="caja titulo">Profesion:</div><div class="caja contenido"><p  id="profesion" ></p></div>
+        <div class="caja titulo">Colegio</div><div class="caja contenido"><p  id="colegio" ></p></div>
+        <div class="caja titulo">Campus</div><div class="caja contenido"><p  id="campus" ></p></div>
+        <div class="caja titulo">Periodo</div><div class="caja contenido"><p  id="periodo" ></p></div>
+        <div class="caja titulo">Cedula</div><div class="caja contenido"><p  id="cedula" ></p></div>
+</div>
+
+<div class="grid-layout">
+        <div class="caja titulo">Maestria:</div><div class="caja contenido"><p  id="maestria" ></p></div>
+        <div class="caja titulo">Colegio</div><div class="caja contenido"><p  id="colegio2" ></p></div>
+        <div class="caja titulo">Campus</div><div class="caja contenido"><p  id="campus2" ></p></div>
+        <div class="caja titulo">Periodo</div><div class="caja contenido"><p  id="periodo2" ></p></div>
+        <div class="caja titulo">Cedula</div><div class="caja contenido"><p  id="certificado" ></p></div>
+</div>
+
+</fieldset>
+</form>
+</div>
+
+

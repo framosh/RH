@@ -1,0 +1,49 @@
+<?php
+DEFINE('DB_USER','arhsi_arhsi01');
+DEFINE('DB_PASSWORD','arhsi6502');
+DEFINE('DB_HOST','localhost:3306');
+DEFINE('DB_NAME','arhsi01_reg');
+
+$dbc = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
+
+if (mysqli_connect_errno()) 
+	{ echo "Failed to connect to DB: ".mysqli_connect_error(); }
+else { echo "DB conected";
+	$stmt=mysqli_stmt_init($dbc); }
+
+$query="SELECT * FROM Vacantes WHERE Clave ='$Clave'";
+
+if($result = mysqli_query($dbc,$query))
+	{
+	if($row = mysqli_fetch_row($result)) 
+		{
+		$Empresa = $row[1];
+		$Puesto = $row[2];
+		$Nivel = $row[3];
+		$Requisitos = $row[4];
+		$Funciones = $row[5];
+		$Lugar = $row[6];
+		$Sueldo = $row[7];
+		$Fecha = $row[8];
+		$Estatus = $row[9];
+
+		echo  '<table id="vacante">
+        	<tr>
+        	<td>$Empresa</td>
+       		<td>$Puesto</td>
+            	<td>$Nivel</td>
+                <td>$Requisitos</td>
+                <td>$Funciones</td>
+                <td>$Lugar</td>
+                <td>$Sueldo</td>
+                <td>$Fecha</td>
+                <td>$Estatus</td>
+                </tr>
+                </table>  ';  
+		}
+	}
+else { echo "<br>Fallo la consulta de datos";}
+
+mysqli_free_result($result);
+mysqli_close($dbc);
+?>

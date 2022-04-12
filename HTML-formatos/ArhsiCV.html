@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../css/stylesCV.css">
+    <title>Curriculum de personal registrado en ARHSI</title>
+
+    <script type="text/javascript" src="progjs/Servidor.js" defer></script>
+    <script type="text/javascript" src="progjs/cv_arhsi.js?dev='+ Math.floor(Math.random()*100)+'" defer></script>
+    <script type="text/javascript" src="progjs/reporteCV.js?dev='+ Math.floor(Math.random()*100)+'" defer></script>
+    <script type="text/javascript" src="progjs/reporteRapCon.js?dev='+ Math.floor(Math.random()*100)+'" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- <link href="../css/material-kit.css" rel="stylesheet" /> -->
+    <!--  -->
+</head>
+
+<body>
+    <h1>CURRICULUM DE PERSONAL</h1>
+    <div class="grid-layout">
+        <div class="caja c11">
+            <div>
+                <img src="../img/arhsi_logo.gif" class="rounded w-90 img-center" alt="No hay logo">
+            </div>
+        </div>
+
+        <div class="caja c1">
+            <div>
+                <h2 style="text-align: center;">
+                    <p>Dirección de Administración</p>
+                </h2>
+                <h3 style="text-align: center;">
+                    <p>Formato general de curriculum</p>
+                </h3>
+
+                <div>
+                    <table>
+                        <tr>
+                            <td style="border-right: 0px;"><b>Vacante solicitada :</b></td>
+                            <td style="border-right: 0px;">
+                                <p id="vacante_sol"></p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="caja c0">
+            <div>
+                <img src="../img/gustavo_bm.jpg" class="rounded w-100 img-center" alt="No hay foto">
+            </div>
+        </div>
+
+        <div class="caja c2">
+            <div>
+                <form>
+                    <h3 style="text-align:center; color: blue;">DATOS PERSONALES</h3>
+                    <fieldset>
+                        <div>
+                            <table style="width:100%;">
+                                <tr>
+                                    <td style="width: 120px;"><b>Nombre:</b></td>
+                                    <td style="width: 400px;">
+                                        <p id="nombre"></p>
+                                    </td>
+                                    <td style="width: 120px;"><b>Hijos:</b></td>
+                                    <td>
+                                        <p id="hijos"></p>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td style="width: 120px;"><b>Edad:</b></td>
+                                    <td style="width: 400px;">
+                                        <p id="edad"></p>
+                                    </td>
+                                    <td style="width: 120px;"><b>Telefono casa:</b></td>
+                                    <td>
+                                        <p id="tel_casa"></p>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td style="width: 120px;"><b>Cumpleaños:</b></td>
+                                    <td style="width: 400px;">
+                                        <p id="cumpleanios"></p>
+                                    </td>
+                                    <td style="width: 120px;"><b>Celular:</b></td>
+                                    <td>
+                                        <p id="celular"></p>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td style="width: 120px;"><b>Estado civil:</b></td>
+                                    <td style="width: 400px;">
+                                        <p id="edo_civil"></p>
+                                    </td>
+                                    <td style="width: 120px;"><b>E-mail:</b></td>
+                                    <td style="width: 300px;">
+                                        <p id="correo"></p>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td style="width: 120px;"><b>Nacionalidad:</b></td>
+                                    <td style="width: 400px;">
+                                        <p id="nacionalidad"></p>
+                                    </td>
+                                    <td style="width: 120px;"><b>Skype:</b></td>
+                                    <td style="width: 300px;">
+                                        <p id="skype"></p>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td style="width: 120px;"><b>Dirección:</b></td>
+                                    <td style="width: 400px;">
+                                        <p id="direccion" p></p>
+                                    </td>
+                                    <td style="width: 120px;"><b>Sueldo actual:</b></td>
+                                    <td>
+                                        <p id="sdo1"></p>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td style="width: 120px;"><b>Colonia:</b></td>
+                                    <td style="width: 400px;">
+                                        <p id="colonia" p></p>
+                                    </td>
+                                    <td style="width: 120px;"><b>Sueldo deseado:</b></td>
+                                    <td>
+                                        <p id="sdo2"></p>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td style="width: 120px;"><b>Delegación:</b></td>
+                                    <td style="width: 400px;">
+                                        <p id="delegacion"></p>
+                                    </td>
+                                    <td style="width: 120px;"><b>Estado:</b></td>
+                                    <td>
+                                        <p id="estado"></p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <div class="caja c3">
+            <form>
+                <h3 style="text-align:center; color: blue;">FORMACION ACADEMICA</h3>
+                <fieldset>
+                    <div class="layout container">
+                        <div class="grid-layout2">
+                            <div class="caja c31">
+                                <p><b>Profesion:</b></p>
+                            </div>
+                            <div class="caja c32">
+                                <p id="profesion" style="font-weight: bold;"></p>
+                            </div>
+                            <div class="caja c33">
+                                <p><b>Colegio:</b></p>
+                            </div>
+                            <div class="caja c34">
+                                <p id="colegio"></p>
+                            </div>
+                            <div class="caja c35">
+                                <p><b>Campus:</b></p>
+                            </div>
+                            <div class="caja c36">
+                                <p id="campus"></p>
+                            </div>
+                            <div class="caja c37">
+                                <p><b>Período:</b></p>
+                            </div>
+                            <div class="caja c38">
+                                <p id="periodo"></p>
+                            </div>
+                            <div class="caja c39">
+                                <p><b>Cédula:</b></p>
+                            </div>
+                            <div class="caja c40">
+                                <p id="cedula"></p>
+                            </div>
+                            <br>
+                        </div>
+
+                        <div class="grid-layout3">
+                            <div class="caja c31">
+                                <p><b>Maestria:</b></p>
+                            </div>
+                            <div class="caja c32">
+                                <p id="maestria" style="font-weight: bold;"></p>
+                            </div>
+                            <div class="caja c33">
+                                <p><b>Colegio:</b></p>
+                            </div>
+                            <div class="caja c34">
+                                <p id="colegio2"></p>
+                            </div>
+                            <div class="caja c35">
+                                <p><b>Campus:</b></p>
+                            </div>
+                            <div class="caja c36">
+                                <p id="campus2"></p>
+                            </div>
+                            <div class="caja c37">
+                                <p><b>Período:</b></p>
+                            </div>
+                            <div class="caja c38">
+                                <p id="periodo2"></p>
+                            </div>
+                            <div class="caja c39">
+                                <p><b>Certificado:</b></p>
+                            </div>
+                            <div class="caja c40">
+                                <p id="certificado"></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+        <div class="caja c4">
+            <div>
+                <form>
+                    <h3 style="text-align:center; color: blue;">FORMACION COMPLEMENTARIA</h3>
+                    <fieldset>
+                        <div id="myDiv2">
+                            <div class="layout container">
+                                <body4></body4>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <div class="caja c5">
+            <div>
+                <form>
+                    <h3 style="text-align:center; color: blue;">EXPERIENCIA LABORAL</h3>
+                    <fieldset>
+                        <div id="myDiv">
+                            <body8></body8>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <div class="caja c6">
+            <div>
+                <form>
+                    <h3 style="text-align:center; color: blue;">HERRAMIENTAS TECNOLOGICAS QUE MANEJA</h3>
+                    <fieldset>
+                        <div id="myDiv">
+                            <body9></body9>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <div class="caja c7">
+            <div>
+                <form>
+                    <h2 style="text-align:center; color: blue;">IDIOMAS QUE CONOCE</h2>
+                    <fieldset>
+                        <div>
+                            <table style="width:80%; margin-left: 10%; margin-right: 10%;">
+                                <tbody>
+                                    <tr>
+                                        <td style="border-right: 0px;">Ingles:</td>
+                                        <td td style="border-right: 0px;"><input type="text" name="ingles" id="ingles"
+                                                value="" disabled></td>
+                                        <td style="border-right: 0px;">Español:</td>
+                                        <td style="border-right: 0px;"><input type="text" name="espaniol" id="espaniol"
+                                                value="" disabled></td>
+                                        <td style="border-right: 0px;">Otro:</td>
+                                        <td style="border-right: 0px;"><input type="text" name="otro" id="otro" value=""
+                                                disabled></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <div class="caja c8">
+            <div>
+                <form>
+                    <fieldset>
+                        <div>
+                            <table style="width:100%;">
+                                <tbody>
+                                    <tr>
+                                        <td style="border-right: 0px;">
+                                            <h3>ACTIVIDADES CULTURALES</h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-right: 0px;"><textarea name="act_cult" cols="125" rows="2"
+                                                id="act_cult" value="" disabled></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-right: 0px;">
+                                            <h3>ACTIVIDADES RECREATIVAS</h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-right: 0px;"><textarea name="act_recrea" cols="125" rows="2"
+                                                id="act_recrea" value="" disabled></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-right: 0px;">
+                                            <h3>COMENTARIOS DEL EVALUADOR</h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-right: 0px;"><textarea name="com_eval" cols="125" rows="2"
+                                                id="com_eval" value="" disabled></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-right: 0px;">
+                                            <h3>COMENTARIOS DEL ENTREVISTADOR</h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-right: 0px;"><textarea name="com_entre" cols="125" rows="2"
+                                                id="com_entre" value="" disabled></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-right: 0px;">
+                                            <h3>COMENTARIOS DEL CANDIDATO</h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-right: 0px;"><textarea name="com_cand" cols="125" rows="2"
+                                                id="com_cand" value="" disabled></textarea></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

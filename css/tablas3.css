@@ -1,0 +1,50 @@
+.layout {
+    font-family: arial, sans-serif, verdana;
+    display: block;
+    margin: auto;
+    font-size: 12px;
+    width: 100%;
+    overflow: auto;
+    /*    height: 100%; */
+    outline-offset: -1px;
+    /*    max-height: 5em; */
+}
+
+.container {
+    display: block;
+    overflow: auto;
+    font-size: 12px;
+    width: 100%;
+}
+
+#myDiv {
+    /*    display: block; */
+    overflow: auto;
+    width: 100%;
+    /*    height: 50%; */
+    background-color: rgb(119, 117, 236);
+}
+
+tbody td,
+thead th {
+    /*text-align: right; */
+    border-right: 2px solid white;
+    word-wrap: break-word;
+}
+
+tbody td:last-child,
+thead th:last-child {
+    border-right: 1px solid white;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.interlineado tr:hover {
+    background-color: #ddd;
+}
+
+#solido.nohover:hover {
+    background-color: #3e87e0;
+}

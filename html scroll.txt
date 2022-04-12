@@ -1,0 +1,30 @@
+<link href="css/estilos_tabla.css" rel="stylesheet"  type="text/css">
+
+<div class="layout">
+<h2 style="color: blue; padding-left: 5px; padding-top: 5px;">APLICACIONES ASIGNADAS</h2>
+
+<form>
+<!-- <h3 id="encabezado0" style="color: blue;  font-weight:bold;"></h3> -->
+<!-- <h4 id="encabezado1"></h4> -->
+
+<div class="container">
+<body8></body8>
+<p style="font-weight:bold;"></p>
+<p style="color: red;"></p>
+</div>
+
+</form>
+</div>
+
+--------------------------------------------------------------------
+
+<div  class="layout">
+<h3 style="text-align:center; color: blue;">EXPERIENCIA LABORAL</h3>
+
+<form>
+<div class="container">
+<tbody  id="cuerpo5">
+</tbody>
+</div>
+</form>
+</div>

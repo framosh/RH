@@ -1,0 +1,44 @@
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: auto;
+}
+
+td,
+th {
+    border: 1px solid #808080;
+    /*	text-align: left; */
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+div {
+    font-family: arial, sans-serif;
+    color: #1E1CE2;
+    font-size: 90%;
+    font-weight: bold;
+}
+
+body {
+    background-color: #CCFFCC;
+}
+
+h1 {
+    color: #1E1CE2;
+    font-family: verdana, arial, sans-serif;
+    font-size: 150%;
+    text-align: center;
+    font-weight: bold;
+}
+
+h2 {
+    color: #1E1CE2;
+    font-family: verdana, arial, sans-serif;
+    font-size: 100%;
+    text-align: center;
+    font-weight: bold;
+}

@@ -1,0 +1,121 @@
+<script  language="JavaScript" type="text/javascript">
+/*
+function addEvent(obj, event, func) {
+            if (obj.addEventListener) {
+                obj.addEventListener(event, func, false);
+                return true;
+               } else if (obj.attachEvent) {
+                           obj.attachEvent('on' + event, func);
+                          } else {
+                               var f = obj['on' + event];
+                               obj['on' + event] = typeof f === 'function' ? function() {
+                                     cargaDatos();
+                                     onError();
+                                     onLoad();
+                                     despliega();
+                                     displayCampos();
+                                     getUrlVars();
+                                     }:func
+                         }
+    */
+   
+
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+
+
+function despliega() {
+var htmlString="Consulta";
+      alert(htmlString);
+}
+
+
+function cargaDatos(Clave) 
+{
+alert("Entrada a la funcion cargaDatos");
+
+alert("paso 1");
+
+var archivo = "http://admonarh.arhsi.com.mx/httpdocs/consultav.php";
+
+if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+    alert("paso 1.5");
+    var xhttp=new XMLHttpRequest();
+    }
+else
+    {// code for IE6, IE5
+    alert("paso 1.8");
+    var xhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+alert("paso 2");
+
+xhttp.open("GET",archivo,false);
+
+alert("paso 2.5");
+
+xhttp.send(Clave);
+
+alert("paso 2.7");
+
+return xhttp.response;
+}
+
+
+function onLoad(e) {
+  alert("Datos cargados" + e.target.status + " al recibir el documento.");
+}
+
+
+function displayDatos(Clave)
+{
+alert("Entrada a la funcion displayDatos");
+
+xmlDoc=cargaDatos(Clave);
+
+alert("paso 3");
+
+//var items = xmlDoc.getElementsByTagName("$row[]");
+
+
+var div = document.getElementById("pantalla");
+
+alert("paso 4");
+
+i=0;
+
+//for (i=0; i<items.length; i++)
+  //  {
+    Empresa = items[i].getElementsByName("row[0]");
+
+alert("paso 5");
+/*
+
+    Puesto = items[i].getElementsByName("Puesto");
+    Nivel = items[i].getElementsByTagName("Nivel")[0].childNodes[0].nodeValue;
+    var Requisitos = items[i].getElementsByTagName("Requisitos")[0].childNodes[0].nodeValue;
+    var Funciones = items[i].getElementsByTagName("Funciones")[0].childNodes[0].nodeValue;
+    var Lugar = items[i].getElementsByTagName("Lugar")[0].childNodes[0].nodeValue;
+    var Sueldo = items[i].getElementsByTagName("Sueldo")[0].childNodes[0].nodeValue;
+    var Fecha = items[i].getElementsByTagName("Fecha")[0].childNodes[0].nodeValue;
+    var Estatus = items[i].getElementsByTagName("Estatus")[0].childNodes[0].nodeValue;
+
+
+   div.innerHTML+="<br/>
+      <span id="Empresa"</span><br/>
+      <span id="Puesto+"</span><br/>
+      <span id="Nivel+"</span><br />
+      <span id="Requisitos+"</span> <br />
+      <span id="Funciones+"</span><br/>";
+
+//    }
+*/
+}
+
+</script>

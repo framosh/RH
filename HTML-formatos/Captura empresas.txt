@@ -1,0 +1,74 @@
+<style>
+div {
+display: block;
+font-family:verdana;
+color:black;
+}
+</style>
+
+<div>
+<form action="http://arhsi.com.mx/reg_emp.php" method="post">
+<fieldset>
+<Table>
+<tr><td>Empresa:</td><td><input type="text" name="emp_nom"   id="emp_nom" value="" maxlength="40" required></td></tr>
+<tr><td>Telefono 1:</td><td><input type="text" name="emp_tel1"   id="emp_tel1" value="" maxlength="40" required></td></tr>
+<tr><td>Telefono 2:</td><td><input type="text" name="emp_tel2"  id="emp_tel2" value=""  maxlength="40" ></td></tr>
+<tr><td>Direccion:</td><td>  <input type="text" name="emp_dir"  id="emp_dir" value=""  maxlength="80"></td></tr>
+<tr><td>Colonia:</td><td>    <input type="text" name="emp_col"  id="emp_col" value=""  maxlength="60"></td></tr>
+<tr><td>Delegacion:</td><td>    <input type="text" name="emp_del"  id="emp_del" value=""  maxlength="40"></td></tr>
+</table>
+
+
+Estado : 
+<select id="emp_estado" name="emp_estado" required>
+   <option>Baja California Norte</option>
+   <option>Baja California Sur</option>
+   <option>Sonora</option>
+   <option>Chihuahua</option>
+   <option>Coahuila</option>
+   <option>Nuevo Leon</option>
+   <option>Tamaulipas</option>
+   <option>Sinaloa</option>
+   <option>Durango</option>
+   <option>Zacatecas</option>
+   <option>San Luis Potosi</option>
+   <option>Nayarit</option>
+   <option>Jalisco</option>
+   <option>Aguas Calientes</option>
+   <option>Guanajuato</option>
+   <option>Queretaro</option>
+   <option>Hidalgo</option>
+   <option>Veracruz</option>
+   <option>Colima</option>
+   <option>Michoacan</option>
+   <option>Estado de Mexico</option>
+   <option>Ciudad de Mexico</option>
+   <option>Tlaxcala</option>
+   <option>Puebla</option>
+   <option>Guerrero</option>
+   <option>Morelos</option>
+   <option>Puebla</option>
+   <option>Oaxaca</option>
+   <option>Chiapas</option>
+   <option>Tabasco</option>
+   <option>Campeche</option>
+   <option>Yucatan</option>
+   <option>Quintana Roo</option>
+</select>
+<br>
+Estatus : 
+<select id="Estatus" name="Estatus" required>
+   <option>Prospecto</option>
+   <option>Cliente</option>
+   <option>Inactivo</option>
+   <option>Perdido</option>
+</select>
+<br>
+<table>
+<tr><td>Observaciones:</td><td><textarea name="emp_obs" cols="45"  rows="5" id="Funciones" value="" ></textarea></td></tr>
+</table>
+<br>
+<input type="submit"  value="Grabar datos" ><br>
+</fieldset>
+</div>
+</form>

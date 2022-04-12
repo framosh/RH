@@ -1,0 +1,37 @@
+<?php 
+require 'arhsi_connect.php';
+$query="SELECT emp_clave, emp_nom FROM Empresa WHERE 1 ORDER BY emp_nom DESC";
+
+$result = mysqli_query($dbc,$query);
+$numero_filas = mysqli_num_rows($result);
+
+if($numero_filas >0){
+    Archivo($result);
+    mysqli_close($dbc);
+} else {
+    echo("0|No hay Clientes");
+}
+
+        function Archivo($result) {
+           return creArchivo('php://output', $result);
+          }
+
+        function creArchivo($filename, $result) {
+         $fp = fopen($filename, 'w');
+         $rc = llenaDatos($fp, $result);
+         fclose($fp);
+         return $rc;
+         }
+
+       function llenaDatos($stream, $result) {
+         $nrows = 0;
+         $delimiter=chr(124);
+         $enclosure=chr(34);
+         while($row = mysqli_fetch_row($result)) {
+           fputcsv($stream, $row, $delimiter);
+           $nrows++;
+           }
+         mysqli_free_result($result);
+         return $nrows;
+         }       
+?>

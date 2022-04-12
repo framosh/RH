@@ -1,0 +1,42 @@
+<script>
+function loadXMLDoc(document)
+{
+/*
+    if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+*/
+/*
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    var items = xmlDoc.getElementsByTagName("item");
+    var items = document.getElementsByTagName("item");
+    var div = document.getElementById("mainContent").innerHTML=xmlhttp.responseText;
+
+    var Empresa = items[0].getElementsByTagName("Empresa")[0].childNodes[0].nodeValue;
+    var Puesto = items[0].getElementsByTagName("Puesto")[0].childNodes[0].nodeValue;
+    var Nivel = items[0].getElementsByTagName("Nivel")[0].childNodes[0].nodeValue;
+    var Requisitos = items[0].getElementsByTagName("Requisitos")[0].childNodes[0].nodeValue;
+    var Funciones = items[0].getElementsByTagName("Funciones")[0].childNodes[0].nodeValue;
+    var Lugar = items[0].getElementsByTagName("Lugar")[0].childNodes[0].nodeValue;
+    var Sueldo = items[0].getElementsByTagName("Sueldo")[0].childNodes[0].nodeValue;
+    var Fecha = items[0].getElementsByTagName("Fecha")[0].childNodes[0].nodeValue;
+    var Estatus = items[0].getElementsByTagName("Estatus")[0].childNodes[0].nodeValue;
+    }
+  }
+*/
+/*
+//xmlhttp.open("GET","http://arhsi.com.mx/../../consultav.xml",true);
+xmlhttp.open("GET",document,true);
+xmlhttp.send();
+return xmlhttp.responseXML;
+*/
+}
+</script>

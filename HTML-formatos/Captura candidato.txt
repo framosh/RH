@@ -1,0 +1,34 @@
+<style>
+div {
+display: block;
+font-family:verdana;
+color:black;
+}
+</style>
+
+<div>
+<form action="http://arhsi.com.mx/registrov.php" method="post">
+<fieldset>
+<Table>
+<tr><td>Empresa:</td><td><input type="text" name="Empresa"   id="Empresa" value="" maxlength="40" required></td></tr>
+<tr><td>Puesto:</td><td><input type="text" name="Puesto"   id="Puesto" value="" maxlength="80" required></td></tr>
+<tr><td>Nivel:</td><td><input type="text" name="Nivel"  id="Nivel" value=""  maxlength="20" required></td></tr>
+<tr><td>Requisitos:</td><td><textarea name="Requisitos" cols="45"  rows="5" id="Requisitos" value="" ></textarea></td></tr>
+<tr><td>Funciones:</td><td><textarea name="Funciones" cols="45"  rows="5" id="Funciones" value="" ></textarea></td></tr>
+<tr><td>Lugar:</td><td><input type="text" name="Lugar"  id="Lugar" value="" maxlength="80" required></td></tr>
+<tr><td>Sueldo:</td><td><input type="text" name="Sueldo"  id="Sueldo" value="" maxlength="40" required></td></tr>
+<tr><td>Clave:</td><td><input type="text" name="Clave"  id="Clave" value="" maxlength="8" required></td></tr>
+</table>
+
+Estatus : 
+<select id="Estatus" name="Estatus" required>
+   <option>Activa</option>
+   <option>Cubierta</option>
+   <option>Cancelada</option>
+   <option>Stand by</option>
+</select>
+<input type="submit"  value="Grabar datos" ><br>
+
+</fieldset>
+</div>
+</form>

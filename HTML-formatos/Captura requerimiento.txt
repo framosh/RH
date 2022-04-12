@@ -1,0 +1,37 @@
+<style>
+div {
+display: block;
+font-family:verdana;
+color:black;
+}
+</style>
+
+<div>
+<form action="http://arhsi.com.mx/envio.php" method="post">
+<fieldset>
+<Table>
+<tr><td>Nombre:</td><td><input type="text" name="Nombre"   id="Nombre" value="" maxlength="40" required></td></tr>
+<tr><td>Empresa:</td><td><input type="text" name="Empresa"  id="Empresa" value=""  maxlength="40" required></td></tr>
+<tr><td>Correo:</td><td><input type="text" name="correo"  id="correo" value="" maxlength="40" required></td></tr>
+<tr><td>Teléfono:</td><td><input type="text" name="Telefono"  id="Telefono" value="" maxlength="20" required></td></tr>
+<tr><td>Comentarios:</td><td><textarea name="Comentarios" cols="45"  rows="5" id="Comentarios" value="" ></textarea></td></tr>
+</table>
+
+Servicio : 
+<select id="Producto" name="Producto" required>
+   <option>Desarrollo Web</option>
+   <option>Desarrollo para móviles</option>
+   <option>Desarrollo en Windows</option>
+   <option>Desarrollo otras plataformas</option>
+   <option>Sistema de venta PowerStreet</option>
+   <option>Monitoreo y administración de sites</option>
+   <option>Capacitación</option>
+   <option>Selección de personal informático</option>
+   <option>Outsourcing de personal</option>
+   <option>Otro tipo de servicio</option>
+</select>
+<input type="submit"  value="Enviar información" ><br>
+
+</fieldset>
+</div>
+</form>

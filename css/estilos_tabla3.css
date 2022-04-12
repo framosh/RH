@@ -1,0 +1,26 @@
+table {
+    border-spacing: 0px;
+    height: 50em;
+}
+
+.rollo {
+    overflow: auto;
+    max-height: 20em;
+}
+
+
+tbody {
+    overflow-y: scroll;
+    display: flexbox;
+    max-height: 50em;
+}
+
+thead {
+    display: table;
+    width: 100%;
+}
+
+tbody tr {
+    display: table;
+    width: 100%;
+}

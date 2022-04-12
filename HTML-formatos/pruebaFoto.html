@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/pruebaFoto.css">
+    <title>Prueba de foto</title>
+
+    <script type="text/javascript" src="/progjs/Servidor.js" defer></script>
+    <!--    <script type="text/javascript" src="../js/carga_foto.js" defer></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <h1>Prueba de foto</h1>
+    <div>
+        <input type="file" id="image_input" accept="image/jpg" onchange="carga_imagen()">
+        <br>
+        <br>
+        <img class="display_image" src="" id="display_image" alt="Seleccione un archivo....."></div>
+    <br>
+    </div>
+    <div>
+        <p id="mensaje_gral" style="color: red"></p>
+    </div>
+
+    <script>
+        function carga_imagen() {
+            var preview = document.querySelector("img");
+            var file = document.querySelector('input[type=file]').files[0];
+            var reader = new FileReader();
+
+            reader.addEventListener("load", function () {
+                preview.src = reader.result;
+                fileUpload(file);
+            }, false);
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function fileUpload(img) {
+            elige_servidor();
+            var xhttp;
+
+            if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+                xhttp = new XMLHttpRequest();
+            } else { // code for IE6, IE5
+                xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            var archivo2 = servidor + "httpdocs/cargaFoto.php";
+            var fd = new FormData();
+
+            xhttp.open("POST", archivo2, true);
+
+            xhttp.onreadystatechange = function () {
+                if (xhttp.readyState == 4 && xhttp.status == 200) {
+                    var cadena = xhttp.responseText;
+                    alert("Cadena: " + cadena);
+                    document.getElementById("mensaje_gral").value = cadena;
+                } else {
+                    //                  alert("Estado: " + xhttp.readyState + "  Status: " + xhttp.status);
+                }
+            };
+            fd.append('myFile', img);
+            xhttp.send(fd);
+        }
+    </script>
+</body>
+
+</html>

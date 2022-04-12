@@ -1,0 +1,17 @@
+.display_image {
+    width: 300px;
+    height: 200px;
+    border: 1px solid black;
+    background-position: center;
+    background-size: cover;
+    background-image: image();
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-direction: column;
+    height: 100vh;
+}
