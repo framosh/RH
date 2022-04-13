@@ -108,6 +108,30 @@ body {
     /*    float: left; */
 }
 
+.c00 {
+    grid-area: input_foto;
+    max-height: 100px;
+    /*  border-right: 0px; */
+    /*    border-left: 0px; */
+    /* grid-column: 1/4; */
+    /* grid-row: 1 / span 2; */
+    /*    grid-area: 1/1/3/4; */
+    /*    grid-column: 1 / span 2; */
+    background-color: rgb(220, 226, 240);
+}
+
+.c01 {
+    grid-area: foto;
+    max-height: 100px;
+    /*  border-right: 0px; */
+    /*    border-left: 0px; */
+    /* grid-column: 1/4; */
+    /* grid-row: 1 / span 2; */
+    /*    grid-area: 1/1/3/4; */
+    /*    grid-column: 1 / span 2; */
+    background-color: rgb(220, 226, 240);
+}
+
 .c1 {
     grid-area: vacante;
     max-height: 200px;
@@ -173,12 +197,13 @@ body {
     width: 100%;
     /*    margin-left: 2%; */
     /*  margin-right: 2%; */
-    grid-template-areas: 'vacante candidato'
+    grid-template-areas: 'input_foto foto'
+        'vacante candidato'
         'estatus candidato'
         'asigna conocimientos'
         'idiomas idiomas'
         'comentarios comentarios';
-    grid-template-rows: auto auto auto 10% auto;
+    grid-template-rows: auto auto auto auto 10% auto;
     grid-template-columns: 50% auto;
     /*    grid-template-columns: 80% auto; */
     /*    grid-template-rows: 20% 10% 60% auto; */

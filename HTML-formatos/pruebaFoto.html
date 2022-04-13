@@ -19,7 +19,9 @@
         <input type="file" id="image_input" accept="image/jpg" onchange="carga_imagen()">
         <br>
         <br>
-        <img class="display_image" src="" id="display_image" alt="Seleccione un archivo....."></div>
+        <img class="display_image" src="" id="display_image" style="width:50%; height:50%;"
+            alt="Seleccione un archivo.....">
+    </div>
     <br>
     </div>
     <div>
@@ -28,7 +30,8 @@
 
     <script>
         function carga_imagen() {
-            var preview = document.querySelector("img");
+            var preview = document.querySelector(".display_image");
+            //            var preview = document.getElementById("display_image").value;
             var file = document.querySelector('input[type=file]').files[0];
             var reader = new FileReader();
 
