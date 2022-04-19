@@ -7,19 +7,20 @@ $campo = explode('|',$campos1);
 //cand_nom,cand_tel1,cand_tel2,cand_corr,cand_skype,cand_fecha_nac,cand_direccion,cand_estado,cand_edad,
 //cand_edoc,cand_hijos,clv_est_cand,cand_sdo_sol,clv_vacante,cand_sdo_ult,cand_ult_trab,cand_ult_pue,clv_est_cv,
 //clv_est_ent,clv_est_eval,cand_fech_env,cand_fech_ingre,cand_sdo_contr,cand_obs_reclu,cand_obs_eval,com_cand
-//,act_recrea,act_cult,ingles,espaniol,otro
+//,act_recrea,act_cult,ingles,espaniol,otro,foto_dir,foto_nom
 require 'arhsi_connect.php';
 
 if(mysqli_stmt_prepare($stmt,"INSERT INTO Candidatos (cand_nom,cand_tel1,cand_tel2,cand_corr,cand_skype,
 cand_fecha_nac,cand_direccion,cand_estado,cand_edad,cand_edoc,cand_hijos,clv_est_cand,cand_sdo_sol,
 clv_vacante,cand_sdo_ult,cand_ult_trab,cand_ult_pue,clv_est_cv,clv_est_ent,clv_est_eval,cand_fech_env,
-cand_fech_ingre,cand_sdo_contr,cand_obs_reclu,cand_obs_eval,com_cand,act_recrea,act_cult,ingles,espaniol,otro) 
-VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"))
+cand_fech_ingre,cand_sdo_contr,cand_obs_reclu,cand_obs_eval,com_cand,act_recrea,act_cult,ingles,espaniol,otro,
+foto_dir,foto_nom) 
+VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"))
 	{
-	mysqli_stmt_bind_param($stmt,"sssssssssssssssssssssssssssssss",$campo[0],$campo[1],$campo[2],$campo[3],$campo[4],
+	mysqli_stmt_bind_param($stmt,"sssssssssssssssssssssssssssssssss",$campo[0],$campo[1],$campo[2],$campo[3],$campo[4],
     $campo[5],$campo[6],$campo[7],$campo[8],$campo[9],$campo[10],$campo[11],$campo[12],$campo[13],$campo[14],
 	$campo[15],$campo[16],$campo[17],$campo[18],$campo[19],$campo[20],$campo[21],$campo[22],$campo[23],
-	$campo[24],$campo[25],$campo[26],$campo[27],$campo[28],$campo[29],$campo[30]);
+	$campo[24],$campo[25],$campo[26],$campo[27],$campo[28],$campo[29],$campo[30],$campo[31],$campo[32]);
 	mysqli_stmt_execute($stmt);
 
 	$affected_rows = mysqli_stmt_affected_rows($stmt);

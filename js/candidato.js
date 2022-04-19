@@ -1,3 +1,69 @@
+// Carga foto del candidato desde un archivo local
+function despliega_foto(foto_url) {
+    if (foto_url.length > 1) {
+        var preview = document.querySelector(".display_image");
+        preview.src = foto_url;
+    } else {
+        alert("No hay foto de candidato");
+    }
+}
+
+function carga_imagen() {
+    var preview = document.querySelector(".display_image");
+    var file = document.querySelector('input[type=file]').files[0];
+    var reader = new FileReader();
+
+    reader.addEventListener("load", function () {
+        preview.src = reader.result;
+        fileUpload(file);
+    }, false);
+
+    if (file) {
+        reader.readAsDataURL(file);
+    }
+}
+
+// Sube la imagen de la foto del candidato al servidor web
+var foto_dir;
+var foto_nom;
+
+function fileUpload(img) {
+    elige_servidor();
+    var xhttp;
+
+    if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+        xhttp = new XMLHttpRequest();
+    } else { // code for IE6, IE5
+        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    var archivo2 = servidor + "httpdocs/cargaFoto.php";
+    var fd = new FormData();
+
+    xhttp.open("POST", archivo2, true);
+
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            var cadena = xhttp.responseText;
+            //       alert("Cadena: " + cadena);
+            var cadena1 = cadena.split(":");
+            foto_dir = cadena1[1];
+            var cadena2 = cadena.split("/");
+            var cadena3 = cadena2[2];
+            foto_nom = cadena3;
+            //           alert("Directorio: " + foto_dir);
+            //         alert("Nombre de foto: " + foto_nom);
+
+            document.getElementById("mensaje_gral2").value = cadena;
+        } else {
+            //                  alert("Estado: " + xhttp.readyState + "  Status: " + xhttp.status);
+        }
+    };
+
+    fd.append('myFile', img);
+    xhttp.send(fd);
+}
+
 //var servidor_local = "/svr_local/httpdocs/";
 //var servidor_web = "https://svr.itbp.com.mx/httpdocs/";
 
@@ -40,17 +106,20 @@ function limpiaPantalla1() {
     //    alert("Limpia pantalla 1");
     var valor = "";
     var opcion2 = 0;
-
+    document.getElementById("empresas").selectedIndex = opcion2;
     document.getElementById("candidatos").selectedIndex = opcion2;
     document.getElementById("vacantes").selectedIndex = opcion2;
     limpiaPantalla2(); // Limpia datos generales
 }
 
 function limpiaPantalla2() {
-    //  alert("Limpia Pantalla 2");
+    //    alert("Limpia Pantalla 2");
+    limpiaTabla();
+    var foto_url = "../img/sin_foto.jpg";
+    despliega_foto(foto_url);
     var valor = "";
     var opcion2 = 0;
-
+    //document.getElementById("candidatos").selectedIndex = opcion2;
     document.getElementById("cand_key").value = valor;
     document.getElementById("cand_nom").value = valor;
     document.getElementById("cand_tel1").value = valor;
@@ -95,11 +164,11 @@ function limpiaPantalla2() {
 // Limpia seccion de comentarios y observaciones
 function limpiaPantalla3() {
     var valor = "";
-    document.getElementById("cultura").innerHTML = valor;
-    document.getElementById("deporte").innerHTML = valor;
-    document.getElementById("cand_obs1").innerHTML = valor;
-    document.getElementById("cand_obs2").innerHTML = valor;
-    document.getElementById("cand_obs3").innerHTML = valor;
+    document.getElementById("cultura").value = valor;
+    document.getElementById("deporte").value = valor;
+    document.getElementById("cand_obs1").value = valor;
+    document.getElementById("cand_obs2").value = valor;
+    document.getElementById("cand_obs3").value = valor;
 
     document.getElementById("ingles").value = valor;
     document.getElementById("espaniol").value = valor;
@@ -276,6 +345,9 @@ function actualizaCandidato() {
         camposx22[19] = est_evaluacion;
         alert("Estatus evaluación: " + est_evaluacion);
     }
+
+    camposx22[32] = foto_dir;
+    camposx22[33] = foto_nom;
 
     var cantidad_campos = camposx22.length;
 
@@ -456,6 +528,9 @@ function altaCandidato() {
     posicion22 = document.getElementById("estatus_eval").selectedIndex;
     est_evaluacion = posicion22;
     camposx22[19] = est_evaluacion;
+
+    camposx22[31] = foto_dir;
+    camposx22[32] = foto_nom;
 
     var cantidad_campos = camposx22.length;
     for (var ix = 0; ix < cantidad_campos; ix++) {
@@ -714,6 +789,7 @@ function consultaCandidato() {
             document.getElementById("ingles").value = ids[32]; // Nivel de ingles
             document.getElementById("espaniol").value = ids[33]; // Nivel de español
             document.getElementById("otro").value = ids[34]; // Otro idioma
+            despliega_foto(ids[35]);
         } else {
             //            alert("Estado: " + xhttp.readyState + "  Status: " + xhttp.status);
         }

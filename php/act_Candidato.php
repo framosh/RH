@@ -37,7 +37,9 @@ act_cult='$campos[26]',
 act_recrea='$campos[27]',
 ingles='$campos[28]',
 espaniol='$campos[29]',
-otro='$campos[30]'
+otro='$campos[30]',
+foto_dir='$campos[32]',
+foto_nom='$campos[33]'
  WHERE cand_key='$campos[31]'"))
 	{
 	   mysqli_stmt_execute($stmt);
