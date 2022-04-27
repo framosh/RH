@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../css/stylesCV.css">
+    <link rel="stylesheet" type="text/css" href="css/stylesCV.css">
     <title>Curriculum de personal registrado en ARHSI</title>
 
     <script type="text/javascript" src="progjs/Servidor.js" defer></script>
@@ -51,7 +51,9 @@
 
         <div class="caja c0">
             <div>
-                <img src="../img/gustavo_bm.jpg" class="rounded w-100 img-center" alt="No hay foto">
+                <!--   <img src="../img/gustavo_bm.jpg" class="rounded w-100 img-center" alt="No hay foto"> -->
+                <img class="display_image rounded w-100 img-center" src="" id="display_image"
+                    style="width:50%; height:50%;">
             </div>
         </div>
 
@@ -59,99 +61,100 @@
             <div>
                 <form>
                     <h3 style="text-align:center; color: blue;">DATOS PERSONALES</h3>
-                    <fieldset>
-                        <div>
-                            <table style="width:100%;">
-                                <tr>
-                                    <td style="width: 120px;"><b>Nombre:</b></td>
-                                    <td style="width: 400px;">
-                                        <p id="nombre"></p>
-                                    </td>
-                                    <td style="width: 120px;"><b>Hijos:</b></td>
-                                    <td>
-                                        <p id="hijos"></p>
-                                    </td>
-                                </tr>
+                    <div>
+                        <fieldset>
+                            <div>
+                                <table style="width:100%;">
+                                    <tr>
+                                        <td style="width: 120px;"><b>Nombre:</b></td>
+                                        <td style="width: 400px;">
+                                            <p id="nombre"></p>
+                                        </td>
+                                        <td style="width: 120px;"><b>Hijos:</b></td>
+                                        <td>
+                                            <p id="hijos"></p>
+                                        </td>
+                                    </tr>
 
-                                <tr>
-                                    <td style="width: 120px;"><b>Edad:</b></td>
-                                    <td style="width: 400px;">
-                                        <p id="edad"></p>
-                                    </td>
-                                    <td style="width: 120px;"><b>Telefono casa:</b></td>
-                                    <td>
-                                        <p id="tel_casa"></p>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td style="width: 120px;"><b>Edad:</b></td>
+                                        <td style="width: 400px;">
+                                            <p id="edad"></p>
+                                        </td>
+                                        <td style="width: 120px;"><b>Telefono casa:</b></td>
+                                        <td>
+                                            <p id="tel_casa"></p>
+                                        </td>
+                                    </tr>
 
-                                <tr>
-                                    <td style="width: 120px;"><b>Cumpleaños:</b></td>
-                                    <td style="width: 400px;">
-                                        <p id="cumpleanios"></p>
-                                    </td>
-                                    <td style="width: 120px;"><b>Celular:</b></td>
-                                    <td>
-                                        <p id="celular"></p>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td style="width: 120px;"><b>Cumpleaños:</b></td>
+                                        <td style="width: 400px;">
+                                            <p id="cumpleanios"></p>
+                                        </td>
+                                        <td style="width: 120px;"><b>Celular:</b></td>
+                                        <td>
+                                            <p id="celular"></p>
+                                        </td>
+                                    </tr>
 
-                                <tr>
-                                    <td style="width: 120px;"><b>Estado civil:</b></td>
-                                    <td style="width: 400px;">
-                                        <p id="edo_civil"></p>
-                                    </td>
-                                    <td style="width: 120px;"><b>E-mail:</b></td>
-                                    <td style="width: 300px;">
-                                        <p id="correo"></p>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td style="width: 120px;"><b>Estado civil:</b></td>
+                                        <td style="width: 400px;">
+                                            <p id="edo_civil"></p>
+                                        </td>
+                                        <td style="width: 120px;"><b>E-mail:</b></td>
+                                        <td style="width: 300px;">
+                                            <p id="correo"></p>
+                                        </td>
+                                    </tr>
 
-                                <tr>
-                                    <td style="width: 120px;"><b>Nacionalidad:</b></td>
-                                    <td style="width: 400px;">
-                                        <p id="nacionalidad"></p>
-                                    </td>
-                                    <td style="width: 120px;"><b>Skype:</b></td>
-                                    <td style="width: 300px;">
-                                        <p id="skype"></p>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td style="width: 120px;"><b>Nacionalidad:</b></td>
+                                        <td style="width: 400px;">
+                                            <p id="nacionalidad"></p>
+                                        </td>
+                                        <td style="width: 120px;"><b>Skype:</b></td>
+                                        <td style="width: 300px;">
+                                            <p id="skype"></p>
+                                        </td>
+                                    </tr>
 
-                                <tr>
-                                    <td style="width: 120px;"><b>Dirección:</b></td>
-                                    <td style="width: 400px;">
-                                        <p id="direccion" p></p>
-                                    </td>
-                                    <td style="width: 120px;"><b>Sueldo actual:</b></td>
-                                    <td>
-                                        <p id="sdo1"></p>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td style="width: 120px;"><b>Dirección:</b></td>
+                                        <td style="width: 400px;">
+                                            <p id="direccion" p></p>
+                                        </td>
+                                        <td style="width: 120px;"><b>Sueldo actual:</b></td>
+                                        <td>
+                                            <p id="sdo1"></p>
+                                        </td>
+                                    </tr>
 
-                                <tr>
-                                    <td style="width: 120px;"><b>Colonia:</b></td>
-                                    <td style="width: 400px;">
-                                        <p id="colonia" p></p>
-                                    </td>
-                                    <td style="width: 120px;"><b>Sueldo deseado:</b></td>
-                                    <td>
-                                        <p id="sdo2"></p>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td style="width: 120px;"><b>Colonia:</b></td>
+                                        <td style="width: 400px;">
+                                            <p id="colonia" p></p>
+                                        </td>
+                                        <td style="width: 120px;"><b>Sueldo deseado:</b></td>
+                                        <td>
+                                            <p id="sdo2"></p>
+                                        </td>
+                                    </tr>
 
-                                <tr>
-                                    <td style="width: 120px;"><b>Delegación:</b></td>
-                                    <td style="width: 400px;">
-                                        <p id="delegacion"></p>
-                                    </td>
-                                    <td style="width: 120px;"><b>Estado:</b></td>
-                                    <td>
-                                        <p id="estado"></p>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </fieldset>
+                                    <tr>
+                                        <td style="width: 120px;"><b>Delegación:</b></td>
+                                        <td style="width: 400px;">
+                                            <p id="delegacion"></p>
+                                        </td>
+                                        <td style="width: 120px;"><b>Estado:</b></td>
+                                        <td>
+                                            <p id="estado"></p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </fieldset>
                 </form>
             </div>
         </div>
@@ -358,6 +361,11 @@
             </div>
         </div>
     </div>
+    <!--    <div>
+        <br>
+        <button id="imprimir" type="submit" onclick="imprime()">Imprimir CV</button>
+    </div> -->
+
 </body>
 
 </html>

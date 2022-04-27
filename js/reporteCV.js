@@ -1,3 +1,7 @@
+/*
+Generación de tabla dinamica configurable con renglones y columnas definidos a voluntad
+*/
+
 var tablax;
 var cuerpox;
 

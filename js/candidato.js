@@ -23,6 +23,10 @@ function carga_imagen() {
     }
 }
 
+function imprime() {
+    window.print();
+}
+
 // Sube la imagen de la foto del candidato al servidor web
 var foto_dir;
 var foto_nom;

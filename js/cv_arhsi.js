@@ -1,10 +1,16 @@
+/*
+Generación de cv. de candidatos directamente usando HTML y JavaScript
+*/
 var cand1 = [];
 var cand_clv;
 var cand_nom;
 
 window.onload = function () {
+    //    alert("Elige servidor");
     elige_servidor();
+    limpiaPantallaEC();
 
+    //    alert("Separa campos del URL");
     var url = document.location.href,
         params = url.split('?')[1].split('&'),
         data = {},
@@ -12,60 +18,95 @@ window.onload = function () {
     var l = params.length;
     //    var url2 = document.location.href;
     //    alert("Url: " + url);
-    //  alert("l: " + l);
+    //    alert("parametros: (" + l + ")");
 
-    for (var i = 0; i < l; i++) {
-        tmp = params[i].split('=');
-        data[tmp[0]] = tmp[1].replace(/%20/g, " ");
-        cand1[i] = data[tmp[0]];
-        cand1[i] = cand1[i].trim();
-        //        alert("cand1: " + cand1[i] + "  i: " + i);
+    if (l <= 1) {
+        alert("No hay candidato a mostrar");
+        //        salir();
+    } else {
+        //      alert("Asigna campos del URL");
+        for (var i = 0; i < l; i++) {
+            tmp = params[i].split('=');
+            data[tmp[0]] = tmp[1].replace(/%20/g, " ");
+            cand1[i] = data[tmp[0]];
+            cand1[i] = cand1[i].trim();
+            //        alert("cand1: " + cand1[i] + "  i: " + i);
+        }
+        cand_clv = cand1[0];
+        cand_nom = cand1[1];
+        var nombre_candidato = cand_clv + " - " + cand_nom;
+
+        //    alert("Candidato: (" + cand_clv + ")");
+
+        document.getElementById("nombre").innerHTML = nombre_candidato;
+        consultaCandidato();
+        consultaEdu();
+        consultaExp();
+        consultaConomientos(cand_clv);
     }
-    cand_clv = cand1[0];
-    cand_nom = cand1[1];
-    var nombre_candidato = cand_clv + " - " + cand_nom;
-
-    //    alert(nombre_candidato);
-    document.getElementById("nombre").innerHTML = nombre_candidato;
-    consultaCandidato();
-    consultaEdu();
-    consultaExp();
-    consultaConomientos(cand_clv);
 };
 
-function reporteEduPant() {
-    //window.location.href = "httpdocs/rdva3_contactos.php?Cliente="+cliente+"&nCliente="+nombrecl;
-    window.location.href = servidor + "httpdocs/rdva3_EduxCand.php" + "?candidato=" + cand_clv + "&nombre=" + cand_nom;
+function despliega_foto(foto_url) {
+    //alert("despliega foto: (" + foto_url + ")");
+    var longitud = foto_url.length;
+
+    //    alert("longitud: " + longitud);
+
+    if (longitud > 1) {
+        var preview = document.querySelector(".display_image");
+        preview.src = foto_url;
+    } else {
+        //  alert("despliega cuadro en blanco");
+        var preview2 = document.querySelector(".display_image");
+        foto_url = "../img/sin_foto.jpg";
+        preview2.src = foto_url;
+        //        alert("No hay foto de candidato");
+    }
 }
+
+function imprime() {
+    window.print();
+}
+
 
 /* LIMPIA PANTALLA  */
 function limpiaPantallaEC() {
     //    document.body.innerHTML = "";
     //    alert("Limpia Pantalla");
+    var foto_url = "../img/sin_foto.jpg";
+    despliega_foto(foto_url);
+
     var vacio = "";
     var vacio1 = 0;
-    document.getElementById("nombre").innerHTML = vacio1;
-    document.getElementById("edad").innerHTML = vacio1;
-    document.getElementById("cumpleanios").innerHTML = vacio1;
-    document.getElementById("edo_civil").innerHTML = vacio1;
-    document.getElementById("nacionalidad").innerHTML = vacio;
+
+    document.getElementById("nombre").innerHTML = vacio;
+    document.getElementById("tel_casa").innerHTML = vacio;
+    document.getElementById("celular").innerHTML = vacio;
+    document.getElementById("correo").innerHTML = vacio;
+    document.getElementById("skype").innerHTML = vacio;
+    document.getElementById("cumpleanios").innerHTML = vacio;
     document.getElementById("direccion").innerHTML = vacio;
     document.getElementById("colonia").innerHTML = vacio;
     document.getElementById("delegacion").innerHTML = vacio;
-    document.getElementById("mensaje_gral_cv").innerHTML = vacio;
-
-    document.getElementById("hijos").innerHTML = vacio1;
-    document.getElementById("tel_casa").innerHTML = vacio1;
-    document.getElementById("celular").innerHTML = vacio1;
-    document.getElementById("correo").innerHTML = vacio1;
-    document.getElementById("skype").innerHTML = vacio1;
-    document.getElementById("sdo1").innerHTML = vacio1;
-    document.getElementById("ado2").innerHTML = vacio1;
-    document.getElementById("estado").innerHTML = vacio1;
+    document.getElementById("edad").innerHTML = vacio;
+    document.getElementById("edo_civil").innerHTML = vacio;
+    document.getElementById("hijos").innerHTML = vacio;
+    document.getElementById("sdo1").innerHTML = vacio; // Ultimo sueldo percibido
+    document.getElementById("sdo2").innerHTML = vacio; // Sueldo solicitado
+    document.getElementById("com_entre").innerHTML = vacio; // Comentario reclutador
+    document.getElementById("com_eval").innerHTML = vacio; // Comentarios del evaluador
+    document.getElementById("com_cand").innerHTML = vacio; // Comentarios del candidato
+    document.getElementById("act_recrea").innerHTML = vacio; // Actividades recreativas
+    document.getElementById("act_cult").innerHTML = vacio; // Actividades culturales
+    document.getElementById("ingles").innerHTML = vacio; // Nivel de ingles
+    document.getElementById("espaniol").innerHTML = vacio; // Niverl de español
+    document.getElementById("otro").innerHTML = vacio; // Otro idioma
+    document.getElementById("nacionalidad").innerHTML = vacio; // Nacionalidad
+    document.getElementById("vacante_sol").innerHTML = vacio; // Vacante solicitada
 }
 
 function consultaCandidato() {
-    //    alert("Consulta Candidato");
+    //  alert("Consulta Candidato: (" + cand_clv + ")");
 
     var archivo1 = servidor + "httpdocs/consCandCV.php";
     var archivo2 = archivo1 + "?candidato=" + cand_clv;
@@ -154,11 +195,12 @@ function consultaCandidato() {
             document.getElementById("com_cand").innerHTML = ids[22]; // Comentarios del candidato
             document.getElementById("act_recrea").innerHTML = ids[23]; // Actividades recreativas
             document.getElementById("act_cult").innerHTML = ids[24]; // Actividades culturales
-            document.getElementById("ingles").innerHTML = ids[25]; // Actividades culturales
-            document.getElementById("espaniol").innerHTML = ids[27]; // Actividades culturales
-            document.getElementById("otro").innerHTML = ids[27]; // Actividades culturales
-            document.getElementById("nacionalidad").innerHTML = ids[19];
-            document.getElementById("vacante_sol").innerHTML = ids[18];
+            document.getElementById("ingles").innerHTML = ids[25]; // Nivel de ingles
+            document.getElementById("espaniol").innerHTML = ids[27]; // Niverl de español
+            document.getElementById("otro").innerHTML = ids[27]; // Otro idioma
+            document.getElementById("nacionalidad").innerHTML = ids[19]; // Nacionalidad
+            document.getElementById("vacante_sol").innerHTML = ids[18]; // Vacante solicitada
+            despliega_foto(ids[28]); // Despliegue de foto
         }
     };
     //    xhttp.disabled();
@@ -239,7 +281,6 @@ function consultaExp() {
         }
     };
 }
-
 
 function consultaEdu() {
     //    alert("Consulta Educacion recibida");
