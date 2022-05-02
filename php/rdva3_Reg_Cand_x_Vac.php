@@ -2,65 +2,43 @@
 <html lang="es">
 <head>
 <link rel="stylesheet" href="../css/reportStyles.css">
-<title>Candidatos por Vacante</title>
+<title>Candidatos Registrados por Vacante</title>
 <meta charset="UTF-8">	
-<h1>Relación de Candidatos por Vacante</h1>
+<h1>Relación de Candidatos Registrados por Vacante</h1>
 </head>
 <body>
 
 <?php
-$campos1 = $_GET['Camposx21']; 
-$campo = array();
-$campo = explode('|',$campos1); 
+$vacante=$_GET["Vacante"];
+$vac_nom=$_GET["Vac_nom"];
+$empresa=$_GET["Empresa"];
+$emp_nom=$_GET["Emp_nom"];
 
-$vacante=$campo[0];
-$vac_nom=$campo[1];
-$empresa=$campo[2];
-$emp_nom=$campo[3];
-$est_cand=$campo[4];
-$est_cv=$campo[5];
-$est_entrevista=$campo[6];
-$est_evaluacion=$campo[7];
 $estatus_cand = ["","Aceptado","Viable","Entrevistar","Aplicar examen","No aplica","Fuera de presupuesto","Edad fuera de rango"];
 $estatus_cv = ["","Solicitar","Recivido","Enviar al cliente","No aplica"];
 $estatus_entrevista = ["","Programar entrevista","Entrevista cancelada","Candidato no asistio","Realizada"];
 $estatus_evaluacion = ["","Programar evaluación","Evaluación cancelada","Evaluación aprobada","Evaluación reporbada"];
 
+$cons1="";
+if($vacante != "0"){
+    $cons1 = "(Cand_x_vac.clv_vacante=".$vacante.")";
+    }
+
+    $cons2="";
+
+    if($empresa != "0"){
+        $cons2 = "(Vacantes.emp_clave=".$empresa.")";
+        }
+
+$y ="";
+
+        if($cons1 != "" && $cons2 != ""){
+            $y = " AND ";
+        }
+
+        $consulta = $cons1.$y.$cons2;
+    
 //$consulta ="(Cand_x_vac.clv_vacante='$vacante') AND (Vacantes.emp_clave='$empresa')";
-
-if($est_cand != "0"){
-$cons_est_cand = " AND (Candidatos.clv_est_cand = '$est_cand')";
-$est1_cand = $estatus_cand[$est_cand];
-} else { 
-	$cons_est_cand = "";
-	$est1_cand ="Todos";
-}
-
-if($est_cv != "0"){
-$cons_est_cv = " AND (Candidatos.clv_est_cv = '$est_cv')";
-$est1_cv = $estatus_cv[$est_cv];
-} else { 
-	$cons_est_cv = "";
-$est1_cv = "Todos";
-}
-
-if($est_entrevista != "0"){
-	$cons_est_entrevista = " AND (Candidatos.clv_est_ent = '$est_entrevista')";
-	$est1_entrevista = $estatus_entrevista[$est_entrevista];
-	} else { 
-		$cons_est_entrevista = "";
-		$est1_entrevista = "Todos";
-	}
-	
-if($est_evaluacion != "0"){
-		$cons_est_evaluacion = " AND (Candidatos.clv_est_eval = '$est_evaluacion')";
-		$est1_evaluacion = $estatus_evaluacion[$est_evaluacion];
-		} else { 
-			$cons_est_evaluacion = "";
-		$est1_evaluacion = "Todos";
-		}
-	
-$consulta = $consulta.$cons_est_cand. $cons_est_cv.$cons_est_entrevista.$cons_est_evaluacion;
 
 require 'arhsi_connect.php';
 
@@ -77,13 +55,10 @@ if($response)
 	$f=Date("d-m-Y");
 	echo "<div><fieldset>Reporte de fecha:  $f";
 	echo "<br>Empresa:  ". $emp_nom;
-	echo "<br>Vacante:  ". $vacante."-".$vac_nom."</fieldset>";
-	echo "<fieldset>";
-	echo "Estatus candidatos:  ". $est1_cand;
-	echo "<br>Estatus cvs:  ". $est1_cv;
-	echo "<br>Estatus entrevista:  ". $est1_entrevista;
-	echo "<br>Estatus evaluación:  ". $est1_evaluacion."</fieldset>"."</div>";
-	echo '<table style="width:100%;">
+	echo "<br>Vacante:  ". $vacante."-".$vac_nom."</div>";
+//    echo "<br>Consulta: ".$consulta."</fieldset>"."</div>";
+
+    echo '<table style="width:100%;">
 	<tr align="center" font="./arial" style="background-color:'.$bgc2.';"><td>
 	<b>Clv.</b> </td>
 	<td><b>Nombre Candidato</b></td>
@@ -98,16 +73,6 @@ if($response)
 
 	while($row = mysqli_fetch_array($response))
 		{
-			/*
-		if($row[6] == 0){ $row[6]="Sin estatus"; }
-        if($row[6] == 1){ $row[6]="Aceptado"; }
-		if($row[6] == 2){ $row[6]="Viable"; }
-		if($row[6] == 3){ $row[6]="Entrevistar"; }
-		if($row[6] == 4){ $row[6]="Aplicar examen"; }
-		if($row[6] == 5){ $row[6]="No aplica"; }
-		if($row[6] == 6){ $row[6]="Fuera de presupuesto"; }
-		if($row[6] == 7){ $row[6]="Fuera de rango"; }
-*/
 		$row[6] = $estatus_cand[$row[6]];
 
        	 echo '<tr><td align="center"  font="arial">'.
@@ -122,7 +87,7 @@ if($response)
     echo '</table>';
   }
 else {
-	echo 'Reporte vacio, no se puede emitir la consulta<br>';
+	echo 'Reporte vacio, no se puede emitir la consulta: '.$consulta.'<br>';
 	mysqli_error($dbc);
 	}
 

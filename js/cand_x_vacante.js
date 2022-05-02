@@ -40,7 +40,9 @@ function repCxV() {
     var empresa_clv = clavex22[0];
     var empresa_nom = clavex22[1];
 
-    window.location.href = servidor + "httpdocs/rdva3_Cand_x_Vac.php" + "?Vacante=" + vacante_clv + "&Vac_nom=" + vacante_nom + "&Empresa=" + empresa_clv + "&Emp_nom=" + empresa_nom;
+    alert("Vacante: " + vacante_clv + " Empresa: " + empresa_clv);
+
+    window.location.href = servidor + "httpdocs/rdva3_Reg_Cand_x_Vac.php" + "?Vacante=" + vacante_clv + "&Vac_nom=" + vacante_nom + "&Empresa=" + empresa_clv + "&Emp_nom=" + empresa_nom;
 }
 
 /* LANZA REPORTE EN EXCEL */
@@ -87,7 +89,7 @@ function repExcelCxV() {
 
     //    alert("Empresa: " + empresa_clv + "  Nombre: " + empresa_nom + " Vacante: " + vacante_clv + " Nombre: " + vacante_nom);
 
-    window.location.href = servidor + "httpdocs/sp_Cand_x_Vac.php" + "?Vacante=" + vacante_clv + "&Vac_nom=" + vacante_nom + "&Empresa=" + empresa_clv + "&Emp_nom=" + empresa_nom;
+    window.location.href = servidor + "httpdocs/sp_Reg_Cand_x_Vac.php" + "?Vacante=" + vacante_clv + "&Vac_nom=" + vacante_nom + "&Empresa=" + empresa_clv + "&Emp_nom=" + empresa_nom;
 }
 
 function limpiaPantalla() {

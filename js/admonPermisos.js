@@ -399,7 +399,7 @@ function checaPermisos() {
 var puesto2 = [];
 
 function leePuestos() {
-    //    alert("Catalogo de puestos");
+    alert("Catalogo de puestos");
     //limpiaPantalla();
     checaPermisos();
     creaEncabezado1();
