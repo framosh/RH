@@ -136,6 +136,12 @@ dato4[3]   //  Puesto
             //        document.getElementById("conocimientos").textContent = leeConocimientos(); // Carga el catalogo de Conocimientos
       }
 
+      if (pagina == "edu_x_cand_p.htm") {
+            //            alert("Entra a edu_x_cand_p");
+            document.getElementById("empresas").textContent = leeClientes2(); // Carga el catalogo de Clientes
+      }
+
+
       if (pagina == "rep_candidatos.htm") {
             //            alert("Entra a cap-candidato");
             document.getElementById("empresas").textContent = leeClientes2(); // Carga el catalogo de Clientes

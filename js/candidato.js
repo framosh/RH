@@ -826,16 +826,6 @@ function checaPermisos() {
     if (consulta1 == "1") {
         consulta = true;
     }
-
-    /*
-    var columnas5 = 4;
-    var renglones5 = 6;
-    var titulo5 = "Conocimientos del Candidato";
-    var encabezado5 = [];
-    encabezado5 = ["HERRAMIENTA", "NIVEL", "AÑOS", "MESES"];
-    creaEncabezado(encabezado5, columnas5, titulo5);
-    creaTabla(renglones5, columnas5);
-    */
 }
 
 function leeClientes2() {

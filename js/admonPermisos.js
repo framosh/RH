@@ -4,8 +4,6 @@
 /* LIMPIA PANTALLA Y CARGA CATALOGO DE ESTADOS */
 function limpiaPantalla() {
     //alert("Inicializa pantalla para nuevo registro");
-    //    saldo=0;
-    //    document.getElementById("forma_permisos").reset();
     var vacio = "";
     var vacio1 = 0;
     document.getElementById("mensaje_permisos").innerHTML = vacio;
@@ -252,10 +250,6 @@ function consultaApliAsignadas() {
         return;
     }
 
-    //document.getElementById("aplicaciones").selectedIndex='0';
-    //limpiaPantalla2();
-    //limpiaTabla();
-
     var puestox = 0;
     for (var i = 0; i < puesto2.length; i++) {
         var nombre = puesto2[i].split("|");
@@ -290,28 +284,18 @@ function consultaApliAsignadas() {
             }
 
             //        document.getElementById("mensaje_permisos").innerHTML=cadena;
+            //alert("cadena: " + cadena);
 
             var aplicacion = cadena.split("\n");
-            //        var bloques = 0;
-            var renglon4 = 0;
-            var contador = 0;
+            var tablax1 = "tablax21";
+            var cuerpox1 = "cuerpox21";
             var apli4 = 0;
             apli4 = aplicacion.length;
             apli4--;
-            var linea = [];
-            //          creaEncabezado1();
-            //      alert("Aplicaciones:"+apli4);
-
-            for (var i4 = contador; i4 < apli4; i4++) {
-                //            alert("Aplicacion: "+aplicacion[i4]+" i4:"+i4);
-                if ((aplicacion[i4] != null) && (aplicacion[i4] != "")) {
-                    linea = aplicacion[i4].split("|");
-                    //                alert("Aplicacion: "+aplicacion[i4]+"  renglon:"+renglon4);
-                    despliegaTabla(linea, renglon4);
-                    renglon4++;
-                }
+            if (apli4 > 0) {
+                quickReport(aplicacion, tablax1, cuerpox1);
             }
-            renglones2 = renglon4 - 1;
+            renglones2 = apli4;
         }
     };
 }
@@ -399,10 +383,10 @@ function checaPermisos() {
 var puesto2 = [];
 
 function leePuestos() {
-    alert("Catalogo de puestos");
+    //    alert("Catalogo de puestos");
     //limpiaPantalla();
     checaPermisos();
-    creaEncabezado1();
+    //    creaEncabezado1();
     limpiaPantalla2();
 
     //var archivo2 = "https://svr.itbp.com.mx/httpdocs/catalogoPuestos.php";
