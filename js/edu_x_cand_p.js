@@ -7,7 +7,6 @@ function limpiaPantalla1() {
     document.getElementById("vacantes").selectedIndex = opcion2;
 }
 
-
 var alta = false;
 var baja = false;
 var cambio = false;
@@ -37,6 +36,9 @@ function checaPermisos() {
 
 function leeClientes2() {
     //    alert("Checa permisos");
+    elige_servidor();
+    leeInstituciones();
+    leeTipoEdu();
     checaPermisos();
     //    alert("Lee Clientes 2");
     //  alert("limpia Pantalla");
@@ -46,6 +48,25 @@ function leeClientes2() {
     document.getElementById("candidatos").innerHTML = limpia;
     //alert("Lee Clientes");
     leeClientes();
+}
+
+var cand_clv;
+var cand_nom;
+
+function separaNombre() {
+    var candidato = document.getElementById("candidatos").value;
+
+    var renglones = candidatos2.length;
+    renglones--;
+    var posicion22 = document.getElementById("candidatos").selectedIndex;
+    posicion22 = (renglones - posicion22);
+    var clavex22 = candidatos2[posicion22].split("|");
+    cand_clv = clavex22[0];
+    cand_nom = clavex22[1];
+
+    document.getElementById("cand_nom").value = cand_nom;
+    document.getElementById("cand_key").value = cand_clv;
+    LeeEducacion();
 }
 
 
@@ -71,6 +92,7 @@ function leeCandidatos2() {
     posicion22 = (renglones - posicion22);
     var clavex22 = vacantes2[posicion22].split("|");
     var vacante_clv = clavex22[0];
+
     leeCandidatos(vacante_clv);
     //    leeConocimientos2();
 }

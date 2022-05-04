@@ -1,3 +1,7 @@
+/*
+Mantenimiento a los conocimientos tecnicos del candidato
+*/
+
 function limpiaPantalla_Con() {
     //    alert("Limpia Pantalla");
     var vacio = "";

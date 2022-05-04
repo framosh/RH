@@ -1,11 +1,94 @@
 /* LANZA REPORTE EN PANTALLA */
 function repCono() {
-    window.location.href = "httpdocs/rdva3_Cono_Req.php";
+    //    alert("Despliega reporte por pantalla");
+    var candidato = document.getElementById("candidatos").value;
+    var vacante = document.getElementById("vacantes").value;
+    var empresa = document.getElementById("empresas").value;
+
+    if (empresa == "Seleccione una Empresa") {
+        alert("Seleccione una Empresa");
+        return;
+    }
+
+    if (candidato == "Seleccione un Candidato") {
+        alert("Seleccione un Candidato");
+        return;
+    }
+
+    var renglones = candidatos2.length;
+    renglones--;
+    var posicion22 = document.getElementById("candidatos").selectedIndex;
+    posicion22 = (renglones - posicion22);
+    var clavex22 = candidatos2[posicion22].split("|");
+    var candidato_clv = clavex22[0];
+
+    renglones = cliente2.length;
+    renglones--;
+    posicion22 = document.getElementById("empresas").selectedIndex;
+    posicion22 = (renglones - posicion22);
+    clavex22 = cliente2[posicion22].split("|");
+    var emp_nom = clavex22[1];
+
+    if (vacante == "Seleccione una Vacante") {
+        alert("Seleccione la Vacante");
+        return;
+    }
+
+    renglones = vacantes2.length;
+    renglones--;
+    posicion22 = document.getElementById("vacantes").selectedIndex;
+    posicion22 = (renglones - posicion22);
+    clavex22 = vacantes2[posicion22].split("|");
+    var vac_clv = clavex22[0];
+    var vac_nom = clavex22[1];
+
+    window.location.href = "httpdocs/rdva3_Cono_x_Cand.php?Candidato=" + candidato_clv + "&Nombre=" + candidato + "&Empresa=" + emp_nom + "&Vacante=" + vac_clv + "&Vac_nom=" + vac_nom;
 }
 
 /* LANZA REPORTE EN EXCEL */
 function repExcelCono() {
-    window.location.href = "httpdocs/sp_Cono_Req.php";
+    var candidato = document.getElementById("candidatos").value;
+    var vacante = document.getElementById("vacantes").value;
+    var empresa = document.getElementById("empresas").value;
+
+    if (empresa == "Seleccione una Empresa") {
+        alert("Seleccione una Empresa");
+        return;
+    }
+
+    if (candidato == "Seleccione un Candidato") {
+        alert("Seleccione un Candidato");
+        return;
+    }
+
+    var renglones = candidatos2.length;
+    renglones--;
+    var posicion22 = document.getElementById("candidatos").selectedIndex;
+    posicion22 = (renglones - posicion22);
+    var clavex22 = candidatos2[posicion22].split("|");
+    var candidato_clv = clavex22[0];
+
+    renglones = cliente2.length;
+    renglones--;
+    posicion22 = document.getElementById("empresas").selectedIndex;
+    posicion22 = (renglones - posicion22);
+    clavex22 = cliente2[posicion22].split("|");
+    var emp_nom = clavex22[1];
+
+    if (vacante == "Seleccione una Vacante") {
+        alert("Seleccione la Vacante");
+        return;
+    }
+
+    renglones = vacantes2.length;
+    renglones--;
+    posicion22 = document.getElementById("vacantes").selectedIndex;
+    posicion22 = (renglones - posicion22);
+    clavex22 = vacantes2[posicion22].split("|");
+    var vac_clv = clavex22[0];
+    var vac_nom = clavex22[1];
+
+    window.location.href = "httpdocs/sp_Cono_x_Cand.php?Candidato=" + candidato_clv + "&Nombre=" + candidato + "&Empresa=" + emp_nom + "&Vacante=" + vac_clv + "&Vac_nom=" + vac_nom;
 }
 
 function limpiaPantalla() {
@@ -23,6 +106,7 @@ function limpiaPantalla() {
     document.getElementById("actuaconr").disabled = true;
 }
 
+// Registro de conocimientos por candidato
 function actualizaConocim() {
     //    alert("Actualiza Conocimiento Requerido");
     var vacio = "";
@@ -46,7 +130,7 @@ function actualizaConocim() {
         return;
     }
 
-    if (vacante == "Seleccione un Candidato") {
+    if (candidato == "Seleccione un Candidato") {
         alert("Seleccione un Candidato");
         return;
     }
@@ -117,6 +201,7 @@ function actualizaConocim() {
     };
 }
 
+// Registro de conocimientos necesarios por vacante
 function altaConocim() {
     //    alert("Alta Conocimiento requerido");
     var vacio = "";
@@ -211,6 +296,7 @@ function altaConocim() {
     };
 }
 
+//Consulta de conocimiento por candidato
 function consultaConocimiento() {
     //    alert("Consulta conocimiento requerido por vacante");
     var vacio = "";
@@ -300,7 +386,7 @@ function consultaConocimiento() {
 }
 
 var conocimientos2 = [];
-
+// Catalogo de conocimientos por candidato
 function leeConocimientos() {
     //    alert("Lee Conocimientos:");
     //    limpiaPantalla();
@@ -372,7 +458,7 @@ function leeConocimientos() {
 }
 
 var candidatos2 = [];
-
+// Catalogo de candidatos por vacante
 function leeCandidatos() {
     //    alert("Lee Conocimientos:");
     //    limpiaPantalla();
@@ -444,7 +530,7 @@ function leeCandidatos() {
 }
 
 var vacantes2 = [];
-
+// Catalogo de vacantes por empresa
 function leeVacantes() {
     //alert("Entra a Carga de Clientes ");
     var limpia = "";
@@ -525,6 +611,7 @@ function leeVacantes() {
     };
 }
 
+// Catalogo de empresas (Clientes)
 function leeClientes2() {
     limpiaPantalla();
     var limpia = "";
