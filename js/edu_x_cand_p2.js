@@ -1,3 +1,4 @@
+// Mantenimiento a la educacion del candidato
 function reporteEduPant() {
     var candidato = document.getElementById("candidatos").value;
 

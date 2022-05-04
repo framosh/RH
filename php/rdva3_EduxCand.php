@@ -8,6 +8,7 @@
 </head>
 <body>
 
+
 <?php
 $candidato=$_GET['candidato'];
 $nombre=$_GET['nombre'];

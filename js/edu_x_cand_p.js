@@ -1,3 +1,4 @@
+// Mantenimiento de la educacion de candidatoas por pantalla
 function limpiaPantalla1() {
     //    alert("Limpia pantalla 1");
     var valor = "";

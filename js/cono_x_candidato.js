@@ -1,3 +1,4 @@
+// Mantenimiento de conocimientos tecnicos por candidato
 /* LANZA REPORTE EN PANTALLA */
 function repCono() {
     //    alert("Despliega reporte por pantalla");

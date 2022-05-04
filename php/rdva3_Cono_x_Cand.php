@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <link rel="stylesheet" href="../css/reportStyles.css">
-<title>Conocimientos por Candidato</title>
+<title>Conocimientos Tecnicos por Candidato</title>
 <meta charset="UTF-8">	
 <h1>Conocimientos por Candidato</h1>
 </head>
