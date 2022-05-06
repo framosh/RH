@@ -92,12 +92,26 @@ function repExcelCono() {
     window.location.href = "httpdocs/sp_Cono_x_Cand.php?Candidato=" + candidato_clv + "&Nombre=" + candidato + "&Empresa=" + emp_nom + "&Vacante=" + vac_clv + "&Vac_nom=" + vac_nom;
 }
 
+function limpiaGeneral() {
+    //    alert("Limpia Pantalla");
+    var vacio = "";
+    var vacio1 = 0;
+    document.getElementById("empresas").selectedIndex = vacio1;
+    document.getElementById("vacantes").innerHTML = vacio;
+    document.getElementById("candidatos").innerHTML = vacio;
+    document.getElementById("conocimientos").innerHTML = vacio;
+    document.getElementById("nivel").selectedIndex = vacio1;
+    document.getElementById("anios").value = vacio;
+    document.getElementById("meses").value = vacio;
+    document.getElementById("mensaje_gral").innerHTML = vacio;
+    document.getElementById("altaconr").disabled = false;
+    document.getElementById("actuaconr").disabled = true;
+}
+
 function limpiaPantalla() {
     //    alert("Limpia Pantalla");
     var vacio = "";
     var vacio1 = 0;
-    document.getElementById("vacantes").selectedIndex = vacio1;
-    document.getElementById("candidatos").selectedIndex = vacio1;
     document.getElementById("conocimientos").selectedIndex = vacio1;
     document.getElementById("nivel").selectedIndex = vacio1;
     document.getElementById("anios").value = vacio;
@@ -106,6 +120,7 @@ function limpiaPantalla() {
     document.getElementById("altaconr").disabled = false;
     document.getElementById("actuaconr").disabled = true;
 }
+
 
 // Registro de conocimientos por candidato
 function actualizaConocim() {
@@ -168,11 +183,11 @@ function actualizaConocim() {
     clavex22 = vacantes2[posicion22].split("|");
     var vacante_clv = clavex22[0];
 
-    renglones = candidato2.length;
+    renglones = candidatos2.length;
     renglones--;
     posicion22 = document.getElementById("candidatos").selectedIndex;
     posicion22 = (renglones - posicion22);
-    clavex22 = candidato2[posicion22].split("|");
+    clavex22 = candidatos2[posicion22].split("|");
     var candidato_clv = clavex22[0];
 
     var nivel22 = 4;
@@ -329,11 +344,11 @@ function consultaConocimiento() {
     clavex22 = conocimientos2[conocimientox22].split("|");
     var conocimiento_clv = clavex22[0];
 
-    renglones = candidato2.length;
+    renglones = candidatos2.length;
     renglones--;
     var posicion22 = document.getElementById("candidatos").selectedIndex;
     posicion22 = (renglones - posicion22);
-    clavex22 = candidato2[posicion22].split("|");
+    clavex22 = candidatos2[posicion22].split("|");
     var candidato_clv = clavex22[0];
 
     var archivo1 = servidor + "httpdocs/con_Con_Cand.php";
@@ -375,7 +390,11 @@ function consultaConocimiento() {
                 }
             }
 
-            document.getElementById("nivel").selectedIndex = ids[2];
+            var lugar = 0;
+            lugar = 4 - ids[2];
+            //            alert("Lugar: " + lugar);
+
+            document.getElementById("nivel").selectedIndex = lugar;
             document.getElementById("anios").value = ids[3];
             document.getElementById("meses").value = ids[4];
             document.getElementById("altaconr").disabled = true;
@@ -407,15 +426,15 @@ function leeConocimientos() {
         return;
     }
 
-    var renglones = vacantes2.length;
+    var renglones = candidatos2.length;
     renglones--;
     var posicion22 = document.getElementById("candidatos").selectedIndex;
     posicion22 = (renglones - posicion22);
-    var clavex22 = candidato2[posicion22].split("|");
+    var clavex22 = candidatos2[posicion22].split("|");
     var candidato_clv = clavex22[0];
 
     var archivo1 = servidor + "httpdocs/cat_cono_x_cand.php";
-    var archivo2 = archivo1 + "?candidato=" + candidato_clv;
+    var archivo2 = archivo1 + "?Candidato=" + candidato_clv;
     var xhttp;
 
     if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -430,12 +449,14 @@ function leeConocimientos() {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var cadena = xhttp.responseText;
+            //          alert("Cadena: " + cadena);
             //            document.getElementById("mensaje_gral").textContent = "(" + cadena + ")" + "   longitud: (" + cadena.length + ")";
 
             var conocimientos = cadena.split("\n");
+            var cantidad = conocimientos.length;
             var i2 = 0;
 
-            for (var i = 0; i < conocimientos.length; i++) {
+            for (var i = 0; i < cantidad; i++) {
                 var campo = conocimientos[i];
                 if (campo) {
                     conocimientos2[i2] = campo.trim();

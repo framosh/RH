@@ -15,7 +15,7 @@ $emp_nom = $_GET['Empresa'];
 $vacante = $_GET['Vacante'];
 $vac_nom = $_GET['Vac_nom'];
 
-$nivel1=["","Alto","Medio","Bajo"];
+$nivel1=["","Bajo","Medio","Alto"];
 $consulta ="Candidatos.cand_key='$candidato'";	
 
 require 'arhsi_connect.php';

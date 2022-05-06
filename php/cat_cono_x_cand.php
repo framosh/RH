@@ -1,3 +1,4 @@
+
 <?php 
 $candidato=$_GET["Candidato"];
 

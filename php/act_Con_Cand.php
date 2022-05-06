@@ -9,7 +9,7 @@ $anio=$_GET["Anio"];
 $mes=$_GET["Mes"];
 
 require 'arhsi_connect.php';
-if(mysqli_stmt_prepare($stmt,"UPDATE Con_candidato SET clv_conocim='$conocimiento', nivel_conocim='$nivel', con_anios='$anio', con_meses='$mes' WHERE (cand_key='$candidato' AND clv_conocim='$conocimiento')"))
+if(mysqli_stmt_prepare($stmt,"UPDATE Con_candidato SET clv_conocim='$conocimiento', con_nivel='$nivel', con_anios='$anio', con_meses='$mes' WHERE (cand_key='$candidato' AND clv_conocim='$conocimiento')"))
 	{
 	mysqli_stmt_execute($stmt);
 	$affected_rows = mysqli_stmt_affected_rows($stmt);
