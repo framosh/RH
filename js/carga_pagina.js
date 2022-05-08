@@ -141,9 +141,13 @@ dato4[3]   //  Puesto
             document.getElementById("empresas").textContent = leeClientes2(); // Carga el catalogo de Clientes
       }
 
-
       if (pagina == "rep_candidatos.htm") {
             //            alert("Entra a cap-candidato");
+            document.getElementById("empresas").textContent = leeClientes2(); // Carga el catalogo de Clientes
+      }
+
+      if (pagina == "rep_vacantes.htm") {
+            //            alert("Entra a rep_vacantes");
             document.getElementById("empresas").textContent = leeClientes2(); // Carga el catalogo de Clientes
       }
 
