@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">	
-<title>Reporte de vacantes por cliente</title>
+<title>Reporte de vacantes por periodo</title>
 <style>
 	p {
 		font-family: arial;		
@@ -28,7 +28,7 @@ tr:nth-child(even) {
 </head>
 <body style="background-color: #BDBDF0;">
 <h1 style="color:#1E1CE2; font-family:verdana; font-size:150%; text-align:center;">
-<b>Reporte de Vacantes por Cliente</b></h1>
+<b>Reporte de Vacantes por Periodo</b></h1>
 
 <?php
 $campos1 = $_GET['Camposx21']; 

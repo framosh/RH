@@ -28,6 +28,9 @@ $estatus_evaluacion = ["","Programar evaluación","Evaluación cancelada","Evalu
 $nivel1=["","Alto","Medio","Bajo"];
 $consulta ="(Cand_x_vac.clv_vacante='$vacante') AND (Vacantes.emp_clave='$empresa')";
 
+setlocale(LC_ALL,"es_ES");
+setlocale(LC_MONETARY,'en_US');
+
 if($est_cand != "0"){
 $cons_est_cand = " AND (Candidatos.clv_est_cand = '$est_cand')";
 $est1_cand = $estatus_cand[$est_cand];

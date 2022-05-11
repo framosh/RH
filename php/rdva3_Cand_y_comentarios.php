@@ -76,6 +76,10 @@ require 'arhsi_connect.php';
   WHERE $consulta ORDER BY Candidatos.cand_nom ASC";  
 
 $response=mysqli_query($dbc,$query);
+
+setlocale(LC_ALL,"es_ES");
+setlocale(LC_MONETARY,'en_US');
+
 if($response)
 	{
     $bgc2="darkgrey";
@@ -98,7 +102,6 @@ if($response)
 	<td><b>Correo</b></td>
 	<td><b>Puesto</b></td>
 	<td width="7%"><b>Estatus</b> </td>
-
     <td><b>Obs. Reclutador</b></td>
     <td><b>Obs. Evaluación</b></td>
 	<td><b>Comentarios Candidato</b></td>
@@ -118,7 +121,6 @@ $clave = "";
 while($row = mysqli_fetch_array($response))
 		{
 		$row[6] = $estatus_cand[$row[6]];
-//$estatus_cand = ["","Aceptado","Viable","Entrevistar","Aplicar examen","No aplica","Fuera de presupuesto","Edad fuera de rango"];
 
         if($row[6]=="Aceptado" || $row[12]=="Viable"){
             $bgc = "chartreuse";

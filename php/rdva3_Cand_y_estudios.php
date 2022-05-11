@@ -28,6 +28,9 @@ $estatus_evaluacion = ["","Programar evaluación","Evaluación cancelada","Evalu
 $nivel1=["","Alto","Medio","Bajo"];
 $edu_estatus = ["","Titulado","Pasante","Certificado","Trunco","Cursando"];
 
+setlocale(LC_ALL,"es_ES");
+setlocale(LC_MONETARY,'en_US');
+
 $consulta ="(Cand_x_vac.clv_vacante='$vacante') AND (Vacantes.emp_clave='$empresa')";
 
 if($est_cand != "0"){
@@ -137,17 +140,6 @@ while($row = mysqli_fetch_array($response))
         }
 
         $colorx1 ="black";
-/*
-        if($clave == $row[0]){
-            for($i1=0;$i1<7;$i1++){
-                $row[$i1]="";
-            }
-            $colorx1 ="black";
-        } else {
-            $colorx1 = "blue";
-            $clave = $row[0];
-        }
-*/
 
 if($clave == $row[0]){
     for($i1=0;$i1<7;$i1++){

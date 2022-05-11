@@ -71,6 +71,10 @@ require 'arhsi_connect.php';
   WHERE $consulta ORDER BY Candidatos.cand_nom DESC";  
 
 $response=mysqli_query($dbc,$query);
+
+setlocale(LC_ALL,"es_ES");
+setlocale(LC_MONETARY,'en_US');
+
 if($response)
 	{
 		$bgc2="darkgrey";
@@ -98,16 +102,6 @@ if($response)
 
 	while($row = mysqli_fetch_array($response))
 		{
-			/*
-		if($row[6] == 0){ $row[6]="Sin estatus"; }
-        if($row[6] == 1){ $row[6]="Aceptado"; }
-		if($row[6] == 2){ $row[6]="Viable"; }
-		if($row[6] == 3){ $row[6]="Entrevistar"; }
-		if($row[6] == 4){ $row[6]="Aplicar examen"; }
-		if($row[6] == 5){ $row[6]="No aplica"; }
-		if($row[6] == 6){ $row[6]="Fuera de presupuesto"; }
-		if($row[6] == 7){ $row[6]="Fuera de rango"; }
-*/
 		$row[6] = $estatus_cand[$row[6]];
 
        	 echo '<tr><td align="center"  font="arial">'.

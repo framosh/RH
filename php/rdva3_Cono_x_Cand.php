@@ -16,6 +16,10 @@ $vacante = $_GET['Vacante'];
 $vac_nom = $_GET['Vac_nom'];
 
 $nivel1=["","Bajo","Medio","Alto"];
+
+setlocale(LC_ALL,"es_ES");
+setlocale(LC_MONETARY,'en_US');
+
 $consulta ="Candidatos.cand_key='$candidato'";	
 
 require 'arhsi_connect.php';

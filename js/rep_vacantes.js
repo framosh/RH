@@ -6,6 +6,8 @@ function rep_pantalla() {
     var fecha1 = document.getElementById("fecha1").value; // Fecha de inicio
     var fecha2 = document.getElementById("fecha2").value; // fecha de fin
 
+    //    alert("Fecha: " + fecha1);
+
     if (tipo_rep == "Seleccione el tipo de reporte") {
         alert("Seleccione un tipo de reporte");
         return;
@@ -43,9 +45,19 @@ function rep_pantalla() {
     campox21 = campox21.join("|");
 
     if (tipo_reporte == 1) { // Vacantes por cliente
+        if (empresa == "Seleccione una Empresa") {
+            alert("Seleccione una Empresa");
+            return;
+        }
+
         window.location.href = servidor + "httpdocs/rdva3_Vac_x_Cliente.php" + "?Camposx21=" + campox21;
     }
     if (tipo_reporte == 2) { // Vacantes por periodo
+        if (fecha1 == "" || fecha1 == null) {
+            alert("Seleccione un periodo");
+            return;
+        }
+
         window.location.href = servidor + "httpdocs/rdva3_Vac_x_Periodo.php" + "?Camposx21=" + campox21;
     }
 }
@@ -92,13 +104,22 @@ function rep_excel() {
     campox21[2] = est_vac;
     campox21[3] = fecha1;
     campox21[4] = fecha2;
-
     campox21 = campox21.join("|");
 
     if (tipo_reporte == 1) { // Vacantes por cliente
+        if (empresa == "Seleccione una Empresa") {
+            alert("Seleccione una Empresa");
+            return;
+        }
+
         window.location.href = servidor + "httpdocs/sp_Vac_x_Cliente.php" + "?Camposx21=" + campox21;
     }
     if (tipo_reporte == 2) { // Vacantes por periodo
+        if (fecha1 == "" || fecha2 == "") {
+            alert("Seleccione un periodo");
+            return;
+        }
+
         window.location.href = servidor + "httpdocs/sp_Vac_x_Periodo.php" + "?Camposx21=" + campox21;
     }
 }
@@ -116,7 +137,7 @@ function limpiaPantalla() {
 }
 
 function leeClientes2() {
-    alert("Lee Clientes");
+    //    alert("Lee Clientes");
     limpiaPantalla();
 
     leeClientes();
