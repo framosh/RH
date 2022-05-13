@@ -129,6 +129,10 @@ dato4[3]   //  Puesto
             document.getElementById("empresas").textContent = leeClientes2(); // Carga el catalogo de Clientes
       }
 
+      if (pagina == "experiencia_p.htm") {
+            document.getElementById("empresas").textContent = leeClientes2(); // Carga el catalogo de Clientes
+      }
+
       if (pagina == "cap-candidato-a.htm") {
             //            alert("Entra a cap-candidato");
             document.getElementById("empresas").textContent = leeClientes2(); // Carga el catalogo de Clientes

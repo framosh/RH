@@ -104,6 +104,8 @@ $fecha2 = "Diciembre";
 }
 
 setlocale(LC_ALL,"es_ES");
+setlocale(LC_MONETARY,'en_US');
+
 $emp=$Empresa." - ".$Nombre;
 $f=Date("d-m-Y");
 echo "<div style='font-family:arial;'>Reporte de fecha: $f<br>";
@@ -139,8 +141,6 @@ if($response)
 	<td align="center"    font="./arial"><b>Lugar</b>   </td>
 	<td align="center"    font="./arial"><b>Horario</b>   </td>
 	<td align="center"    font="./arial"><b>Observaciones</b>   </td></tr>';
-
-	setlocale(LC_MONETARY,'en_US');
 
 	while($row = mysqli_fetch_array($response))
 		{
