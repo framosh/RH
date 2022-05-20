@@ -117,6 +117,11 @@ dato4[3]   //  Puesto
             document.getElementById("areas").textContent = leeAreas(); // Carga el catalogo de Puestos
       }
 
+      if (pagina == "evaluacion.htm") {
+            document.getElementById("conocimientos").textContent = leeConocimientos(); // Carga el catalogo de Conocimientos
+            document.getElementById("puestos").textContent = leePuestos(); // Carga el catalogo de Puestos
+      }
+
       if (pagina == "cat_conocimiento.htm") {
             document.getElementById("conocimientos").textContent = leeConocimientos(); // Carga el catalogo de Conocimientos
       }
