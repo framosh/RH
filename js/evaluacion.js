@@ -1,6 +1,6 @@
 // Mantenimiento al catalogo de evaluaciones
 /* LANZA REPORTE EN PANTALLA */
-function repEvalPant() {
+function rep_Pantalla() {
     //    alert("Despliega reporte por pantalla");
     /*
     var candidato = document.getElementById("candidatos").value;
@@ -49,7 +49,7 @@ function repEvalPant() {
 }
 
 /* LANZA REPORTE EN EXCEL */
-function repEvalExcel() {
+function rep_Excel() {
     /*
         var candidato = document.getElementById("candidatos").value;
         var vacante = document.getElementById("vacantes").value;
@@ -96,19 +96,24 @@ function repEvalExcel() {
     */
 }
 
-function limpiaPantalla() {
-    //    alert("Limpia Pantalla");
+function limpiaPantalla_eval() {
+    //alert("Limpia Pantalla");
     var vacio = "";
     var vacio1 = 0;
     document.getElementById("puestos").selectedIndex = vacio1;
     document.getElementById("conocimientos").selectedIndex = vacio1;
     document.getElementById("evaluaciones").selectedIndex = vacio1;
-    document.getElementById("descipcion").innerHTML = vacio;
+    document.getElementById("nombre").value = vacio;
+    document.getElementById("clave").value = vacio;
     document.getElementById("pmin").value = vacio1;
     document.getElementById("nivel").selectedIndex = vacio1;
-    document.getElementById("observacion").innerHTML = vacio;
-    document.getElementById("puestos").disabled = false;
-    document.getElementById("conocimientos").disabled = false;
+    document.getElementById("descripcion").value = vacio;
+    document.getElementById("alta").disabled = false;
+    document.getElementById("actualiza").disabled = false;
+}
+
+function nuevoEval() {
+    limpiaPantalla_eval();
 }
 
 var tipo_funcion = "";
@@ -121,23 +126,26 @@ function altaEval() {
 function actualizaEval() {
     tipo_funcion = "modifica";
     modificaEval();
+    document.getElementById("alta").disabled = true;
+    document.getElementById("actualiza").disabled = false;
 }
 
 
 // Registro de conocimientos por candidato
 function modificaEval() {
-    //    alert("Actualiza Conocimiento Requerido");
+    //    alert("Alta y Actualización de Evaluaciones");
     var vacio = "";
     var vacio1 = 0;
-    document.getElementById("mensaje_gral").innerHTML = vacio;
+    document.getElementById("mensaje_gral").value = vacio;
+
 
     var puesto = document.getElementById("puestos").value;
     var evaluacion = document.getElementById("evaluaciones").value;
     var conocimiento = document.getElementById("conocimientos").value;
-    var descripcion = document.getElementById("descipcion").value;
+    var descripcion = document.getElementById("descripcion").value;
     var pmin = document.getElementById("pmin").value;
     var nivel = document.getElementById("nivel").value;
-    var observaciones = document.getElementById("observacion").value;
+    var nombre = document.getElementById("nombre").value;
 
     if (puesto == "Seleccione el Puesto") {
         alert("Seleccione el Puesto");
@@ -159,6 +167,11 @@ function modificaEval() {
             alert("Seleccione la evaluacion");
             return;
         }
+    } else {
+        if (nombre == "") {
+            alert("Registre el nombre de la evaluación");
+            return;
+        }
     }
 
     var camposx22 = [];
@@ -178,20 +191,18 @@ function modificaEval() {
     clavex22 = puestos2[posicion22].split("|");
     var puesto_clv = clavex22[0];
 
-    renglones = evaluaciones2.length;
-    renglones--;
-    posicion22 = document.getElementById("evaluaciones").selectedIndex;
-    posicion22 = (renglones - posicion22);
-    clavex22 = evaluaciones2[posicion22].split("|");
-    var evaluacion_clv = clavex22[0];
+    evaluacion_clv = document.getElementById("clave").value;
+    if (evaluacion_clv == null) {
+        evaluacion_clv = 0;
+    }
 
     camposx22[0] = conocimiento_clv;
     camposx22[1] = puesto_clv;
     camposx22[2] = evaluacion_clv;
-    camposx22[3] = descripcion;
+    camposx22[3] = nombre;
     camposx22[4] = nivel;
     camposx22[5] = pmin;
-    camposx22[6] = observaciones;
+    camposx22[6] = descripcion;
 
     var camposx23 = camposx22.join("|");
 
@@ -200,7 +211,7 @@ function modificaEval() {
     if (tipo_funcion == "modifica") {
         archivo1 = servidor + "httpdocs/act_evaluacion.php";
     } else {
-        archivo1 = servidor + "httpdocs/alta_evaluacion.php";
+        archivo1 = servidor + "httpdocs/reg_evaluacion.php";
     }
 
     var archivo2 = archivo1 + "?Campos=" + camposx23;
@@ -218,10 +229,15 @@ function modificaEval() {
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var cadena = xhttp.responseText;
+            //        alert("Cadena: " + cadena);
             document.getElementById("mensaje_gral").innerHTML = cadena;
             if (tipo_funcion == "alta") {
                 var valor = cadena.split(":");
-                document.getElementById("clave").value = valor[1];
+                if (valor[0] == "Nueva evaluación") {
+                    document.getElementById("clave").value = valor[1];
+                    document.getElementById("alta").disabled = true;
+                    document.getElementById("actualiza").disabled = false;
+                }
             }
         }
     };
@@ -231,8 +247,8 @@ function consultaEval() {
     //    alert("Consulta Conocimiento");
     var vacio = "";
     document.getElementById("mensaje_gral").innerHTML = vacio;
-    document.getElementById("puestos").disabled = true;
-    document.getElementById("conocimientos").disabled = true;
+    document.getElementById("alta").disabled = true;
+    document.getElementById("actualiza").disabled = false;
 
     var evaluacion = document.getElementById("evaluaciones").value;
 
@@ -241,12 +257,13 @@ function consultaEval() {
         return;
     }
 
-    renglones = evaluaciones2.length;
+    var renglones = evaluaciones2.length;
     renglones--;
-    posicion22 = document.getElementById("evaluaciones").selectedIndex;
+    var posicion22 = document.getElementById("evaluaciones").selectedIndex;
     posicion22 = (renglones - posicion22);
-    clavex22 = evaluaciones2[posicion22].split("|");
+    var clavex22 = evaluaciones2[posicion22].split("|");
     var evaluacion_clv = clavex22[0];
+
     document.getElementById("clave").value = evaluacion_clv;
 
     var archivo1 = servidor + "httpdocs/consultaEvaluacion.php";
@@ -265,6 +282,13 @@ function consultaEval() {
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var cadena = xhttp.responseText;
+            var mensaje_cadena = cadena.split(":");
+            //          alert("Cadena: " + cadena);
+            if (mensaje_cadena[0] == "No hay Evaluacion número") {
+                document.getElementById("mensaje_gral").innerHTML = cadena;
+                return;
+            }
+
             var ids = cadena.split("|");
 
             for (var i = 0; i < ids.length; i++) {
@@ -281,21 +305,17 @@ function consultaEval() {
             var puesto = 0;
             var opcion4 = 0;
 
-            if (ids[8] != "" && ids[8] != "0") {
+            if (ids[2] != "" && ids[2] != "0") {
                 var cantPuestos = puestos2.length;
                 cantPuestos--;
 
                 for (var i1 = cantPuestos; i1 >= 0; i1--) {
                     var campo2 = puestos2[i1];
                     var clave = campo2.split("|");
-                    if (campo2 && clave[0] != "0") {
+                    if (puesto_clv == clave[0]) {
                         opcion4++;
-                        if (clave[0] == ids[8]) {
-                            puesto = opcion4;
-                            //                            estado--;
-                            //                     alert("Estado: "+estado2[i1]+"  opcion5:("+opcion5+")  ids[7]:("+ids[7]+")   longitud:"+estado2.length);
-                            break;
-                        }
+                        puesto = ((cantPuestos + 1) - opcion4);
+                        break;
                     }
                 }
             } else {
@@ -305,32 +325,37 @@ function consultaEval() {
             var conocimiento = 0;
             opcion4 = 0;
 
-            if (ids[8] != "" && ids[8] != "0") {
+            if (ids[3] != "" && ids[3] != "0") {
                 var cantConocimientos = conocimientos2.length;
                 cantConocimientos--;
+
+                //                alert("Conocimientos: " + cantConocimientos);
 
                 for (var i2 = cantConocimientos; i2 >= 0; i2--) {
                     var campo3 = conocimientos2[i2];
                     var clavex1 = campo3.split("|");
-                    if (campo3 && clavex1[0] != "0") {
+                    if (conocimiento_clv == clavex1[0]) {
                         opcion4++;
-                        if (clavex1[0] == ids[8]) {
-                            conocimiento = opcion4;
-                            break;
-                        }
+                        conocimiento = ((cantConocimientos - 2) - opcion4);
+                        break;
                     }
                 }
             } else {
                 conocimiento = 0;
             }
 
+            var nivelx1 = 3 - ids[5];
+
             document.getElementById("puestos").selectedIndex = puesto;
             document.getElementById("conocimientos").selectedIndex = conocimiento;
 
-            document.getElementById("descripcion").value = ids[1];
+            document.getElementById("descripcion").value = ids[6];
             document.getElementById("pmin").value = ids[4];
-            document.getElementById("nivel").selectedIndex = ids[5];
-            document.getElementById("observacion").value = ids[6];
+            document.getElementById("nivel").selectedIndex = nivelx1;
+            document.getElementById("nombre").value = ids[1];
+
+            document.getElementById("alta").disabled = true;
+            document.getElementById("actualiza").disabled = false;
         } else {
             //   alert("readyState="+xhttp.readyState+"        Status="+xhttp.status);
         }

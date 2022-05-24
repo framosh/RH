@@ -2,16 +2,17 @@
 $Clave=$_GET["clave"];
 
 require 'arhsi_connect.php';
-$query="SELECT * FROM Evaluaciones WHERE clv_evaluación='$Clave'";
+$query="SELECT * FROM Evaluaciones WHERE clv_evaluacion='$Clave'";
 
 $result = mysqli_query($dbc,$query);
-$numero_filas = mysqli_num_rows($result);
+//$numero_filas = mysqli_num_rows($result);
 
-if($numero_filas >0){
+if($result){
     Archivo($result);
     mysqli_close($dbc);
 } else {
-    echo("0|No hay Evaluacion");
+  $mensaje = "No hay Evaluacion número: ".$Clave; 
+    echo($mensaje);
 }
 
         function Archivo($result) {
@@ -35,6 +36,7 @@ if($numero_filas >0){
            fputcsv($stream, $row, $delimiter);
            $nrows++;
            }
+         mysqli_free_result($result);
          return $nrows;
          }       
 ?>

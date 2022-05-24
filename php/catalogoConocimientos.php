@@ -1,13 +1,23 @@
 <?php 
 $vacante=$_GET["Vacante"];
+$condicion = "";
+
+if($vacante ==0){
+$condicion = "1";
+$vacante="";
+} else {
+  $condicion = "clv_vacante='$vacante'";
+}
 
 require 'arhsi_connect.php';
+
 if($vacante ==""){
   $query="SELECT * FROM conocimientos WHERE 1 ORDER BY clv_conocim";
 } else {
-  $query="SELECT Con_req.clv_conocim, conocimientos.cono_desc, Con_req.nivel_conocim, Con_req.exp_anio_min, Con_req.exp_mes_min FROM Con_req 
+  $query="SELECT Con_req.clv_conocim, conocimientos.cono_desc, Con_req.nivel_conocim, Con_req.exp_anio_min, Con_req.exp_mes_min 
+  FROM Con_req 
   LEFT JOIN conocimientos ON conocimientos.clv_conocim = Con_req.clv_conocim
-  WHERE clv_vacante='$vacante' 
+  WHERE $condicion 
   ORDER BY clv_conocim";
 }
 

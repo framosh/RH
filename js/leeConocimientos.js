@@ -1,3 +1,4 @@
+// Catalogo de conocimientos
 var conocimientos2 = [];
 
 function leeConocimientos(vacante_clv) {
