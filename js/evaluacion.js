@@ -2,98 +2,41 @@
 /* LANZA REPORTE EN PANTALLA */
 function rep_Pantalla() {
     //    alert("Despliega reporte por pantalla");
-    /*
-    var candidato = document.getElementById("candidatos").value;
-    var vacante = document.getElementById("vacantes").value;
-    var empresa = document.getElementById("empresas").value;
+    var puesto = document.getElementById("puestos").value;
 
-    if (empresa == "Seleccione una Empresa") {
-        alert("Seleccione una Empresa");
+    if (puesto == "Seleccione el Puesto") {
+        alert("Seleccione el Puesto");
         return;
     }
 
-    if (candidato == "Seleccione un Candidato") {
-        alert("Seleccione un Candidato");
-        return;
-    }
-
-    var renglones = candidatos2.length;
+    var renglones = puestos2.length;
     renglones--;
-    var posicion22 = document.getElementById("candidatos").selectedIndex;
+    var posicion22 = document.getElementById("puestos").selectedIndex;
     posicion22 = (renglones - posicion22);
-    var clavex22 = candidatos2[posicion22].split("|");
-    var candidato_clv = clavex22[0];
+    var clavex22 = puestos2[posicion22].split("|");
+    var puesto_clv = clavex22[0];
 
-    renglones = cliente2.length;
-    renglones--;
-    posicion22 = document.getElementById("empresas").selectedIndex;
-    posicion22 = (renglones - posicion22);
-    clavex22 = cliente2[posicion22].split("|");
-    var emp_nom = clavex22[1];
-
-    if (vacante == "Seleccione una Vacante") {
-        alert("Seleccione la Vacante");
-        return;
-    }
-
-    renglones = vacantes2.length;
-    renglones--;
-    posicion22 = document.getElementById("vacantes").selectedIndex;
-    posicion22 = (renglones - posicion22);
-    clavex22 = vacantes2[posicion22].split("|");
-    var vac_clv = clavex22[0];
-    var vac_nom = clavex22[1];
-
-    window.location.href = "httpdocs/rdva3_Cono_x_Cand.php?Candidato=" + candidato_clv + "&Nombre=" + candidato + "&Empresa=" + emp_nom + "&Vacante=" + vac_clv + "&Vac_nom=" + vac_nom;
-    */
+    window.location.href = "httpdocs/rdva3_Evaluaciones.php?Puesto=" + puesto_clv;
 }
 
 /* LANZA REPORTE EN EXCEL */
 function rep_Excel() {
-    /*
-        var candidato = document.getElementById("candidatos").value;
-        var vacante = document.getElementById("vacantes").value;
-        var empresa = document.getElementById("empresas").value;
+    //    alert("Despliega reporte por Excel");
+    var puesto = document.getElementById("puestos").value;
 
-        if (empresa == "Seleccione una Empresa") {
-            alert("Seleccione una Empresa");
-            return;
-        }
+    if (puesto == "Seleccione el Puesto") {
+        alert("Seleccione el Puesto");
+        return;
+    }
 
-        if (candidato == "Seleccione un Candidato") {
-            alert("Seleccione un Candidato");
-            return;
-        }
+    var renglones = puestos2.length;
+    renglones--;
+    var posicion22 = document.getElementById("puestos").selectedIndex;
+    posicion22 = (renglones - posicion22);
+    var clavex22 = puestos2[posicion22].split("|");
+    var puesto_clv = clavex22[0];
 
-        var renglones = candidatos2.length;
-        renglones--;
-        var posicion22 = document.getElementById("candidatos").selectedIndex;
-        posicion22 = (renglones - posicion22);
-        var clavex22 = candidatos2[posicion22].split("|");
-        var candidato_clv = clavex22[0];
-
-        renglones = cliente2.length;
-        renglones--;
-        posicion22 = document.getElementById("empresas").selectedIndex;
-        posicion22 = (renglones - posicion22);
-        clavex22 = cliente2[posicion22].split("|");
-        var emp_nom = clavex22[1];
-
-        if (vacante == "Seleccione una Vacante") {
-            alert("Seleccione la Vacante");
-            return;
-        }
-
-        renglones = vacantes2.length;
-        renglones--;
-        posicion22 = document.getElementById("vacantes").selectedIndex;
-        posicion22 = (renglones - posicion22);
-        clavex22 = vacantes2[posicion22].split("|");
-        var vac_clv = clavex22[0];
-        var vac_nom = clavex22[1];
-
-        window.location.href = "httpdocs/sp_Cono_x_Cand.php?Candidato=" + candidato_clv + "&Nombre=" + candidato + "&Empresa=" + emp_nom + "&Vacante=" + vac_clv + "&Vac_nom=" + vac_nom;
-    */
+    window.location.href = "httpdocs/sp_Evaluaciones.php?Puesto=" + puesto_clv;
 }
 
 function limpiaPantalla_eval() {

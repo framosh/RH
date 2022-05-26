@@ -19,7 +19,7 @@ function leeEvaluaciones() {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var cadena = xhttp.responseText;
-            alert("Cadena de evaluaciones: " + cadena);
+            //            alert("Cadena de evaluaciones: " + cadena);
             //            document.getElementById("mensaje_gral").textContent = "(" + cadena + ")" + "   longitud: (" + cadena.length + ")";
 
             var evaluacion = cadena.split("\n");
