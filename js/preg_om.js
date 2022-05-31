@@ -2,45 +2,48 @@
 /* LANZA REPORTE EN PANTALLA */
 function rep_Pantalla() {
     //    alert("Despliega reporte por pantalla");
-    /*
-    var puesto = document.getElementById("puestos").value;
+    var vacio = "";
+    document.getElementById("mensaje_gral").innerHTML = vacio;
+    var conocimiento = document.getElementById("conocimientos").value;
 
-    if (puesto == "Seleccione el Puesto") {
-        alert("Seleccione el Puesto");
+    if (conocimiento == "Seleccione el Conocimiento") {
+        alert("Seleccione el Conocimiento");
         return;
     }
 
-    var renglones = puestos2.length;
+    var clavex22 = [];
+    var renglones = conocimientos2.length;
     renglones--;
-    var posicion22 = document.getElementById("puestos").selectedIndex;
-    posicion22 = (renglones - posicion22);
-    var clavex22 = puestos2[posicion22].split("|");
-    var puesto_clv = clavex22[0];
+    var conocimientox22 = document.getElementById("conocimientos").selectedIndex;
+    conocimientox22 = (renglones - conocimientox22);
+    clavex22 = conocimientos2[conocimientox22].split("|");
+    var conocimiento_clv = clavex22[0];
 
-    window.location.href = "httpdocs/rdva3_Evaluaciones.php?Puesto=" + puesto_clv;
-    */
+    window.location.href = "httpdocs/rdva3_PreguntasOM.php?clave=" + conocimiento_clv + "&nombre=" + conocimiento;
 }
 
 /* LANZA REPORTE EN EXCEL */
 function rep_Excel() {
     //    alert("Despliega reporte por Excel");
-    /*
-    var puesto = document.getElementById("puestos").value;
+    var vacio = "";
+    document.getElementById("mensaje_gral").innerHTML = vacio;
+    var conocimiento = document.getElementById("conocimientos").value;
 
-    if (puesto == "Seleccione el Puesto") {
-        alert("Seleccione el Puesto");
+    if (conocimiento == "Seleccione el Conocimiento") {
+        alert("Seleccione el Conocimiento");
         return;
     }
 
-    var renglones = puestos2.length;
+    var clavex22 = [];
+    var renglones = conocimientos2.length;
     renglones--;
-    var posicion22 = document.getElementById("puestos").selectedIndex;
-    posicion22 = (renglones - posicion22);
-    var clavex22 = puestos2[posicion22].split("|");
-    var puesto_clv = clavex22[0];
+    var conocimientox22 = document.getElementById("conocimientos").selectedIndex;
+    conocimientox22 = (renglones - conocimientox22);
+    clavex22 = conocimientos2[conocimientox22].split("|");
+    var conocimiento_clv = clavex22[0];
 
-    window.location.href = "httpdocs/sp_Evaluaciones.php?Puesto=" + puesto_clv;
-*/
+    window.location.href = "httpdocs/sp_PreguntasOM.php?clave=" + conocimiento_clv + "&nombre=" + conocimiento;
+
 }
 
 function limpiaPantalla_preg() {
@@ -57,7 +60,8 @@ function limpiaPantalla_preg() {
     document.getElementById("resp3").value = vacio;
     document.getElementById("resp4").value = vacio;
     document.getElementById("resp5").value = vacio;
-    document.getElementById("solucion").value = vacio1;
+    document.getElementById("solucion1").value = vacio;
+    document.getElementById("solucion2").value = vacio;
 
     document.getElementById("alta").disabled = false;
     document.getElementById("actualiza").disabled = false;
@@ -101,10 +105,11 @@ function modificaPregunta() {
     var respuesta3 = document.getElementById("resp3").value;
     var respuesta4 = document.getElementById("resp4").value;
     var respuesta5 = document.getElementById("resp5").value;
-    var solucion = document.getElementById("solucion").value;
+    var solucion1 = document.getElementById("solucion1").value;
+    var solucion2 = document.getElementById("solucion2").value;
 
-    if (solucion == 0 || solucion == null) {
-        alert("Asigne la renglon de la solucion correspondiente");
+    if ((solucion1 == 0 || solucion1 == null) && (solucion2 == 0 || solucion2 == null)) {
+        alert("Asigne el renglon de la solucion correspondiente");
         return;
     }
 
@@ -145,7 +150,8 @@ function modificaPregunta() {
     camposx22[6] = respuesta4;
     camposx22[7] = respuesta5;
     camposx22[8] = conocimiento_clv;
-    camposx22[9] = solucion;
+    camposx22[9] = solucion1;
+    camposx22[10] = solucion2;
 
     var camposx23 = camposx22.join("|");
 
@@ -189,6 +195,7 @@ var preguntas2 = [];
 function leePreguntas() {
     var vacio = "";
     document.getElementById("mensaje_gral").innerHTML = vacio;
+    document.getElementById("preguntas").innerHTML = vacio;
     var conocimiento = document.getElementById("conocimientos").value;
 
     if (conocimiento == "Seleccione el Conocimiento") {
@@ -249,7 +256,7 @@ function leePreguntas() {
 }
 
 function consultaPregunta() {
-    alert("Consulta Pregunta");
+    //    alert("Consulta Pregunta");
     var vacio = "";
     document.getElementById("mensaje_gral").innerHTML = vacio;
     document.getElementById("alta").disabled = true;
@@ -267,14 +274,9 @@ function consultaPregunta() {
     var posicion22 = document.getElementById("preguntas").selectedIndex;
     var posicion23 = posicion22;
     posicion22 = (renglones - posicion22);
-    alert("posicion22: " + posicion22);
 
     var clavex22 = preguntas2[posicion22].split("|");
     var pregunta_clv = clavex22[0];
-
-    alert("renglones: " + renglones);
-    alert("pregunta_clv: " + pregunta_clv);
-    alert("preguntas2: " + preguntas2[posicion23]);
 
     document.getElementById("clave").value = pregunta_clv;
 
@@ -294,6 +296,8 @@ function consultaPregunta() {
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var cadena = xhttp.responseText;
+            //          alert("cadena: " + cadena);
+
             var mensaje_cadena = cadena.split(":");
             //          alert("Cadena: " + cadena);
             if (mensaje_cadena[0] == "No hay Pregunta número") {
@@ -318,7 +322,10 @@ function consultaPregunta() {
             document.getElementById("resp3").value = ids[7];
             document.getElementById("resp4").value = ids[8];
             document.getElementById("resp5").value = ids[9];
-            document.getElementById("solucion").value = ids[10];
+            document.getElementById("solucion1").value = ids[10];
+            document.getElementById("solucion2").value = ids[11];
+
+            //            alert("ids de 10:" + ids[10]);
 
             document.getElementById("alta").disabled = true;
             document.getElementById("actualiza").disabled = false;

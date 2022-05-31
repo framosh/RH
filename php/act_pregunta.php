@@ -13,13 +13,14 @@ $campos = explode('|',$campos1);
     camposx22[6] = respuesta4;
     camposx22[7] = respuesta5;
     camposx22[8] = conocimiento;
-    camposx22[9] = solucion;
+    camposx22[9] = solucion1;
+    camposx22[10] = solucion2;
 */
 
 require 'arhsi_connect.php';
 if(mysqli_stmt_prepare($stmt,"UPDATE Preg_om SET nombre_pregom='$campos[1]', desc_preg='$campos[2]',
 resp1='$campos[3]',resp2='$campos[4]',resp3='$campos[5]',resp4='$campos[6]',resp5='$campos[7]',
-clv_conocim='$campos[8]',sol_preg='$campos[9]' WHERE clv_preg_om='$campos[0]'"))
+clv_conocim='$campos[8]',sol_preg1='$campos[9]',sol_preg2='$campos[10]' WHERE clv_preg_om='$campos[0]'"))
 	{
 	mysqli_stmt_execute($stmt);
 	$affected_rows = mysqli_stmt_affected_rows($stmt);
