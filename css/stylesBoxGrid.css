@@ -117,20 +117,20 @@ body {
     /*    float: left; */
 }
 
-.c8 {
-    grid-area: titulo;
-    /*    max-height: 100px; */
-    background-color: rgb(220, 226, 240);
-}
-
-.c9 {
-    grid-area: foto;
-    /*    max-height: 100px; */
-    background-color: rgb(220, 226, 240);
-}
-
 .c1 {
-    grid-area: vacante;
+    grid-area: preguntas;
+    /*    max-height: 100px; */
+    background-color: rgb(220, 226, 240);
+}
+
+.c2 {
+    grid-area: grafico;
+    /*    max-height: 100px; */
+    background-color: rgb(220, 226, 240);
+}
+
+.c3 {
+    grid-area: respuestas;
     max-height: 200px;
     /*  border-right: 0px; */
     /*    border-left: 0px; */
@@ -141,53 +141,13 @@ body {
     background-color: rgb(220, 226, 240);
 }
 
-.c2 {
-    grid-area: candidato;
+.c4 {
+    grid-area: botones;
     max-height: 530px;
     /*grid-column: 1/3; */
     /*    grid-column: 1 / span 2; */
     background-color: rgb(171, 192, 238);
 }
-
-.c3 {
-    grid-area: estatus;
-    max-height: 330px;
-    /*grid-column: 3/4; */
-    /*    background-color: rgb(171, 192, 238);*/
-    background-color: cadetblue;
-}
-
-.c4 {
-    grid-area: asigna;
-    /* grid-column: 2/4; */
-    background-color: rgb(171, 192, 238);
-}
-
-.c5 {
-    grid-area: conocimientos;
-    max-height: 350px;
-    /*    overflow-y: auto; */
-    /*    width: 70%; */
-    /*    margin-left: 15%; */
-    /* margin-right: 15%; */
-    /* grid-column: 2/4; */
-    /*    background-color: rgb(171, 192, 238); */
-    background-color: cadetblue;
-}
-
-.c6 {
-    grid-area: idiomas;
-
-    /* grid-column: 2/4; */
-    background-color: rgb(171, 192, 238);
-}
-
-.c7 {
-    grid-area: comentarios;
-    /* grid-column: 2/4; */
-    background-color: rgb(171, 192, 238);
-}
-
 
 .grid-layout {
     display: grid;
@@ -196,13 +156,11 @@ body {
     /*    margin-left: 2%; */
     /*  margin-right: 2%; */
     grid-template-areas:
-        'titulo foto'
-        'vacante candidato'
-        'estatus candidato'
-        'asigna conocimientos'
-        'idiomas idiomas'
-        'comentarios comentarios';
-    grid-template-rows: auto auto auto auto 10% auto;
+        'preguntas preguntas'
+        'grafico grafico'
+        'respuestas respuestas'
+        'botones botones';
+    grid-template-rows: auto auto auto 10%;
     grid-template-columns: 50% auto;
     /*    grid-template-columns: 80% auto; */
     /*    grid-template-rows: 20% 10% 60% auto; */

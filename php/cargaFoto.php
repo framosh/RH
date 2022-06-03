@@ -1,3 +1,4 @@
+
 <?php
 if (isset($_FILES['myFile'])) {
     $archivo = "../img/".$_FILES["myFile"]['name'];

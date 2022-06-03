@@ -8,6 +8,7 @@ function despliega_foto(foto_url) {
     }
 }
 
+
 function carga_imagen() {
     var preview = document.querySelector(".display_image");
     var file = document.querySelector('input[type=file]').files[0];

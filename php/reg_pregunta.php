@@ -15,14 +15,15 @@ $campos = explode('|',$campos1);
     camposx22[8] = Conocimiento;
     camposx22[9] = solucion1;
     camposx22[10] = solucion2;
+    camposx22[11] = imagen;
     */
 
 require 'arhsi_connect.php';
 
-if(mysqli_stmt_prepare($stmt,"INSERT INTO Preg_om (nombre_pregom,desc_preg,clv_conocim,resp1,resp2,resp3,resp4,resp5,sol_preg1,sol_preg2) 
-VALUES (?,?,?,?,?,?,?,?,?,?)"))
+if(mysqli_stmt_prepare($stmt,"INSERT INTO Preg_om (nombre_pregom,desc_preg,clv_conocim,resp1,resp2,resp3,resp4,resp5,sol_preg1,sol_preg2,img_dir) 
+VALUES (?,?,?,?,?,?,?,?,?,?,?)"))
 	{
-	mysqli_stmt_bind_param($stmt,"ssssssssss",$campos[1],$campos[2],$campos[8],$campos[3],$campos[4],$campos[5],$campos[6],$campos[7],$campos[9],$campos[10]);
+	mysqli_stmt_bind_param($stmt,"sssssssssss",$campos[1],$campos[2],$campos[8],$campos[3],$campos[4],$campos[5],$campos[6],$campos[7],$campos[9],$campos[10],$campos[11]);
 	mysqli_stmt_execute($stmt);
 
 	$affected_rows = mysqli_stmt_affected_rows($stmt);

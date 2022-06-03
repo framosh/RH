@@ -1,4 +1,71 @@
 // Mantenimiento al catalogo de evaluaciones
+// Carga foto del candidato desde un archivo local
+function despliega_foto(foto_url) {
+    if (foto_url.length > 1) {
+        var preview = document.querySelector(".display_image");
+        preview.src = foto_url;
+    } else {
+        alert("No hay imagen de la pregunta");
+    }
+}
+
+function carga_imagen() {
+    var preview = document.querySelector(".display_image");
+    var file = document.querySelector('input[type=file]').files[0];
+    var reader = new FileReader();
+
+    reader.addEventListener("load", function () {
+        preview.src = reader.result;
+        fileUpload(file);
+    }, false);
+
+    if (file) {
+        reader.readAsDataURL(file);
+    }
+}
+
+
+// Sube la imagen de la foto del candidato al servidor web
+var foto_dir;
+var foto_nom;
+
+function fileUpload(img) {
+    elige_servidor();
+    var xhttp;
+
+    if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+        xhttp = new XMLHttpRequest();
+    } else { // code for IE6, IE5
+        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    var archivo2 = servidor + "httpdocs/cargaFoto.php";
+    var fd = new FormData();
+
+    xhttp.open("POST", archivo2, true);
+
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            var cadena = xhttp.responseText;
+            //       alert("Cadena: " + cadena);
+            var cadena1 = cadena.split(":");
+            foto_dir = cadena1[1];
+            var cadena2 = cadena.split("/");
+            var cadena3 = cadena2[2];
+            foto_nom = cadena3;
+            //           alert("Directorio: " + foto_dir);
+            //         alert("Nombre de foto: " + foto_nom);
+
+            document.getElementById("mensaje_gral").value = cadena;
+        } else {
+            //                  alert("Estado: " + xhttp.readyState + "  Status: " + xhttp.status);
+        }
+    };
+
+    fd.append('myFile', img);
+    xhttp.send(fd);
+}
+
 /* LANZA REPORTE EN PANTALLA */
 function rep_Pantalla() {
     //    alert("Despliega reporte por pantalla");
@@ -43,18 +110,20 @@ function rep_Excel() {
     var conocimiento_clv = clavex22[0];
 
     window.location.href = "httpdocs/sp_PreguntasOM.php?clave=" + conocimiento_clv + "&nombre=" + conocimiento;
-
 }
 
 function limpiaPantalla_preg() {
     //alert("Limpia Pantalla");
     var vacio = "";
     var vacio1 = 0;
+    var foto_url = "../img/sin_foto.jpg";
+    despliega_foto(foto_url);
+
     document.getElementById("conocimientos").selectedIndex = vacio1;
     document.getElementById("preguntas").selectedIndex = vacio1;
     document.getElementById("nombre").value = vacio;
     document.getElementById("clave").value = vacio;
-    document.getElementById("descripcion").innerHTML = vacio;
+    document.getElementById("descripcion").value = vacio;
     document.getElementById("resp1").value = vacio;
     document.getElementById("resp2").value = vacio;
     document.getElementById("resp3").value = vacio;
@@ -65,6 +134,8 @@ function limpiaPantalla_preg() {
 
     document.getElementById("alta").disabled = false;
     document.getElementById("actualiza").disabled = false;
+
+    document.getElementById("mensaje_gral").innerHTML = vacio;
 }
 
 function nuevaPregunta() {
@@ -152,6 +223,7 @@ function modificaPregunta() {
     camposx22[8] = conocimiento_clv;
     camposx22[9] = solucion1;
     camposx22[10] = solucion2;
+    camposx22[11] = foto_dir;
 
     var camposx23 = camposx22.join("|");
 
@@ -324,6 +396,7 @@ function consultaPregunta() {
             document.getElementById("resp5").value = ids[9];
             document.getElementById("solucion1").value = ids[10];
             document.getElementById("solucion2").value = ids[11];
+            despliega_foto(ids[12]);
 
             //            alert("ids de 10:" + ids[10]);
 
