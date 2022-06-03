@@ -14,7 +14,7 @@ $campos = explode('|',$campos1);
 
 require 'arhsi_connect.php';
 
-if(mysqli_stmt_prepare($stmt,"INSERT INTO Preg_xcom (nombre_pregpc,desc_preg_xcom,clv_conocim,resp1,resp2,img_dir) 
+if(mysqli_stmt_prepare($stmt,"INSERT INTO Preg_xcom (nombre_pregpc,des_preg_xcom,clv_conocim,resp1,resp2,img_dir) 
 VALUES (?,?,?,?,?,?)"))
 	{
 	mysqli_stmt_bind_param($stmt,"ssssss",$campos[1],$campos[2],$campos[5],$campos[3],$campos[4],$campos[6]);

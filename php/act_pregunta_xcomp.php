@@ -14,7 +14,7 @@ $campos = explode('|',$campos1);
 */
 
 require 'arhsi_connect.php';
-if(mysqli_stmt_prepare($stmt,"UPDATE Preg_xcom SET nombre_pregpc='$campos[1]', desc_preg_xcom='$campos[2]',
+if(mysqli_stmt_prepare($stmt,"UPDATE Preg_xcom SET nombre_pregpc='$campos[1]', des_preg_xcom='$campos[2]',
 resp1='$campos[3]',resp2='$campos[4]',clv_conocim='$campos[5]',img_dir='$campos[6]' 
 WHERE clv_preg_pc='$campos[0]'"))
 	{

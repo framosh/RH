@@ -142,9 +142,6 @@ var tipo_funcion = "";
 function altaPregunta() {
     tipo_funcion = "alta";
     modificaPregunta();
-
-    document.getElementById("alta").disabled = true;
-    document.getElementById("actualiza").disabled = false;
 }
 
 function actualizaPregunta() {
@@ -168,11 +165,6 @@ function modificaPregunta() {
     var descripcion = document.getElementById("descripcion").value;
     var respuesta1 = document.getElementById("resp1").value;
     var respuesta2 = document.getElementById("resp2").value;
-
-    if ((solucion1 == 0 || solucion1 == null) && (solucion2 == 0 || solucion2 == null)) {
-        alert("Asigne el renglon de la solucion correspondiente");
-        return;
-    }
 
     if (conocimiento == "Seleccione el Conocimiento") {
         alert("Seleccione el Conocimiento");
@@ -200,12 +192,13 @@ function modificaPregunta() {
     }
 
     /*
-    camposx22[0] = nombre;
-    camposx22[1] = descripcion;
-    camposx22[2] = respuesta1;
-    camposx22[3] = respuesta2;
-    camposx22[4] = conocimiento;
-    camposx22[5] = imagen;
+    camposx22[0] = pregunta_clv;
+    camposx22[1] = nombre;
+    camposx22[2] = descripcion;
+    camposx22[3] = respuesta1;
+    camposx22[4] = respuesta2;
+    camposx22[5] = conocimiento;
+    camposx22[6] = imagen;
     */
 
     var camposx22 = [];
@@ -223,9 +216,9 @@ function modificaPregunta() {
     var archivo1 = "";
 
     if (tipo_funcion == "modifica") {
-        archivo1 = servidor + "httpdocs/act_pregunta.php";
+        archivo1 = servidor + "httpdocs/act_pregunta_xcomp.php";
     } else {
-        archivo1 = servidor + "httpdocs/reg_pregunta.php";
+        archivo1 = servidor + "httpdocs/reg_pregunta_xcomp.php";
     }
 
     var archivo2 = archivo1 + "?Campos=" + camposx23;
@@ -249,6 +242,8 @@ function modificaPregunta() {
                 var valor = cadena.split(":");
                 if (valor[0] == "Nueva pregunta") {
                     document.getElementById("clave").value = valor[1];
+                    document.getElementById("alta").disabled = true;
+                    document.getElementById("actualiza").disabled = false;
                 }
             }
         }
@@ -276,7 +271,7 @@ function leePreguntas() {
     clavex22 = conocimientos2[conocimientox22].split("|");
     var conocimiento_clv = clavex22[0];
 
-    var archivo1 = servidor + "httpdocs/catalogoPreguntas.php";
+    var archivo1 = servidor + "httpdocs/catalogo_PregXcomp.php";
     var archivo2 = archivo1 + "?Conocimiento=" + conocimiento_clv;
     var xhttp;
 
@@ -293,6 +288,8 @@ function leePreguntas() {
             //            alert("Cadena del catalogo de conocimientos: " + cadena);
             var preguntas = cadena.split("\n");
             var i2 = 0;
+            //            alert("Registros: " + preguntas.length);
+
 
             for (var i = 0; i < preguntas.length; i++) {
                 var campo = preguntas[i];
@@ -324,15 +321,19 @@ function consultaPregunta() {
     //    alert("Consulta Pregunta");
     var vacio = "";
     document.getElementById("mensaje_gral").innerHTML = vacio;
-    document.getElementById("alta").disabled = true;
-    document.getElementById("actualiza").disabled = false;
-
     var pregunta = document.getElementById("preguntas").value;
 
     if (pregunta == "Seleccione la Pregunta") {
         alert("Seleccione la Pregunta");
         return;
     }
+
+    if (pregunta == "No hay Preguntas") {
+        return;
+    }
+
+    document.getElementById("alta").disabled = true;
+    document.getElementById("actualiza").disabled = false;
 
     var renglones = preguntas2.length;
     renglones--;
