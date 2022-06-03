@@ -131,6 +131,14 @@ dato4[3]   //  Puesto
             document.getElementById("conocimientos").textContent = leeConocimientos(valorx22); // Carga el catalogo de Conocimientos
       }
 
+      if (pagina == "preg_xcom.htm") {
+            //            limpiaPantalla_eval();
+            //            alert("Carga Preguntas por Complemento");
+            var valorx23 = 0;
+            document.getElementById("conocimientos").textContent = leeConocimientos(valorx23); // Carga el catalogo de Conocimientos
+      }
+
+
       if (pagina == "cat_conocimiento.htm") {
             document.getElementById("conocimientos").textContent = leeConocimientos(); // Carga el catalogo de Conocimientos
       }
