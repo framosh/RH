@@ -1,0 +1,1 @@
+<img class="display_image" src="" id="display_image" style="width:50%; height:50%;" alt="Seleccione un archivo.....">

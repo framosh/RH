@@ -10,13 +10,15 @@ if (isset($_FILES['myFile'])) {
 //    echo("Tamaño de archivo: ".$tamanio);
 
     if($tipo == "image/jpg" or $tipo == "image/png" or $tipo == "image/gif" or $tipo == "image/jpeg"){
-        if($tamanio <= 60000){
+        if($tamanio <= 1000000){
             if($error == 0) {
                 move_uploaded_file($temporal, $archivo);
-                echo("Se sube el archivo: ".$archivo);
+                $atributos2 = getimagesize($archivo);
+
+                echo("Se sube el archivo:".$archivo."\n Ancho: ".$atributos2[0]."\n Alto:".$atributos2[1]);
                 exit;
             } else { echo("Error: ".$error);}
-        } else { echo("Tamaño de archivo supera el limite de 60 kb.: (".($tamanio/1000).") kb.");}
+        } else { echo("Tamaño de archivo supera el limite de 1 mb.: (".($tamanio/1000).") kb.");}
     } else { echo("Tipo de archivo diferente: ".$tipo);}
 }
 ?>

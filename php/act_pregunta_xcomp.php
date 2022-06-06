@@ -15,13 +15,15 @@ $campos = explode('|',$campos1);
 
 require 'arhsi_connect.php';
 if(mysqli_stmt_prepare($stmt,"UPDATE Preg_xcom SET nombre_pregpc='$campos[1]', des_preg_xcom='$campos[2]',
-resp1='$campos[3]',resp2='$campos[4]',clv_conocim='$campos[5]',img_dir='$campos[6]' 
-WHERE clv_preg_pc='$campos[0]'"))
+resp1='$campos[3]',resp2='$campos[4]',clv_conocim='$campos[5]',img_dir='$campos[6]' WHERE clv_preg_pc='$campos[0]'"))
 	{
 	mysqli_stmt_execute($stmt);
 	$affected_rows = mysqli_stmt_affected_rows($stmt);
     if($affected_rows ==1)
-	    { echo "Datos actualizados";  }
+	    { 
+            $foto = "Datos actualizados, imagen: ".$campos[6];
+            echo $foto;  
+        }
     else { 
         $mensaje = "Fallo la actualizacion de datos, pregunta: ".$campos[0];
         echo $mensaje;

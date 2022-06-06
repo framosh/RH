@@ -37,7 +37,7 @@ setlocale(LC_ALL,"es_ES");
 setlocale(LC_MONETARY,'en_US');
 
 require 'arhsi_connect.php';
-$query="SELECT clv_preg_pc, nombre_pregpc, desc_preg FROM Preg_xcom WHERE clv_conocim = '$Clave' ORDER BY nombre_pregpc ASC";
+$query="SELECT clv_preg_pc, nombre_pregpc, des_preg_xcom FROM Preg_xcom WHERE clv_conocim = '$Clave' ORDER BY nombre_pregpc ASC";
 
 $response=mysqli_query($dbc,$query);
 $bgc2="darkgrey";

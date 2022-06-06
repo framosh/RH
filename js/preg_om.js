@@ -4,6 +4,7 @@ function despliega_foto(foto_url) {
     if (foto_url.length > 1) {
         var preview = document.querySelector(".display_image");
         preview.src = foto_url;
+
     } else {
         alert("No hay imagen de la pregunta");
     }
@@ -24,14 +25,17 @@ function carga_imagen() {
     }
 }
 
-
-// Sube la imagen de la foto del candidato al servidor web
 var foto_dir;
 var foto_nom;
+var ancho;
+var alto;
 
 function fileUpload(img) {
     elige_servidor();
     var xhttp;
+    ancho = 0;
+    alto = 0;
+
 
     if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
         xhttp = new XMLHttpRequest();
@@ -48,15 +52,38 @@ function fileUpload(img) {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var cadena = xhttp.responseText;
             //       alert("Cadena: " + cadena);
-            var cadena1 = cadena.split(":");
-            foto_dir = cadena1[1];
-            var cadena2 = cadena.split("/");
-            var cadena3 = cadena2[2];
-            foto_nom = cadena3;
-            //           alert("Directorio: " + foto_dir);
-            //         alert("Nombre de foto: " + foto_nom);
+            var cadena1 = cadena.split("\n");
+            var cadena2 = cadena1[1].split(":");
 
-            document.getElementById("mensaje_gral").value = cadena;
+            foto_dir = "";
+
+            if (cadena2[0] == "Tamaño de archivo supera el limite de 1 mb.") {
+                alert("La imagen supera el megabyte de tamaño, elija otra imagen: " + cadena2[1]);
+                return;
+            }
+            if (cadena2[0] == "Error") {
+                alert("Error en carga de imagen");
+                return;
+            }
+
+            if (cadena2[0] == "Tipo de archivo diferente") {
+                alert("Error en tipo de imagen");
+                return;
+            }
+
+            var nombre = cadena1[1].split(":");
+            foto_dir = nombre[1];
+            var ancho1 = cadena1[2].split(":");
+            ancho = ancho1[1];
+            var alto1 = cadena1[3].split(":");
+            alto = alto1[1];
+
+            if (alto > 1200 || ancho > 1600) {
+                var preview = document.querySelector(".display_image");
+                preview.className = "al-40";
+            }
+
+            document.getElementById("mensaje_imagen").value = cadena;
         } else {
             //                  alert("Estado: " + xhttp.readyState + "  Status: " + xhttp.status);
         }
@@ -116,10 +143,13 @@ function limpiaPantalla_preg() {
     //alert("Limpia Pantalla");
     var vacio = "";
     var vacio1 = 0;
+    alto = 0;
+    ancho = 0;
+
     var foto_url = "../img/sin_foto.jpg";
     despliega_foto(foto_url);
 
-    document.getElementById("conocimientos").selectedIndex = vacio1;
+    //    document.getElementById("conocimientos").selectedIndex = vacio1;
     document.getElementById("preguntas").selectedIndex = vacio1;
     document.getElementById("nombre").value = vacio;
     document.getElementById("clave").value = vacio;
@@ -265,6 +295,8 @@ function modificaPregunta() {
 var preguntas2 = [];
 
 function leePreguntas() {
+    limpiaPantalla_preg();
+
     var vacio = "";
     document.getElementById("mensaje_gral").innerHTML = vacio;
     document.getElementById("preguntas").innerHTML = vacio;
@@ -334,6 +366,9 @@ function consultaPregunta() {
     document.getElementById("alta").disabled = true;
     document.getElementById("actualiza").disabled = false;
 
+    var foto_url = "../img/sin_foto.jpg";
+    despliega_foto(foto_url);
+
     var pregunta = document.getElementById("preguntas").value;
 
     if (pregunta == "Seleccione la Pregunta") {
@@ -397,8 +432,6 @@ function consultaPregunta() {
             document.getElementById("solucion1").value = ids[10];
             document.getElementById("solucion2").value = ids[11];
             despliega_foto(ids[12]);
-
-            //            alert("ids de 10:" + ids[10]);
 
             document.getElementById("alta").disabled = true;
             document.getElementById("actualiza").disabled = false;
