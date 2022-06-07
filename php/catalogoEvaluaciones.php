@@ -1,6 +1,6 @@
 <?php 
 require 'arhsi_connect.php';
-$query="SELECT clv_evaluacion, nombre_eval FROM Evaluaciones WHERE 1 ORDER BY nombre_eval DESC";
+$query="SELECT clv_evaluacion, nombre_eval, clv_conocim FROM Evaluaciones WHERE 1 ORDER BY nombre_eval DESC";
 
 $result = mysqli_query($dbc,$query);
 $numero_filas = mysqli_num_rows($result);

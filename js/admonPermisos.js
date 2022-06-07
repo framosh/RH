@@ -1,6 +1,7 @@
 //var servidor_local = "/svr_local/httpdocs/";
 //var servidor_web = "https://svr.itbp.com.mx/httpdocs/";
 
+
 /* LIMPIA PANTALLA Y CARGA CATALOGO DE ESTADOS */
 function limpiaPantalla() {
     //alert("Inicializa pantalla para nuevo registro");
