@@ -1,9 +1,12 @@
-<?php 
+<?php
+$evaluacion=$_GET['evaluacion'];
+
 require 'arhsi_connect.php';
-$query="SELECT Evaluaciones.clv_evaluacion, Evaluaciones.nombre_eval, Evaluaciones.clv_conocim, 
-conocimientos.cono_desc FROM Evaluaciones 
-LEFT JOIN conocimientos ON conocimientos.clv_conocim = Evaluaciones.clv_conocim
-WHERE 1 ORDER BY Evaluaciones.nombre_eval DESC";
+
+$query="SELECT Preg_xeval.posicion, Preg_xcom.nombre_pregpc, Preg_om.nombre_pregom FROM Preg_xeval 
+LEFT JOIN Preg_om ON Preg_om.clv_preg_om = Preg_xeval.clv_preg_om
+LEFT JOIN Preg_xcom ON Preg_xcom.clv_preg_pc = Preg_xeval.clv_preg_pc
+WHERE (Preg_xeval.clv_evaluacion = '$evaluacion')";
 
 $result = mysqli_query($dbc,$query);
 $numero_filas = mysqli_num_rows($result);
@@ -12,8 +15,8 @@ if($numero_filas >0){
     Archivo($result);
     mysqli_close($dbc);
 } else {
-    echo("0|No hay Evaluaciones");
-}
+         echo("No hay Preguntas asignadas");
+        }
 
         function Archivo($result) {
            return creArchivo('php://output', $result);
@@ -23,18 +26,19 @@ if($numero_filas >0){
          $fp = fopen($filename, 'w');
          $rc = llenaDatos($fp, $result);
          fclose($fp);
+         if($rc==0) {
+            echo("No hay Preguntas asignadas");
+            }
          return $rc;
          }
 
        function llenaDatos($stream, $result) {
          $nrows = 0;
-         $delimiter=chr(124);
-         $enclosure=chr(34);
+         $delimiter='|';
          while($row = mysqli_fetch_row($result)) {
            fputcsv($stream, $row, $delimiter);
            $nrows++;
            }
-         mysqli_free_result($result);
          return $nrows;
          }       
 ?>

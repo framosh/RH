@@ -125,6 +125,11 @@ dato4[3]   //  Puesto
             document.getElementById("puestos").textContent = leePuestos(); // Carga el catalogo de Puestos
       }
 
+      if (pagina == "preg_x_eval.htm") {
+            //            limpiaPantalla_eval();
+            document.getElementById("evaluaciones").textContent = leeEvaluaciones(); // Carga el catalogo de Conocimientos
+      }
+
       if (pagina == "preg_om.htm") {
             //            limpiaPantalla_eval();
             var valorx22 = 0;
