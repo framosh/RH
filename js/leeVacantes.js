@@ -6,6 +6,9 @@ function leeVacantes(cliente_clv) {
     document.getElementById("vacantes").innerHTML = limpia;
 
     var estatus = 1;
+    if (cliente_clv == 0 || cliente_clv == null || cliente_clv == "") {
+        cliente_clv = clave_empresa;
+    }
 
     //    var archivo2 = "https://admonarh.arhsi.com.mx/httpdocs/catalogoClientes.php";
     var archivo1 = servidor + "httpdocs/catalogoVacantes.php";

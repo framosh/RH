@@ -6,9 +6,10 @@ var permiso_Aplicacion;
 var timeOutId;
 var intervalo = 300000;
 var sinActividad = 300000;
+//var clave_empresa;
 
 window.onload = function () {
-      //alert("Entra a carga de pagina");
+      //      alert("Entra a carga de pagina");
       window.setInterval(startTimeOut, intervalo);
 
       elige_servidor();
@@ -23,29 +24,31 @@ window.onload = function () {
       //alert("Url2: "+url2);
 
       /*
-dato4[0]  //  User
-dato4[1]   //  Nombre
-dato4[2]   //  Nivel A-B_C
-dato4[3]   //  Puesto
+            dato4[0]  //  User
+            dato4[1]   //  Nombre
+            dato4[2]   //  Nivel A-B_C
+            dato4[3]   //  Puesto
+            dato4[4]   //  Empresa
 */
+      //     alert("cantidad de parametros: " + l);
 
-      for (var i = 0; i < l; i++) {
+      for (var i = 0; i <= l; i++) {
             tmp = params[i].split('=');
             data[tmp[0]] = tmp[1].replace(/%20/g, " ");
             dato4[i] = data[tmp[0]];
             dato4[i] = dato4[i].trim();
-            //            alert("data: (" + data[tmp[0]] + ")  tmp:(" + tmp[0] + ")");
             //            alert("Dato4: " + i + "  contiene: " + dato4[i]);
       }
 
-      document.getElementById("usuario1").innerHTML = dato4[1];
+      //      document.getElementById("usuario1").innerHTML = dato4[1];
+      document.getElementById("usuario1").value = dato4[1];
 
       var direccion2 = url2.split("?")[0].split("/");
       direccion2[3] = direccion2[3].trim();
       var mensa = direccion2[3];
 
       var pagina = "";
-      var puesto33 = 0;
+      //      var puesto33 = 0;
 
       if (servidor == "/arhsi_local/") {
             pagina = direccion2[4];
@@ -53,12 +56,12 @@ dato4[3]   //  Puesto
             pagina = direccion2[3];
       }
 
-      //      alert("Checa permisos del puesto: " + dato4[3]);
-
-      puesto33 = dato4[3];
-      leeApliAsignadas(puesto33);
-
-      //    alert("Pagina: " + pagina);
+      alert("Checa permisos del puesto: " + dato4[3]);
+      //      puesto33 = dato4[3];
+      //    leeApliAsignadas(puesto33);
+      //      clave_empresa = dato4[4];
+      alert("Empresa: " + dato4[4]);
+      alert("Pagina: " + pagina);
 
       if (pagina == "areas.htm") {
             document.getElementById("areas").textContent = leeAreas(); // Carga el catalogo de Areas
@@ -97,7 +100,8 @@ dato4[3]   //  Puesto
 
       if (pagina == "cap-usuario.htm") {
             //alert("Carga catalogo de usuarios");
-            document.getElementById("usuarios").textContent = leeUsuarios(); // Carga el catalogo de personal
+            document.getElementById("empresas").textContent = leeClientes(); // Carga el catalogo de personal
+            //document.getElementById("usuarios").textContent = leeUsuarios(); // Carga el catalogo de personal
             document.getElementById("puestos").textContent = leePuestos(); // Carga el catalogo de Puestos
       }
 
@@ -134,6 +138,12 @@ dato4[3]   //  Puesto
             //            limpiaPantalla_eval();
             var valorx22 = 0;
             document.getElementById("conocimientos").textContent = leeConocimientos(valorx22); // Carga el catalogo de Conocimientos
+      }
+
+      if (pagina == "resp_xom.htm") {
+            //            limpiaPantalla_eval();
+            var valorx25 = 0;
+            document.getElementById("vacantes").textContent = leeVacantes(valorx25); // Carga el catalogo de Vacantes
       }
 
       if (pagina == "preg_xcom.htm") {

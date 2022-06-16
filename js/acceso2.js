@@ -41,9 +41,10 @@ function validacion() {
                 if (campo) {
                     dato4[i] = dato4[i].replace(/\"/g, "");
                     dato4[i] = dato4[i].trim();
-                    //                    alert("campo: (" + i + ") - (" + dato4[i] + ")");
+                    //                         alert("campo: (" + i + ") - (" + dato4[i] + ")");
                 }
             }
+            //$query="SELECT usuarioclv, nombre, nivel, clave, puesto, emp_clave 
 
             document.getElementById("nombre").innerHTML = dato4[1];
             /*
@@ -52,19 +53,19 @@ function validacion() {
             dato4[2]   //  Nivel A-B_C
             dato4[3]   //  Clave
             dato4[4]   //  Puesto
+            dato4[5]   //  Empresa
             */
 
-            //            alert("Datos: (" + dato4[0] + ")-(" + dato4[1] + ")-(" + dato4[2] + ")-(" + dato4[3] + ")-(" + dato4[4] + ")");
-            //          alert("dato4[3]=(" + dato4[3] + ")  Clave= (" + clave + ")");
+            //            alert("Empresax1: " + dato4[5]);
 
             if (dato4[3] == clave) {
                 switch (dato4[2]) // Nivel
                 {
                     case 'A':
-                        window.location.href = "principal.htm" + "?u1=" + dato4[0] + "&no1=" + dato4[1] + "&ni1=" + dato4[2] + "&pu1=" + dato4[4];
+                        window.location.href = "principal.htm" + "?u1=" + dato4[0] + "&no1=" + dato4[1] + "&ni1=" + dato4[2] + "&pu1=" + dato4[4] + "&em1=" + dato4[5];
                         break;
                     case 'B':
-                        window.location.href = "principal.htm" + "?u1=" + dato4[0] + "&no1=" + dato4[1] + "&ni1=" + dato4[2] + "&pu1=" + dato4[4];
+                        window.location.href = "principal.htm" + "?u1=" + dato4[0] + "&no1=" + dato4[1] + "&ni1=" + dato4[2] + "&pu1=" + dato4[4] + "&em1=" + dato4[5];
                         break;
                     default:
                         window.location.href = "index.htm";

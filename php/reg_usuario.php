@@ -6,13 +6,14 @@ $nivel=$_GET["nivel"];
 $puesto=$_GET["puesto"];
 $clvacceso=$_GET["clvacceso"];
 $estatus=$_GET["estatus"];
+$cliente=$_GET["cliente"];
 $f=Date("Y-m-d");
 
 require 'arhsi_connect.php';
 
-if(mysqli_stmt_prepare($stmt,"INSERT INTO Acceso (usuarioclv,nombre,correo,nivel,estatus,clave,puesto,fechalta) VALUES (?,?,?,?,?,?,?,?)"))
+if(mysqli_stmt_prepare($stmt,"INSERT INTO Acceso (usuarioclv,nombre,correo,nivel,estatus,clave,puesto,fechalta,emp_clave) VALUES (?,?,?,?,?,?,?,?,?)"))
 	{
-	mysqli_stmt_bind_param($stmt,"ssssssss",$Uclave,$nombre,$correo,$nivel,$estatus,$clvacceso,$puesto,$f);
+	mysqli_stmt_bind_param($stmt,"sssssssss",$Uclave,$nombre,$correo,$nivel,$estatus,$clvacceso,$puesto,$f,$cliente);
 	mysqli_stmt_execute($stmt);
 		
 	$affected_rows = mysqli_stmt_affected_rows($stmt);

@@ -1,3 +1,4 @@
+// Modulo de mantenimiento a usuarios
 /* LANZA REPORTE EN PANTALLA */
 function reporteUsuario() {
     var estatus = document.getElementById("estatus").value;
@@ -8,9 +9,23 @@ function reporteUsuario() {
         return;
     }
 
+    var cliente = document.getElementById("empresas").value;
+
+    if (cliente == "Seleccione una Empresa") {
+        alert("Seleccione la empresa");
+        return;
+    }
+
+    var renglones = cliente2.length;
+    renglones--;
+    var posicion22 = document.getElementById("empresas").selectedIndex;
+    posicion22 = (renglones - posicion22);
+    var posicion = cliente2[posicion22].split("|");
+    clave_empresa = posicion[0];
+
     //    alert("Estatus: " + estatus);
     //    window.location.href = "httpdocs/rdva3_Usuario.php?estatus="+estatusx;
-    window.location.href = servidor + "httpdocs/rdva3_Usuario.php?estatus=" + estatus;
+    window.location.href = servidor + "httpdocs/rdva3_Usuario.php?estatus=" + estatus + "&clie=" + clave_empresa + "&nombre=" + cliente;
 }
 
 /* LANZA REPORTE EN EXCEL */
@@ -23,8 +38,22 @@ function reporteExcelUsuario() {
         return;
     }
 
+    var cliente = document.getElementById("empresas").value;
+
+    if (cliente == "Seleccione una Empresa") {
+        alert("Seleccione la empresa");
+        return;
+    }
+
+    var renglones = cliente2.length;
+    renglones--;
+    var posicion22 = document.getElementById("empresas").selectedIndex;
+    posicion22 = (renglones - posicion22);
+    var posicion = cliente2[posicion22].split("|");
+    clave_empresa = posicion[0];
+
     //    window.location.href = "httpdocs/sp_Usuario.php?estatus="+estatusx;
-    window.location.href = servidor + "httpdocs/sp_usuario.php?estatus=" + estatus;
+    window.location.href = servidor + "httpdocs/sp_usuario.php?estatus=" + estatus + "&clie=" + clave_empresa + "&nombre=" + cliente;
 }
 
 function limpiaPantalla2() {
@@ -45,6 +74,7 @@ function limpiaPantalla() {
     document.getElementById("correo").value = valor2;
     document.getElementById("clvacceso").value = valor2;
     document.getElementById("puestos").selectedIndex = valor;
+    document.getElementById("empresas").selectedIndex = valor;
 
     document.getElementById("nivel").selectedIndex = valor;
     document.getElementById("estatus").selectedIndex = valor;
@@ -68,6 +98,19 @@ function altaUsuario() {
     var nivel = document.getElementById("nivel").value;
     var clvacceso = document.getElementById("clvacceso").value;
     var puesto = document.getElementById("puestos").value;
+    var cliente = document.getElementById("empresas").value;
+
+    if (cliente == "Seleccione una Empresa") {
+        alert("Seleccione la empresa");
+        return;
+    }
+
+    var renglones = cliente2.length;
+    renglones--;
+    var posicion22 = document.getElementById("empresas").selectedIndex;
+    posicion22 = (renglones - posicion22);
+    var posicion = cliente2[posicion22].split("|");
+    clave_empresa = posicion[0];
 
     if (Uclave == "" || Uclave == null) {
         alert("Teclee el número o clave de usuario");
@@ -97,11 +140,11 @@ function altaUsuario() {
         return;
     }
 
-    var renglones = puesto2.length;
+    renglones = puesto2.length;
     renglones--;
-    var posicion22 = document.getElementById("puestos").selectedIndex;
+    posicion22 = document.getElementById("puestos").selectedIndex;
     posicion22 = (renglones - posicion22);
-    var posicion = puesto2[posicion22].split("|");
+    posicion = puesto2[posicion22].split("|");
     var clv_puesto = posicion[0];
 
     if (estatus == "Seleccione el estatus") {
@@ -112,7 +155,7 @@ function altaUsuario() {
 
     //var archivo1 = "https://svr.itbp.com.mx/httpdocs/act_usuario.php";
     var archivo1 = servidor + "httpdocs/reg_usuario.php";
-    var archivo2 = archivo1 + "?nombre=" + nombre + "&user_number=" + Uclave + "&estatus=" + estatus + "&correo=" + correo + "&nivel=" + nivel + "&clvacceso=" + clvacceso + "&puesto=" + clv_puesto;
+    var archivo2 = archivo1 + "?nombre=" + nombre + "&user_number=" + Uclave + "&estatus=" + estatus + "&correo=" + correo + "&nivel=" + nivel + "&clvacceso=" + clvacceso + "&puesto=" + clv_puesto + "&cliente=" + clave_empresa;
     var xhttp;
 
     if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -148,6 +191,19 @@ function actualizaUsuario() {
     var nivel = document.getElementById("nivel").value;
     var clvacceso = document.getElementById("clvacceso").value;
     var puesto = document.getElementById("puestos").value;
+    var cliente = document.getElementById("empresas").value;
+
+    if (cliente == "Seleccione una Empresa") {
+        alert("Seleccione la empresa");
+        return;
+    }
+
+    var renglones = cliente2.length;
+    renglones--;
+    var posicion22 = document.getElementById("empresas").selectedIndex;
+    posicion22 = (renglones - posicion22);
+    var posicion = cliente2[posicion22].split("|");
+    clave_empresa = posicion[0];
 
     if (clvacceso == "" || clvacceso == null) {
         alert("Teclee una clave de acceso al sistema");
@@ -172,11 +228,11 @@ function actualizaUsuario() {
         return;
     }
 
-    var renglones = puesto2.length;
+    renglones = puesto2.length;
     renglones--;
-    var posicion22 = document.getElementById("puestos").selectedIndex;
+    posicion22 = document.getElementById("puestos").selectedIndex;
     posicion22 = (renglones - posicion22);
-    var posicion = puesto2[posicion22].split("|");
+    posicion = puesto2[posicion22].split("|");
     var clv_puesto = posicion[0];
 
     if (estatus == "Seleccione el estatus") {
@@ -187,7 +243,7 @@ function actualizaUsuario() {
 
     //var archivo1 = "https://svr.itbp.com.mx/httpdocs/act_usuario.php";
     var archivo1 = servidor + "httpdocs/act_usuario.php";
-    var archivo2 = archivo1 + "?Uclave=" + Uclave + "&nombre=" + nombre + "&estatus=" + estatus + "&correo=" + correo + "&nivel=" + nivel + "&clvacceso=" + clvacceso + "&puesto=" + clv_puesto;
+    var archivo2 = archivo1 + "?Uclave=" + Uclave + "&nombre=" + nombre + "&estatus=" + estatus + "&correo=" + correo + "&nivel=" + nivel + "&clvacceso=" + clvacceso + "&puesto=" + clv_puesto + "&cliente=" + clave_empresa;
     var xhttp;
 
     alert("Archivo2: " + archivo2);
@@ -239,7 +295,7 @@ function consultaUsuario() {
 
     //var archivo1 = "https://svr.itbp.com.mx/httpdocs/consultaUsuario2.php";
     var archivo1 = servidor + "httpdocs/consultaUsuario2.php";
-    var archivo2 = archivo1 + "?Uclave=" + usuario;
+    var archivo2 = archivo1 + "?Uclave=" + usuario + "&cliente=" + clave_empresa;
     var xhttp;
 
     if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -370,7 +426,8 @@ function leeUsuarios() {
     limpiaPantalla();
 
     //var archivo2 = "https://svr.itbp.com.mx/httpdocs/catalogoUsuarios.php";
-    var archivo2 = servidor + "httpdocs/catalogoUsuarios3.php";
+    var archivo1 = servidor + "httpdocs/catalogoUsuarios3.php";
+    var archivo2 = archivo1 + "?Cliente=" + clave_empresa;
     var xhttp;
 
     if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari

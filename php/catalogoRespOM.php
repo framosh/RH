@@ -1,15 +1,20 @@
 <?php 
-$Clave=$_GET['Uclave'];
-$Cliente=$_GET['cliente'];
+$evaluacion=$_GET["Evaluacion"];
+$condicion = "";
+
+if($evaluacion ==0){
+    echo("0|No hay respuestas de opcion multiple");
+    return;
+} else {
+  $condicion = "((Preg_xeval.clv_evaluacion='$evaluacion') AND (Preg_xeval.clv_preg_om != 0))";
+}
 
 require 'arhsi_connect.php';
-$query="SELECT usuarioclv, nombre, correo, nivel, estatus, clave, puesto FROM Acceso 
-WHERE (Acceso.usuarioclv='$Clave' AND Acceso.emp_clave='$Cliente')";
-/*
-$query="SELECT Acceso.usuarioclv, Acceso.nombre, Acceso.correo, Acceso.nivel, Acceso.estatus, Acceso.clave, puesto.puesto_nom FROM Acceso 
-LEFT JOIN puesto ON puesto.puesto_clv = Acceso.puesto
-WHERE Acceso.usuarioclv='$Clave'";
-*/
+
+$query="SELECT Preg_xeval.clv_preg_om, Preg_om.nombre_pregom, Preg_xeval.clv_evaluacion, posicion 
+FROM Preg_xeval 
+LEFT JOIN Preg_om ON Preg_om.clv_preg_om = Preg_xeval.clv_preg_om
+WHERE $condicion ORDER BY Preg_xeval.posicion";
 
 $result = mysqli_query($dbc,$query);
 $numero_filas = mysqli_num_rows($result);
@@ -18,8 +23,8 @@ if($numero_filas >0){
     Archivo($result);
     mysqli_close($dbc);
 } else {
-    echo("No hay registros");
-}
+         echo("0|No hay respuestas de opcion multiple");
+        }
 
         function Archivo($result) {
            return creArchivo('php://output', $result);
@@ -29,6 +34,9 @@ if($numero_filas >0){
          $fp = fopen($filename, 'w');
          $rc = llenaDatos($fp, $result);
          fclose($fp);
+         if($rc==0) {
+            echo("0|No hay respuestas de opcion multiple");
+            }
          return $rc;
          }
 

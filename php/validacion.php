@@ -5,7 +5,8 @@ $estatus="Activo";
 
 require 'arhsi_connect.php';
 
-$query="SELECT usuarioclv, nombre, nivel, clave, puesto FROM Acceso WHERE ((usuarioclv LIKE '$usuario') AND (clave LIKE '$Clave') AND (estatus LIKE '$estatus'))";
+$query="SELECT usuarioclv, nombre, nivel, clave, puesto, emp_clave FROM Acceso 
+WHERE ((usuarioclv LIKE '$usuario') AND (clave LIKE '$Clave') AND (estatus LIKE '$estatus'))";
 
 $result = mysqli_query($dbc,$query);
 $numero_filas = mysqli_num_rows($result);

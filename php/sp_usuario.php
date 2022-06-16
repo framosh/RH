@@ -1,8 +1,11 @@
 <?php
 $estatus=$_GET['estatus'];
+$cliente1=$_GET['clie'];
+$nombre=$_GET['nombre'];
+
+$estatus1="(Acceso.estatus='$estatus' AND Acceso.emp_clave='$cliente1')";
 
 require 'arhsi_connect.php';
-$estatus1="Acceso.estatus='$estatus'";
 
 $query="SELECT Acceso.usuarioclv, Acceso.nombre, Acceso.correo, Acceso.nivel, Acceso.estatus, puesto.puesto_nom FROM Acceso
 LEFT JOIN puesto ON puesto.puesto_clv = Acceso.puesto
@@ -33,7 +36,7 @@ function csvFileFromResult($filename, $result, $showColumnHeaders = true) {
 
 // Pasa los datos al archivo abierto
 function csvFromResult($stream, $result, $showColumnHeaders = true) {
-    global $estatus;
+    global $estatus,$nombre;
     $Fecha1=Date("d-m-Y");
 
     if($showColumnHeaders) {
@@ -42,6 +45,10 @@ function csvFromResult($stream, $result, $showColumnHeaders = true) {
         $separador = '|';
         $columnHeaders[0] = "REPORTE DE USUARIOS DEL SISTEMA";
         fputcsv($stream, $columnHeaders,$separador);
+
+        $encabezado1[0] = "Empresa:";
+        $encabezado1[1] = $nombre;
+        fputcsv($stream, $encabezado1,$separador);
 
         $encabezado1[0] = "Estatus:";
         $encabezado1[1] = $estatus;

@@ -1,8 +1,11 @@
 <?php 
+$cliente=$_GET["Cliente"];
+$condicion = "";
+
 $estatus="Activo";
 require 'arhsi_connect.php';
 
-$query="SELECT usuarioclv,nombre FROM Acceso WHERE (estatus='$estatus')";
+$query="SELECT usuarioclv,nombre FROM Acceso WHERE (estatus='$estatus' AND emp_clave='$cliente')";
 
 $result = mysqli_query($dbc,$query);
 $numero_filas = mysqli_num_rows($result);

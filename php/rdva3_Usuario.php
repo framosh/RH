@@ -10,11 +10,15 @@
 
 <?php
 $estatus1=$_GET['estatus'];
+$cliente1=$_GET['clie'];
+$nombre=$_GET['nombre'];
+
+$estatus="(Acceso.estatus='$estatus1' AND Acceso.emp_clave='$cliente1')";
 
 require 'arhsi_connect.php';
-$estatus="Acceso.estatus='$estatus1'";
 
-$query="SELECT Acceso.usuarioclv, Acceso.nombre, Acceso.correo, Acceso.nivel, Acceso.estatus, puesto.puesto_nom FROM Acceso
+$query="SELECT Acceso.usuarioclv, Acceso.nombre, Acceso.correo, Acceso.nivel, Acceso.estatus, 
+puesto.puesto_nom FROM Acceso
 LEFT JOIN puesto ON puesto.puesto_clv = Acceso.puesto
 WHERE $estatus ORDER BY Acceso.nombre";
 
@@ -25,6 +29,7 @@ if($numero_filas >0)
 	{
 	$f=Date("d-m-Y");
 	echo "<div><b>Reporte de fecha: $f<br>";
+	echo "<b>Cliente: $nombre<br>";
 	echo "Estatus: $estatus1</b><br></div>";
 	echo '<table>
 	<tr align="center" font="./arial">
