@@ -1,19 +1,17 @@
 //var servidor_local = "/svr_local/httpdocs/";
 //var servidor_web = "https://svr.itbp.com.mx/httpdocs/";
-//var clave_empresa;
-var aplicacion3 = [];
 
 function cargaInicio() {
-    //    clave_empresa = dato4[5];
+    clave_empresa = dato4[5];
+    var pl = "0-0-0-0";
 
     switch (dato4[2]) // Nivel
     {
         case 'A':
-            window.location.href = "principal.htm" + "?user=" + dato4[0] + "&nombre=" + dato4[1] + "&nivel=" + dato4[2] + "&puesto=" + dato4[3] + "&em1=" + dato4[5];
-            //                  window.location.href = "soporte.htm"+"?user="+dato4[0]+"&nivel="+dato4[1]+"&nombre="+dato4[2]+"&puesto="+dato4[3];
+            window.location.href = "principal.htm" + "?user=" + dato4[0] + "&nombre=" + dato4[1] + "&nivel=" + dato4[2] + "&puesto=" + dato4[3] + "&pl=" + pl + "&em1=" + dato4[5];
             break;
         case 'B':
-            window.location.href = "principal.htm" + "?user=" + dato4[0] + "&nombre=" + dato4[1] + "&nivel=" + dato4[2] + "&puesto=" + dato4[3] + "&em1=" + dato4[5];
+            window.location.href = "principal.htm" + "?user=" + dato4[0] + "&nombre=" + dato4[1] + "&nivel=" + dato4[2] + "&puesto=" + dato4[3] + "&pl=" + pl + "&em1=" + dato4[5];
 
             break;
         default:
@@ -26,7 +24,8 @@ dato4[0]  //  User
 dato4[1]   //  Nombre
 dato4[2]   //  Nivel A-B_C
 dato4[3]   //  Puesto
-dato4[4]   //  Empresa
+dato4[4]   //  Permisos
+dato4[5]   //  Empresa
 */
 
 function lanzaAplicacion(aplicacion) {
@@ -35,38 +34,11 @@ function lanzaAplicacion(aplicacion) {
     var nombre1 = dato4[1];
     var nivel = dato4[2];
     //    clave_empresa = dato4[4];
-    var pl = "";
     //    alert("Empresa 2: " + dato4[4]);
     //   alert("Lanza: " + aplicacion2);
 
     var puesto33 = dato4[3];
-    leeApliAsignadas(puesto33);
-
-    updatePlease();
-
-    alert("Aplicaciones validas: " + aplicacion3.length);
-
-    for (var i = 0; i < aplicacion3.length; i++) {
-        var aplicacion4 = aplicacion3[i].split("|");
-        var aplicacionx = aplicacion4[0] + ".htm";
-        pl = aplicacion4[2];
-
-        if (aplicacionx == aplicacion2) {
-            window.location.href = aplicacion2 + "?u1=" + usuario1 + "&no1=" + nombre1 + "&ni1=" + nivel + "&puesto=" + dato4[3] + "&pl=" + pl + "&em1=" + dato4[4];
-            return;
-        }
-    }
-    alert("No tiene permiso de ingreso a la aplicacion");
-}
-
-var timer = 60;
-
-function updatePlease() {
-    timer--;
-    if (timer > 0) {
-        document.getElementById("mensajes").innerHTML = timer;
-        setTimeout(updatePlease, 1000);
-    }
+    leeApliAsignadas(puesto33, aplicacion2);
 }
 
 
@@ -94,14 +66,12 @@ function captura_Teclado() {
 }
 
 /* CONSULTA APLICACIONES ASIGNADAS AL PUESTO */
-function leeApliAsignadas(puestox) {
-    captura_Teclado();
-    //    alert("Lee aplicaciones asignadas Puesto: " + puestox);
+function leeApliAsignadas(puestox, aplicacion2) {
+    //    alert("leeApliAsignadas puesto: " + puestox + " aplicacion: " + aplicacion2);
+    var pl = "";
 
-    for (var i4 = 0; i4 < aplicacion3.length; i4++) {
-        aplicacion3[i4] = "";
-    }
-    //        var archivo1 = "https://svr.itbp.com.mx/httpdocs/consultaAplicaciones.php";
+    captura_Teclado();
+
     var archivo1 = servidor + "httpdocs/consultaAplicaciones.php";
     var archivo2 = archivo1 + "?puesto=" + puestox;
     var xhttp;
@@ -118,15 +88,26 @@ function leeApliAsignadas(puestox) {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var cadena = xhttp.responseText;
-            //            alert("Aplicaciones asignadas para el puesto: " + puestox + "  aplicaciones: " + cadena);
+            //         alert("cadena de aplicaciones encontradas: " + cadena);
 
             if (cadena == "No hay Aplicaciones asignadas") {
                 //                document.getElementById("mensaje_permisos").innerHTML = cadena;
                 document.getElementById("mensaje_permisos").value = cadena;
                 return;
             }
-            aplicacion3 = cadena.split("\n");
-            //           alert("Registros encontrados: " + aplicacion3.length);
+            var aplicacion3 = cadena.split("\n");
+
+            for (var i = 0; i < aplicacion3.length; i++) {
+                var aplicacion4 = aplicacion3[i].split("|");
+                var aplicacionx = aplicacion4[0] + ".htm";
+                pl = aplicacion4[2];
+
+                if (aplicacionx == aplicacion2) {
+                    window.location.href = aplicacion2 + "?u1=" + dato4[0] + "&no1=" + dato4[1] + "&ni1=" + dato4[2] + "&puesto=" + dato4[3] + "&pl=" + pl + "&em1=" + dato4[5];
+                    return;
+                }
+            }
+            alert("No tiene permiso de ingreso a la aplicacion");
         }
     };
 }

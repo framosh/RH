@@ -12,9 +12,6 @@ function validacion() {
     var archivo2 = archivo1 + "?Uclave=" + usuario + "&clvacceso=" + clave;
     var xhttp;
 
-    //    alert("archivo2: " + archivo2);
-
-    //    alert("Entra a validacion de Usuario: (" + usuario + ")  pwd: (" + clave + ")");
     //    alert("url a activar: " + archivo2);
     //    var actual_url = window.location.href;
     //    var actual_url = window.location.pathname;
@@ -46,26 +43,27 @@ function validacion() {
             }
             //$query="SELECT usuarioclv, nombre, nivel, clave, puesto, emp_clave 
 
-            document.getElementById("nombre").innerHTML = dato4[1];
+            document.getElementById("usuario1").innerHTML = dato4[1];
             /*
             dato4[0]  //  User
             dato4[1]   //  Nombre
             dato4[2]   //  Nivel A-B_C
-            dato4[3]   //  Clave
-            dato4[4]   //  Puesto
+            dato4[3]   //  Puesto
+            dato4[4]   //  Permiso
             dato4[5]   //  Empresa
             */
 
             //            alert("Empresax1: " + dato4[5]);
+            var pl = "0-0-0-0";
 
             if (dato4[3] == clave) {
                 switch (dato4[2]) // Nivel
                 {
                     case 'A':
-                        window.location.href = "principal.htm" + "?u1=" + dato4[0] + "&no1=" + dato4[1] + "&ni1=" + dato4[2] + "&pu1=" + dato4[4] + "&em1=" + dato4[5];
+                        window.location.href = "principal.htm" + "?u1=" + dato4[0] + "&no1=" + dato4[1] + "&ni1=" + dato4[2] + "&pu1=" + dato4[4] + "&pl=" + pl + "&em1=" + dato4[5];
                         break;
                     case 'B':
-                        window.location.href = "principal.htm" + "?u1=" + dato4[0] + "&no1=" + dato4[1] + "&ni1=" + dato4[2] + "&pu1=" + dato4[4] + "&em1=" + dato4[5];
+                        window.location.href = "principal.htm" + "?u1=" + dato4[0] + "&no1=" + dato4[1] + "&ni1=" + dato4[2] + "&pu1=" + dato4[4] + "&pl=" + pl + "&em1=" + dato4[5];
                         break;
                     default:
                         window.location.href = "index.htm";

@@ -6,7 +6,7 @@ var permiso_Aplicacion;
 var timeOutId;
 var intervalo = 300000;
 var sinActividad = 300000;
-//var clave_empresa;
+var clave_empresa;
 
 window.onload = function () {
       //      alert("Entra a carga de pagina");
@@ -20,35 +20,31 @@ window.onload = function () {
             data = {},
             tmp;
       var l = params.length;
+
       var url2 = document.location.href;
-      //alert("Url2: "+url2);
 
       /*
             dato4[0]  //  User
             dato4[1]   //  Nombre
             dato4[2]   //  Nivel A-B_C
             dato4[3]   //  Puesto
-            dato4[4]   //  Empresa
+            dato4[4]   // permisos
+            dato4[5]   //  Empresa 
 */
-      //     alert("cantidad de parametros: " + l);
 
-      for (var i = 0; i <= l; i++) {
+      for (var i = 0; i < l; i++) {
             tmp = params[i].split('=');
             data[tmp[0]] = tmp[1].replace(/%20/g, " ");
             dato4[i] = data[tmp[0]];
             dato4[i] = dato4[i].trim();
-            //            alert("Dato4: " + i + "  contiene: " + dato4[i]);
+            //        alert("Dato4: " + i + "  contiene: " + dato4[i]);
       }
-
-      //      document.getElementById("usuario1").innerHTML = dato4[1];
-      document.getElementById("usuario1").value = dato4[1];
 
       var direccion2 = url2.split("?")[0].split("/");
       direccion2[3] = direccion2[3].trim();
       var mensa = direccion2[3];
 
       var pagina = "";
-      //      var puesto33 = 0;
 
       if (servidor == "/arhsi_local/") {
             pagina = direccion2[4];
@@ -56,12 +52,9 @@ window.onload = function () {
             pagina = direccion2[3];
       }
 
-      alert("Checa permisos del puesto: " + dato4[3]);
-      //      puesto33 = dato4[3];
-      //    leeApliAsignadas(puesto33);
-      //      clave_empresa = dato4[4];
-      alert("Empresa: " + dato4[4]);
-      alert("Pagina: " + pagina);
+      clave_empresa = dato4[5];
+
+      document.getElementById("usuario1").innerHTML = dato4[1];
 
       if (pagina == "areas.htm") {
             document.getElementById("areas").textContent = leeAreas(); // Carga el catalogo de Areas
