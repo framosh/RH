@@ -53,8 +53,10 @@ window.onload = function () {
       }
 
       clave_empresa = dato4[5];
+      //      alert("Empresa: " + clave_empresa);
 
       document.getElementById("usuario1").innerHTML = dato4[1];
+      buscaEmpresa(clave_empresa); // Busca el nombre de la empresa a donde pertenece el usuario
 
       if (pagina == "areas.htm") {
             document.getElementById("areas").textContent = leeAreas(); // Carga el catalogo de Areas
@@ -221,4 +223,29 @@ function startTimeOut() {
 
 function stopTimer() {
       window.clearTimeout(timeOutId);
+}
+
+function buscaEmpresa(clave) {
+      //      alert("Busca empresa");
+      //    var archivo2 = "https://admonarh.arhsi.com.mx/httpdocs/catalogoClientes.php";
+      var archivo1 = servidor + "httpdocs/buscaEmpresa.php";
+      var archivo2 = archivo1 + "?clave=" + clave;
+      var xhttp;
+
+      if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+            xhttp = new XMLHttpRequest();
+      } else { // code for IE6, IE5
+            xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+
+      xhttp.open("GET", archivo2, true);
+      xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                  var cadena = xhttp.responseText;
+                  //                alert("cadena: " + cadena);
+                  document.getElementById("mensajes").innerHTML = cadena;
+            }
+      };
+      xhttp.send();
+      //    xhttp.disabled();  
 }

@@ -167,10 +167,14 @@ function limpiaPantalla_preg() {
     document.getElementById("mensaje_gral").innerHTML = vacio;
 }
 
+//Carga los candidatos asignados a la vacante
+function cargaCandidatos() {
+
+}
+
 function nuevaPregunta() {
     limpiaPantalla_preg();
 }
-
 
 // Registro de conocimientos por candidato
 function actualizaRespuesta() {
