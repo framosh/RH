@@ -137,8 +137,7 @@ window.onload = function () {
 
       if (pagina == "resp_xom.htm") {
             //            limpiaPantalla_eval();
-            var valorx25 = 0;
-            document.getElementById("vacantes").textContent = leeVacantes(valorx25); // Carga el catalogo de Vacantes
+            document.getElementById("vacantes").textContent = leeVacantes(clave_empresa); // Carga el catalogo de Vacantes
       }
 
       if (pagina == "preg_xcom.htm") {
