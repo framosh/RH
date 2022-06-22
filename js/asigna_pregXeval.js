@@ -97,7 +97,7 @@ function deshabilita() {
 
 // Borra la pregunta seleccionada de la evaluación activa
 function baja_pregunta() {
-    alert("Entra a baja de registro");
+    //    alert("Entra a baja de registro");
     var evaluacion = document.getElementById("evaluaciones").value;
     var preguntaOM = document.getElementById("preguntasOM").value;
     var preguntaXC = document.getElementById("preguntasXC").value;
@@ -122,8 +122,6 @@ function baja_pregunta() {
         }
     }
 
-    alert("1");
-
     var clv_preguntaOM = 0;
     if (preguntaOM != "Seleccione la pregunta de opcion multiple") {
         for (i = 0; i < preguntasOM2.length; i++) {
@@ -135,8 +133,6 @@ function baja_pregunta() {
             }
         }
     }
-
-    alert("2");
 
     var clv_preguntaXC = 0;
     if (preguntaXC != "Seleccione la pregunta por complemento") {
@@ -150,10 +146,7 @@ function baja_pregunta() {
         }
     }
 
-    alert("3");
-
     var camposx22 = [];
-
     camposx22[0] = clv_evaluacion;
     camposx22[1] = clv_preguntaXC;
     camposx22[2] = clv_preguntaOM;
@@ -164,7 +157,7 @@ function baja_pregunta() {
     var archivo2 = archivo1 + "?Campos=" + camposx23;
     var xhttp;
 
-    alert("archivo1: " + archivo1);
+    //    alert("archivo1: " + archivo1);
 
     if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
         xhttp = new XMLHttpRequest();
@@ -178,7 +171,7 @@ function baja_pregunta() {
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var cadena = xhttp.responseText;
-            alert("cadena: " + cadena);
+            //          alert("cadena: " + cadena);
             document.getElementById("mensaje_gral").innerHTML = cadena;
             document.getElementById("preguntasOM").disabled = false;
             document.getElementById("preguntasXC").disabled = false;
@@ -189,9 +182,25 @@ function baja_pregunta() {
 }
 
 var tipo_funcion = "";
-var secuencial = 0;
 
 function alta_pregunta() {
+    var posicion = document.getElementById("posicion").value;
+
+    if (posicion == null || posicion == "" || posicion == 0) {
+        alert("Asigne una posicion de la pregunta dentro de la evaluación");
+        return;
+    }
+
+    var cantidad = preguntas.length;
+
+    for (var i = 0; i < cantidad; i++) {
+        var renglon = preguntas[i].split("|");
+        if (renglon[0] == posicion) {
+            alert("La posicion ya existe, asigne otra");
+            return;
+        }
+    }
+
     tipo_funcion = "alta";
     actualizaEvaluacion();
 }
@@ -221,12 +230,9 @@ function actualizaEvaluacion() {
     var aviso;
     var nombre, campo, i;
 
-    if (posicion == null || posicion == "") {
-        secuencial++;
-        document.getElementById("posicion").value = secuencial;
-        posicion = secuencial;
-    } else {
-        secuencial = posicion;
+    if (posicion == null || posicion == "" || posicion == 0) {
+        alert("Asigne una posicion de la pregunta dentro de la evaluación");
+        return;
     }
 
     if (evaluacion == "Seleccione la evaluacion") {
@@ -257,6 +263,8 @@ function actualizaEvaluacion() {
                 break;
             }
         }
+    } else {
+        clv_preguntaXC = 0;
     }
 
     var clv_preguntaXC = 0;
@@ -269,6 +277,8 @@ function actualizaEvaluacion() {
                 break;
             }
         }
+    } else {
+        clv_preguntaOM = 0;
     }
     //    alert("Tipo funcion: " + tipo_funcion);
 
@@ -287,7 +297,6 @@ function actualizaEvaluacion() {
         archivo1 = servidor + "httpdocs/act_PregXevaluacion.php";
     } else {
         archivo1 = servidor + "httpdocs/reg_preguntaXevaluacion.php";
-        secuencial = secuencial + 1;
     }
 
     var archivo2 = archivo1 + "?Campos=" + camposx23;
@@ -322,7 +331,7 @@ function actualizaEvaluacion() {
 
 function consultaPreguntasAsignadas() {
     var aviso = "";
-    document.getElementById("mensaje_gral").innerHTML = aviso;
+    //    document.getElementById("mensaje_gral").innerHTML = aviso;
 
     //    var archivo1 = "https://svr.itbp.com.mx/httpdocs/consultaAplicaciones.php";
     var archivo1 = servidor + "httpdocs/consultaPregAsignadas.php";
@@ -341,7 +350,6 @@ function consultaPreguntasAsignadas() {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var cadena = xhttp.responseText;
-
             //    alert("Cadena: " + cadena);
 
             if (cadena == "No hay Preguntas asignadas") {
@@ -354,6 +362,7 @@ function consultaPreguntasAsignadas() {
             var subtitulo = ["POSICION", "PREGUNTA POR COMPLEMENTO", "PREGUNTA DE OPCION MULTIPLE"];
 
             var aplicacion = cadena.split("\n");
+            preguntas = aplicacion;
             var tablax1 = "tablax21";
             var cuerpox1 = "cuerpox21";
             var apli4 = 0;
@@ -367,6 +376,7 @@ function consultaPreguntasAsignadas() {
     };
 }
 
+var preguntas = [];
 
 var preguntasXC2 = [];
 

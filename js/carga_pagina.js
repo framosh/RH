@@ -124,6 +124,11 @@ window.onload = function () {
             document.getElementById("puestos").textContent = leePuestos(); // Carga el catalogo de Puestos
       }
 
+      if (pagina == "eval_x_candidato.htm") {
+            //            limpiaPantalla_eval();
+            document.getElementById("vacantes").textContent = leeVacantes(clave_empresa); // Carga el catalogo de Vacantes
+      }
+
       if (pagina == "preg_x_eval.htm") {
             //            limpiaPantalla_eval();
             document.getElementById("evaluaciones").textContent = leeEvaluaciones(); // Carga el catalogo de Conocimientos
@@ -193,22 +198,15 @@ window.onload = function () {
 };
 
 function controlDePantalla() {
-      window.addEventListener('keydown', function (e) {
-            if (!e.ctrlKey) {
-                  salirx1();
-            }
-
-            if (e.ctrlKey && e.key == 'r') { // Ctrl R
-                  return;
-            } else {
-                  salirx1();
-            }
-      });
-      //      window.addEventListener('click', salirx1);
+      if (confirm("¿Quiere salir?")) {
+            var archivo3 = "index.htm";
+            window.location.href = archivo3;
+      }
+      stopTimer();
 }
 
 function salirx1() {
-      alert("Sale de pantalla");
+      //      alert("Sale de pantalla");
       var archivo3 = "index.htm";
       window.location.href = archivo3;
 }
@@ -216,12 +214,13 @@ function salirx1() {
 function startTimeOut() {
       timeOutId = window.setTimeout(controlDePantalla, sinActividad);
       window.addEventListener('mousemove', stopTimer);
-      //      window.addEventListener('click', stopTimer);
-      //    window.addEventListener('input', stopTimer);
+      window.addEventListener('click', stopTimer);
+      window.addEventListener('input', stopTimer);
 }
 
 function stopTimer() {
       window.clearTimeout(timeOutId);
+      //      window.setInterval(startTimeOut, intervalo);
 }
 
 function buscaEmpresa(clave) {
