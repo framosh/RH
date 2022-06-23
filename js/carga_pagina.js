@@ -124,6 +124,12 @@ window.onload = function () {
             document.getElementById("puestos").textContent = leePuestos(); // Carga el catalogo de Puestos
       }
 
+      if (pagina == "eval_x_puesto.htm") {
+            limpiaPantalla_eval();
+            document.getElementById("puestos").textContent = leePuestos(); // Carga el catalogo de Puestos
+            document.getElementById("evaluaciones").textContent = leeEvaluaciones(); // Carga el catalogo de Conocimientos
+      }
+
       if (pagina == "eval_x_candidato.htm") {
             //            limpiaPantalla_eval();
             document.getElementById("vacantes").textContent = leeVacantes(clave_empresa); // Carga el catalogo de Vacantes
