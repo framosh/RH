@@ -1,13 +1,9 @@
 <?php 
 $candidato=$_GET["candidato"];
+$evaluacion=$_GET["evaluacion"];
 
 require 'arhsi_connect.php';
-
-$query="SELECT Evaluaciones.clv_evaluacion, Evaluaciones.nombre_eval, Eval_xcand.estatus_eval, 
-conocimientos.cono_desc FROM Eval_xcand 
-LEFT JOIN Evaluaciones ON Evaluaciones.clv_evaluacion = Eval_xcand.clv_evaluacion
-LEFT JOIN conocimientos ON conocimientos.clv_conocim = Evaluaciones.clv_conocim
-WHERE (Eval_xcand.cand_key=$candidato) ORDER BY Evaluaciones.nombre_eval DESC";
+$query="SELECT * FROM Eval_xcand WHERE ((cand_key = $candidato) AND (clv_evaluacion = $evaluacion))";
 
 $result = mysqli_query($dbc,$query);
 $numero_filas = mysqli_num_rows($result);
@@ -16,7 +12,7 @@ if($numero_filas >0){
     Archivo($result);
     mysqli_close($dbc);
 } else {
-    echo("No hay Evaluaciones");
+    echo("No existe la evaluacion:".$evaluacion);
 }
 
         function Archivo($result) {
@@ -35,11 +31,6 @@ if($numero_filas >0){
          $delimiter=chr(124);
          $enclosure=chr(34);
          while($row = mysqli_fetch_row($result)) {
-          $estatus = $row[2];
-          $estatus_desc = ["No definido","Aplicar","Aplicada","Cancelada","Abortada","Reprobada","Aprobada"];
-          $nivelx=$estatus_desc[$estatus];
-
-          $row[2] = $nivelx;
            fputcsv($stream, $row, $delimiter);
            $nrows++;
            }

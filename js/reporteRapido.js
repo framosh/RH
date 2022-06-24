@@ -19,15 +19,14 @@ function quickReport(contenido, tabla, cuerpo, subtitulo) {
     linea = contenido;
 
     //    renglones--;
-    var mensaje1;
     //    alert("Renglones a desplegar: " + renglones);
-
-    if (renglones < 1) {
-        mensaje1 = "No hay registros";
-        document.getElementById("mensaje_gral").innerHTML = mensaje1;
-        return;
-    }
-
+    /*
+        if (renglones < 1) {
+            mensaje1 = "No hay registros";
+            document.getElementById("mensaje_gral").innerHTML = mensaje1;
+            return;
+        }
+    */
     var renglon4 = 0;
     var i4;
 
@@ -48,11 +47,19 @@ function quickReport(contenido, tabla, cuerpo, subtitulo) {
     creaEncabezado(encabezadox, columnas);
     creaTabla(renglones, columnas);
 
-    if (document.getElementById(tablax6)) {
-        for (i4 = 0; i4 < renglones; i4++) {
-            if ((linea[i4] != null) && (linea[i4] != "")) {
-                despliega(linea[i4], renglon4);
-                renglon4++;
+    var mensaje1;
+
+    if (renglones < 1) {
+        mensaje1 = "No hay registros";
+        document.getElementById("mensaje_gral").innerHTML = mensaje1;
+        return;
+    } else {
+        if (document.getElementById(tablax6)) {
+            for (i4 = 0; i4 < renglones; i4++) {
+                if ((linea[i4] != null) && (linea[i4] != "")) {
+                    despliega(linea[i4], renglon4);
+                    renglon4++;
+                }
             }
         }
     }

@@ -1,8 +1,8 @@
-function evalXpuesto(puesto) {
-    //    alert("Despliega evaluaciones por puesto: " + puesto);
+function despliegaEvalXcand(candidato_clv) {
+    //    alert("Despliega evaluaciones por candidato: " + candidato_clv);
 
-    var archivo1 = servidor + "httpdocs/cargaEvalXpuesto.php";
-    var archivo2 = archivo1 + "?puesto=" + puesto;
+    var archivo1 = servidor + "httpdocs/evalXcandidato.php";
+    var archivo2 = archivo1 + "?candidato=" + candidato_clv;
     var xhttp;
 
     if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -15,7 +15,7 @@ function evalXpuesto(puesto) {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var cadena = xhttp.responseText;
-            //            alert("Cadena de evaluaciones: " + cadena);
+            //                        alert("Cadena de evaluaciones: " + cadena);
             //            document.getElementById("mensaje_gral").textContent = "(" + cadena + ")" + "   longitud: (" + cadena.length + ")";
             if (cadena == "No hay Evaluaciones") { //No hay Evaluaciones
                 document.getElementById("mensaje_gral").value = cadena;
@@ -24,7 +24,7 @@ function evalXpuesto(puesto) {
             //$query="SELECT Evaluaciones.clv_evaluacion, Evaluaciones.nombre_eval, Evaluaciones.nivel_cono, 
             //conocimientos.cono_desc FROM eval_XPuesto 
 
-            var subtitulo = ["CLAVE", "NOMBRE", "NIVEL", "AREA DE CONOCIMIENTO"];
+            var subtitulo = ["CLAVE", "NOMBRE", "ESTATUS", "AREA DE CONOCIMIENTO"];
 
             var aplicacion = cadena.split("\n");
             preguntas = aplicacion;
@@ -33,9 +33,8 @@ function evalXpuesto(puesto) {
             var apli4 = 0;
             apli4 = aplicacion.length;
             apli4--;
-            if (apli4 > 0) {
-                quickReport(aplicacion, tablax1, cuerpox1, subtitulo);
-            }
+            quickReport(aplicacion, tablax1, cuerpox1, subtitulo);
+
             renglones2 = apli4;
         }
     };

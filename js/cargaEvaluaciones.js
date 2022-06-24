@@ -5,6 +5,7 @@ function evalXcandidato(candidato) {
 
     var archivo1 = servidor + "httpdocs/cargaEvaluaciones.php";
     var archivo2 = archivo1 + "?candidato=" + candidato;
+
     var xhttp;
 
     if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari

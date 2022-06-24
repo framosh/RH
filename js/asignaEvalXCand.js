@@ -42,6 +42,19 @@ function rep_Excel() {
     window.location.href = "httpdocs/sp_Evaluaciones.php?Puesto=" + puesto_clv;
 */
 }
+/*
+function limpia_parcial() {
+    var vacio = "";
+    var vacio1 = 0;
+
+    document.getElementById("fecha").value = vacio;
+    document.getElementById("hora").value = vacio;
+    document.getElementById("calificacion").value = vacio1;
+    document.getElementById("estatus").selectedIndex = vacio1;
+    document.getElementById("observacion").innerHTML = vacio;
+    document.getElementById("mensaje_gral").innerHTML = vacio;
+}
+*/
 
 function limpiaPantalla_eval() {
     //alert("Limpia Pantalla");
@@ -49,22 +62,52 @@ function limpiaPantalla_eval() {
     var vacio1 = 0;
     document.getElementById("candidatos").selectedIndex = vacio1;
     document.getElementById("evaluaciones").selectedIndex = vacio1;
+    document.getElementById("puesto").value = vacio;
+    document.getElementById("clave").value = vacio;
     document.getElementById("fecha").value = vacio;
     document.getElementById("hora").value = vacio;
     document.getElementById("calificacion").value = vacio1;
     document.getElementById("estatus").selectedIndex = vacio1;
-    document.getElementById("observacion").value = vacio;
+    document.getElementById("observacion").innerHTML = vacio;
     document.getElementById("asigna").disabled = false;
     document.getElementById("actualiza").disabled = false;
 }
 
-function asignaEval() {
-    limpiaPantalla_eval();
+function nuevoCandidato() {
+    var vacio = "";
+    var vacio1 = 0;
+    //    document.getElementById("candidatos").selectedIndex = vacio1;
+    document.getElementById("evaluaciones").selectedIndex = vacio1;
+    document.getElementById("puesto").value = vacio;
+    document.getElementById("clave").value = vacio;
+    document.getElementById("fecha").value = vacio;
+    document.getElementById("hora").value = vacio;
+    document.getElementById("calificacion").value = vacio1;
+    document.getElementById("estatus").selectedIndex = vacio1;
+    document.getElementById("observacion").innerHTML = vacio;
+    document.getElementById("asigna").disabled = false;
+    document.getElementById("actualiza").disabled = false;
+}
+
+function nuevaEvaluacion() {
+    var vacio = "";
+    var vacio1 = 0;
+    //    document.getElementById("candidatos").selectedIndex = vacio1;
+    //    document.getElementById("evaluaciones").selectedIndex = vacio1;
+    //    document.getElementById("puesto").value = vacio;
+    //    document.getElementById("clave").value = vacio;
+    document.getElementById("fecha").value = vacio;
+    document.getElementById("hora").value = vacio;
+    document.getElementById("calificacion").value = vacio1;
+    document.getElementById("estatus").selectedIndex = vacio1;
+    document.getElementById("observacion").innerHTML = vacio;
+    document.getElementById("asigna").disabled = false;
+    document.getElementById("actualiza").disabled = false;
 }
 
 var tipo_funcion = "";
 
-function actualizaEval() {
+function asignaEval() {
     tipo_funcion = "alta";
     modificaEval();
 }
@@ -99,7 +142,7 @@ function modificaEval() {
         return;
     }
 
-    if (estatus == "Seleccione el estatus") {
+    if (estatus == "Seleccione un estatus") {
         alert("Seleccione el Estatus");
         return;
     }
@@ -113,29 +156,8 @@ function modificaEval() {
        <option>Aprobada</option>
     */
 
-    var estatus_valor;
-    switch (estatus) {
-        case "Aplicar":
-            estatus_valor = 1;
-            break;
-        case "Aplicada":
-            estatus_valor = 2;
-            break;
-        case "Cancelada":
-            estatus_valor = 3;
-            break;
-        case "Abortada":
-            estatus_valor = 4;
-            break;
-        case "Reprobada":
-            estatus_valor = 5;
-            break;
-        case "Aprobada":
-            estatus_valor = 6;
-            break;
-        default:
-            estatus_valor = 0;
-    }
+    var estatus_num = document.getElementById("estatus").selectedIndex;
+    //    alert("estatus_num:" + estatus_num);
 
     var camposx22 = [];
 
@@ -163,8 +185,10 @@ function modificaEval() {
 
     camposx22[0] = candidato_clv;
     camposx22[1] = evaluacion_clv;
-    camposx22[2] = estatus;
+    camposx22[2] = estatus_num;
     camposx22[3] = observacion;
+
+    //    alert("Estatus: " + estatus_valor);
 
     var camposx23 = camposx22.join("|");
 
@@ -191,15 +215,16 @@ function modificaEval() {
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var cadena = xhttp.responseText;
-            //        alert("Cadena: " + cadena);
+            alert("Cadena: " + cadena);
             document.getElementById("mensaje_gral").innerHTML = cadena;
             if (tipo_funcion == "alta") {
                 var valor = cadena.split(":");
-                if (valor[0] == "Asignada") {
+                if (valor[0] == "Asignación grabada candidato") {
                     var estatusx = 1;
                     document.getElementById("estatus").value = estatusx;
                     document.getElementById("asigna").disabled = true;
                     document.getElementById("actualiza").disabled = false;
+                    despliegaEvalXcand(candidato_clv); // Despliega evaluaciones en matriz de pantalla
                 }
             }
         }
@@ -208,10 +233,9 @@ function modificaEval() {
 
 function consultaEval() {
     //    alert("Consulta Conocimiento");
+    nuevaEvaluacion();
+    //    limpia_parcial();
     var vacio = "";
-    document.getElementById("mensaje_gral").innerHTML = vacio;
-    document.getElementById("asigna").disabled = true;
-    document.getElementById("actualiza").disabled = false;
 
     var candidato = document.getElementById("candidatos").value;
 
@@ -245,7 +269,7 @@ function consultaEval() {
     document.getElementById("clave").value = evaluacion_clv;
 
     var archivo1 = servidor + "httpdocs/consultaEvalXCand.php";
-    var archivo2 = archivo1 + "?evaluacion=" + evaluacion_clv + "?candidato=" + candidato_clv;
+    var archivo2 = archivo1 + "?evaluacion=" + evaluacion_clv + "&candidato=" + candidato_clv;
     var xhttp;
 
     if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -262,7 +286,7 @@ function consultaEval() {
             var cadena = xhttp.responseText;
             var mensaje_cadena = cadena.split(":");
             //          alert("Cadena: " + cadena);
-            if (mensaje_cadena[0] == "No hay Evaluacion número") {
+            if (mensaje_cadena[0] == "No existe la evaluacion") {
                 document.getElementById("mensaje_gral").innerHTML = cadena;
                 return;
             }
@@ -277,15 +301,15 @@ function consultaEval() {
                 }
             }
 
-            var nivelx1 = ids[5];
+            var nivelx1 = ids[2];
 
-            document.getElementById("fecha").value = ids[2];
-            document.getElementById("hora").value = ids[3];
-            document.getElementById("calificacion").value = ids[4];
+            document.getElementById("fecha").value = ids[3];
+            document.getElementById("hora").value = ids[4];
+            document.getElementById("calificacion").value = ids[5];
             document.getElementById("estatus").selectedIndex = nivelx1;
-            document.getElementById("observaciones").value = ids[6];
+            document.getElementById("observacion").innerHTML = ids[6];
 
-            document.getElementById("alta").disabled = true;
+            document.getElementById("asigna").disabled = true;
             document.getElementById("actualiza").disabled = false;
         } else {
             //   alert("readyState="+xhttp.readyState+"        Status="+xhttp.status);
@@ -294,6 +318,7 @@ function consultaEval() {
 }
 
 function cargaCandidatos() {
+    nuevoCandidato();
     var vacante = document.getElementById("vacantes").value;
 
     if (vacante == "0-Seleccione una Vacante") {
@@ -311,6 +336,7 @@ function cargaCandidatos() {
 }
 
 function cargaEvaluaciones() {
+    //    alert("cargaEvaluaciones");
     var candidato = document.getElementById("candidatos").value;
 
     if (candidato == "Seleccione el Candidato") {
@@ -326,5 +352,110 @@ function cargaEvaluaciones() {
     clavex22 = candidatos2[posicion21].split("|");
     var candidato_clv = clavex22[0];
 
-    evalXcandidato(candidato_clv);
+    consultaCandidato(candidato_clv); // Consulta el puesto del candidato y las evaluaciones asignadas
+}
+
+function consultaCandidato(candidato_clv) {
+    var archivo1 = servidor + "httpdocs/consPuestoCandidato.php";
+    var archivo2 = archivo1 + "?candidato=" + candidato_clv;
+    var xhttp;
+
+    if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+        xhttp = new XMLHttpRequest();
+    } else { // code for IE6, IE5
+        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    xhttp.open("GET", archivo2, true);
+    xhttp.onreadystatechange = function () {
+        //  alert("paso 1.7");
+        if (this.readyState == 4 && this.status == 200) {
+            //   alert("paso 1.8");
+            var cadena = xhttp.responseText;
+            //            alert("Cadena: " + cadena);
+
+            if (cadena == "No existe el Candidato") {
+                document.getElementById("mensaje_gral").innerHTML = cadena;
+                return;
+            }
+
+            var ids = cadena.split("|");
+            for (var i1 = 0; i1 < ids.length; i1++) {
+                if (ids[i1] == null) {
+                    ids[i1] = "";
+                }
+                var campo = ids[i1];
+                if (campo != null && campo != "") {
+                    ids[i1] = ids[i1].replace(/\"/g, "");
+                    ids[i1] = ids[i1].trim();
+                    //           alert("campo: ("+i1+") - ("+ids[i1]+")");
+                }
+            }
+
+            var puesto_nombre = ids[0] + "-" + ids[1];
+            var puesto = ids[0];
+
+            document.getElementById("puesto").value = puesto_nombre; // Ultimo puesto laborado
+            //            alert("Lanza evalXpuesto");
+            leeEvalpuesto(puesto); // Carga evaluaciones por puesto para el pull down
+            despliegaEvalXcand(candidato_clv); // Despliega en la matriz de pantalla las evaluaciones del candidato 
+        } else {
+            //            alert("Estado: " + xhttp.readyState + "  Status: " + xhttp.status);
+        }
+    };
+    xhttp.send();
+    //    xhttp.disabled();  
+}
+
+// Catalogo de evaluaciones asignadas por puesto
+var evaluaciones2 = [];
+
+function leeEvalpuesto(puesto) {
+    var archivo1 = servidor + "httpdocs/catEvaluaPuesto.php";
+    var archivo2 = archivo1 + "?puesto=" + puesto;
+    var xhttp;
+
+    if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+        xhttp = new XMLHttpRequest();
+    } else { // code for IE6, IE5
+        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    xhttp.open("GET", archivo2, true);
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var cadena = xhttp.responseText;
+            //            alert("Cadena de evaluaciones: " + cadena);
+            //            document.getElementById("mensaje_gral").textContent = "(" + cadena + ")" + "   longitud: (" + cadena.length + ")";
+            if (cadena == "0|No hay Evaluaciones") {
+                var mensaje = cadena.split(":");
+                document.getElementById("mensaje_gral").innerHTML = mensaje[0];
+                return;
+            }
+
+            var evaluacion = cadena.split("\n");
+            var i2 = 0;
+
+            for (var i = 0; i < evaluacion.length; i++) {
+                var campo = evaluacion[i];
+                if (campo) {
+                    evaluaciones2[i2] = campo.trim();
+                    evaluaciones2[i2] = evaluaciones2[i2].replace(/\"/g, "");
+                    //                    alert("campo: (" + i2 + ") - (" + puestos2[i2] + ")");
+                    i2++;
+                }
+            }
+
+            evaluaciones2[i2] = "0|Seleccione la Evaluación";
+            var select = document.getElementById("evaluaciones");
+
+            for (var i1 = i2; i1 >= 0; i1--) {
+                var option = document.createElement('option');
+                var nombre = evaluaciones2[i1].split("|");
+                option.text = option.value = nombre[1];
+                select.add(option);
+            }
+        }
+    };
+    xhttp.send();
 }

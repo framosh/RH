@@ -1,7 +1,7 @@
 var candidatos2 = [];
 
 function leeCandidatos(vacante_clv) {
-    alert("Entra a candidatos de la vacante: " + vacante_clv);
+    //    alert("Entra a candidatos de la vacante: " + vacante_clv);
     //    var limpia = "";
     //  document.getElementById("candidatos").innerHTML = limpia;
 
