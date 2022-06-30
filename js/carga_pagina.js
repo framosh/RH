@@ -147,7 +147,14 @@ window.onload = function () {
       }
 
       if (pagina == "resp_xom.htm") {
-            //            limpiaPantalla_eval();
+            // Calificacion de respuestas de opcion multiple
+            nueva_vacante();
+            document.getElementById("vacantes").textContent = leeVacantes(clave_empresa); // Carga el catalogo de Vacantes
+      }
+
+      if (pagina == "resp_xcom.htm") {
+            // Calificacion de respuestas de opcion multiple
+            nueva_vacante();
             document.getElementById("vacantes").textContent = leeVacantes(clave_empresa); // Carga el catalogo de Vacantes
       }
 

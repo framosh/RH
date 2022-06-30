@@ -1,3 +1,4 @@
+// Carga evaluaciones del candidato al pulldown de evaluaciones
 var evaluaciones2 = [];
 
 function evalXcandidato(candidato) {

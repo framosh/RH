@@ -1,37 +1,42 @@
 <?php 
-$evaluacion=$_GET["evaluacion"];
-$pregunta=$_GET["pregunta"];
+$evaluacion=$_GET["Evaluacion"];
+$candidato=$_GET["candidato"];
+$condicion = "";
+
+if($evaluacion ==0){
+    echo("0|No hay respuestas por complemento");
+    return;
+} else {
+  $condicion = "((Preg_xeval.clv_evaluacion='$evaluacion') AND (Preg_xeval.clv_preg_pc != 0))";
+}
 
 require 'arhsi_connect.php';
 
-$query="SELECT Res_pom.sol_resp1, Res_pom.sol_resp2, Res_pom.calif_resp_pom 
+$query="SELECT Preg_xeval.clv_preg_pc, Preg_xcom.nombre_pregpc, Preg_xeval.clv_evaluacion, posicion 
 FROM Preg_xeval 
-LEFT JOIN Res_pom ON Res_pom.clv_preg_om = Preg_xeval.clv_preg_om
-WHERE ((Preg_xeval.clv_evaluacion = $evaluacion) AND (Preg_xeval.clv_preg_om = $pregunta))";
+LEFT JOIN Preg_xcom ON Preg_xcom.clv_preg_pc = Preg_xeval.clv_preg_pc
+WHERE $condicion ORDER BY Preg_xeval.posicion";
 
 $result = mysqli_query($dbc,$query);
 $numero_filas = mysqli_num_rows($result);
 
-if($numero_filas > 0){
+if($numero_filas >0){
     Archivo($result);
     mysqli_close($dbc);
 } else {
-  $mensaje = "No hay respuestas a pregunta: ".$pregunta; 
-    echo($mensaje);
-}
+         echo("0|No hay respuestas por complemento");
+        }
 
         function Archivo($result) {
            return creArchivo('php://output', $result);
           }
 
         function creArchivo($filename, $result) {
-            global $pregunta;
-
          $fp = fopen($filename, 'w');
          $rc = llenaDatos($fp, $result);
          fclose($fp);
          if($rc==0) {
-            echo("No hay respuestas a pregunta: ".$pregunta);
+            echo("0|No hay respuestas por complemento");
             }
          return $rc;
          }
@@ -43,7 +48,6 @@ if($numero_filas > 0){
            fputcsv($stream, $row, $delimiter);
            $nrows++;
            }
-         mysqli_free_result($result);
          return $nrows;
          }       
 ?>

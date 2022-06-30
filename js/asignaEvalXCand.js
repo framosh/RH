@@ -42,21 +42,8 @@ function rep_Excel() {
     window.location.href = "httpdocs/sp_Evaluaciones.php?Puesto=" + puesto_clv;
 */
 }
-/*
-function limpia_parcial() {
-    var vacio = "";
-    var vacio1 = 0;
 
-    document.getElementById("fecha").value = vacio;
-    document.getElementById("hora").value = vacio;
-    document.getElementById("calificacion").value = vacio1;
-    document.getElementById("estatus").selectedIndex = vacio1;
-    document.getElementById("observacion").innerHTML = vacio;
-    document.getElementById("mensaje_gral").innerHTML = vacio;
-}
-*/
-
-function limpiaPantalla_eval() {
+function nuevaVacante() {
     //alert("Limpia Pantalla");
     var vacio = "";
     var vacio1 = 0;
@@ -71,6 +58,7 @@ function limpiaPantalla_eval() {
     document.getElementById("observacion").innerHTML = vacio;
     document.getElementById("asigna").disabled = false;
     document.getElementById("actualiza").disabled = false;
+    limpiaTabla();
 }
 
 function nuevoCandidato() {
@@ -87,6 +75,7 @@ function nuevoCandidato() {
     document.getElementById("observacion").innerHTML = vacio;
     document.getElementById("asigna").disabled = false;
     document.getElementById("actualiza").disabled = false;
+    limpiaTabla();
 }
 
 function nuevaEvaluacion() {
@@ -234,7 +223,6 @@ function modificaEval() {
 function consultaEval() {
     //    alert("Consulta Conocimiento");
     nuevaEvaluacion();
-    //    limpia_parcial();
     var vacio = "";
 
     var candidato = document.getElementById("candidatos").value;
@@ -318,7 +306,7 @@ function consultaEval() {
 }
 
 function cargaCandidatos() {
-    nuevoCandidato();
+    nuevaVacante();
     var vacante = document.getElementById("vacantes").value;
 
     if (vacante == "0-Seleccione una Vacante") {
@@ -337,6 +325,8 @@ function cargaCandidatos() {
 
 function cargaEvaluaciones() {
     //    alert("cargaEvaluaciones");
+    nuevoCandidato();
+
     var candidato = document.getElementById("candidatos").value;
 
     if (candidato == "Seleccione el Candidato") {

@@ -5,9 +5,9 @@ require 'arhsi_connect.php';
 $query="SELECT * FROM Preg_om WHERE clv_preg_om='$Clave'";
 
 $result = mysqli_query($dbc,$query);
-//$numero_filas = mysqli_num_rows($result);
+$numero_filas = mysqli_num_rows($result);
 
-if($result){
+if($numero_filas > 0){
     Archivo($result);
     mysqli_close($dbc);
 } else {

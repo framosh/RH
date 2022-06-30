@@ -1,4 +1,3 @@
-// Mantenimiento al catalogo de evaluaciones
 // Carga foto del candidato desde un archivo local
 function despliega_foto(foto_url) {
     if (foto_url.length > 1) {
@@ -139,14 +138,6 @@ function limpiaPantalla_preg() {
     document.getElementById("clave_preg").value = vacio;
     document.getElementById("descripcion").value = vacio;
     document.getElementById("resp1").value = vacio;
-    document.getElementById("resp2").value = vacio;
-    document.getElementById("resp3").value = vacio;
-    document.getElementById("resp4").value = vacio;
-    document.getElementById("resp5").value = vacio;
-    document.getElementById("resp_cand1").value = vacio;
-    document.getElementById("resp_cand2").value = vacio;
-    document.getElementById("solucion1").value = vacio;
-    document.getElementById("solucion2").value = vacio;
     document.getElementById("calificacion").value = vacio;
     document.getElementById("mensaje_gral").innerHTML = vacio;
 }
@@ -352,7 +343,7 @@ function leePreguntas() {
 
     document.getElementById("clave_eval").value = evaluacion_clv;
 
-    var archivo1 = servidor + "httpdocs/catalogoRespOM.php";
+    var archivo1 = servidor + "httpdocs/catalogoRespCOM.php";
     var archivo2 = archivo1 + "?Evaluacion=" + evaluacion_clv + "&candidato=" + candidato_clv;
     var xhttp;
 
@@ -466,7 +457,7 @@ function consultaPregunta() {
 
     document.getElementById("clave_preg").value = pregunta_clv;
 
-    var archivo1 = servidor + "httpdocs/consultaPregunta.php";
+    var archivo1 = servidor + "httpdocs/consultaPregXCOMP.php";
     var archivo2 = archivo1 + "?clave=" + pregunta_clv;
     var xhttp;
 
@@ -499,20 +490,10 @@ function consultaPregunta() {
                     //             alert("campo: ("+i+") - ("+ids[i]+")");
                 }
             }
-            //$query="SELECT Preg_om.clv_preg_om, Preg_om.nombre_pregom, Preg_om.desc_preg, Preg_om.clv_conocim,
-            //Preg_om.resp1, Preg_om.resp2, Preg_om.resp3, Preg_om.resp4, Preg_om.resp5, Preg_om.sol_preg1, 
-            //Preg_om.sol_preg2, Preg_om.img_dir, Res_pom.sol_resp1, Res_pom.sol_resp2, Res_pom.calif_resp_pom 
 
             document.getElementById("nombre").value = ids[1];
             document.getElementById("descripcion").value = ids[2];
-            document.getElementById("resp1").value = ids[5];
-            document.getElementById("resp2").value = ids[6];
-            document.getElementById("resp3").value = ids[7];
-            document.getElementById("resp4").value = ids[8];
-            document.getElementById("resp5").value = ids[9];
-            document.getElementById("solucion1").value = ids[10];
-            document.getElementById("solucion2").value = ids[11];
-            despliega_foto(ids[12]);
+            despliega_foto(ids[4]);
             consultaRespuesta(clv_evaluacion, pregunta_clv);
         } else {
             //   alert("readyState="+xhttp.readyState+"        Status="+xhttp.status);
@@ -554,9 +535,8 @@ function consultaRespuesta(evaluacion, pregunta) {
                 }
             }
 
-            document.getElementById("resp_cand1").value = ids[0];
-            document.getElementById("resp_cand2").value = ids[1];
-            document.getElementById("calificacion").value = ids[2];
+            document.getElementById("resp1").value = ids[0];
+            document.getElementById("calificacion").value = ids[1];
         } else {
             //   alert("readyState="+xhttp.readyState+"        Status="+xhttp.status);
         }

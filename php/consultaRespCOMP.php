@@ -4,10 +4,9 @@ $pregunta=$_GET["pregunta"];
 
 require 'arhsi_connect.php';
 
-$query="SELECT Res_pom.sol_resp1, Res_pom.sol_resp2, Res_pom.calif_resp_pom 
-FROM Preg_xeval 
-LEFT JOIN Res_pom ON Res_pom.clv_preg_om = Preg_xeval.clv_preg_om
-WHERE ((Preg_xeval.clv_evaluacion = $evaluacion) AND (Preg_xeval.clv_preg_om = $pregunta))";
+$query="SELECT Res_pc.resp_comp, Res_pc.calif_resp_pc FROM Preg_xeval 
+LEFT JOIN Res_pc ON Res_pc.clv_preg_pc = Preg_xeval.clv_preg_pc
+WHERE ((Preg_xeval.clv_evaluacion = $evaluacion) AND (Preg_xeval.clv_preg_pc = $pregunta))";
 
 $result = mysqli_query($dbc,$query);
 $numero_filas = mysqli_num_rows($result);
