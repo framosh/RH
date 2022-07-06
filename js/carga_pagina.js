@@ -21,6 +21,12 @@ window.onload = function () {
             tmp;
       var l = params.length;
 
+      //      alert("l: " + l);
+
+      if (l < 6) {
+            window.location.href = "index.htm";
+      }
+
       var url2 = document.location.href;
 
       /*
@@ -53,7 +59,7 @@ window.onload = function () {
       }
 
       clave_empresa = dato4[5];
-      //      alert("Empresa: " + clave_empresa);
+      //      alert("Empresa: (" + clave_empresa + ")");
 
       document.getElementById("usuario1").innerHTML = dato4[1];
       buscaEmpresa(clave_empresa); // Busca el nombre de la empresa a donde pertenece el usuario

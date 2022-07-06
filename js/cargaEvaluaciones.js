@@ -2,7 +2,7 @@
 var evaluaciones2 = [];
 
 function evalXcandidato(candidato) {
-    alert("Entra a catalogo de evaluaciones por candidato: " + candidato);
+    //    alert("Entra a catalogo de evaluaciones por candidato: " + candidato);
 
     var archivo1 = servidor + "httpdocs/cargaEvaluaciones.php";
     var archivo2 = archivo1 + "?candidato=" + candidato;

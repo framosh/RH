@@ -12,7 +12,9 @@ function cargaInicio() {
             break;
         case 'B':
             window.location.href = "principal.htm" + "?user=" + dato4[0] + "&nombre=" + dato4[1] + "&nivel=" + dato4[2] + "&puesto=" + dato4[3] + "&pl=" + pl + "&em1=" + dato4[5];
-
+            break;
+        case 'C':
+            window.location.href = "evaluaciones.htm" + "?user=" + dato4[0] + "&nombre=" + dato4[1] + "&nivel=" + dato4[2] + "&puesto=" + dato4[3] + "&pl=" + pl + "&em1=" + dato4[5];
             break;
         default:
             alert("No hay nivel signado para : " + dato4[1]);

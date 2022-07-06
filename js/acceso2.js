@@ -41,15 +41,16 @@ function validacion() {
                     //                         alert("campo: (" + i + ") - (" + dato4[i] + ")");
                 }
             }
-            //$query="SELECT usuarioclv, nombre, nivel, clave, puesto, emp_clave 
+            //$query="SELECT usuarioclv, nombre, nivel, clave, puesto, emp_clave FROM Acceso 
+            //WHERE ((usuarioclv LIKE '$usuario') AND (clave LIKE '$Clave') AND (estatus LIKE '$estatus'))";
 
             document.getElementById("usuario1").innerHTML = dato4[1];
             /*
             dato4[0]  //  User
             dato4[1]   //  Nombre
             dato4[2]   //  Nivel A-B_C
-            dato4[3]   //  Puesto
-            dato4[4]   //  Permiso
+            dato4[3]   //  Clave
+            dato4[4]   //  Puesto
             dato4[5]   //  Empresa
             */
 
