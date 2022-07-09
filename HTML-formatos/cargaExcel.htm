@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curriculum de personal registrado en ARHSI</title>
+    <script type="text/javascript" src="progjs/Servidor.js" defer></script>
+
+    <title>Importando archivo excel de candidatos</title>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/cargando.css">
+    <link rel="stylesheet" type="text/css" href="css/cssGenerales.css">
+    <link rel="stylesheet" type="text/css" href="css/stylesCV.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <div>
+        <img src="../img/arhsi_logo.gif" class="rounded w-90 img-center" alt="No hay logo">
+    </div>
+
+    <div class="cargando">
+        <div class="loader-outter"></div>
+        <div class="loader-inner"></div>
+    </div>
+
+
+    <nav class="navbar navbar-expand-lg navbar-light navbar-dark fixed-top"
+        style="background-color: #563d7c !important;">
+        <ul class="navbar-nav mr-auto collapse navbar-collapse">
+            <li class="nav-item active">
+                <a href="cargaExcel.htm">
+                    <img src="img/arhsi_logo.gif" alt="ARHSI" width="120">
+                </a>
+            </li>
+        </ul>
+        <div class="my-2 my-lg-0">
+            <h5 class="navbar-brand">Carga de archivo Excel de Candidatos</h5>
+        </div>
+    </nav>
+
+
+    <div class="container">
+
+        <h3 class="text-center">
+            Importando Excel de Candidatos a MYSQL con PHP
+        </h3>
+        <hr>
+        <br><br>
+
+        <div class="row">
+            <div class="col-md-7">
+                <form action="httpdocs/reg_cand_desde_excel.php" method="POST" accept-charset="UTF-8"
+                    enctype="multipart/form-data" />
+                <div class="file-input text-center">
+                    <input type="file" name="dataCandidato" id="file-input" class="file-input__input" />
+                    <label class="file-input__label" for="file-input">
+                        <i class="zmdi zmdi-upload zmdi-hc-2x"></i>
+                        <span>Elegir Archivo Excel</span></label>
+                </div>
+                <div class="text-center mt-5">
+                    <input type="submit" name="subir" class="btn-enviar" value="Subir Excel" />
+                </div>
+                </form>
+            </div>
+
+            <div class="col-md-5">
+                <?php
+      header('Content-Type: text/html; charset=utf-8');
+      require 'arhsi_connect.php';
+      $sqlClientes = ("SELECT cand_key,cand_nom,cand_tel1,cand_tel2,clv_vacante FROM Candidatos ORDER BY cand_nom ASC");
+      $queryData   = mysqli_query($dbc, $sqlClientes);
+      $total_client = mysqli_num_rows($queryData);
+      ?>
+
+                <h6 class="text-center">
+                    Lista de Candidatos <strong>(<?php echo $total_client; ?>)</strong>
+                </h6>
+
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Clave</th>
+                            <th>Nombre</th>
+                            <th>Telefono 1</th>
+                            <th>Telefono 2</th>
+                            <th>Correo</th>
+                            <th>Vacante</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php 
+                $i = 1;
+                while ($data = mysqli_fetch_array($queryData)) { ?>
+                        <tr>
+                            <th scope="row"><?php echo $i++; ?></th>
+                            <td><?php echo $data[0]; ?></td>
+                            <td><?php echo $data[1]; ?></td>
+                            <td><?php echo $data[2]; ?></td>
+                            <td><?php echo $data[3]; ?></td>
+                            <td><?php echo $data[4]; ?></td>
+                            <td><?php echo $data[5]; ?></td>
+                        </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="progjs/jquery.min.js"></script>
+    <script src="'progjs/popper.min.js"></script>
+    <script src="progjs/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(window).load(function () {
+                $(".cargando").fadeOut(1000);
+            });
+        });
+    </script>
+
+</body>
+
+</html>
