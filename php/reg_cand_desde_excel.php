@@ -15,11 +15,15 @@ if (isset($_FILES['dataCandidato'])) {
 	$lineas = file($temporal);
 	$registros = count($lineas);
 
+$rechazado = "red";
+$aprobado = "gren";
+$normal = "black";
+
 	if($error == 0) {
 		move_uploaded_file($temporal, $archivo);
-		echo("Se sube el archivo: ".$archivo."<br>Registros: ".$registros);
+		echo '<p style="text-align:left; color:'.$normal.';">Se sube el archivo: '.$archivo."<br>Registros: ".$registros.'</p>';
  	} else { 
-		echo("Error en carga de archivo: ".$error);
+		echo '<p style="text-align:left; color:'.$rechazado.';">Error en carga de archivo: '.$error.'</p>';
 		return;
 	}
 
@@ -69,6 +73,10 @@ $map = array(
 );
 
 foreach ($lineas as $linea) {
+	$rechazado = "red";
+	$aprobado = "green";
+	$normal = "black";
+
     $cantidad_registros = count($lineas);
     $cantidad_regist_agregados = ($cantidad_registros -2);
 
@@ -82,19 +90,12 @@ foreach ($lineas as $linea) {
 				$campo[$i2] = html_entity_decode(mb_convert_encoding(strtr($campo[$i2], $map), 'UTF-8', 'ISO-8859-2'), ENT_QUOTES, 'UTF-8');
 			}
         }
-//		$campo[0] = iconv('UTF-8','ISO-8859-1//IGNORE',$campo[0]);
-//		$linea = iconv('UTF-8','ISO-8859-1//IGNORE',$linea);
-//$campo[0] = html_entity_decode(mb_convert_encoding(strtr($campo[0], $map), 'UTF-8', 'ISO-8859-2'), ENT_QUOTES, 'UTF-8');
 		$linea = html_entity_decode(mb_convert_encoding(strtr($linea, $map), 'UTF-8', 'ISO-8859-2'), ENT_QUOTES, 'UTF-8');
-		echo("<br><p style='font-weight: bold'>Candidato: ".$campo[0]."</p><p style='font-weight: normal'>Línea: ".$linea."</p>");
+		echo("<br><p style='font-weight: bold; color:'.$normal.';'>Candidato: ".$campo[0]."</p><p style='font-weight: normal'>Línea: ".$linea."</p>");
     } else {
 		$i++;
 		continue;
 	}
-
-//	echo ('<div>'. $i. "). " .$linea."   Nombre: ".$campo[0].'</div>');
-
-//	echo("Candidato: ".$campo[0]."  Linea: ".$linea);
 
 	require 'arhsi_connect.php';
 
@@ -116,6 +117,7 @@ VALUES (?,?,?,?,?,?,?,?,?,?,?,?)"))
 	mysqli_stmt_bind_param($stmt,"ssssssssssss",$campo[0],$campo[1],$campo[2],$campo[3],$campo[4],
     $campo[5],$campo[6],$campo[7],$campo[8],$campo[9],$campo[10],$campo[11]);
 */
+
 if(mysqli_stmt_prepare($stmt,"INSERT INTO Candidatos (cand_nom,cand_tel1,cand_tel2,cand_corr,clv_vacante) 
 VALUES (?,?,?,?,?)"))
 	{
@@ -128,30 +130,30 @@ VALUES (?,?,?,?,?)"))
 	if($affected_rows ==1)
 		{
 		$candidato = mysqli_stmt_insert_id($stmt);
-//		echo "Datos grabados, envío de correo a soporte";
-//echo '<div>'.$candidato. "). " .$linea.'</div>';
-
-			$vacante=$campo[4];
-			registroCand_x_vac($candidato,$vacante);	
+		echo '<p style="text-align:left; color:'.$aprobado.';">Candidato grabado: '.$campo[0].'</p>';
+		$vacante=$campo[4];
+		registroCand_x_vac($candidato,$vacante);	
 		} 
 	else {
-		echo("Error de grabacion: ".mysqli_error($dbc));
+		echo '<p style="text-align:left; color:'.$rechazado.';">Error de grabacion: '.mysqli_error($dbc).'</p>';
 		}
 	mysqli_stmt_close($stmt);
 	}
-else { echo "Fallo la grabación de datos"; 
+else {
+	echo '<p style="text-align:left; color:'.$rechazado.';">'."Fallo la grabación de datos".'</p>'; 
 	}
 	echo ('<div>'. $i. "). " .$linea.'</div>');
     $i++;
 	mysqli_close($dbc);
  }
 
-	 echo '<p style="text-align:center; color:#1B1B24;">Total de registros: '.$cantidad_regist_agregados.'</p>';
+	 echo '<p style="text-align:center; color:'.$normal.';">Total de registros: '.$cantidad_regist_agregados.'</p>';
  }
 
  echo("</div>");
 
 function registroCand_x_vac($candidato,$vacante) {
+	global $normal, $rechazado, $aprobado; 
 	$estatus="1";
 	require 'arhsi_connect.php';
 
@@ -164,34 +166,41 @@ function registroCand_x_vac($candidato,$vacante) {
 	
 		if($affected_rows ==1)
 			{
-				echo "Cand_x_vac grabado";
+				echo '<p style="text-align:left; color:'.$aprobado.';">Candidato X Vacante grabado: '.$campos[0].'</p>';
 			} else {
-				echo("Error de grabacion en : Cand_x_vac: ".mysqli_error($dbc));
+				echo '<p style="text-align:left; color:'.$rechazado.';">Error de grabacion en Cand_x_vac: '.mysqli_error($dbc).'</p>';
 				}
 		mysqli_stmt_close($stmt);
 		mysqli_close($dbc);
-		} else { echo "Fallo la grabación de datos del candidato"; }
+		} else {
+			echo '<p style="text-align:left; color:'.$rechazado.';">Fallo la grabación de datos del candidato '.'</p>';
+		}
 }
 
 function actualiza($campos){
+	global $normal, $rechazado, $aprobado; 
+
     require 'arhsi_connect.php';
 
-    if(mysqli_stmt_prepare($stmt,"UPDATE Candidatos SET cand_nom='$campos[0]', cand_tel2='$campos[3]', 
-	cand_corr='$campos[4]', clv_vacante='$campos[5]' WHERE cand_tel1='$campos[1]'"))
+    if(mysqli_stmt_prepare($stmt,"UPDATE Candidatos SET cand_nom='$campos[0]', cand_tel2='$campos[2]', 
+	cand_corr='$campos[3]', clv_vacante='$campos[4]' WHERE cand_tel1='$campos[1]'"))
 	{
 	   mysqli_stmt_execute($stmt);
 	   $affected_rows = mysqli_stmt_affected_rows($stmt);
            if($affected_rows ==1)
-	          {  echo "Candidato actualizado: ".$campos[0];  }
+	          {
+				echo '<p style="text-align:left; color:'.$aprobado.';">Candidato actualizado: '.$campos[0].'</p>';
+			}
            else { 
-              $mensaje = "Fallo la actualización de datos del candidato: ".$campos[0];
-              echo ($mensaje);
+			echo '<p style="text-align:left; color:'.$rechazado.';">Fallo la actualización de datos del candidato: '.$campos[0].'</p>';
             }
            mysqli_stmt_close($stmt);
         }
-   else { echo "Fallo apertura de la DB de Candidatos para la actualización";}
+   else {
+	echo '<p style="text-align:left; color:'.$rechazado.';">Fallo apertura de la DB de Candidatos para la actualización'.'</p>';
+}
 	mysqli_close($dbc);
 	}
 ?>
 
-<a href="../cargaExcel.htm">Atras</a>
+<button type="submit" onclick="history.go(-1);">Regresar a pantalla anterior</button>
