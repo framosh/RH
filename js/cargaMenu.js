@@ -31,7 +31,15 @@ dato4[5]   //  Empresa
 */
 
 function lanzaAplicacion(aplicacion) {
-    var aplicacion2 = aplicacion + ".htm";
+    var comodin = "";
+
+    if (aplicacion == "cargaExcel") {
+        comodin = ".php";
+    } else {
+        comodin = ".htm";
+    }
+
+    var aplicacion2 = aplicacion + comodin;
     var usuario1 = dato4[0];
     var nombre1 = dato4[1];
     var nivel = dato4[2];
@@ -98,10 +106,17 @@ function leeApliAsignadas(puestox, aplicacion2) {
                 return;
             }
             var aplicacion3 = cadena.split("\n");
+            var comodin = "";
 
             for (var i = 0; i < aplicacion3.length; i++) {
                 var aplicacion4 = aplicacion3[i].split("|");
-                var aplicacionx = aplicacion4[0] + ".htm";
+                if (aplicacion4[0] == "cargaExcel") {
+                    comodin = ".php";
+                } else {
+                    comodin = ".htm";
+                }
+
+                var aplicacionx = aplicacion4[0] + comodin;
                 pl = aplicacion4[2];
 
                 if (aplicacionx == aplicacion2) {

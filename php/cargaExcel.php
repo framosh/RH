@@ -61,27 +61,56 @@
                     <div>
                         <input type="text" name="archivo"  id="archivo" value="" size="40" disabled>
                         <script  language="JavaScript" type="text/javascript">
+                            var limpia = "";
+                            document.getElementById("archivo").value=limpia;
+//                            document.getElementById("vacante").value=limpia;
+//                            var vacante="";
                             function asigna_nombre() {
                                 var archivo = document.getElementById("file-input").value;
+  //                              vacante = document.getElementById("vacante").value;
                                 var archivo2 = archivo.split("\\");
                                 var cant_arch = archivo2.length;
                                 document.getElementById("archivo").value=archivo2[cant_arch-1];
                                 }
                         </script>
-
                     </div>
                     <div class="text-center mt-5">
                         <input type="submit" name="subir" class="btn-enviar" value="Subir Excel"/>
                     </div>
+                </form>
+                <br>
+                <br>
+                <form action="" method="GET">
+                    <table>
+                    <tr><td>Clave vacante:</td><td><input type="text" name="vacante"  id="vacante" value="0"></td></tr>
+                    <tr><td></td><td><input type="submit" name="despliega" class="btn-enviar" value="Reporte"/> </td></tr>
+                    </table>
                 </form>
             </div>
 
             <div class="col-md-8">
                 <div>
                     <?php
-//      header('Content-Type: text/html; charset=utf-8');
+                    $busca_vacante = "1";
+
+                    if(isset($_GET['vacante'])){
+                        $vacante=$_GET['vacante'];
+                        if($vacante >0){
+                            $busca_vacante = "clv_vacante=".$vacante;
+                        } else {
+                            $busca_vacante = "1";
+                        }
+                    }
+                    
+    header('Content-Type: text/html; charset=utf-8');
+    if($busca_vacante == "1"){
+        $cantidad = "Todas";
+    } else { $cantidad = $vacante;}
+
+    echo("Vacante: ".$cantidad);
+    
     require 'httpdocs/arhsi_connect.php';
-    $query="SELECT cand_key, cand_nom, cand_tel1, cand_tel2, clv_vacante FROM Candidatos WHERE 1 ORDER BY clv_vacante DESC, cand_nom ASC";
+    $query="SELECT cand_key, cand_nom, cand_tel1, cand_tel2, clv_vacante FROM Candidatos WHERE $busca_vacante ORDER BY clv_vacante DESC, cand_nom ASC";
     $response=mysqli_query($dbc,$query);
     $total_candidatos = mysqli_num_rows($response);
     ?>
