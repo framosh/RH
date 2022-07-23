@@ -33,7 +33,7 @@ dato4[5]   //  Empresa
 function lanzaAplicacion(aplicacion) {
     var comodin = "";
 
-    if (aplicacion == "cargaExcel") {
+    if ((aplicacion == "cargaExcel") || (aplicacion == "cargaExcel2")) {
         comodin = ".php";
     } else {
         comodin = ".htm";
@@ -110,7 +110,7 @@ function leeApliAsignadas(puestox, aplicacion2) {
 
             for (var i = 0; i < aplicacion3.length; i++) {
                 var aplicacion4 = aplicacion3[i].split("|");
-                if (aplicacion4[0] == "cargaExcel") {
+                if ((aplicacion4[0] == "cargaExcel") || (aplicacion4[0] == "cargaExcel2")) {
                     comodin = ".php";
                 } else {
                     comodin = ".htm";
