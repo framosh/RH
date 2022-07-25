@@ -19,6 +19,7 @@
 </style>
 
 <?php
+// Carga de archivo excel puro sin convertir, usando librerias.
 //setlocale(LC_ALL,"es_ES");
 setlocale(LC_CTYPE,'POSIX');
 //setlocale(LC_MONETARY,'en_US');
@@ -31,12 +32,10 @@ require_once('SpreadsheetReader.php');
 
 if (isset($_POST['import']))
     {
-//        echo("Entra a isset");
     $allowedFileType = ['application/vnd.ms-excel','text/xls','text/xlsx','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
   
     if(in_array($_FILES['file']['type'],$allowedFileType))
         {
-  //          echo("<br>Determina archivo");
         $targetPath = '../archivos/'.$_FILES['file']['name'];
         move_uploaded_file($_FILES['file']['tmp_name'], $targetPath);
         
@@ -46,7 +45,6 @@ if (isset($_POST['import']))
         $sheetCount = count($Reader->sheets());
         for($i=0;$i<$sheetCount;$i++)  // Todas las lineas
         {
-    //        echo("<br>Determina registros en linea<br>");
             $Reader->ChangeSheet($i);
             $i2=0; // Contador de lineas
             foreach ($Reader as $Row)  // Todos los campos por linea, si es la linea 2 se refiere a los datos de los candidatos
@@ -84,7 +82,7 @@ if (isset($_POST['import']))
   }
 }
 
-
+// Alta de registro en DB
 function graba_registro($campo){
     echo("Campo 1: ".$campo[1]);
 
@@ -103,7 +101,6 @@ if(mysqli_stmt_prepare($stmt,"INSERT INTO Candidatos (cand_nom,cand_tel1,cand_te
 VALUES (?,?,?,?,?)"))
 {
 	mysqli_stmt_bind_param($stmt,"sssss",$campo[0],$campo[1],$campo[2],$campo[3],$campo[4]);
-//	mysqli_stmt_bind_param($stmt,$eses,$cadena_campos);
 
     mysqli_stmt_execute($stmt);
 
@@ -129,8 +126,8 @@ else {
 
 echo("</div>");
 
+// Alta de registro de candidato por vacante en DB
 function registroCand_x_vac($candidato,$vacante,$campo) {
-
 	$estatus="1";
 	require 'arhsi_connect.php';
 
@@ -154,8 +151,8 @@ function registroCand_x_vac($candidato,$vacante,$campo) {
 		}
 }
 
+// Actualiza registro en DB
 function actualiza($campos){
-
     require 'arhsi_connect.php';
 
     if(mysqli_stmt_prepare($stmt,"UPDATE Candidatos SET cand_nom='$campos[0]', cand_tel2='$campos[2]', 

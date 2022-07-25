@@ -8,7 +8,7 @@
     <title>Carga de candidatos desde tabla de excel a MySQL en la web</title>
     <script type="text/javascript" src="progjs/Servidor.js" defer></script>
 
-    <title>Importando archivo excel de candidatos</title>
+    <title>Importando archivo excel de candidatos sin convertir, utilizando librerias</title>
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" type="text/css" href="css/stylesCV.css">
@@ -65,11 +65,8 @@
                         <script  language="JavaScript" type="text/javascript">
                             var limpia = "";
                             document.getElementById("archivo").value=limpia;
-//                            document.getElementById("vacante").value=limpia;
-//                            var vacante="";
                             function asigna_nombre() {
                                 var archivo = document.getElementById("file").value;
-  //                              vacante = document.getElementById("vacante").value;
                                 var archivo2 = archivo.split("\\");
                                 var cant_arch = archivo2.length;
                                 document.getElementById("archivo").value=archivo2[cant_arch-1];
