@@ -99,8 +99,6 @@ function limpiaPantalla2() {
 function cargaDatos() {
     limpiaPantalla2();
     var vacante = document.getElementById("vacantes").value;
-    document.getElementById("altav").disabled = true;
-    document.getElementById("actualizav").disabled = false;
     //    document.getElementById("Clave").setAttribute('value', vacante);
     var vacante_clv;
     var nombre1;
@@ -213,6 +211,8 @@ function cargaDatos() {
             document.getElementById("edad1").value = ids[13];
             document.getElementById("edad2").value = ids[14];
             document.getElementById("Estatus").selectedIndex = opcion;
+            document.getElementById("altav").disabled = true;
+            document.getElementById("actualizav").disabled = false;
         }
     };
 }
@@ -227,7 +227,7 @@ function actualizaVacante() {
 
 /* ALTA VACANTES  */
 function registroVacante() {
-    //    alert("Graba vacante");
+    alert("Graba vacante");
     var tipo2 = tipo;
 
     var empresa = document.getElementById("empresas").value;
@@ -390,13 +390,15 @@ function registroVacante() {
             //            alert("Paso 2");
             var cadena = xhttp.responseText;
             document.getElementById("mensaje_vacante").textContent = cadena;
-            //            alert("Cadena: " + cadena);
+            alert("Cadena: " + cadena);
 
             var vacantex1 = cadena.split(":");
             //            alert("Array length:" + vacantex1.length);
-            if (vacantex1.length > 1) {
+            if (vacantex1[0] == "Alta de vacante, correo enviado, vacante numero") {
                 var vacantex2 = vacantex1[1];
                 document.getElementById("vacante").value = vacantex2;
+                document.getElementById("altav").disabled = true;
+                document.getElementById("actualizav").disabled = false;
             }
             //            send(nvacante, nivel, sueldo1);
         }

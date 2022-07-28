@@ -1,4 +1,5 @@
 <?php
+$encoding = "utf-8";
 $campos1 = $_GET['campos']; 
 $campo = array();
 $campo = explode('|',$campos1); 
@@ -33,9 +34,9 @@ VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"))
 		$subjet = "Candidato nuevo: ".$candidato;
 		$message = nl2br("Candidato: $campo[0]\nVacante: $campo[13]\nTelefono : $campo[1]\nCorreo: $campo[3]\nSueldo solicitado: $campo[12]\nEdad: $campo[8]\n",false);
 		$from = "federico.ramos@arhsi.com.mx";
-		$header = "From:".$from;
-		$header .= "MIME-Version: 1.0\r\n";
+		$header = "MIME-Version: 1.0\r\n";
 		$header .= "Content-type: text/html\r\n";
+		$header .= "From:".$from;
 		$retval = mail($to,$subjet,$message,$header);
 		if($retval == true){
 			echo "Alta de candidato, candidato: ".$candidato;

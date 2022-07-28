@@ -94,6 +94,41 @@ function nuevaEvaluacion() {
     document.getElementById("actualiza").disabled = false;
 }
 
+function aplica_eval() {
+    var candidato = document.getElementById("candidatos").value;
+    if (candidato == "Seleccione el Candidato") {
+        alert("Seleccione el Candidato");
+        return;
+    }
+
+    var renglones = candidatos2.length;
+    renglones--;
+    var posicion21 = document.getElementById("candidatos").selectedIndex;
+    posicion21 = (renglones - posicion21);
+    clavex22 = candidatos2[posicion21].split("|");
+    var candidato_clv = clavex22[0];
+
+    var archivo1 = servidor + "httpdocs/aplicaEvaluaciones.php";
+    var archivo2 = archivo1 + "?can=" + candidato_clv;
+    var xhttp;
+
+    if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+        xhttp = new XMLHttpRequest();
+    } else { // code for IE6, IE5
+        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    xhttp.open("GET", archivo2, true);
+    xhttp.send(null);
+
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            var cadena = xhttp.responseText;
+            document.getElementById("mensaje_gral").innerHTML = cadena;
+        }
+    };
+}
+
 var tipo_funcion = "";
 
 function asignaEval() {

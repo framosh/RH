@@ -1,0 +1,7 @@
+id="evalua2"
+
+href="admon.htm"
+
+src="img/arhsi_logo.gif" id="tecnología1" al 6
+
+estatus1 al 6

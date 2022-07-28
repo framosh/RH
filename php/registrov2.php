@@ -21,8 +21,9 @@ $campos[13]=$_GET["fecha"];
 $campos[14]=$_GET["horario"];
 $campos[15]=$_GET["obs"];
 */
+$camposx1 = count($campos);
 
-for($i=0;$i<=14;$i++) {
+for($i=0;$i< $camposx1;$i++) {
 	if($campos[$i]==null){
 		$campos[$i]="";
 	}
@@ -30,7 +31,8 @@ for($i=0;$i<=14;$i++) {
 
 require 'arhsi_connect.php';
 
-if(mysqli_stmt_prepare($stmt,"INSERT INTO Vacantes (emp_clave,vac_desc,clv_puesto,Funciones,Requisitos,Nivel,Lugar,vac_fech_reg,Estatus,vac_sdo1,vac_sdo2,vac_edad1,vac_edad2,horario,Observaciones) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"))
+if(mysqli_stmt_prepare($stmt,"INSERT INTO Vacantes (emp_clave,vac_desc,clv_puesto,Funciones,Requisitos,Nivel,Lugar,vac_fech_reg,Estatus,vac_sdo1,vac_sdo2,vac_edad1,vac_edad2,horario,Observaciones) 
+VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"))
 	{
 	mysqli_stmt_bind_param($stmt,"sssssssssssssss",$campos[0],$campos[2],$campos[3],$campos[6],$campos[5],$campos[4],$campos[7],$campos[13],$campos[12],$campos[8],$campos[9],$campos[10],$campos[11],$campos[14],$campos[15]);
 	mysqli_stmt_execute($stmt);
@@ -45,15 +47,17 @@ if(mysqli_stmt_prepare($stmt,"INSERT INTO Vacantes (emp_clave,vac_desc,clv_puest
 		  Funciones: $campos[6]\n  Requisitos: $campos[5]\n   Lugar de trabajo: $campos[7]\n  
 		  Fecha de registro: $campos[13]\n  Sueldo de: $campos[8]\n  Sueldo a: $campos[9]\n  Estatus: $campos[12]\n",false);
 		$from = "federico.ramos@arhsi.com.mx";
-		$header = "From:".$from;
-		$header .= "MIME-Version: 1.0\r\n";
+		$header = "MIME-Version: 1.0\r\n";
 		$header .= "Content-type: text/html\r\n";
+		$header .= "From:".$from;
 		$retval = mail($to,$subjet,$message,$header);
 		if($retval == true){
-			echo "Alta de vacante, correo enviado, vacante numero:".$registro;
-			} else { echo "Alta de vacante, correo no enviado, vacante numero:".$registro;}
-		} else { echo "Error apertura DB de Vacantes, Puesto:".$campos[2]; } 
+			echo ("Alta de vacante, correo enviado, vacante numero:".$registro);
+			} else { echo ("Alta de vacante, correo no enviado, vacante numero:".$registro);}
+		} else { echo ("Error registro no insertado, Vacante:No insertado:".$campos1); } 
 	mysqli_stmt_close($stmt);
 	mysqli_close($dbc);
+	} else {
+		echo("Error insercion de registro de vacante:Campos erroneos:".$campos1);
 	}
 ?>
