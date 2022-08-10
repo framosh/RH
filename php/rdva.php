@@ -16,8 +16,8 @@ tr:nth-child(even) {
 	background-color: #dddddd;
 	}
 </style>
-
 </head>
+
 <body style="background-color:##B2B2E4;">
 <h1 style="color:#1E1CE2; font-family:verdana; font-size:150%; text-align:center;">
 <b>Vacantes Activas</b></h1>

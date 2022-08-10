@@ -227,7 +227,7 @@ function actualizaVacante() {
 
 /* ALTA VACANTES  */
 function registroVacante() {
-    alert("Graba vacante");
+    //    alert("Graba vacante");
     var tipo2 = tipo;
 
     var empresa = document.getElementById("empresas").value;
@@ -371,8 +371,15 @@ function registroVacante() {
     datosx1[15] = obs;
 
     var camposx2 = datosx1.join("|");
-    var archivo2 = archivo1 + "?datosx2=" + camposx2;
+    camposx2 = camposx2.replace(/\#/g, " Sharp");
 
+    var archivo2 = archivo1 + "?datosx2=" + camposx2;
+    /*
+        document.getElementById("mensaje_vacante").textContent = camposx2;
+        alert("Cambio de cadena de Sharp");
+        var limpia_campo = "";
+        document.getElementById("mensaje_vacante").textContent = limpia_campo;
+    */
     var xhttp;
 
     if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -385,13 +392,10 @@ function registroVacante() {
     xhttp.send();
 
     xhttp.onreadystatechange = function () {
-        //      alert("Paso 1");
         if (this.readyState == 4 && this.status == 200) {
-            //            alert("Paso 2");
             var cadena = xhttp.responseText;
             document.getElementById("mensaje_vacante").textContent = cadena;
-            alert("Cadena: " + cadena);
-
+            //            alert("Cadena: " + cadena);
             var vacantex1 = cadena.split(":");
             //            alert("Array length:" + vacantex1.length);
             if (vacantex1[0] == "Alta de vacante, correo enviado, vacante numero") {

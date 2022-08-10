@@ -9,7 +9,6 @@ $result = mysqli_query($dbc,$query);
 $numero_filas = mysqli_num_rows($result);
 
 if($numero_filas >0){
-    $cand_nombre = 
     $row = mysqli_fetch_row($result);
     $nombre = $row[0];
     $correo = $row[1];
@@ -37,11 +36,13 @@ if($numero_filas >0){
 }
 
 function envia_correo($nombre,$correo){
+    global $candidato;
+
     $to = "contacto@arhsi.com.mx";
     $copia="federicoramos57@gmail.com";
     $subjet = "Aplicación de examenes";
 //    $attach = $cand_cv;
-    $message = nl2br("Candidato: $nombre\n   Correo: $correo\n   Favor de ingresar a la siguiente liga para aplicar los examenes para la vacante de referencia: \n https://admonarh.arhsi.com.mx/evaluaciones.htm",false);
+    $message = nl2br("Candidato: $nombre\n   Correo: $correo\n   Favor de ingresar a la siguiente liga para aplicar los examenes para la vacante de referencia: \n https://admonarh.arhsi.com.mx/evaluaciones.htm?cand=".$candidato,false);
     $from = "federico.ramos@arhsi.com.mx";
     $headers = "MIME-Version: 1.0"."\r\n";
     $headers .= "Content-type: text/html; charset=iso-8859-1"."\r\n";

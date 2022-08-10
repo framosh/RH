@@ -4,25 +4,27 @@ $campos = array();
 $campos = explode('|',$campos1); 
 
 /*
-$campos[0]=$_GET["empresa"];
-$campos[1]=$_GET["vacante"];
-$campos[2]=$_GET["nombre"];
-$campos[3]=$_GET["puesto"];
-$campos[4]=$_GET["nivel"];
-$campos[5]=$_GET["requisitos"];
-$campos[6]=$_GET["funciones"];
-$campos[7]=$_GET["lugar"];
-$campos[8]=$_GET["sueldo1"];
-$campos[9]=$_GET["sueldo2"];
-$campos[10]=$_GET["edad1"];
-$campos[11]=$_GET["edad2"];
-$campos[12]=$_GET["estatus"];
-$campos[13]=$_GET["fecha"];
-$campos[14]=$_GET["horario"];
-$campos[15]=$_GET["obs"];
+    datosx1[0] = cliente_clv;
+    datosx1[1] = vacante;
+    datosx1[2] = nvacante;
+    datosx1[3] = puesto_clv;
+    datosx1[4] = nivel;
+    datosx1[5] = requisitos;
+    datosx1[6] = funciones;
+    datosx1[7] = lugar;
+    datosx1[8] = sueldo1;
+    datosx1[9] = sueldo2;
+    datosx1[10] = edad1;
+    datosx1[11] = edad2;
+    datosx1[12] = estatus;
+    datosx1[13] = fecha;
+    datosx1[14] = horario;
+    datosx1[15] = obs;
 */
 
-for($i=0;$i<=15;$i++) {
+$cantidad = count($campos);
+
+for($i=0;$i<$cantidad;$i++) {
 	if($campos[$i]==null){
 		$campos[$i]="";
 	}
@@ -30,9 +32,8 @@ for($i=0;$i<=15;$i++) {
 
 require 'arhsi_connect.php';
 
-if(mysqli_stmt_prepare($stmt,"UPDATE Vacantes SET clv_puesto='$campos[3]', vac_desc='$campos[2]', Funciones='$campos[6]',
- Requisitos='$campos[5]', Nivel='$campos[4]', Lugar='$campos[7]', Estatus='$campos[12]', vac_sdo1='$campos[8]',
- vac_sdo2='$campos[9]', vac_edad2='$campos[11]', vac_edad1='$campos[10]', horario='$campos[14]', Observaciones='$campos[15]' WHERE ((clv_vacante LIKE '$campos[1]') AND (emp_clave LIKE '$campos[0]'))"))
+if(mysqli_stmt_prepare($stmt,"UPDATE Vacantes SET clv_puesto='$campos[3]', vac_desc='$campos[2]', Funciones='$campos[6]', Requisitos='$campos[5]', Nivel='$campos[4]', Lugar='$campos[7]', Estatus='$campos[12]', vac_sdo1='$campos[8]', vac_sdo2='$campos[9]', vac_edad2='$campos[11]', vac_edad1='$campos[10]', horario='$campos[14]', Observaciones='$campos[15]' 
+WHERE ((clv_vacante LIKE '$campos[1]') AND (emp_clave LIKE '$campos[0]'))"))
 	 	{
 	  	mysqli_stmt_execute($stmt);
 	  	$affected_rows = mysqli_stmt_affected_rows($stmt);

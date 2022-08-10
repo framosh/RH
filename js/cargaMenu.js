@@ -75,6 +75,7 @@ function captura_Teclado() {
     });
 }
 
+
 /* CONSULTA APLICACIONES ASIGNADAS AL PUESTO */
 function leeApliAsignadas(puestox, aplicacion2) {
     //    alert("leeApliAsignadas puesto: " + puestox + " aplicacion: " + aplicacion2);
