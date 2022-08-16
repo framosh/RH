@@ -208,6 +208,7 @@ function modificaPregunta() {
     var respuesta5 = document.getElementById("resp5").value;
     var solucion1 = document.getElementById("solucion1").value;
     var solucion2 = document.getElementById("solucion2").value;
+    descripcion = descripcion.replace(/\n/g, "\\n");
 
     if ((solucion1 == 0 || solucion1 == null) && (solucion2 == 0 || solucion2 == null)) {
         alert("Asigne el renglon de la solucion correspondiente");

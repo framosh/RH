@@ -241,6 +241,12 @@ function actualizaCandidato() {
     camposx22[29] = document.getElementById("espaniol").value; // Español
     camposx22[30] = document.getElementById("otro").value; // Otros
 
+    camposx22[23] = camposx22[23].replace(/\n/g, "\\n");
+    camposx22[24] = camposx22[24].replace(/\n/g, "\\n");
+    camposx22[25] = camposx22[25].replace(/\n/g, "\\n");
+    camposx22[26] = camposx22[26].replace(/\n/g, "\\n");
+    camposx22[27] = camposx22[27].replace(/\n/g, "\\n");
+
     var usuario2 = dato4[0];
 
     if (cliente == "Seleccione una Empresa") {
@@ -439,6 +445,12 @@ function altaCandidato() {
     camposx22[28] = document.getElementById("ingles").value; // Nivel de ingles
     camposx22[29] = document.getElementById("espaniol").value; // Nivel de español
     camposx22[30] = document.getElementById("otro").value; // otro idioma
+
+    camposx22[23] = camposx22[23].replace(/\n/g, "\\n");
+    camposx22[24] = camposx22[24].replace(/\n/g, "\\n");
+    camposx22[25] = camposx22[25].replace(/\n/g, "\\n");
+    camposx22[26] = camposx22[26].replace(/\n/g, "\\n");
+    camposx22[27] = camposx22[27].replace(/\n/g, "\\n");
 
     var usuario2 = dato4[0];
 

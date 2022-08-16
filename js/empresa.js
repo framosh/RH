@@ -56,6 +56,7 @@ function actualizaEmpresa() {
     var estatus = document.getElementById("estatus").value;
     var estado = document.getElementById("estados").value;
     var observaciones = document.getElementById("observaciones").value;
+    observaciones = observaciones.replace(/\n/g, "\\n");
 
     if (estado == "Seleccione un Estado") {
         aviso = "Por favor seleccione un estado geografico";
@@ -144,6 +145,7 @@ function altaEmpresa() {
     var estatus = document.getElementById("estatus").value;
     var estado = document.getElementById("estados").value;
     var observaciones = document.getElementById("observaciones").value;
+    observaciones = observaciones.replace(/\n/g, "\\n");
 
     //alert("Alta Empresa: ("+empresa+")");
 

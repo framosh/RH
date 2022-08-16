@@ -75,6 +75,11 @@ window.onload = function () {
         document.getElementById("candidatos").textContent = leeCandidatos2(); // Carga el catalogo de Estados
     }
 
+    if (direccion2[3] == "tipo_educa.htm") {
+        document.getElementById("tipos_edu").textContent = leeTipoEdu(); // Carga el catalogo de Clientes
+    }
+
+
     //document.getElementById("userclv").innerHTML=data.user;
     //alert("nombre: ("+data.nombre+")  User:("+data.user+")  Nivel:("+data.nivel+")");
     //window.location.href = "estados.php";   // Verifica el catálogo de los Estados geográficos

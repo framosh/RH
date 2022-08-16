@@ -30,11 +30,12 @@ function actualizaUsuario() {
     //    var archivo1 = "https://notaria.itbp.com.mx/httpdocs/act_usuario.php";
     var archivo1 = servidor + "httpdocs/act_usuario.php";
     var archivo2 = archivo1 + "?Uclave=" + Uclave + "&estatus=" + estatus + "&correo=" + correo + "&nombre=" + nombre + "&nivel=" + nivel + "&puesto=" + puesto + "&clvacceso=" + clvacceso;
+    var xhttp;
 
     if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
-        var xhttp = new XMLHttpRequest();
+        xhttp = new XMLHttpRequest();
     } else { // code for IE6, IE5
-        var xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
     }
 
     xhttp.open("GET", archivo2, true);
@@ -66,11 +67,12 @@ function altaUsuario() {
     //    var archivo1 = "https://notaria.itbp.com.mx/httpdocs/reg_usuario.php";
     var archivo1 = servidor + "httpdocs/reg_usuario.php";
     var archivo2 = archivo1 + "?Uclave=" + Uclave + "&estatus=" + estatus + "&correo=" + correo + "&nombre=" + nombre + "&nivel=" + nivel + "&puesto=" + puesto + "&clvacceso=" + clvacceso;
+    var xhttp;
 
     if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
-        var xhttp = new XMLHttpRequest();
+        xhttp = new XMLHttpRequest();
     } else { // code for IE6, IE5
-        var xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
     }
 
     xhttp.open("GET", archivo2, true);
@@ -98,11 +100,12 @@ function consultaUsuario() {
     //    var archivo1 = "https://notaria.itbp.com.mx/httpdocs/consultaUsuario.php";
     var archivo1 = servidor + "httpdocs/consultaUsuario.php";
     var archivo2 = archivo1 + "?Uclave=" + llave1;
+    var xhttp;
 
     if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
-        var xhttp = new XMLHttpRequest();
+        xhttp = new XMLHttpRequest();
     } else { // code for IE6, IE5
-        var xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
     }
 
     xhttp.open("GET", archivo2, true);

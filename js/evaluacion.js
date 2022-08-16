@@ -89,6 +89,8 @@ function modificaEval() {
     var pmin = document.getElementById("pmin").value;
     var nivel = document.getElementById("nivel").value;
     var nombre = document.getElementById("nombre").value;
+    descripcion = descripcion.replace(/\n/g, "\\n");
+
 
     if (puesto == "Seleccione el Puesto") {
         alert("Seleccione el Puesto");

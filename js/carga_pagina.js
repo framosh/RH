@@ -122,6 +122,10 @@ window.onload = function () {
             document.getElementById("areas").textContent = leeAreas(); // Carga el catalogo de Puestos
       }
 
+      if (direccion2[3] == "tipo_educa.htm") {
+            document.getElementById("tipos_edu").textContent = leeTipoEdu(); // Carga el catalogo de Clientes
+      }
+
       if (pagina == "evaluacion.htm") {
             //            limpiaPantalla_eval();
             var valorx21 = 0;

@@ -116,6 +116,7 @@ function modificaEval() {
     var evaluacion = document.getElementById("evaluaciones").value;
     var observacion = document.getElementById("observacion").value;
     var puesto = document.getElementById("puestos").value;
+    observacion = observacion.replace(/\n/g, "\\n");
 
     if (puesto == "Seleccione el Puesto") {
         alert("Seleccione el Puesto");

@@ -105,6 +105,10 @@ function altaExp(tipo_mov) {
     experiencia[8] = document.getElementById("herramientas").value;
     experiencia[9] = cand_clv;
 
+    experiencia[6] = experiencia[6].replace(/\n/g, "\\n");
+    experiencia[7] = experiencia[7].replace(/\n/g, "\\n");
+    experiencia[8] = experiencia[8].replace(/\n/g, "\\n");
+
     if (experiencia[4].length > 1) {
         experiencia[4] = experiencia[4].replace(/[^a-zA-Z0-9]/g, '_');
         alert("Sueldo: " + experiencia[4]);

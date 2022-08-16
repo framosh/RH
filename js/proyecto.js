@@ -44,6 +44,7 @@ function actualizaProyecto() {
     var correo = document.getElementById("correo").value;
     var estatus = document.getElementById("estatus").value;
     var descripcion = document.getElementById("descripcion").value;
+    descripcion = descripcion.replace(/\n/g, "\\n");
 
     var clave = [];
     var clave2 = [];
@@ -91,6 +92,7 @@ function altaProyecto() {
     var correo = document.getElementById("correo").value;
     var estatus = document.getElementById("estatus").value;
     var descripcion = document.getElementById("descripcion").value;
+    descripcion = descripcion.replace(/\n/g, "\\n");
 
     var clave = [];
     var clave2 = [];

@@ -155,6 +155,7 @@ function modificaEval() {
     var evaluacion = document.getElementById("evaluaciones").value;
     var estatus = document.getElementById("estatus").value;
     var observacion = document.getElementById("observacion").value;
+    observacion = observacion.replace(/\n/g, "\\n");
 
     if (candidato == "Seleccione el Candidato") {
         alert("Seleccione el Candidato");

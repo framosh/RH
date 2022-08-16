@@ -197,6 +197,9 @@ function modificaPregunta() {
     var descripcion = document.getElementById("descripcion").value;
     var respuesta1 = document.getElementById("resp1").value;
     var respuesta2 = document.getElementById("resp2").value;
+    descripcion = descripcion.replace(/\n/g, "\\n");
+    respuesta1 = respuesta1.replace(/\n/g, "\\n");
+    respuesta2 = respuesta2.replace(/\n/g, "\\n");
 
     if (conocimiento == "Seleccione el Conocimiento") {
         alert("Seleccione el Conocimiento");
