@@ -119,7 +119,6 @@ function altaExp(tipo_mov) {
         alert("Candidato: " + experiencia[9]);
     }
 
-
     if (experiencia[1] == "" || experiencia[1] == null) {
         alert("Teclee la Empresa");
         return;
@@ -175,6 +174,8 @@ function altaExp(tipo_mov) {
             document.getElementById("mensaje_gral_exp").value = cadena;
             if (campos[1] > 0 && tipo_mov != 2) {
                 document.getElementById("clv_exp").value = campos[1];
+                document.getElementById("altaexp").disabled = false;
+                document.getElementById("actuaexp").disabled = true;
             }
         }
     };

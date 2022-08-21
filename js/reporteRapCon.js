@@ -99,17 +99,20 @@ function creaEncabezado(textoth, columnas, titulo) {
     //    alert("Crea Encabezado: " + textoth + "  columnas: " + columnas);
 
     if (document.getElementById('encabezadoy2')) {
-        //        alert("Tabla ya creada: ");
-        //        var num_col = document.getElementById('tabla4').rows[0].cells.length;
-        //        alert("Rellena el encabezado con los nuevos titulos");
-        for (var col23 = 0; col23 < columnas; col23++) {
-            var encabezadox1 = "enca" + col23;
-            var etiqueta = textoth[col23];
-            if (etiqueta.length == 0) {
-                etiqueta = " ";
-            }
-            document.getElementById(encabezadox1).innerHTML = etiqueta;
-        }
+        return;
+        /*
+                //        alert("Tabla ya creada: ");
+                //        var num_col = document.getElementById('tabla4').rows[0].cells.length;
+                //        alert("Rellena el encabezado con los nuevos titulos");
+                for (var col23 = 0; col23 < columnas; col23++) {
+                    var encabezadox1 = "enca" + col23;
+                    var etiqueta = textoth[col23];
+                    if (etiqueta.length == 0) {
+                        etiqueta = " ";
+                    }
+                    document.getElementById(encabezadox1).innerHTML = etiqueta;
+                }
+                */
         //        return;
     }
 
@@ -137,7 +140,9 @@ function creaEncabezado(textoth, columnas, titulo) {
         }
 
         thead.appendChild(hilera);
-    } else { // Si existe el encabezado lo llena con los nuevos titulos
+    }
+    /*
+    else { // Si existe el encabezado lo llena con los nuevos titulos
         //        alert("Rellena el encabezado con los nuevos titulos");
         for (col22 = 0; col22 < columnas; col22++) {
             var encabezadox11 = "enca" + col22;
@@ -148,6 +153,7 @@ function creaEncabezado(textoth, columnas, titulo) {
             document.getElementById(encabezadox11).innerHTML = etiqueta1;
         }
     }
+    */
 }
 
 

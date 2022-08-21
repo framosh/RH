@@ -39,10 +39,10 @@ VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"))
 		$header .= "From:".$from;
 		$retval = mail($to,$subjet,$message,$header);
 		if($retval == true){
-			echo "Alta de candidato, candidato: ".$candidato;
+			echo "Alta de candidato, candidato: ".$candidato.":";
 			$vacante=$campo[13];
 			registroCand_x_vac($candidato,$vacante);	
-			} else { echo "Alta de candidato, correo no enviado, candidato: ".$candidato;}
+			} else { echo "Alta de candidato, candidato: ".$candidato." :Correo no enviado:";}
 		} 
 	else {
 		echo("<br>Error de grabacion: ".mysqli_error($dbc));

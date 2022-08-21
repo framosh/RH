@@ -1,13 +1,13 @@
 // Carga foto del candidato desde un archivo local
 function despliega_foto(foto_url) {
+    alert("Muestra foto: " + foto_url);
     if (foto_url.length > 1) {
         var preview = document.querySelector(".display_image");
         preview.src = foto_url;
     } else {
-        alert("No hay foto de candidato");
+        alert("No hay foto de candidato: " + foto_url);
     }
 }
-
 
 function carga_imagen() {
     var preview = document.querySelector(".display_image");
@@ -46,18 +46,18 @@ function fileUpload(img) {
     var fd = new FormData();
 
     xhttp.open("POST", archivo2, true);
+    //echo("Se sube el archivo:".$archivo.":\n Ancho: ".$atributos2[0].":\n Alto:".$atributos2[1]);
 
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var cadena = xhttp.responseText;
-            //       alert("Cadena: " + cadena);
+            alert("Cadena: " + cadena);
             var cadena1 = cadena.split(":");
             foto_dir = cadena1[1];
-            var cadena2 = cadena.split("/");
-            var cadena3 = cadena2[2];
-            foto_nom = cadena3;
-            //           alert("Directorio: " + foto_dir);
-            //         alert("Nombre de foto: " + foto_nom);
+            var cadena2 = foto_dir.split("/");
+            foto_nom = cadena2[2];
+            alert("Directorio: " + foto_dir);
+            alert("Nombre de foto: " + foto_nom);
 
             document.getElementById("mensaje_gral2").value = cadena;
         } else {
@@ -576,7 +576,7 @@ function altaCandidato() {
             var cadena = xhttp.responseText;
             var cadena1 = cadena.split(":");
             document.getElementById("mensaje_gral").innerHTML = cadena;
-            if (cadena1[0] == "Alta de candidato, candidato: ") {
+            if (cadena1[0] == "Alta de candidato, candidato") {
                 document.getElementById("alta_cand").disabled = true;
                 document.getElementById("act_cand").disabled = false;
                 document.getElementById("cand_key").value = cadena1[1];

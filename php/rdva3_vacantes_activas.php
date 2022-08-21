@@ -26,7 +26,7 @@ tr:nth-child(even) {
 </style>
 
 </head>
-<body style="background-color: #BDBDF0;">
+<body style="background-color: #E8EEE8;">
 <h1 style="color:#1E1CE2; font-family:verdana; font-size:150%; text-align:center;">
 <b>Vacantes Activas</b></h1>
 
@@ -73,6 +73,10 @@ if($response)
 		{
 		$row[6]=$nivel[$row[6]];
 		$fecha = date('d/m/Y', strtotime($row[8]));
+		$row[12] = str_replace("\n","<br>",$row[12]);
+		$row[4] = str_replace("\n","<br>",$row[4]);
+		$row[12] = str_replace("\n","<br>",$row[12]);
+		$row[5] = str_replace("\n","<br>",$row[5]);
 
 		echo '<tr><td align="left"  font="arial">'.
 		$row[0]  .'</td><td align="left" >'.

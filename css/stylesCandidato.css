@@ -84,7 +84,7 @@ tbody tr:nth-child(even) {
 }
 
 .interlineado tr:hover {
-    background-color: #ddd;
+    background-color: rgb(248, 242, 242);
     line-height: 1;
 }
 
@@ -211,7 +211,7 @@ body {
 
     /*    width: 80%; */
     /*  margin: 0 auto; */
-    background-color: chartreuse;
+    background-color: rgb(241, 247, 235);
     /*    padding: 20px; */
     /*    border: 1px solid black; */
 }

@@ -213,19 +213,20 @@ function altaConocim() {
         //        alert("paso 1.7");
         if ((xhttp.readyState == 4) && (xhttp.status == 200)) {
             //            limpiaTabla();
-            var llave = 0;
-            var nvo_index = conocim_cand.length;
-            nvo_index++;
-            var nvo_renglon = conocimiento_clv + "|" + nombre + "|" + nivel + "|" + anios + "|" + meses + "\n";
-            if (conocim_cand.length == 0) {
-                conocim_cand[0] = nvo_renglon;
-            } else {
-                conocim_cand[nvo_index] = nvo_renglon;
-            }
-            //Despliegan en el cuadro de conocimientos el conocimiento registrado
-            //            alert("Conocim_cand: " + conocim_cand);
-            quickReport(conocim_cand);
-
+            /*
+                        var llave = 0;
+                        var nvo_index = conocim_cand.length;
+                        nvo_index++;
+                        var nvo_renglon = conocimiento_clv + "|" + nombre + "|" + nivel + "|" + anios + "|" + meses + "\n";
+                        if (conocim_cand.length == 0) {
+                            conocim_cand[0] = nvo_renglon;
+                        } else {
+                            conocim_cand[nvo_index] = nvo_renglon;
+                        }
+                        //Despliegan en el cuadro de conocimientos el conocimiento registrado
+                        //            alert("Conocim_cand: " + conocim_cand);
+                        quickReport(conocim_cand);
+            */
             //            alert("paso 1.8");
             var cadena = xhttp.responseText; // Regresa le mensaje enviado por el servidor en el proceso php 
             var cadena2 = xhttp.statusText; // Regresa el texto del estatus del proceso
@@ -233,6 +234,7 @@ function altaConocim() {
             var cadena4 = xhttp.getAllResponseHeaders(); // Regresa todo el estatus del proceso completo
             //          alert("Web server:  " + cadena);
             document.getElementById("mensaje_conocimiento").innerHTML = cadena;
+            leeConocimCand(candidato_clv);
             //        alert("Estatus del proceso:  " + cadena2);
             //            alert("URL del proceso:  " + cadena3);
             //          alert("Informe general del proceso:  " + cadena4);
