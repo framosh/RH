@@ -165,8 +165,8 @@ body {
 
 .c5 {
     grid-area: conocimientos;
-    max-height: 350px;
-    /*    overflow-y: auto; */
+    max-height: 250px;
+    overflow-y: auto;
     /*    width: 70%; */
     /*    margin-left: 15%; */
     /* margin-right: 15%; */

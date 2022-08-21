@@ -76,5 +76,10 @@ else {
 
 mysqli_close($dbc);
 ?>
+<div>
+    <br>
+    <button type="submit"  onclick="window.close();">Salir</button>
+</div>
+
 </body>
 </html>

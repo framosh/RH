@@ -33,7 +33,12 @@ window.onload = function () {
 
 function reporteEduPant() {
     //window.location.href = "httpdocs/rdva3_contactos.php?Cliente="+cliente+"&nCliente="+nombrecl;
-    window.location.href = servidor + "httpdocs/rdva3_EduxCand.php" + "?candidato=" + cand_clv + "&nombre=" + cand_nom;
+    //    window.location.href = servidor + "httpdocs/rdva3_EduxCand.php" + "?candidato=" + cand_clv + "&nombre=" + cand_nom;
+
+    $(document).ready(function () {
+        var pagina = servidor + "httpdocs/rdva3_EduxCand.php" + "?candidato=" + cand_clv + "&nombre=" + cand_nom;
+        ww = window.open(pagina, 'New Window4', 'height=630,width=1300,top=10,left=10');
+    });
 }
 
 

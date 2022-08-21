@@ -1,6 +1,6 @@
 // Carga foto del candidato desde un archivo local
 function despliega_foto(foto_url) {
-    alert("Muestra foto: " + foto_url);
+    //    alert("Muestra foto: " + foto_url);
     if (foto_url.length > 1) {
         var preview = document.querySelector(".display_image");
         preview.src = foto_url;
@@ -51,13 +51,13 @@ function fileUpload(img) {
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var cadena = xhttp.responseText;
-            alert("Cadena: " + cadena);
+            //            alert("Cadena: " + cadena);
             var cadena1 = cadena.split(":");
             foto_dir = cadena1[1];
             var cadena2 = foto_dir.split("/");
             foto_nom = cadena2[2];
-            alert("Directorio: " + foto_dir);
-            alert("Nombre de foto: " + foto_nom);
+            //          alert("Directorio: " + foto_dir);
+            //        alert("Nombre de foto: " + foto_nom);
 
             document.getElementById("mensaje_gral2").value = cadena;
         } else {
@@ -1034,7 +1034,8 @@ function Experiencia() {
 
     $(document).ready(function () {
         var pagina = servidor + "experiencia.htm" + "?candidato=" + candidato_clv + "&cand_nom=" + candidato;
-        ww = window.open(pagina, 'New Window', 'height=630,width=850,top=10,left=250');
+        //        ww = window.open(pagina, 'New Window', 'height=630,width=850,top=10,left=250');
+        ww = window.open(pagina, 'New Window', 'height=750,width=850,top=10,left=250');
     });
 }
 

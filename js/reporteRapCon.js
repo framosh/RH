@@ -201,11 +201,11 @@ function creaTabla(renglones, columnas) {
     if (!document.getElementById(tablax6)) {
         //           alert("No existe la tabla, se crea tabla y el cuerpo de la tabla");
         tabla = document.createElement("table", {
-            //            class: "scroll"
+            class: "scroll"
         });
         tabla.id = tablax6;
         tabla.style.width = ancho;
-        tabla.style.height = "100%";
+        tabla.style.height = "80%";
         //        tabla.style.maxHeight = "10em";
         tabla.style.marginLeft = mizquierdo;
         tabla.style.marginRight = mderecho;

@@ -73,9 +73,11 @@ function limpiaPantallaEXP() {
     document.getElementById("actuaexp").disabled = true;
 }
 
+var tipo_mov = 1;
+
 function actualizaExp() {
     //    alert("Actualiza Experiencia");
-    var tipo_mov = 2; // Estatus para modificación de registro
+    tipo_mov = 2; // Estatus para modificación de registro
     altaExp(tipo_mov);
 }
 
@@ -111,12 +113,12 @@ function altaExp(tipo_mov) {
 
     if (experiencia[4].length > 1) {
         experiencia[4] = experiencia[4].replace(/[^a-zA-Z0-9]/g, '_');
-        alert("Sueldo: " + experiencia[4]);
+        //   alert("Sueldo: " + experiencia[4]);
     }
 
     if (experiencia[9].length > 1) {
         experiencia[9] = experiencia[9].replace(/[^a-zA-Z0-9]/g, '_');
-        alert("Candidato: " + experiencia[9]);
+        //   alert("Candidato: " + experiencia[9]);
     }
 
     if (experiencia[1] == "" || experiencia[1] == null) {
@@ -140,17 +142,20 @@ function altaExp(tipo_mov) {
     }
 
     for (var i1 = 0; i1 < 9; i1++) {
-        if (experiencia[i1].length <= 1) {
+        if (experiencia[i1].length < 1) {
             experiencia[i1] = " ";
         }
         experiencia[i1] = experiencia[i1] + "|";
     }
+
+    //    alert("Experiencia: " + experiencia[0]);
 
     var archivo1;
 
     if (tipo_mov == 2) {
         archivo1 = servidor + "httpdocs/act_exp_x_cand.php";
     } else {
+        tipo_mov = 1;
         archivo1 = servidor + "httpdocs/reg_exp_x_cand.php";
     }
 
@@ -169,7 +174,7 @@ function altaExp(tipo_mov) {
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var cadena = xhttp.responseText;
-            //            alert("cadena:" + cadena);
+            alert(cadena);
             var campos = cadena.split(":");
             document.getElementById("mensaje_gral_exp").value = cadena;
             if (campos[1] > 0 && tipo_mov != 2) {

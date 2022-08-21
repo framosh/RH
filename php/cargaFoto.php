@@ -15,7 +15,7 @@ if (isset($_FILES['myFile'])) {
                 move_uploaded_file($temporal, $archivo);
                 $atributos2 = getimagesize($archivo);
 
-                echo("Se sube el archivo:".$archivo.":\n Ancho: ".$atributos2[0].":\n Alto:".$atributos2[1]);
+                echo("Se sube el archivo:".$archivo."\n Ancho: ".$atributos2[0]."\n Alto:".$atributos2[1]);
                 exit;
             } else { echo("Error: ".$error);}
         } else { echo("Tamaño de archivo supera el limite de 1 mb.: (".($tamanio/1000).") kb.");}

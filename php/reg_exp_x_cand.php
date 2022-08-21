@@ -1,10 +1,7 @@
 <?php
-$edux=$_GET["Experiencia"];
-$edux = explode('|',$edux);
-
-for($i1=0;$i1<10;$i1++){
-    $edux[$i1] = str_replace(',','',$edux[$i1]);
-}
+$edux1=$_GET["Experiencia"];
+$edux1 = str_replace(',','',$edux1);
+$edux = explode('|',$edux1);
 
 $candidato = $edux[9];
 
@@ -35,7 +32,7 @@ if(mysqli_stmt_prepare($stmt,"INSERT INTO Experiencia (exp_clv,cand_key,empresa,
 //        $registro = mysqli_stmt_insert_id($stmt);
 		echo "Experiencia grabada: ".$exp2;
 		} 
-    else { echo "Fallo registro de experiencia:0";}
+    else { echo "Fallo registro de experiencia:".$exp2;}
     mysqli_stmt_close($stmt);
     mysqli_close($dbc);
     }
