@@ -1,4 +1,5 @@
 <?php 
+// Extracción de los registros de experiencia del candidato seleccionado
 $Candidato=$_GET["Candidato"];
 $Experiencia=$_GET["Experiencia"];
 
@@ -38,7 +39,9 @@ if($numero_filas >0){
        function llenaDatos($stream, $result) {
          $nrows = 0;
          $delimiter='|';
+//         $escape_char ="\";
          while($row = mysqli_fetch_row($result)) {
+           $row = str_replace("\n","<br>",$row);
            fputcsv($stream, $row, $delimiter);
            $nrows++;
            }

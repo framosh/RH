@@ -9,21 +9,14 @@ var cuerpox;
 function quickReport2(registros, tablax1, cuerpox1) {
     //    alert("tabla: " + tablax1);
     //  alert("cuerpo: " + cuerpox1);
-    //    alert("quickReport2 contenido: " + registros + "  cantidad: " + registros.length);
+    var renglones = registros.length;
 
     var listaInforme = new Array(30);
     listaInforme = registros;
     tablax = tablax1;
     cuerpox = cuerpox1;
-
     //    limpiaTabla();
 
-    var renglones = 0;
-
-    var linea = listaInforme;
-    renglones = linea.length;
-    //    alert("Cantidad de registros: " + renglones);
-    //    renglones--;
     var mensaje1;
     //    alert("Renglones a desplegar: " + renglones);
 
@@ -35,8 +28,6 @@ function quickReport2(registros, tablax1, cuerpox1) {
 
     //Despliega Formación Complementaria
     if (tablax == "tabla4") {
-        //   alert("Tabla de educacion tablax: " + tablax + "  cuerpox: " + cuerpox);
-        // alert("Contenido educacion: " + linea);
         var i4;
         var columnas = 5;
         var renglon4 = 0;
@@ -50,13 +41,11 @@ function quickReport2(registros, tablax1, cuerpox1) {
 
         creaEncabezado2(encabezadox, columnas);
         creaTabla2(renglones, columnas);
-        //        alert("Tablax: " + tablax + " Renglones: " + renglones);
 
         if (document.getElementById(tablax)) {
-            //          alert("Despliega los datos de la tablax: " + tablax);
             for (i4 = 0; i4 < renglones; i4++) {
-                if ((linea[i4] != null) && (linea[i4] != "")) {
-                    despliega2(linea[i4], renglon4);
+                if ((listaInforme[i4] != null) && (listaInforme[i4] != "")) {
+                    despliega2(listaInforme[i4], renglon4);
                     renglon4++;
                 }
             }
@@ -67,19 +56,18 @@ function quickReport2(registros, tablax1, cuerpox1) {
 
     // Tabla a llenar de la experiencia
     if (tablax == "tabla5") {
-        //    alert("Tabla de experiencia");
         creaTabla55(renglones);
 
         if (document.getElementById(tablax)) {
             for (var i5 = 0; i5 < renglones; i5++) {
-                if ((linea[i5] != null) && (linea[i5] != "")) {
-                    despliega5(linea[i5], i5);
+                if ((listaInforme[i5] != null) && (listaInforme[i5] != "")) {
+                    despliega5(listaInforme[i5], i5);
                 }
             }
         }
     }
 }
-//                var idcampo = "reg-" + i + "ren-" + i2 + "col-" + i3;
+
 // Vacia datos a los campos asignados para el registro requerido
 function despliega5(linea, registro) {
     //    alert("Despliega datos de experiencia");
@@ -239,7 +227,7 @@ function creaTabla55(registros) {
                     parrafo.style.paddingRight = "5px";
                     parrafo.style.paddingLeft = "5px";
                     parrafo.style.textAlign = "left";
-                    parrafo.style.columnWidth = "20%";
+                    celda.style.columnWidth = "20%";
                     parrafo.style.fontWeight = "bold";
                 }
 
@@ -249,7 +237,7 @@ function creaTabla55(registros) {
                     parrafo.style.textAlign = "left";
                     //                    parrafo.style.columnWidth = "400px";
                     parrafo.style.fontWeight = "normal";
-                    parrafo.style.columnWidth = "80%";
+                    celda.style.columnWidth = "80%";
                 }
 
                 var titulo = "";

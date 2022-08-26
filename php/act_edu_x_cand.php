@@ -2,9 +2,22 @@
 $edux=$_GET["datos_edu_cand"];
 $edux = explode(',',$edux);
 
-require 'arhsi_connect.php';
+/*
+    datos_edu_cand[0] = cand_clv;
+    datos_edu_cand[1] = tipo_edu_clv;
+    datos_edu_cand[2] = clv_inst;
+    datos_edu_cand[3] = carrera;
+    datos_edu_cand[4] = campus;
+    datos_edu_cand[5] = generacion;
+    datos_edu_cand[6] = estatus_edu;
+    datos_edu_cand[7] = secuencial;
+*/
 
-if(mysqli_stmt_prepare($stmt,"UPDATE Edu_xcand SET campus='$edux[3]',edu_generacion='$edux[4]',edu_estatus='$edux[5]'
+require 'arhsi_connect.php';
+//if(mysqli_stmt_prepare($stmt,"UPDATE Edu_xcand SET campus='$edux[4]',edu_generacion='$edux[5]',edu_estatus='$edux[6]', clv_institucion='$edux[2]', secuencial='$edux[7]'
+//WHERE (cand_key='$edux[0]' AND clv_tip_edu='$edux[1]')"))
+
+if(mysqli_stmt_prepare($stmt,"UPDATE Edu_xcand SET campus='$edux[4]',edu_generacion='$edux[5]',edu_estatus='$edux[6]'
 WHERE (cand_key='$edux[0]' AND clv_tip_edu='$edux[1]' AND clv_institucion='$edux[2]')"))
     {
 	mysqli_stmt_execute($stmt);		

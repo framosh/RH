@@ -221,6 +221,33 @@ body {
     /*    border: 1px solid black; */
 }
 
+.grid-layout4 {
+    display: grid !important;
+    height: 100% !important;
+    width: 80% !important;
+    margin-left: 10% !important;
+    margin-right: 10% !important;
+    grid-template-areas: 'experiencia' !important;
+    grid-template-rows: 100% !important;
+    grid-template-columns: 100% !important;
+    background-color: chartreuse !important;
+    /*    border: 1px solid black; */
+}
+
+.grid-layout5 {
+    display: grid;
+    height: 100px;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    grid-template-areas: 'cursos cursos';
+    grid-template-rows: 100%;
+    grid-template-columns: auto auto;
+    background-color: rgb(238, 243, 233);
+    /*    border: 1px solid black; */
+}
+
+
 .c4 {
     grid-area: cursos;
     /*    grid-column: 1 / span 2; */
@@ -229,7 +256,7 @@ body {
 
 .c5 {
     grid-area: experiencia;
-    /* grid-column: 2/4; */
+    grid-column: 1;
     background-color: rgb(171, 192, 238);
 }
 

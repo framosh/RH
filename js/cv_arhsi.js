@@ -36,13 +36,13 @@ window.onload = function () {
         cand_nom = cand1[1];
         var nombre_candidato = cand_clv + " - " + cand_nom;
 
-        //    alert("Candidato: (" + cand_clv + ")");
+        //       alert("Candidato: (" + cand_clv + ")");
 
         document.getElementById("nombre").innerHTML = nombre_candidato;
         consultaCandidato();
         consultaEdu();
         consultaExp();
-        consultaConomientos(cand_clv);
+        consultaConocimientos(cand_clv);
     }
 };
 
@@ -244,8 +244,9 @@ function consultaEstado(estado) {
     };
 }
 
+// Consulta y despliega la experiencia en el formato HTML
 function consultaExp() {
-    //    alert("Consulta Experiencia");
+    //    alert("Consulta Experiencia del candidato: " + cand_clv);
     var exp_clv = "";
 
     var archivo1 = servidor + "httpdocs/consExp_x_Cand.php";
@@ -264,20 +265,20 @@ function consultaExp() {
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var cadena = xhttp.responseText;
+            cadena = cadena.replace(/\"/g, "");
             //            alert("Cadena: " + cadena);
+
             var cadena2 = cadena.split("\n");
             var num_reg = cadena2.length;
-            //          alert("Registros: " + num_reg);
-
-            for (var i2 = 0; i2 < num_reg; i2++) {
-                cadena2[i2] = cadena2[i2].replace(/\"/g, "");
-            }
+            //          alert("Registros de experiencia: " + num_reg);
 
             if (num_reg > 0) {
                 var tabla = "tabla5";
                 var cuerpo = "cuerpo5";
                 quickReport2(cadena2, tabla, cuerpo);
             }
+        } else {
+            //            alert("Estado: " + xhttp.readyState + "  Status: " + xhttp.status);
         }
     };
 }
@@ -382,7 +383,7 @@ function consultaEdu() {
                     var cuerpo = "cuerpo4";
                     quickReport2(desp2, tabla, cuerpo);
                 } else {
-                    alert("No hay cursos adicionales: " + curso);
+                    //                    alert("No hay cursos adicionales: " + curso);
                 }
             }
         }
@@ -397,7 +398,7 @@ function salir() {
 
 var conocim_cand = [];
 
-function consultaConomientos(candidato_clv) {
+function consultaConocimientos(candidato_clv) {
     //    alert("Lee Conocimientos de candidato: " + candidato_clv);
     //    limpiaPantalla_Con();
     //    limpiaTabla(); // Limpia tabla de conocimientos del candidato consultado anteriormente

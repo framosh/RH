@@ -27,6 +27,7 @@ function limpiaPantallaEC() {
     document.getElementById("campus").value = vacio;
     document.getElementById("generacion").value = vacio;
     document.getElementById("mensaje_gral").innerHTML = vacio;
+    document.getElementById("secuencial").value = vacio1;
 }
 
 function actualizaEdu() {
@@ -75,6 +76,7 @@ function altaEdu(tipo_mov) {
     var campus = document.getElementById("campus").value;
     var generacion = document.getElementById("generacion").value;
     var estatus = document.getElementById("estatus").value;
+    var secuencial = document.getElementById("secuencial").value;
 
     if (tipo_edu == "Seleccione tipo de educación") {
         alert("Seleccione el tipo de educación");
@@ -109,6 +111,7 @@ function altaEdu(tipo_mov) {
     datos_edu_cand[4] = campus;
     datos_edu_cand[5] = generacion;
     datos_edu_cand[6] = estatus_edu;
+    datos_edu_cand[7] = secuencial;
 
     var archivo1;
 
@@ -202,6 +205,7 @@ function despliegaEdu() {
     document.getElementById("campus").value = campus;
     document.getElementById("generacion").value = ids[5];
     document.getElementById("estatus").selectedIndex = estatus2;
+    document.getElementById("secuencial").value = ids[7];
 }
 
 
