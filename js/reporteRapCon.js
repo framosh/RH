@@ -100,20 +100,6 @@ function creaEncabezado(textoth, columnas, titulo) {
 
     if (document.getElementById('encabezadoy2')) {
         return;
-        /*
-                //        alert("Tabla ya creada: ");
-                //        var num_col = document.getElementById('tabla4').rows[0].cells.length;
-                //        alert("Rellena el encabezado con los nuevos titulos");
-                for (var col23 = 0; col23 < columnas; col23++) {
-                    var encabezadox1 = "enca" + col23;
-                    var etiqueta = textoth[col23];
-                    if (etiqueta.length == 0) {
-                        etiqueta = " ";
-                    }
-                    document.getElementById(encabezadox1).innerHTML = etiqueta;
-                }
-                */
-        //        return;
     }
 
     //    tblBody = document.getElementById("cuerpo4");

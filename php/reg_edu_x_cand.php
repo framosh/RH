@@ -5,7 +5,7 @@ $edux = explode(',',$edux);
 $secuencial=0;
 
 require 'arhsi_connect.php';
-$query="SELECT * FROM Edu_xcand WHERE ((cand_key='$edux[0]') AND (clv_tip_edu='$edux[1]'))";
+$query="SELECT * FROM Edu_xcand WHERE (cand_key='$edux[0]')";
 
 $result = mysqli_query($dbc,$query);
 $numero_filas = mysqli_num_rows($result);

@@ -39,10 +39,15 @@ window.onload = function () {
         //       alert("Candidato: (" + cand_clv + ")");
 
         document.getElementById("nombre").innerHTML = nombre_candidato;
-        consultaCandidato();
-        consultaEdu();
-        consultaExp();
-        consultaConocimientos(cand_clv);
+        setTimeout(consultaCandidato(), 3000);
+        setTimeout(consultaEdu(), 3000);
+        setTimeout(consultaExp(), 3000);
+        setTimeout(consultaConocimientos(cand_clv), 3000);
+
+        //        consultaCandidato();
+        //        consultaEdu();
+        //      consultaExp();
+        //    consultaConocimientos(cand_clv);
     }
 };
 

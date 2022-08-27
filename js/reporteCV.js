@@ -19,6 +19,7 @@ function quickReport2(registros, tablax1, cuerpox1) {
 
     var mensaje1;
     //    alert("Renglones a desplegar: " + renglones);
+    //  alert("Registros: " + registros);
 
     if (renglones < 1) {
         mensaje1 = "No hay registros a desplegar";
@@ -184,19 +185,24 @@ function creaTabla55(registros) {
     var div = document.getElementById("myDiv");
 
     var body = document.getElementsByTagName("body8")[0];
-    //    body.className = "container";
+    body.className = "container";
 
     if (!document.getElementById("tabla5")) {
         //           alert("No existe la tabla, se crea tabla y el cuerpo de la tabla");
         tabla = document.createElement("table");
         tabla.id = "tabla5";
+        tabla.style.width = "100%";
         //    tabla.style.width = "100%";
-        //      tabla.style.maxHeight = "300px";
-
+        tabla.style.maxHeight = "600px";
+        tblBody = document.createElement("tbody");
+        tblBody.id = cuerpox;
     } else {
-        tabla = document.getElementById("tabla5");
+        //        tabla = document.getElementById("tabla5");
+        tabla = document.getElementById(tablax);
+        tblBody = document.getElementById(cuerpox);
     }
 
+    /*
     if (!document.getElementById("cuerpo5")) {
         //           alert("No existe la tabla, se crea tabla y el cuerpo de la tabla");
         tblBody = document.createElement("tbody");
@@ -204,6 +210,7 @@ function creaTabla55(registros) {
     } else {
         tblBody = document.getElementById("cuerpo5");
     }
+    */
 
     //    alert("Registros: " + registros);
 
@@ -307,10 +314,10 @@ function creaTabla2(renglones, columnas) {
         //      alert("No existe la tabla, se crea tabla y el cuerpo de la tabla");
         tabla = document.createElement("table");
         tabla.id = tablax;
-        tabla.style.width = "80%";
-        tabla.style.marginLeft = "10%";
-        tabla.style.marginRight = "10%";
-        //        tabla.style.maxHeight = "100px";
+        tabla.style.width = "100%";
+        //        tabla.style.marginLeft = "10%";
+        //      tabla.style.marginRight = "10%";
+        tabla.style.maxHeight = "100px";
 
         tblBody = document.createElement("tbody");
         tblBody.id = cuerpox;
