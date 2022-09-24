@@ -113,7 +113,6 @@ function modificaEval() {
     var vacio1 = 0;
     document.getElementById("mensaje_gral").value = vacio;
 
-    var evaluacion = document.getElementById("evaluaciones").value;
     var observacion = document.getElementById("observacion").value;
     var puesto = document.getElementById("puestos").value;
     observacion = observacion.replace(/\n/g, "\\n");
@@ -130,6 +129,8 @@ function modificaEval() {
     posicion21 = (renglones - posicion21);
     clavex22 = puestos2[posicion21].split("|");
     var puesto_clv = clavex22[0];
+
+    var evaluacion = document.getElementById("evaluaciones").value;
 
     if (evaluacion == "Seleccione la Evaluacion") {
         alert("Seleccione la Evaluación");
@@ -188,9 +189,56 @@ function modificaEval() {
                 if (valor[0] == "Asignación grabada puesto") {
                     document.getElementById("asigna").disabled = true;
                     document.getElementById("actualiza").disabled = false;
-                    evalXpuesto(puesto_clv);
+                    evalXpuesto(puesto_clv, evaluacion_clv);
                 }
             }
+        }
+    };
+}
+
+function evalXpuesto(puesto_clv, evaluacion_clv) {
+    var archivo1 = servidor + "httpdocs/catEvalXPuesto.php";
+    var archivo2 = archivo1 + "?evaluacion=" + evaluacion_clv + "&puesto=" + puesto_clv;
+    var xhttp;
+
+    if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+        xhttp = new XMLHttpRequest();
+    } else { // code for IE6, IE5
+        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    xhttp.open("GET", archivo2, true);
+    xhttp.send(null);
+
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            var cadena = xhttp.responseText;
+            var mensaje_cadena = cadena.split(":");
+            //          alert("Cadena: " + cadena);
+            if (mensaje_cadena[0] == "No hay evaluaciones para el puesto") {
+                document.getElementById("mensaje_gral").innerHTML = cadena;
+                return;
+            }
+
+            var evaluaciones = cadena.split("\n");
+
+            for (var i = 0; i < evaluaciones.length; i++) {
+                var campo = evaluaciones[i];
+                if (campo) {
+                    evaluaciones[i] = evaluaciones[i].replace(/\"/g, "");
+                    //             alert("campo: ("+i+") - ("+ids[i]+")");
+                }
+            }
+            //$query="SELECT Evaluaciones.clv_evaluacion, Evaluaciones.nombre_eval, conocimientos.cono_desc, 
+            //Evaluaciones.nivel_cono FROM eval_XPuesto 
+
+            var subtitulo = [];
+            subtitulo = ["CLAVE", "NOMBRE", "CONOCIMIENTO", "NIVEL"];
+            var tabla = "conocim";
+            var cuerpo = "body8";
+            quickReport(evaluaciones, tabla, cuerpo, subtitulo);
+        } else {
+            //   alert("readyState="+xhttp.readyState+"        Status="+xhttp.status);
         }
     };
 }
@@ -281,6 +329,27 @@ function consultaEval() {
 
 function cargaEvaluaciones() {
     //    alert("Entra a carga de evaluaciones del puesto");
+    var evaluacion = document.getElementById("evaluaciones").value;
+
+    if (evaluacion == "Seleccione la Evaluacion") {
+        alert("Seleccione la Evaluación");
+        return;
+    }
+
+    var renglones = evaluaciones2.length;
+    renglones--;
+    var posicion22 = document.getElementById("evaluaciones").selectedIndex;
+    posicion22 = (renglones - posicion22);
+    var clavex22 = evaluaciones2[posicion22].split("|");
+    var evaluacion_clv = clavex22[0];
+
+    evaluacion_clv = document.getElementById("clave").value;
+    if (evaluacion_clv == null) {
+        evaluacion_clv = 0;
+        alert("No hay evaluación seleccionada");
+        return;
+    }
+
     var puesto = document.getElementById("puestos").value;
 
     if (puesto == "Seleccione el Puesto") {
@@ -288,12 +357,12 @@ function cargaEvaluaciones() {
         return;
     }
 
-    var clavex22 = [];
-    var renglones = puestos2.length;
+    clavex22 = [];
+    renglones = puestos2.length;
     renglones--;
     var posicion21 = document.getElementById("puestos").selectedIndex;
     posicion21 = (renglones - posicion21);
     clavex22 = puestos2[posicion21].split("|");
     var puesto_clv = clavex22[0];
-    evalXpuesto(puesto_clv);
+    evalXpuesto(puesto_clv, evaluacion_clv);
 }

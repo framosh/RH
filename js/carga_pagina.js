@@ -131,7 +131,6 @@ window.onload = function () {
             var valorx21 = 0;
             document.getElementById("evaluaciones").textContent = leeEvaluaciones(); // Carga el catalogo de Conocimientos
             document.getElementById("conocimientos").textContent = leeConocimientos(valorx21); // Carga el catalogo de Conocimientos
-            document.getElementById("puestos").textContent = leePuestos(); // Carga el catalogo de Puestos
       }
 
       if (pagina == "eval_x_puesto.htm") {

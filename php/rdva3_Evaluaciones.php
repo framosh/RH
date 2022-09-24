@@ -31,14 +31,7 @@ tr:nth-child(even) {
 <b>Catalogo de Evaluaciones por Puesto</b></h1>
 
 <?php
-$puesto=$_GET["Puesto"];
-$consulta ="";
-
-if($puesto != ""){
-    $consulta = "Evaluaciones.clv_puesto='$puesto'";
-} else {
-    $consulta="1";
-}
+$consulta ="1";
 
 setlocale(LC_ALL,"es_ES");
 setlocale(LC_MONETARY,'en_US');
@@ -47,13 +40,11 @@ $f=Date("d-m-Y");
 echo "<div style='font-family:arial;'>Fecha reporte: $f<br></div>";
 
 require 'arhsi_connect.php';
-$query="SELECT Evaluaciones.clv_puesto, Puestos.puesto_desc, Evaluaciones.clv_evaluacion, 
-Evaluaciones.nombre_eval, conocimientos.cono_desc, Evaluaciones.puntaje_req, Evaluaciones.nivel_cono, 
-Evaluaciones.observaciones 
+$query="SELECT Evaluaciones.clv_evaluacion, Evaluaciones.nombre_eval, conocimientos.cono_desc, 
+Evaluaciones.puntaje_req, Evaluaciones.nivel_cono, Evaluaciones.observaciones 
 FROM Evaluaciones 
-LEFT JOIN Puestos ON Puestos.clv_puesto = Evaluaciones.clv_puesto
 LEFT JOIN conocimientos ON conocimientos.clv_conocim = Evaluaciones.clv_conocim
-WHERE $consulta ORDER BY Evaluaciones.clv_puesto ASC";
+WHERE $consulta";
 
 $response=mysqli_query($dbc,$query);
 $bgc2="darkgrey";
@@ -62,31 +53,28 @@ if($response)
 	{
 	echo '<table>
     <tr style="background-color:'.$bgc2.';">
-	<td align="center" font="./arial"><b>Puesto</b> </td>
         <td aling="left" font="./arial"><b>Evaluacion</b> </td>
         <td aling="left" font="./arial"><b>Conocimiento</b> </td>
         <td aling="left" font="./arial"><b>Puntaje minimo</b> </td>
         <td aling="left" font="./arial"><b>Nivel de conocimiento</b> </td>
 		<td aling="left" font="./arial"><b>Observaciones</b> </td></tr>';
 
-//$query="SELECT Evaluaciones.clv_puesto, puesto.puesto_nom, Evaluaciones.clv_evaluacion, 
+//$query="SELECT Evaluaciones.clv_evaluacion, 
 //Evaluaciones.nombre_eval, conocimientos.cono_desc, Evaluaciones.puntaje_req, Evaluaciones.nivel_cono, 
 //Evaluaciones.observaciones 
 $nivelx1=["Bajo","Medio","Alto"];
 
 	while($row = mysqli_fetch_array($response))
 		{
-            $nivel=$nivelx1[$row[6]];
-            $puesto = $row[0]."-".$row[1];
-            $evaluacion = $row[2]."-".$row[3];
+            $nivel=$nivelx1[$row[4]];
+            $evaluacion = $row[0]."-".$row[1];
 
        	    echo '<tr><td align="center"  font="arial">'.
-	       $puesto .'</td><td align="left" >'.
 	       $evaluacion .'</td><td align="left" >'.
-           $row[4] .'</td><td align="left" >'.
-           $row[5] .'</td><td align="left" >'.
+           $row[2] .'</td><td align="left" >'.
+           $row[3] .'</td><td align="left" >'.
            $nivel .'</td><td align="left" >'.
-		   $row[7] .'</td></tr>';
+		   $row[5] .'</td></tr>';
         }
     echo '</table>';
   } 

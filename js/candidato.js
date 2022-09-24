@@ -984,8 +984,9 @@ var ww;
 
 function Estudios() {
     //alert("Entra a estudios");
-    var candidato = document.getElementById("candidatos").value;
+    //    var candidato = document.getElementById("candidatos").value;
     var candidato_clv = document.getElementById("cand_key").value;
+    var candidato = document.getElementById("cand_nom").value;
 
     if (candidato == null) {
         candidato = "";
@@ -994,7 +995,7 @@ function Estudios() {
         candidato_clv = "";
     }
 
-    if ((candidato.length <= 1) || (candidato == "Seleccione el Candidato")) {
+    if ((candidato_clv = "") || (candidato_clv == 0)) {
         var aviso = "Por favor seleccione un Candidato";
         alert(aviso);
         document.getElementById("mensaje_gral").innerHTML = aviso;

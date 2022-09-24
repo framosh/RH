@@ -52,13 +52,13 @@ function limpiaPantallaEC() {
     document.getElementById("instituciones").selectedIndex = vacio1;
     document.getElementById("tipos_edu").selectedIndex = vacio1;
     document.getElementById("estatus").selectedIndex = vacio1;
-    document.getElementById("nombre").value = vacio;
+    //    document.getElementById("nombre").value = vacio;
     document.getElementById("carrera").value = vacio;
     document.getElementById("clv_inst").value = vacio;
     document.getElementById("campus").value = vacio;
     document.getElementById("generacion").value = vacio;
     document.getElementById("secuencial").value = vacio1;
-    document.getElementById("mensaje_gral_edu").innerHTML = vacio;
+    document.getElementById("mensaje_gral_edu").value = vacio;
 }
 
 function actualizaEdu() {

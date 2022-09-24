@@ -219,9 +219,9 @@ function creaTabla(renglones, columnas) {
             //            alert("Crea campo: " + i2 + "  linea:" + i);
             var idcampo = "camp" + i2 + "-reng" + i;
             var celda = document.createElement("td");
-            var parrafo = document.createElement("p");
-            parrafo.id = idcampo;
-            celda.appendChild(parrafo);
+            //            var parrafo = document.createElement("p");
+            celda.id = idcampo;
+            //          celda.appendChild(parrafo);
 
             if (i2 == 2 || i2 == 3) {
                 celda.style.textAlign = "center";

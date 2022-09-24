@@ -1,22 +1,14 @@
 <?php
-$puesto=$_GET["Puesto"];
-$consulta ="";
-
-if($puesto != ""){
-    $consulta = "Evaluaciones.clv_puesto='$puesto'";
-} else {
     $consulta="1";
-}
 
 setlocale(LC_ALL,"es_ES");
 setlocale(LC_MONETARY,'en_US');
 
 require 'arhsi_connect.php';
-$query="SELECT Evaluaciones.clv_puesto, Puestos.puesto_desc, Evaluaciones.clv_evaluacion, 
+$query="SELECT Evaluaciones.clv_evaluacion, 
 Evaluaciones.nombre_eval, conocimientos.cono_desc, Evaluaciones.puntaje_req, Evaluaciones.nivel_cono, 
 Evaluaciones.observaciones 
 FROM Evaluaciones 
-LEFT JOIN Puestos ON Puestos.clv_puesto = Evaluaciones.clv_puesto
 LEFT JOIN conocimientos ON conocimientos.clv_conocim = Evaluaciones.clv_conocim
 WHERE $consulta ORDER BY Evaluaciones.clv_puesto ASC";
 
@@ -50,7 +42,7 @@ function csvFromResult($stream, $result, $showColumnHeaders = true) {
     if($showColumnHeaders) {
         $separador = '|';
         $encabezado1 = array();
-        $encabezado1[0] = "CATALOGO DE EVALUACIONES POR PUESTO";
+        $encabezado1[0] = "CATALOGO DE EVALUACIONES";
         fputcsv($stream, $encabezado1,$separador);
 
         $encabezado2 = array();
@@ -58,16 +50,15 @@ function csvFromResult($stream, $result, $showColumnHeaders = true) {
         fputcsv($stream, $encabezado2,$separador);
 
         $columnHeaders = array();
-        $columnHeaders[0] = "PUESTO";
-        $columnHeaders[1] = "EVALUACION";
-        $columnHeaders[2] = "CONOCIMIENTO";
-        $columnHeaders[3] = "PUNTAJE MINIMO";
-        $columnHeaders[4] = "NIVEL DE CONOCIMIENTO";
-        $columnHeaders[5] = "OBSERVACIONES";
+        $columnHeaders[0] = "EVALUACION";
+        $columnHeaders[1] = "CONOCIMIENTO";
+        $columnHeaders[2] = "PUNTAJE MINIMO";
+        $columnHeaders[3] = "NIVEL DE CONOCIMIENTO";
+        $columnHeaders[4] = "OBSERVACIONES";
         fputcsv($stream, $columnHeaders,$separador);
         }
 
-        //$query="SELECT Evaluaciones.clv_puesto, puesto.puesto_nom, Evaluaciones.clv_evaluacion, 
+        //$query="SELECT Evaluaciones.clv_evaluacion, 
 //Evaluaciones.nombre_eval, conocimientos.cono_desc, Evaluaciones.puntaje_req, Evaluaciones.nivel_cono, 
 //Evaluaciones.observaciones 
 $nivelx1=["Bajo","Medio","Alto"];
@@ -76,19 +67,17 @@ $campos=[];
     $nrows = 0;
     while($row = mysqli_fetch_row($result)) {
         $row[1] = iconv('UTF-8','ISO-8859-15',$row[1]);
-        $row[3] = iconv('UTF-8','ISO-8859-15',$row[3]);
-        $row[7] = iconv('UTF-8','ISO-8859-15',$row[7]);
+        $row[2] = iconv('UTF-8','ISO-8859-15',$row[2]);
+        $row[5] = iconv('UTF-8','ISO-8859-15',$row[5]);
 
-        $nivel=$nivelx1[$row[6]];
-        $puesto = $row[0]."-".$row[1];
-        $evaluacion = $row[2]."-".$row[3];
+        $nivel=$nivelx1[$row[4]];
+        $evaluacion = $row[0]."-".$row[1];
 
-        $campos[0] = $puesto;
-        $campos[1] = $evaluacion;
-        $campos[2] = $row[4];
-        $campos[3] = $row[5];
-        $campos[4] = $nivel;
-        $campos[5] = $row[7];
+        $campos[0] = $evaluacion;
+        $campos[1] = $row[2];
+        $campos[2] = $row[3];
+        $campos[3] = $nivel;
+        $campos[4] = $row[5];
 
         $separador = '|';        
         fputcsv($stream, $campos,$separador);

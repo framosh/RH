@@ -227,23 +227,23 @@ function creaTabla55(registros) {
             for (i3 = 0; i3 < 2; i3++) { // Columna del registro - columna de titulo y columna de datos 
                 var idcampo = "reg-" + i + "ren-" + i2 + "col-" + i3;
                 var celda = document.createElement("td");
-                var parrafo = document.createElement("p");
-                parrafo.id = idcampo;
+                //                var parrafo = document.createElement("p");
+                celda.id = idcampo;
 
                 if (i3 == 0) {
-                    parrafo.style.paddingRight = "5px";
-                    parrafo.style.paddingLeft = "5px";
-                    parrafo.style.textAlign = "left";
+                    celda.style.paddingRight = "5px";
+                    celda.style.paddingLeft = "5px";
+                    celda.style.textAlign = "left";
                     celda.style.columnWidth = "20%";
-                    parrafo.style.fontWeight = "bold";
+                    celda.style.fontWeight = "bold";
                 }
 
                 if (i3 == 1) {
-                    parrafo.style.paddingRight = "5px";
-                    parrafo.style.paddingLeft = "5px";
-                    parrafo.style.textAlign = "left";
+                    celda.style.paddingRight = "5px";
+                    celda.style.paddingLeft = "5px";
+                    celda.style.textAlign = "left";
                     //                    parrafo.style.columnWidth = "400px";
-                    parrafo.style.fontWeight = "normal";
+                    celda.style.fontWeight = "normal";
                     celda.style.columnWidth = "80%";
                 }
 
@@ -275,9 +275,9 @@ function creaTabla55(registros) {
 
                 if (i3 == 0) {
                     var textoCelda = document.createTextNode(titulo);
-                    parrafo.appendChild(textoCelda);
+                    celda.appendChild(textoCelda);
                 }
-                celda.appendChild(parrafo);
+                //                celda.appendChild(parrafo);
                 hilera.appendChild(celda);
             }
             tblBody.appendChild(hilera);
@@ -336,9 +336,9 @@ function creaTabla2(renglones, columnas) {
             //    alert("Crea campo: " + i2 + "  linea:" + i);
             var idcampo = "camp" + i2 + "-reng" + i;
             var celda = document.createElement("td");
-            var parrafo = document.createElement("p");
-            parrafo.id = idcampo;
-            celda.appendChild(parrafo);
+            //     var parrafo = document.createElement("p");
+            celda.id = idcampo;
+            //    celda.appendChild(parrafo);
 
             if (i2 == 2 || i2 == 3) {
                 celda.style.textAlign = "center";

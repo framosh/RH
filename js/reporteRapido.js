@@ -2,6 +2,7 @@
 Generador de reporte de pantalla universal, con columnas ajustables 
 a la cantidad especificada y renglones ajustables a la cantidad de lineas
 */
+
 var tablax6;
 var cuerpox6;
 var columnas;

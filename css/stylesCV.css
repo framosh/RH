@@ -2,7 +2,9 @@
     font-family: arial, sans-serif, verdana;
     display: block;
     margin: auto;
-    font-size: 14px;
+    /*    font-size: 14px; */
+    font-weight: normal;
+    font-style: normal;
     width: 100%;
     overflow: auto;
     height: 100%;
@@ -16,7 +18,10 @@
     /*    margin-left: 10%; */
     /*    margin-right: 10%; */
     overflow: auto;
-    font-size: 14px;
+    /*    font-size: 14px;*/
+    font-weight: normal;
+    font-style: normal;
+
     width: 100%;
 }
 
@@ -192,7 +197,9 @@ body {
 }
 
 .grid-layout2 {
-    font-size: 18px;
+    /*    font-size: 18px; */
+    font-weight: normal;
+    font-style: normal;
     display: grid;
     height: 200px;
     width: 80%;
@@ -209,7 +216,9 @@ body {
 }
 
 .grid-layout3 {
-    font-size: 18px;
+    /*    font-size: 18px;*/
+    font-weight: normal;
+    font-style: normal;
     display: grid;
     height: 200px;
     width: 80%;
@@ -226,7 +235,9 @@ body {
 }
 
 .grid-layout4 {
-    font-size: 18px;
+    /*    font-size: 18px;*/
+    font-weight: normal;
+    font-style: normal;
     display: grid;
     height: 600px;
     margin-left: 10%;
@@ -239,7 +250,9 @@ body {
 }
 
 .grid-layout5 {
-    font-size: 18px;
+    /*    font-size: 18px;*/
+    font-weight: normal;
+    font-style: normal;
     display: grid;
     height: 100px;
     margin-left: 10%;
@@ -290,7 +303,10 @@ body {
 }
 
 .grid-layout {
-    font-size: 18px;
+    /*    font-size: 18px;*/
+    font-weight: normal;
+    font-style: normal;
+
     display: grid;
     height: 1800px;
     width: 80%;
