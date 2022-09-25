@@ -1,5 +1,14 @@
-<?php 
-$encoding = "utf-8";
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<title>Envio de correos para aplicación de examenes remotos</title>
+<meta charset="UTF-8">
+</head>
+<body style="background-color: #BDBDF0;">
+
+<?php
+setlocale(LC_ALL,"es_ES");
+$encoding = "UTF-8";
 $candidato=$_GET['can'];
 
 require 'arhsi_connect.php';
@@ -37,17 +46,19 @@ if($numero_filas >0){
 
 function envia_correo($nombre,$correo){
     global $candidato;
+    setlocale(LC_ALL,"es_ES");
 
-    $to = "contacto@arhsi.com.mx";
+    $to = $correo;
     $copia="federicoramos57@gmail.com";
     $subjet = "Aplicación de examenes";
 //    $attach = $cand_cv;
-    $message = nl2br("Candidato: $nombre\n   Correo: $correo\n   Favor de ingresar a la siguiente liga para aplicar los examenes para la vacante de referencia: \n https://admonarh.arhsi.com.mx/evaluaciones.htm?cand=".$candidato,false);
-    $from = "federico.ramos@arhsi.com.mx";
+    $message = nl2br("Candidato: $nombre\n   Correo: $correo\n   Favor de ingresar a la siguiente liga para aplicar los examenes para la vacante de referencia: \n https://admonarh.arhsi.com.mx/evaluaciones.htm?cand=".$candidato."\n",false);
+    $from = "federico.ramos@admonarh.arhsi.com.mx";
     $headers = "MIME-Version: 1.0"."\r\n";
-    $headers .= "Content-type: text/html; charset=iso-8859-1"."\r\n";
+    $headers .= "Content-type: text/html; charset=UTF-8"."\r\n";
     $headers .= "From:".$from."\r\n";
     $headers .= "Bcc:".$copia."\r\n";
+    $headers .= "X-Mailer: PHP/".phpversion();
     $retval = mail($to,$subjet,$message,$headers);
     if($retval == true){
         echo "Correo enviado al candidato: ".$nombre;
@@ -56,3 +67,5 @@ function envia_correo($nombre,$correo){
 
 mysqli_close($dbc);
 ?>
+</body>
+</html>

@@ -240,7 +240,7 @@ function modificaEval() {
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var cadena = xhttp.responseText;
-            alert("Cadena: " + cadena);
+            //            alert("Cadena: " + cadena);
             document.getElementById("mensaje_gral").innerHTML = cadena;
             if (tipo_funcion == "alta") {
                 var valor = cadena.split(":");

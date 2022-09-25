@@ -19,14 +19,6 @@ window.onload = function () {
     var l = params.length;
 
 
-    //      alert("l: " + l);
-    /*
-        if (l < 6) {
-            window.location.href = "index.htm";
-        }
-    */
-    //    var url2 = document.location.href;
-
     /*
             dato4[0]  //  User
             dato4[1]   //  Nombre
@@ -44,57 +36,74 @@ window.onload = function () {
         //        alert("Dato4: " + i + "  contiene: " + dato4[i]);
     }
 
+    /*
+    //    var today = new Date();
+    var today = new Date().toLocaleDateString();
+    var tiempo = new Date().toLocaleTimeString();
+    var fecha = today;
+    var hora = tiempo;
+    alert("Fecha: " + fecha);
+    alert("Hora: " + hora);
+
+    document.getElementById(fecha).innerHTML = fecha;
+    document.getElementById(hora).innerHTML = hora;
+*/
     candidatox1 = dato6[0];
-    /*
-        var direccion2 = url2.split("?")[0].split("/");
-        direccion2[3] = direccion2[3].trim();
-        var mensa = direccion2[3];
-
-        var pagina = "";
-
-        if (servidor == "/arhsi_local/") {
-            pagina = direccion2[4];
-        } else {
-            pagina = direccion2[3];
-        }
-        */
-    /*
-        clave_empresa = dato4[5];
-        //      alert("Empresa: (" + clave_empresa + ")");
-
-        document.getElementById("nombre_candidato").innerHTML = dato4[1];
-        buscaEmpresa(clave_empresa); // Busca el nombre de la empresa a donde pertenece el usuario
-
-        if (pagina == "evalua_OM.htm") {
-            document.getElementById("areas").textContent = leeAreas(); // Carga el catalogo de Areas
-        }
-
-        if (pagina == "evalua_XCOM.htm") {
-            document.getElementById("aplicaciones").textContent = leeAplicaciones(); // Carga el catalogo de Aplicaciones
-        }
-        */
-    buscaCandidato(candidatox1);
-    //    buscaExamenes(candidatox1);
-    despliega_menu();
+    despliega(candidatox1);
 };
 
-var titulos = [];
-var imagen = [];
+function getData() {
+    return new Promise((resolve, reject) => {
+        if (examen.length == 0) {
+            reject(new Error('No hay examenes asignados'));
+            //            return;
+        }
+        setTimeout(() => {
+            resolve(despliega_menu(candidatox1));
+        }, 2000);
+    });
+}
+
+async function despliega(candidatox1) {
+    buscaCandidato(candidatox1);
+    buscaExamenes(candidatox1);
+    await getData();
+}
+
+/*
+getData()
+.then((response) => console.log(response))
+.catch((err) => console.log(err.message))
+*/
+
+
+var examen = [];
 var estatus = [];
 
-function despliega_menu() {
-    alert("Entra despliega menu del candidato: " + candidatox1);
-    titulos = ["JavaScript", "HTML", "Java", "Android", "C#", "SQL"];
-    imagen = ["js.png", "html.png", "java.png", "android.png", "C sharp.png", "sql.png"];
-    estatus = ["pendiente", "aplicado"];
+function despliega_menu(candidatox1) {
+    //    alert("Entra despliega menu del candidato: " + candidatox1);
+    var titulos = ["", "JavaScript", "HTML", "Java", "Android", "C#", "SQL"];
+    var imagen = ["", "js.png", "html.png", "java.png", "android.png", "C sharp.png", "sql.png"];
+    var estatus2 = ["", "pendiente", "aplicado"];
     var i = 0;
-    for (i = 0; i < 6; i++) {
+    var evaluaciones = examen.length;
+    //    alert("examen: " + examen);
+    //  alert("examen length: " + evaluaciones);
+    if (evaluaciones == 0) {
+        alert("No hay evaluaciones por aplicar");
+        return;
+    }
+    var examenx1 = 0;
+    var estatusx1 = 0;
+    for (i = 0; i < evaluaciones; i++) {
+        examenx1 = examen[i];
+        estatusx1 = estatus[i];
         var titulox = "evalua" + (i + 1);
         var estatusx = "estatus" + (i + 1);
         var tecnologia = "tecnologia" + (i + 1);
-        var logo_url = "../img/" + imagen[i];
-        document.getElementById(titulox).innerHTML = titulos[i];
-        document.getElementById(estatusx).innerHTML = estatus[0];
+        var logo_url = "../img/" + imagen[examenx1];
+        document.getElementById(titulox).innerHTML = titulos[examenx1];
+        document.getElementById(estatusx).innerHTML = estatus2[estatusx1];
         //        var preview = document.querySelector('.display_image');
         var preview = document.getElementById(tecnologia);
         preview.src = logo_url;
@@ -128,11 +137,11 @@ function stopTimer() {
 }
 
 
-function buscaExamenes(clave) {
-    //      alert("Busca empresa");
+function buscaExamenes(candidatox1) {
+    //    alert("Busca examenes del candidato: " + candidatox1);
     //    var archivo2 = "https://admonarh.arhsi.com.mx/httpdocs/catalogoClientes.php";
     var archivo1 = servidor + "httpdocs/buscaExamenes.php";
-    var archivo2 = archivo1 + "?clave=" + clave;
+    var archivo2 = archivo1 + "?candidato=" + candidatox1;
     var xhttp;
 
     if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -145,7 +154,12 @@ function buscaExamenes(clave) {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var cadena = xhttp.responseText;
-            //                alert("cadena: " + cadena);
+            var mensaje = cadena.split("|");
+            if (mensaje[0] == "No hay evaluaciones") {
+                document.getElementById("mensaje_gral").innerHTML = cadena;
+                return;
+            }
+            //            alert("cadena de examenes: " + cadena);
             //document.getElementById("empresa").innerHTML = cadena;
             var evaluaciones = cadena.split("\n");
             var i2 = 0;
@@ -157,9 +171,9 @@ function buscaExamenes(clave) {
                     evaluaciones[i2] = campo.trim();
                     evaluaciones[i2] = evaluaciones[i2].replace(/\"/g, "");
                     evalua = evaluaciones[i2].split("|");
-                    titulos[i2] = evalua[0];
-                    imagen[i2] = evalua[1];
-                    estatus[i2] = evalua[2];
+                    examen[i2] = evalua[0];
+                    //                    imagen[i2] = evalua[1];
+                    estatus[i2] = evalua[1];
                     //           alert("campo: ("+i2+") - ("+cliente2[i2]+")");
                     i2++;
                 }
@@ -170,11 +184,11 @@ function buscaExamenes(clave) {
     //    xhttp.disabled();  
 }
 
-function buscaCandidato(clave) {
-    //    alert("Busca Candidato");
+function buscaCandidato(candidatox1) {
+    //    alert("Busca al candidato: " + candidatox1);
     //    var archivo2 = "https://admonarh.arhsi.com.mx/httpdocs/catalogoClientes.php";
     var archivo1 = servidor + "httpdocs/consultaCandidato2.php";
-    var archivo2 = archivo1 + "?candidato=" + clave;
+    var archivo2 = archivo1 + "?candidato=" + candidatox1;
     var xhttp;
 
     if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -207,7 +221,15 @@ function buscaCandidato(clave) {
                     //                    alert("campo: (" + i1 + ") - (" + ids[i1] + ")");
                 }
             }
+            var today = new Date().toLocaleDateString();
+            var tiempo = new Date().toLocaleTimeString();
+            var fecha = today;
+            var hora = tiempo;
+            //            alert("Fecha: " + fecha);
+            //          alert("Hora: " + hora);
 
+            document.getElementById("fecha").value = fecha;
+            document.getElementById("hora").value = hora;
             document.getElementById("nombre").value = ids[1];
             document.getElementById("vacante").value = ids[0];
         }

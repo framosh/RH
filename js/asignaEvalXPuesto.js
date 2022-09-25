@@ -364,5 +364,6 @@ function cargaEvaluaciones() {
     posicion21 = (renglones - posicion21);
     clavex22 = puestos2[posicion21].split("|");
     var puesto_clv = clavex22[0];
+
     evalXpuesto(puesto_clv, evaluacion_clv);
 }
