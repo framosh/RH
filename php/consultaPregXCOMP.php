@@ -35,6 +35,7 @@ if($numero_filas > 0){
          $nrows = 0;
          $delimiter='|';
          while($row = mysqli_fetch_row($result)) {
+          $row = str_replace('"','\'',$row);
            fputcsv($stream, $row, $delimiter);
            $nrows++;
            }

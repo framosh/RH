@@ -79,11 +79,14 @@ getData()
 
 var examen = [];
 var estatus = [];
+var conocimiento = [];
+var imagen = [];
+var liga = [];
 
 function despliega_menu(candidatox1) {
     //    alert("Entra despliega menu del candidato: " + candidatox1);
-    var titulos = ["", "JavaScript", "HTML", "Java", "Android", "C#", "SQL"];
-    var imagen = ["", "js.png", "html.png", "java.png", "android.png", "C sharp.png", "sql.png"];
+    //    var conocimiento = ["", "JavaScript", "HTML", "Java", "Android", "C#", "SQL"];
+    //    var imagen = ["", "js.png", "html.png", "java.png", "android.png", "C sharp.png", "sql.png"];
     var estatus2 = ["", "pendiente", "aplicado"];
     var i = 0;
     var evaluaciones = examen.length;
@@ -93,6 +96,20 @@ function despliega_menu(candidatox1) {
         alert("No hay evaluaciones por aplicar");
         return;
     }
+    /*
+                        examen[i2] = evalua[0];
+                        estatus[i2] = evalua[1];
+                        conocimiento[i2] = evalua[2];
+                        imagen[i2] = evalua[3];
+                        liga[i2] = evalua[4];
+        */
+    for (i2 = 0; i2 < 6; i2++) {
+        var tecnologia1 = "tecnologia" + (i2 + 1);
+        var logo_url1 = "../img/sin_foto.jpg";
+        var preview1 = document.getElementById(tecnologia1);
+        preview1.src = logo_url1;
+    }
+
     var examenx1 = 0;
     var estatusx1 = 0;
     for (i = 0; i < evaluaciones; i++) {
@@ -101,12 +118,16 @@ function despliega_menu(candidatox1) {
         var titulox = "evalua" + (i + 1);
         var estatusx = "estatus" + (i + 1);
         var tecnologia = "tecnologia" + (i + 1);
-        var logo_url = "../img/" + imagen[examenx1];
-        document.getElementById(titulox).innerHTML = titulos[examenx1];
+        var ligax1 = "liga" + (i + 1);
+        var logo_url = "../img/" + imagen[i];
+        var direccion_liga = liga[i];
+        document.getElementById(titulox).innerHTML = conocimiento[i];
         document.getElementById(estatusx).innerHTML = estatus2[estatusx1];
         //        var preview = document.querySelector('.display_image');
         var preview = document.getElementById(tecnologia);
         preview.src = logo_url;
+        document.getElementById(ligax1).setAttribute('href', direccion_liga);
+        //        alert("liga: " + direccion_liga);
     }
 }
 
@@ -136,7 +157,6 @@ function stopTimer() {
     //      window.setInterval(startTimeOut, intervalo);
 }
 
-
 function buscaExamenes(candidatox1) {
     //    alert("Busca examenes del candidato: " + candidatox1);
     //    var archivo2 = "https://admonarh.arhsi.com.mx/httpdocs/catalogoClientes.php";
@@ -163,6 +183,8 @@ function buscaExamenes(candidatox1) {
             //document.getElementById("empresa").innerHTML = cadena;
             var evaluaciones = cadena.split("\n");
             var i2 = 0;
+            //$query="SELECT Eval_xcand.clv_evaluacion, Eval_xcand.estatus_eval, conocimientos.cono_desc, 
+            //conocimientos.imagen, Eval_xcand.eval_liga FROM Eval_xcand 
 
             for (var i = 0; i < evaluaciones.length; i++) {
                 var campo = evaluaciones[i];
@@ -172,8 +194,17 @@ function buscaExamenes(candidatox1) {
                     evaluaciones[i2] = evaluaciones[i2].replace(/\"/g, "");
                     evalua = evaluaciones[i2].split("|");
                     examen[i2] = evalua[0];
-                    //                    imagen[i2] = evalua[1];
                     estatus[i2] = evalua[1];
+                    conocimiento[i2] = evalua[2];
+                    imagen[i2] = evalua[3];
+                    liga[i2] = evalua[4];
+                    if (liga[i2] == "" || liga[i2] == null) {
+                        liga[i2] = "#";
+                    }
+
+                    if (imagen[i2] == "" || imagen[i2] == null) {
+                        imagen[i2] = "sin_foto.jpg";
+                    }
                     //           alert("campo: ("+i2+") - ("+cliente2[i2]+")");
                     i2++;
                 }

@@ -3,6 +3,12 @@ $campos1 = $_GET['Campos'];
 $campos = array();
 $campos = explode('|',$campos1); 
 
+$elementos = count($campos);
+
+for($i1=0;$i1<$elementos;$i1++){
+    $campos[$i1] = str_replace('"','\"',$campos[$i1]);
+}
+
 /*
     camposx22[0] = pregunta_clv;
     camposx22[1] = nombre;

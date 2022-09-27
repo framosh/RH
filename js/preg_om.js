@@ -1,12 +1,16 @@
 // Mantenimiento al catalogo de evaluaciones
 // Carga foto del candidato desde un archivo local
 function despliega_foto(foto_url) {
+    var foto2 = "../img/sin_foto.jpg";
+    var preview;
+
     if (foto_url.length > 1) {
-        var preview = document.querySelector(".display_image");
+        preview = document.querySelector(".display_image");
         preview.src = foto_url;
 
     } else {
-        alert("No hay imagen de la pregunta");
+        preview = document.querySelector(".display_image");
+        preview.src = foto2;
     }
 }
 
@@ -241,8 +245,11 @@ function modificaPregunta() {
         }
     }
 
-    var camposx22 = [];
+    if (foto_dir == null) {
+        foto_dir = "";
+    }
 
+    var camposx22 = [];
     camposx22[0] = pregunta_clv;
     camposx22[1] = nombre;
     camposx22[2] = descripcion;
@@ -261,8 +268,12 @@ function modificaPregunta() {
     var archivo1 = "";
 
     if (tipo_funcion == "modifica") {
+        alert("Actualiza pregunta");
+        alert("Datos: " + camposx23);
         archivo1 = servidor + "httpdocs/act_pregunta.php";
     } else {
+        alert("Alta pregunta");
+        alert("Datos: " + camposx23);
         archivo1 = servidor + "httpdocs/reg_pregunta.php";
     }
 
@@ -367,9 +378,6 @@ function consultaPregunta() {
     document.getElementById("alta").disabled = true;
     document.getElementById("actualiza").disabled = false;
 
-    var foto_url = "../img/sin_foto.jpg";
-    despliega_foto(foto_url);
-
     var pregunta = document.getElementById("preguntas").value;
 
     if (pregunta == "Seleccione la Pregunta") {
@@ -407,7 +415,6 @@ function consultaPregunta() {
             //          alert("cadena: " + cadena);
 
             var mensaje_cadena = cadena.split(":");
-            //          alert("Cadena: " + cadena);
             if (mensaje_cadena[0] == "No hay Pregunta número") {
                 document.getElementById("mensaje_gral").innerHTML = cadena;
                 return;
