@@ -5,9 +5,8 @@ setlocale(LC_ALL,"es_ES");
 setlocale(LC_MONETARY,'en_US');
 
 require 'arhsi_connect.php';
-$query="SELECT Evaluaciones.clv_evaluacion, 
-Evaluaciones.nombre_eval, conocimientos.cono_desc, Evaluaciones.puntaje_req, Evaluaciones.nivel_cono, 
-Evaluaciones.observaciones 
+$query="SELECT Evaluaciones.clv_tipo_eval, Evaluaciones.nombre_eval, conocimientos.cono_desc, 
+Evaluaciones.puntaje_req, Evaluaciones.nivel_cono, Evaluaciones.observaciones 
 FROM Evaluaciones 
 LEFT JOIN conocimientos ON conocimientos.clv_conocim = Evaluaciones.clv_conocim
 WHERE $consulta ORDER BY Evaluaciones.clv_puesto ASC";

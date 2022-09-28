@@ -15,7 +15,7 @@ $campos = explode('|',$campos1);
 
 require 'arhsi_connect.php';
 if(mysqli_stmt_prepare($stmt,"UPDATE Evaluaciones SET puntaje_req='$campos[4]', nivel_cono='$campos[3]',
-observaciones='$campos[5]' WHERE clv_evaluacion='$campos[2]'"))
+observaciones='$campos[5]' WHERE clv_tipo_eval='$campos[2]'"))
 	{
 	mysqli_stmt_execute($stmt);
 	$affected_rows = mysqli_stmt_affected_rows($stmt);

@@ -3,7 +3,7 @@ $candidato=$_GET["candidato"];
 $evaluacion=$_GET["evaluacion"];
 
 require 'arhsi_connect.php';
-$query="SELECT * FROM Eval_xcand WHERE ((cand_key = $candidato) AND (clv_evaluacion = $evaluacion))";
+$query="SELECT * FROM Eval_xcand WHERE ((cand_key = $candidato) AND (clv_tipo_eval = $evaluacion))";
 
 $result = mysqli_query($dbc,$query);
 $numero_filas = mysqli_num_rows($result);

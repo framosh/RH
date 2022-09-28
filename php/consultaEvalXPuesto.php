@@ -4,8 +4,8 @@ $evaluacion=$_GET["evaluacion"];
 
 require 'arhsi_connect.php';
 $query="SELECT Evaluaciones.observaciones FROM eval_XPuesto 
-LEFT JOIN Evaluaciones ON Evaluaciones.clv_evaluacion = eval_XPuesto.clv_evaluacion
-WHERE ((eval_XPuesto.clv_puesto = $puesto) AND (eval_XPuesto.clv_evaluacion = $evaluacion))";
+LEFT JOIN Evaluaciones ON Evaluaciones.clv_tipo_eval = eval_XPuesto.clv_tipo_eval
+WHERE ((eval_XPuesto.clv_puesto = $puesto) AND (eval_XPuesto.clv_tipo_eval = $evaluacion))";
 
 $result = mysqli_query($dbc,$query);
 $numero_filas = mysqli_num_rows($result);

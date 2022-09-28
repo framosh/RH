@@ -21,7 +21,7 @@ $observaciones = $dato[3];
 require 'arhsi_connect.php';
 
 if(mysqli_stmt_prepare($stmt,"UPDATE Eval_xcand SET eval_obs='$observaciones', estatus_eval='$estatus'  
-WHERE ((cand_key='$candidato') AND (clv_evaluacion='$evaluacion'))"))
+WHERE ((cand_key='$candidato') AND (clv_tipo_eval='$evaluacion'))"))
     {
 	mysqli_stmt_execute($stmt);		
 	$affected_rows = mysqli_stmt_affected_rows($stmt);

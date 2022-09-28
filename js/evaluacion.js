@@ -191,6 +191,7 @@ function consultaEval() {
         xhttp = new ActiveXObject("Microsoft.XMLHTTP");
     }
 
+
     xhttp.open("GET", archivo2, true);
     xhttp.send(null);
 

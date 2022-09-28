@@ -11,7 +11,7 @@ for($i1=0;$i1<$elementos;$i1++){
 
 
 /*
-    camposx22[0] = clv_evaluacion;
+    camposx22[0] = clv_tipo_eval;
     camposx22[1] = clv_preguntaXC;
     camposx22[2] = clv_preguntaOM;
     camposx22[3] = posicion;
@@ -20,7 +20,7 @@ for($i1=0;$i1<$elementos;$i1++){
 require 'arhsi_connect.php';
 
 if(mysqli_stmt_prepare($stmt,"UPDATE Preg_xeval SET clv_preg_pc='$campos[1]', clv_preg_om='$campos[2]' 
-WHERE (clv_evaluacion='$campos[0]' AND posicion='$campos[3]')"))
+WHERE (clv_tipo_eval='$campos[0]' AND posicion='$campos[3]')"))
 	{
 	mysqli_stmt_execute($stmt);
 	$affected_rows = mysqli_stmt_affected_rows($stmt);

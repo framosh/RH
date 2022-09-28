@@ -40,7 +40,7 @@ $f=Date("d-m-Y");
 echo "<div style='font-family:arial;'>Fecha reporte: $f<br></div>";
 
 require 'arhsi_connect.php';
-$query="SELECT Evaluaciones.clv_evaluacion, Evaluaciones.nombre_eval, conocimientos.cono_desc, 
+$query="SELECT Evaluaciones.clv_tipo_eval, Evaluaciones.nombre_eval, conocimientos.cono_desc, 
 Evaluaciones.puntaje_req, Evaluaciones.nivel_cono, Evaluaciones.observaciones 
 FROM Evaluaciones 
 LEFT JOIN conocimientos ON conocimientos.clv_conocim = Evaluaciones.clv_conocim

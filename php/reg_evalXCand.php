@@ -20,7 +20,7 @@ $observaciones = $dato[3];
 
 require 'arhsi_connect.php';
 
-$query="SELECT * FROM Eval_xcand WHERE ((cand_key LIKE '$candidato') AND (clv_evaluacion LIKE '$evaluacion'))";
+$query="SELECT * FROM Eval_xcand WHERE ((cand_key LIKE '$candidato') AND (clv_tipo_eval LIKE '$evaluacion'))";
 $result = mysqli_query($dbc,$query);
 $numero_filas = mysqli_num_rows($result);
 
@@ -30,7 +30,7 @@ if($numero_filas>0){
     return;
 } 
 
-if(mysqli_stmt_prepare($stmt,"INSERT INTO Eval_xcand (cand_key,clv_evaluacion,estatus_eval,eval_obs) VALUES (?,?,?,?)"))
+if(mysqli_stmt_prepare($stmt,"INSERT INTO Eval_xcand (cand_key,clv_tipo_eval,estatus_eval,eval_obs) VALUES (?,?,?,?)"))
 	{
 	mysqli_stmt_bind_param($stmt,"ssss",$candidato,$evaluacion,$estatus,$observaciones);
 	mysqli_stmt_execute($stmt);

@@ -13,7 +13,7 @@ $observaciones = $dato[2];
 
 require 'arhsi_connect.php';
 
-$query="SELECT * FROM eval_XPuesto WHERE ((clv_puesto LIKE '$puesto') AND (clv_evaluacion LIKE '$evaluacion'))";
+$query="SELECT * FROM eval_XPuesto WHERE ((clv_puesto LIKE '$puesto') AND (clv_tipo_eval LIKE '$evaluacion'))";
 $result = mysqli_query($dbc,$query);
 $numero_filas = mysqli_num_rows($result);
 
@@ -23,7 +23,7 @@ if($numero_filas>0){
     return;
 } 
 
-if(mysqli_stmt_prepare($stmt,"INSERT INTO eval_XPuesto (clv_puesto,clv_evaluacion,observaciones) VALUES (?,?,?)"))
+if(mysqli_stmt_prepare($stmt,"INSERT INTO eval_XPuesto (clv_puesto,clv_tipo_eval,observaciones) VALUES (?,?,?)"))
 	{
 	mysqli_stmt_bind_param($stmt,"sss",$puesto,$evaluacion,$observaciones);
 	mysqli_stmt_execute($stmt);

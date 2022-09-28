@@ -2,7 +2,7 @@
 $Clave=$_GET["clave"];
 
 require 'arhsi_connect.php';
-$query="SELECT * FROM Evaluaciones WHERE clv_evaluacion='$Clave'";
+$query="SELECT * FROM Evaluaciones WHERE clv_tipo_eval='$Clave'";
 
 $result = mysqli_query($dbc,$query);
 //$numero_filas = mysqli_num_rows($result);

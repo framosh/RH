@@ -1,6 +1,6 @@
 <?php 
 require 'arhsi_connect.php';
-$query="SELECT Evaluaciones.clv_evaluacion, Evaluaciones.nombre_eval, Evaluaciones.clv_conocim, 
+$query="SELECT Evaluaciones.clv_tipo_eval, Evaluaciones.nombre_eval, Evaluaciones.clv_conocim, 
 conocimientos.cono_desc FROM Evaluaciones 
 LEFT JOIN conocimientos ON conocimientos.clv_conocim = Evaluaciones.clv_conocim
 WHERE 1 ORDER BY Evaluaciones.nombre_eval DESC";

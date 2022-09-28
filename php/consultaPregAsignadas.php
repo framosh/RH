@@ -6,7 +6,7 @@ require 'arhsi_connect.php';
 $query="SELECT Preg_xeval.posicion, Preg_xcom.nombre_pregpc, Preg_om.nombre_pregom FROM Preg_xeval 
 LEFT JOIN Preg_om ON Preg_om.clv_preg_om = Preg_xeval.clv_preg_om
 LEFT JOIN Preg_xcom ON Preg_xcom.clv_preg_pc = Preg_xeval.clv_preg_pc
-WHERE (Preg_xeval.clv_evaluacion = '$evaluacion')";
+WHERE (Preg_xeval.clv_tipo_eval = '$evaluacion')";
 
 $result = mysqli_query($dbc,$query);
 $numero_filas = mysqli_num_rows($result);

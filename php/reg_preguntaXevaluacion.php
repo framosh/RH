@@ -4,7 +4,7 @@ $campos = array();
 $campos = explode('|',$campos1); 
 
 /*
-    camposx22[0] = clv_evaluacion;
+    camposx22[0] = clv_tipo_eval;
     camposx22[1] = clv_preguntaXC;
     camposx22[2] = clv_preguntaOM;
     camposx22[3] = posicion;
@@ -12,7 +12,7 @@ $campos = explode('|',$campos1);
 
 require 'arhsi_connect.php';
 
-$query="SELECT * FROM Preg_xeval WHERE (clv_evaluacion = '$campos[0]' AND posicion = '$campos[3]')";
+$query="SELECT * FROM Preg_xeval WHERE (clv_tipo_eval = '$campos[0]' AND posicion = '$campos[3]')";
 
 $result = mysqli_query($dbc,$query);
 $numero_filas = mysqli_num_rows($result);
@@ -23,7 +23,7 @@ if($numero_filas >0){
 	return;
 }
 
-if(mysqli_stmt_prepare($stmt,"INSERT INTO Preg_xeval (clv_evaluacion,clv_preg_pc,clv_preg_om,posicion) 
+if(mysqli_stmt_prepare($stmt,"INSERT INTO Preg_xeval (clv_tipo_eval,clv_preg_pc,clv_preg_om,posicion) 
 VALUES (?,?,?,?)"))
 	{
 	mysqli_stmt_bind_param($stmt,"ssss",$campos[0],$campos[1],$campos[2],$campos[3]);
