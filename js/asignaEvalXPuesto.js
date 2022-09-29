@@ -229,7 +229,7 @@ function evalXpuesto(puesto_clv, evaluacion_clv) {
                     //             alert("campo: ("+i+") - ("+ids[i]+")");
                 }
             }
-            //$query="SELECT Evaluaciones.clv_evaluacion, Evaluaciones.nombre_eval, conocimientos.cono_desc, 
+            //$query="SELECT Evaluaciones.clv_tipo_eval, Evaluaciones.nombre_eval, conocimientos.cono_desc, 
             //Evaluaciones.nivel_cono FROM eval_XPuesto 
 
             var subtitulo = [];

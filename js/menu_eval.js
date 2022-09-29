@@ -183,7 +183,7 @@ function buscaExamenes(candidatox1) {
             //document.getElementById("empresa").innerHTML = cadena;
             var evaluaciones = cadena.split("\n");
             var i2 = 0;
-            //$query="SELECT Eval_xcand.clv_evaluacion, Eval_xcand.estatus_eval, conocimientos.cono_desc, 
+            //$query="SELECT Eval_xcand.clv_tipo_eval, Eval_xcand.estatus_eval, conocimientos.cono_desc, 
             //conocimientos.imagen, Eval_xcand.eval_liga FROM Eval_xcand 
 
             for (var i = 0; i < evaluaciones.length; i++) {

@@ -3,8 +3,8 @@ $puesto=$_GET["puesto"];
 $evaluacion=$_GET["evaluacion"];
 
 require 'arhsi_connect.php';
-$query="SELECT Evaluaciones.clv_evaluacion, Evaluaciones.nombre_eval, conocimientos.cono_desc, Evaluaciones.nivel_cono FROM eval_XPuesto 
-LEFT JOIN Evaluaciones ON Evaluaciones.clv_evaluacion = eval_XPuesto.clv_evaluacion
+$query="SELECT Evaluaciones.clv_tipo_eval, Evaluaciones.nombre_eval, conocimientos.cono_desc, Evaluaciones.nivel_cono FROM eval_XPuesto 
+LEFT JOIN Evaluaciones ON Evaluaciones.clv_tipo_eval = eval_XPuesto.clv_tipo_eval
 LEFT JOIN conocimientos ON conocimientos.clv_conocim = Evaluaciones.clv_conocim
 WHERE (eval_XPuesto.clv_puesto = '$puesto')";
 

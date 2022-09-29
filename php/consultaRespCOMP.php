@@ -6,7 +6,7 @@ require 'arhsi_connect.php';
 
 $query="SELECT Res_pc.resp_comp, Res_pc.calif_resp_pc FROM Preg_xeval 
 LEFT JOIN Res_pc ON Res_pc.clv_preg_pc = Preg_xeval.clv_preg_pc
-WHERE ((Preg_xeval.clv_evaluacion = $evaluacion) AND (Preg_xeval.clv_preg_pc = $pregunta))";
+WHERE ((Preg_xeval.clv_tipo_eval = $evaluacion) AND (Preg_xeval.clv_preg_pc = $pregunta))";
 
 $result = mysqli_query($dbc,$query);
 $numero_filas = mysqli_num_rows($result);

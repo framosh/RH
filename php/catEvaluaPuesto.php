@@ -3,8 +3,8 @@ $puesto=$_GET["puesto"];
 
 require 'arhsi_connect.php';
 
-$query="SELECT Evaluaciones.clv_evaluacion, Evaluaciones.nombre_eval FROM eval_XPuesto 
-LEFT JOIN Evaluaciones ON Evaluaciones.clv_evaluacion = eval_XPuesto.clv_evaluacion
+$query="SELECT Evaluaciones.clv_tipo_eval, Evaluaciones.nombre_eval FROM eval_XPuesto 
+LEFT JOIN Evaluaciones ON Evaluaciones.clv_tipo_eval = eval_XPuesto.clv_tipo_eval
 WHERE (eval_XPuesto.clv_puesto = $puesto) ORDER BY Evaluaciones.nombre_eval DESC";
 
 $result = mysqli_query($dbc,$query);

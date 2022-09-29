@@ -16,12 +16,12 @@ function limpiaPantalla_eval() {
 }
 
 var clv_conocimiento;
-var clv_evaluacion;
+var clv_tipo_eval;
 var nom_conocimiento;
 
 function determina_conocimiento() {
     clv_conocimiento = 0;
-    clv_evaluacion = 0;
+    clv_tipo_eval = 0;
     nom_conocimiento = "";
 
     var evaluacion = document.getElementById("evaluaciones").value;
@@ -36,7 +36,7 @@ function determina_conocimiento() {
         var nombre = evaluaciones2[i].split("|");
         var campo = nombre[1];
         if (campo == evaluacion) {
-            clv_evaluacion = nombre[0].trim();
+            clv_tipo_eval = nombre[0].trim();
             clv_conocimiento = nombre[2].trim();
             nom_conocimiento = nombre[3].trim();
             break;
@@ -45,7 +45,7 @@ function determina_conocimiento() {
 
     //    alert("Conocimiento: " + nom_conocimiento);
 
-    document.getElementById("clv_eval").value = clv_evaluacion;
+    document.getElementById("clv_eval").value = clv_tipo_eval;
     document.getElementById("conocimiento").value = nom_conocimiento;
     leePreguntasOM();
     leePreguntasXC();
@@ -112,12 +112,12 @@ function baja_pregunta() {
         return;
     }
 
-    clv_evaluacion = 0;
+    clv_tipo_eval = 0;
     for (i = 0; i < evaluaciones2.length; i++) {
         nombre = evaluaciones2[i].split("|");
         campo = nombre[1];
         if (campo == evaluacion) {
-            clv_evaluacion = nombre[0].trim();
+            clv_tipo_eval = nombre[0].trim();
             break;
         }
     }
@@ -147,7 +147,7 @@ function baja_pregunta() {
     }
 
     var camposx22 = [];
-    camposx22[0] = clv_evaluacion;
+    camposx22[0] = clv_tipo_eval;
     camposx22[1] = clv_preguntaXC;
     camposx22[2] = clv_preguntaOM;
 
@@ -241,13 +241,13 @@ function actualizaEvaluacion() {
         return;
     }
 
-    clv_evaluacion = 0;
+    clv_tipo_eval = 0;
     clv_conocimiento = 0;
     for (i = 0; i < evaluaciones2.length; i++) {
         nombre = evaluaciones2[i].split("|");
         campo = nombre[1];
         if (campo == evaluacion) {
-            clv_evaluacion = nombre[0].trim();
+            clv_tipo_eval = nombre[0].trim();
             clv_conocimiento = nombre[2].trim();
             break;
         }
@@ -284,7 +284,7 @@ function actualizaEvaluacion() {
 
     var camposx22 = [];
 
-    camposx22[0] = clv_evaluacion;
+    camposx22[0] = clv_tipo_eval;
     camposx22[1] = clv_preguntaXC;
     camposx22[2] = clv_preguntaOM;
     camposx22[3] = posicion;
@@ -335,7 +335,7 @@ function consultaPreguntasAsignadas() {
 
     //    var archivo1 = "https://svr.itbp.com.mx/httpdocs/consultaAplicaciones.php";
     var archivo1 = servidor + "httpdocs/consultaPregAsignadas.php";
-    var archivo2 = archivo1 + "?evaluacion=" + clv_evaluacion;
+    var archivo2 = archivo1 + "?evaluacion=" + clv_tipo_eval;
     var xhttp;
 
     if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari

@@ -57,7 +57,7 @@ function csvFromResult($stream, $result, $showColumnHeaders = true) {
         fputcsv($stream, $columnHeaders,$separador);
         }
 
-        //$query="SELECT Evaluaciones.clv_evaluacion, 
+        //$query="SELECT Evaluaciones.clv_tipo_eval, 
 //Evaluaciones.nombre_eval, conocimientos.cono_desc, Evaluaciones.puntaje_req, Evaluaciones.nivel_cono, 
 //Evaluaciones.observaciones 
 $nivelx1=["Bajo","Medio","Alto"];

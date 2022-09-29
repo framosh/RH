@@ -59,7 +59,7 @@ if($response)
         <td aling="left" font="./arial"><b>Nivel de conocimiento</b> </td>
 		<td aling="left" font="./arial"><b>Observaciones</b> </td></tr>';
 
-//$query="SELECT Evaluaciones.clv_evaluacion, 
+//$query="SELECT Evaluaciones.clv_tipo_eval, 
 //Evaluaciones.nombre_eval, conocimientos.cono_desc, Evaluaciones.puntaje_req, Evaluaciones.nivel_cono, 
 //Evaluaciones.observaciones 
 $nivelx1=["Bajo","Medio","Alto"];

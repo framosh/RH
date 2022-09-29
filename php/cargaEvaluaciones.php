@@ -2,8 +2,8 @@
 $candidato=$_GET["candidato"];
 
 require 'arhsi_connect.php';
-$query="SELECT Evaluaciones.clv_evaluacion, Evaluaciones.nombre_eval FROM Eval_xcand 
-LEFT JOIN Evaluaciones ON Evaluaciones.clv_evaluacion = Eval_xcand.clv_evaluacion
+$query="SELECT Evaluaciones.clv_tipo_eval, Evaluaciones.nombre_eval FROM Eval_xcand 
+LEFT JOIN Evaluaciones ON Evaluaciones.clv_tipo_eval = Eval_xcand.clv_tipo_eval
 WHERE 1 ORDER BY Eval_xcand.cand_key = $candidato DESC";
 
 $result = mysqli_query($dbc,$query);

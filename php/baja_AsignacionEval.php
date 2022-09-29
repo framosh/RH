@@ -4,7 +4,7 @@ $campos = array();
 $campos = explode('|',$campos1); 
 $condicion ="";
 
-$condicion = "(clv_puesto = '$campos[0]' AND clv_evaluacion = '$campos[1]')";
+$condicion = "(clv_puesto = '$campos[0]' AND clv_tipo_eval = '$campos[1]')";
 
 require 'arhsi_connect.php';
 

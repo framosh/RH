@@ -5,6 +5,7 @@ function despliegaEvalXcand(candidato_clv) {
     var archivo2 = archivo1 + "?candidato=" + candidato_clv;
     var xhttp;
 
+
     if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
         xhttp = new XMLHttpRequest();
     } else { // code for IE6, IE5
@@ -21,7 +22,7 @@ function despliegaEvalXcand(candidato_clv) {
                 document.getElementById("mensaje_gral").value = cadena;
                 return;
             }
-            //$query="SELECT Evaluaciones.clv_evaluacion, Evaluaciones.nombre_eval, Evaluaciones.nivel_cono, 
+            //$query="SELECT Evaluaciones.clv_tipo_eval, Evaluaciones.nombre_eval, Evaluaciones.nivel_cono, 
             //conocimientos.cono_desc FROM eval_XPuesto 
 
             var subtitulo = ["CLAVE", "NOMBRE", "ESTATUS", "AREA DE CONOCIMIENTO"];

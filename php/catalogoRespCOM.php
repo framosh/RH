@@ -7,12 +7,12 @@ if($evaluacion ==0){
     echo("0|No hay respuestas por complemento");
     return;
 } else {
-  $condicion = "((Preg_xeval.clv_evaluacion='$evaluacion') AND (Preg_xeval.clv_preg_pc != 0))";
+  $condicion = "((Preg_xeval.clv_tipo_eval='$evaluacion') AND (Preg_xeval.clv_preg_pc != 0))";
 }
 
 require 'arhsi_connect.php';
 
-$query="SELECT Preg_xeval.clv_preg_pc, Preg_xcom.nombre_pregpc, Preg_xeval.clv_evaluacion, posicion 
+$query="SELECT Preg_xeval.clv_preg_pc, Preg_xcom.nombre_pregpc, Preg_xeval.clv_tipo_eval, posicion 
 FROM Preg_xeval 
 LEFT JOIN Preg_xcom ON Preg_xcom.clv_preg_pc = Preg_xeval.clv_preg_pc
 WHERE $condicion ORDER BY Preg_xeval.posicion";

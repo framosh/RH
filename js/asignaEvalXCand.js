@@ -49,6 +49,7 @@ function nuevaVacante() {
     var vacio1 = 0;
     document.getElementById("candidatos").selectedIndex = vacio1;
     document.getElementById("evaluaciones").selectedIndex = vacio1;
+    document.getElementById("clv_eval").value = vacio;
     document.getElementById("puesto").value = vacio;
     document.getElementById("clave").value = vacio;
     document.getElementById("fecha").value = vacio;
@@ -342,6 +343,7 @@ function consultaEval() {
 }
 
 function cargaCandidatos() {
+    alert("Carga Candidatos");
     nuevaVacante();
     var vacante = document.getElementById("vacantes").value;
 

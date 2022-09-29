@@ -2,9 +2,9 @@
 $candidato=$_GET['candidato'];
 
 require 'arhsi_connect.php';
-$query="SELECT Eval_xcand.clv_evaluacion, Eval_xcand.estatus_eval, conocimientos.cono_desc, 
+$query="SELECT Eval_xcand.clv_tipo_eval, Eval_xcand.estatus_eval, conocimientos.cono_desc, 
 conocimientos.imagen, Eval_xcand.eval_liga FROM Eval_xcand 
-LEFT JOIN Evaluaciones ON Evaluaciones.clv_evaluacion = Eval_xcand.clv_evaluacion
+LEFT JOIN Evaluaciones ON Evaluaciones.clv_tipo_eval = Eval_xcand.clv_tipo_eval
 LEFT JOIN conocimientos ON conocimientos.clv_conocim = Evaluaciones.clv_conocim
 WHERE Eval_xcand.cand_key='$candidato'";
 

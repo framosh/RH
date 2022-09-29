@@ -7,12 +7,12 @@ if($evaluacion ==0){
     echo("0|No hay respuestas de opcion multiple");
     return;
 } else {
-  $condicion = "((Preg_xeval.clv_evaluacion='$evaluacion') AND (Preg_xeval.clv_preg_om != 0))";
+  $condicion = "((Preg_xeval.clv_tipo_eval='$evaluacion') AND (Preg_xeval.clv_preg_om != 0))";
 }
 
 require 'arhsi_connect.php';
 
-$query="SELECT Preg_xeval.clv_preg_om, Preg_om.nombre_pregom, Preg_xeval.clv_evaluacion, posicion 
+$query="SELECT Preg_xeval.clv_preg_om, Preg_om.nombre_pregom, Preg_xeval.clv_tipo_eval, posicion 
 FROM Preg_xeval 
 LEFT JOIN Preg_om ON Preg_om.clv_preg_om = Preg_xeval.clv_preg_om
 WHERE $condicion ORDER BY Preg_xeval.posicion";

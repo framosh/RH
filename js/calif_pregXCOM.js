@@ -364,7 +364,7 @@ function leePreguntas() {
                 return;
             }
             */
-            //$query="SELECT Preg_xeval.clv_preg_om, Preg_om.nombre_pregom, Preg_xeval.clv_evaluacion, posicion 
+            //$query="SELECT Preg_xeval.clv_preg_om, Preg_om.nombre_pregom, Preg_xeval.clv_tipo_eval, posicion 
             var preguntas = cadena.split("\n");
             var i2 = 0;
 
@@ -437,7 +437,7 @@ function consultaPregunta() {
     //    alert("Consulta Pregunta");
     var vacio = "";
     document.getElementById("mensaje_gral").innerHTML = vacio;
-    var clv_evaluacion = document.getElementById("clave_eval").value;
+    var clv_tipo_eval = document.getElementById("clave_eval").value;
 
     var foto_url = "../img/sin_foto.jpg";
     despliega_foto(foto_url);
@@ -494,7 +494,7 @@ function consultaPregunta() {
             document.getElementById("nombre").value = ids[1];
             document.getElementById("descripcion").value = ids[2];
             despliega_foto(ids[4]);
-            consultaRespuesta(clv_evaluacion, pregunta_clv);
+            consultaRespuesta(clv_tipo_eval, pregunta_clv);
         } else {
             //   alert("readyState="+xhttp.readyState+"        Status="+xhttp.status);
         }

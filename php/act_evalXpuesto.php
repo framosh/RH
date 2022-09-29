@@ -14,7 +14,7 @@ $observaciones = $dato[2];
 require 'arhsi_connect.php';
 
 if(mysqli_stmt_prepare($stmt,"UPDATE eval_XPuesto SET observaciones='$observaciones' 
-WHERE ((clv_puesto='$puesto') AND (clv_evaluacion='$evaluacion'))"))
+WHERE ((clv_puesto='$puesto') AND (clv_tipo_eval='$evaluacion'))"))
     {
 	mysqli_stmt_execute($stmt);		
 	$affected_rows = mysqli_stmt_affected_rows($stmt);
