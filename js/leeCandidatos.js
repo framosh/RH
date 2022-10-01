@@ -1,7 +1,7 @@
 var candidatos2 = [];
 
 function leeCandidatos(vacante_clv) {
-    alert("Entra a candidatos de la vacante: " + vacante_clv);
+    //    alert("Entra a candidatos de la vacante: " + vacante_clv);
     //    var limpia = "";
     //  document.getElementById("candidatos").innerHTML = limpia;
 
@@ -19,7 +19,7 @@ function leeCandidatos(vacante_clv) {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var cadena = xhttp.responseText;
-            alert("cadena: " + cadena);
+            //            alert("cadena: " + cadena);
             //            document.getElementById("mensaje_gral").textContent = "(" + cadena + ")" + "   longitud: (" + cadena.length + ")";
 
             var candidatos = cadena.split("\n");

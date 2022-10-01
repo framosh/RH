@@ -53,7 +53,8 @@ function nuevaVacante() {
     document.getElementById("puesto").value = vacio;
     document.getElementById("clave").value = vacio;
     document.getElementById("fecha").value = vacio;
-    document.getElementById("hora").value = vacio;
+    document.getElementById("hora_ini").value = vacio;
+    document.getElementById("hora_fin").value = vacio;
     document.getElementById("calificacion").value = vacio1;
     document.getElementById("estatus").selectedIndex = vacio1;
     document.getElementById("observacion").innerHTML = vacio;
@@ -70,7 +71,8 @@ function nuevoCandidato() {
     document.getElementById("puesto").value = vacio;
     document.getElementById("clave").value = vacio;
     document.getElementById("fecha").value = vacio;
-    document.getElementById("hora").value = vacio;
+    document.getElementById("hora_ini").value = vacio;
+    document.getElementById("hora_fin").value = vacio;
     document.getElementById("calificacion").value = vacio1;
     document.getElementById("estatus").selectedIndex = vacio1;
     document.getElementById("observacion").innerHTML = vacio;
@@ -87,7 +89,8 @@ function nuevaEvaluacion() {
     //    document.getElementById("puesto").value = vacio;
     //    document.getElementById("clave").value = vacio;
     document.getElementById("fecha").value = vacio;
-    document.getElementById("hora").value = vacio;
+    document.getElementById("hora_ini").value = vacio;
+    document.getElementById("hora_fin").value = vacio;
     document.getElementById("calificacion").value = vacio1;
     document.getElementById("estatus").selectedIndex = vacio1;
     document.getElementById("observacion").innerHTML = vacio;
@@ -326,13 +329,14 @@ function consultaEval() {
                 }
             }
 
-            var nivelx1 = ids[2];
-
-            document.getElementById("fecha").value = ids[3];
-            document.getElementById("hora").value = ids[4];
-            document.getElementById("calificacion").value = ids[5];
+            var nivelx1 = ids[3];
+            document.getElementById("clv_eval").value = ids[2];
+            document.getElementById("fecha").value = ids[4];
+            document.getElementById("hora_ini").value = ids[5];
+            document.getElementById("hora_fin").value = ids[6];
+            document.getElementById("calificacion").value = ids[7];
             document.getElementById("estatus").selectedIndex = nivelx1;
-            document.getElementById("observacion").innerHTML = ids[6];
+            document.getElementById("observacion").innerHTML = ids[8];
 
             document.getElementById("asigna").disabled = true;
             document.getElementById("actualiza").disabled = false;
@@ -343,7 +347,7 @@ function consultaEval() {
 }
 
 function cargaCandidatos() {
-    alert("Carga Candidatos");
+    //    alert("Carga Candidatos");
     nuevaVacante();
     var vacante = document.getElementById("vacantes").value;
 
