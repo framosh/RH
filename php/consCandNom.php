@@ -2,11 +2,7 @@
 $candidato=$_GET['candidato'];
 
 require 'arhsi_connect.php';
-$query="SELECT Eval_xcand.clv_tipo_eval, Eval_xcand.estatus_eval, conocimientos.cono_desc, 
-conocimientos.imagen, Eval_xcand.eval_liga, Eval_xcand.clv_evaluacion FROM Eval_xcand 
-LEFT JOIN Evaluaciones ON Evaluaciones.clv_tipo_eval = Eval_xcand.clv_tipo_eval
-LEFT JOIN conocimientos ON conocimientos.clv_conocim = Evaluaciones.clv_conocim
-WHERE Eval_xcand.cand_key='$candidato'";
+$query="SELECT cand_nom,cand_corr FROM Candidatos WHERE cand_key='$candidato'";
 
 $result = mysqli_query($dbc,$query);
 $numero_filas = mysqli_num_rows($result);
@@ -14,7 +10,7 @@ $numero_filas = mysqli_num_rows($result);
 if($numero_filas >0){
     Archivo($result);
 } else {
-    echo("No hay evaluaciones");
+    echo("No existe el Candidato");
 }
 
         function Archivo($result) {
@@ -40,5 +36,4 @@ if($numero_filas >0){
          return $nrows;
          }
 mysqli_close($dbc);
-
 ?>

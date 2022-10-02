@@ -120,7 +120,8 @@ function despliega_menu(candidatox1) {
         var tecnologia = "tecnologia" + (i + 1);
         var ligax1 = "liga" + (i + 1);
         var logo_url = "../img/" + imagen[i];
-        var direccion_liga = liga[i];
+        //        var direccion_liga = liga[i];
+        var direccion_liga = "esquema_gral.htm?cand=" + candidatox1 + "&eval=" + examenx1;
         document.getElementById(titulox).innerHTML = conocimiento[i];
         document.getElementById(estatusx).innerHTML = estatus2[estatusx1];
         //        var preview = document.querySelector('.display_image');
@@ -183,8 +184,10 @@ function buscaExamenes(candidatox1) {
             //document.getElementById("empresa").innerHTML = cadena;
             var evaluaciones = cadena.split("\n");
             var i2 = 0;
+
             //$query="SELECT Eval_xcand.clv_tipo_eval, Eval_xcand.estatus_eval, conocimientos.cono_desc, 
-            //conocimientos.imagen, Eval_xcand.eval_liga FROM Eval_xcand 
+            //conocimientos.imagen, Eval_xcand.eval_liga, Eval_xcand.clv_evaluacion FROM Eval_xcand 
+
 
             for (var i = 0; i < evaluaciones.length; i++) {
                 var campo = evaluaciones[i];
@@ -193,7 +196,7 @@ function buscaExamenes(candidatox1) {
                     evaluaciones[i2] = campo.trim();
                     evaluaciones[i2] = evaluaciones[i2].replace(/\"/g, "");
                     evalua = evaluaciones[i2].split("|");
-                    examen[i2] = evalua[0];
+                    examen[i2] = evalua[5];
                     estatus[i2] = evalua[1];
                     conocimiento[i2] = evalua[2];
                     imagen[i2] = evalua[3];
