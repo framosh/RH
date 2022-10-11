@@ -2,6 +2,10 @@ var cand1 = [];
 var cand_clv;
 var cand_nom;
 var evaluacion;
+var hora_ini;
+var hora_fin;
+var fecha;
+
 
 window.onload = function () {
     //    alert("Elige servidor");
@@ -29,15 +33,16 @@ window.onload = function () {
         }
         cand_clv = cand1[0];
         evaluacion = cand1[1];
-        aplica_examen(cand_clv);
+        aplica_examen();
         //        setTimeout(consultaCandidato(cand_clv), 3000);
     }
 };
 
-function aplica_examen(cand_clv) {
-    alert("Aplica examen");
-    pantalla_OM();
-    consultaCandidato(cand_clv);
+function aplica_examen() {
+    //    alert("Aplica examen para candidato: " + cand_clv + " evaluacion: " + evaluacion);
+
+    //    pantalla_OM();
+    consultaCandidato();
 }
 
 function despliega_foto(foto_url) {
@@ -153,7 +158,6 @@ function limpiaPantalla_PC() {
     document.getElementById("clave").value = vacio;
     document.getElementById("descripcion").value = vacio;
     document.getElementById("resp1").value = vacio;
-    document.getElementById("resp2").value = vacio;
 
     document.getElementById("alta").disabled = false;
     document.getElementById("actualiza").disabled = false;
@@ -182,7 +186,6 @@ function limpiaPantalla_OM() {
     document.getElementById("resp4").value = vacio;
     document.getElementById("resp5").value = vacio;
     document.getElementById("solucion1").value = vacio;
-    document.getElementById("solucion2").value = vacio;
 
     document.getElementById("mensaje_gral").innerHTML = vacio;
 }
@@ -190,7 +193,7 @@ function limpiaPantalla_OM() {
 var preguntas2 = [];
 
 function cargaPreguntas() {
-    limpiaPantalla_preg();
+    //    limpiaPantalla_preg();
 
     var vacio = "";
     document.getElementById("mensaje_gral").innerHTML = vacio;
@@ -210,25 +213,16 @@ function cargaPreguntas() {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var cadena = xhttp.responseText;
-            //            alert("Cadena del catalogo de conocimientos: " + cadena);
-            var preguntas = cadena.split("\n");
-            var i2 = 0;
-            var cant_preguntas = preguntas.length;
-            if (cant_preguntas == 0) {
-                alert("La evaluación: " + evaluacion + " no tiene preguntas");
+            alert("Cadena de preguntas de la evaluacion: " + cadena);
+
+            var cadena2 = cadena.split(":");
+            if (cadena2[0] == "No hay Preguntas para la evaluación") {
+                alert(cadena);
                 return;
             }
 
-            for (var i = 0; i < cant_preguntas; i++) {
-                var campo = preguntas[i];
-                if (campo != null && campo != "") {
-                    preguntas2[i2] = campo.trim();
-                    //                    preguntas2[i2] = preguntas2[i2].split("|");
-                    //                    alert("campo: (" + i2 + ") - (" + puestos2[i2] + ")");
-                    i2++;
-                }
-            }
-            despliega_preguntas(preguntas2);
+            var preguntas = cadena.split("\n");
+            despliega_preguntas(preguntas);
         } else {
             //            alert("Estado: " + xhttp.readyState + "  Status: " + xhttp.status);
         }
@@ -236,41 +230,141 @@ function cargaPreguntas() {
     xhttp.send();
 }
 
+var pregunta265 = 0;
+var pregunta266 = [];
+
 function despliega_preguntas(preguntas2) {
     var pregunta = [];
     pregunta = preguntas2;
-    var cant_preguntas = pregunta.length;
-    for (i = 0; i < cant_preguntas; i++) {
-        consultaPregunta(pregunta[i]);
+    var preguntas = pregunta.length;
+    var renglon;
+
+    alert("Cantidad de preguntas : " + preguntas);
+
+    for (var i2 = 1; i2 < preguntas; i2++) {
+        renglon = pregunta[i2];
+
+        if (renglon.length == 7) {
+            pregunta265++;
+            pregunta266[pregunta265] = pregunta[i2];
+        }
     }
+    consultaPregunta();
 }
 
-function consultaPregunta(preguntax1) {
+
+function temporizador(tiempo, renglon) {
+    var renglon2 = renglon;
+    var lapso = tiempo;
+    return new Promise(function (resolve) {
+        setTimeout(function () {
+            resolve(renglon2);
+        }, lapso);
+    });
+}
+
+
+function getData(data) {
+    var mensaje = "";
+    return new Promise(function (resolve, reject) {
+        setTimeout(function () {
+            if (data.length < 7) {
+                reject(new Error('Sin datos'));
+            } else {
+                resolve(data);
+            }
+        }, 9000);
+    });
+}
+
+function despliega(renglon) {
+    getData(renglon)
+        .then((response) => consultaPregunta(response))
+        .catch((err) => alert(err.message));
+}
+
+function consultaPregunta() {
     //    alert("Consulta Pregunta");
     var vacio = "";
     document.getElementById("mensaje_gral").innerHTML = vacio;
+    //    alert("Pregunta: " + preguntax1);
+
+    if (pregunta265 < 1) {
+        alert("Ya no hay mas preguntas");
+        actualizaExamen();
+        return;
+    }
+
+    var preguntax1 = pregunta266[pregunta265];
+    pregunta265--;
+
+    if (preguntax1.length < 7) {
+        return;
+    }
+
     var pregunta = preguntax1.split("|");
-    var pregunta_clv = pregunta[0];
+    var pregunta_clv = pregunta[2];
     var tipo_preg = pregunta[1];
     if (tipo_preg == "1") {
         pantalla_OM();
-        consulta_OM(preguntax1);
+        consulta_OM(pregunta_clv);
     } else {
         pantalla_PC();
-        consulta_PC(preguntax1);
+        consulta_PC(pregunta_clv);
     }
 }
 
-function consulta_PC(pregunta_clv) {
+function actualizaExamen() {
+    alert("Actualiza examen");
+    var estatus = 2;
+
+    var camposx22 = [];
+
+    camposx22[0] = evaluacion;
+    camposx22[1] = estatus;
+    camposx22[2] = hora_ini;
+    camposx22[3] = hora_fin;
+    camposx22[4] = fecha;
+
+    var camposx23 = camposx22.join("|");
+
+    var archivo1 = servidor + "httpdocs/actualizaExamenCand.php";
+    var archivo2 = archivo1 + "?Campos=" + camposx23;
+    var xhttp;
+
+    if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+        xhttp = new XMLHttpRequest();
+    } else { // code for IE6, IE5
+        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    xhttp.open("GET", archivo2, true);
+    xhttp.send(null);
+
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            var cadena = xhttp.responseText;
+            //          alert("cadena: " + cadena);
+            document.getElementById("mensaje_gral").innerHTML = cadena;
+        } else {
+            //   alert("readyState="+xhttp.readyState+"        Status="+xhttp.status);
+        }
+    };
+}
+
+function consulta_PC(clave_pc) {
     //    alert("Consulta Pregunta");
     var vacio = "";
     document.getElementById("mensaje_gral").innerHTML = vacio;
+
     var foto_url = "../img/sin_foto.jpg";
     despliega_foto(foto_url);
     foto_dir = foto_url;
 
-    var archivo1 = servidor + "httpdocs/consultaPreg_xcomp.php";
-    var archivo2 = archivo1 + "?clave=" + pregunta_clv;
+    //    alert("Clave pregunta: " + clave_pc);
+
+    var archivo1 = servidor + "httpdocs/consultaPregXCOMP.php";
+    var archivo2 = archivo1 + "?clave=" + clave_pc;
     var xhttp;
 
     if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -289,7 +383,7 @@ function consulta_PC(pregunta_clv) {
 
             var mensaje_cadena = cadena.split(":");
             //          alert("Cadena: " + cadena);
-            if (mensaje_cadena[0] == "No hay Pregunta número") {
+            if (mensaje_cadena[0] == "No hay Pregunta clave") {
                 document.getElementById("mensaje_gral").innerHTML = cadena;
                 return;
             }
@@ -303,22 +397,26 @@ function consulta_PC(pregunta_clv) {
                     //             alert("campo: ("+i+") - ("+ids[i]+")");
                 }
             }
-
+            document.getElementById("clave").value = ids[0];
             document.getElementById("nombre").value = ids[1];
             document.getElementById("descripcion").value = ids[2];
             document.getElementById("resp1").value = ids[5];
-            document.getElementById("resp2").value = ids[6];
             despliega_foto(ids[4]);
-
         } else {
             //   alert("readyState="+xhttp.readyState+"        Status="+xhttp.status);
         }
     };
 }
 
-function consulta_OM(pregunta_clv) {
+function consulta_OM(clave_om) {
+    var foto_url = "../img/sin_foto.jpg";
+    despliega_foto(foto_url);
+
+    //    var clave_pc = pregunta[2];
+    //    alert("Clave pregunta: " + clave_om);
+
     var archivo1 = servidor + "httpdocs/consPregOM.php";
-    var archivo2 = archivo1 + "?clave=" + pregunta_clv;
+    var archivo2 = archivo1 + "?clave=" + clave_om;
     var xhttp;
 
     if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -336,7 +434,7 @@ function consulta_OM(pregunta_clv) {
             //          alert("cadena: " + cadena);
 
             var mensaje_cadena = cadena.split(":");
-            if (mensaje_cadena[0] == "No hay Pregunta número") {
+            if (mensaje_cadena[0] == "No hay Pregunta clave") {
                 document.getElementById("mensaje_gral").innerHTML = cadena;
                 return;
             }
@@ -350,7 +448,7 @@ function consulta_OM(pregunta_clv) {
                     //             alert("campo: ("+i+") - ("+ids[i]+")");
                 }
             }
-
+            document.getElementById("clave").value = ids[0];
             document.getElementById("nombre").value = ids[1];
             document.getElementById("descripcion").value = ids[2];
             document.getElementById("resp1").value = ids[5];
@@ -359,7 +457,6 @@ function consulta_OM(pregunta_clv) {
             document.getElementById("resp4").value = ids[8];
             document.getElementById("resp5").value = ids[9];
             document.getElementById("solucion1").value = ids[10];
-            document.getElementById("solucion2").value = ids[11];
             despliega_foto(ids[12]);
         } else {
             //   alert("readyState="+xhttp.readyState+"        Status="+xhttp.status);
@@ -367,8 +464,9 @@ function consulta_OM(pregunta_clv) {
     };
 }
 
-function consultaCandidato(cand_clv) {
-    alert("Consulta Candidato: (" + cand_clv + ")");
+
+function consultaCandidato() {
+    //    alert("Consulta Candidato: (" + cand_clv + ")");
 
     var archivo1 = servidor + "httpdocs/consCandNom.php";
     var archivo2 = archivo1 + "?candidato=" + cand_clv;
@@ -408,7 +506,7 @@ function consultaCandidato(cand_clv) {
                 }
             }
 
-            var candido = cand_clv + "-" + ids[0];
+            var candido = cand_clv + " - " + ids[0];
             document.getElementById("candidato").innerHTML = candido;
             cargaPreguntas();
         }
@@ -417,7 +515,7 @@ function consultaCandidato(cand_clv) {
 }
 
 function pantalla_PC() {
-    alert("Dibuja pantalla por Complemento");
+    //    alert("Dibuja pantalla por Complemento");
     document.getElementById("esquema_gral").innerHTML =
         '    <div class="grid-layout">\n' +
         '    <div class="caja c1">\n' +
@@ -461,7 +559,6 @@ function pantalla_PC() {
         '<fieldset>\n' +
         '<table>\n' +
         '<tr><td>Respuesta 1:</td><td><textarea name="resp1" cols="62"  rows="4" id="resp1" value="" ></textarea></td></tr>\n' +
-        '<tr><td>Respuesta 2:</td><td><textarea name="resp2" cols="62"  rows="4" id="resp2" value="" ></textarea></td></tr>\n' +
         '</table>\n' +
         '</fieldset>\n' +
         '</form>\n' +
@@ -471,7 +568,7 @@ function pantalla_PC() {
         '<br>\n' +
         '<div class="caja c4">\n' +
         '<div>\n' +
-        '<button  id="actualiza" type="submit"  onclick="actPregPC()">Siguiente</button>\n' +
+        '<button  id="actualiza" type="submit"  onclick="regRespPC()">Siguiente</button>\n' +
         '</div>\n' +
         '</div>\n' +
         '</div>\n' +
@@ -484,7 +581,7 @@ function pantalla_PC() {
 
 
 function pantalla_OM() {
-    alert("Dibuja pantalla Opcion Multiple");
+    //    alert("Dibuja pantalla Opcion Multiple");
     document.getElementById("esquema_gral").innerHTML =
         '<div class="grid-layout">' +
         '<div class="caja c1">\n' +
@@ -533,7 +630,6 @@ function pantalla_OM() {
         '<tr><td>Respuesta 4:</td><td><input type="text" name="resp4"   id="resp4" size="70"  required></td></tr>\n' +
         '<tr><td>Respuesta 5:</td><td><input type="text" name="resp5"   id="resp5" size="70"  required></td></tr>\n' +
         '<tr><td>Solucion 1:</td><td><input type="text" name="solucion1" id="solucion1" val="0" required></td></tr>\n' +
-        '<tr><td>Solucion 2:</td><td><input type="text" name="solucion2" id="solucion2" val="0" required></td></tr>\n' +
         '</table>\n' +
         '</fieldset>\n' +
         '</form>\n' +
@@ -543,7 +639,7 @@ function pantalla_OM() {
         '<br>\n' +
         '   <div class="caja c4">\n' +
         '<div>\n' +
-        '<button  id="actualiza" type="submit"  onclick="actPregOM()">Siguiente</button>\n' +
+        '<button  id="actualiza" type="submit"  onclick="regRespOM()">Siguiente</button>\n' +
         '</div>\n' +
         '</div>\n' +
         '</div>\n' +
@@ -552,4 +648,113 @@ function pantalla_OM() {
         '<p id="mensaje_imagen"  style="color: blue"></p>\n' +
         '<p id="mensaje_gral"  style="color: red"></p>\n' +
         '</div>\n';
+}
+
+//regRespPC()
+// Registro la respuesta a la pregunta de por complemento
+//regRespPC
+function regRespPC() {
+    alert("Registra respuesta por complemento");
+    var vacio = "";
+    var vacio1 = 0;
+    document.getElementById("mensaje_gral").value = vacio;
+
+    var pregunta_clv = document.getElementById("clave").value;
+    var solucion1 = document.getElementById("resp1").value;
+    solucion1 = solucion1.replace(/\n/g, "\\n");
+
+    if (solucion1 == 0 || solucion1 == null) {
+        alert("No hay solucion");
+        return;
+    }
+
+    var camposx22 = [];
+    camposx22[0] = evaluacion;
+    camposx22[1] = cand_clv;
+    camposx22[2] = pregunta_clv;
+    camposx22[3] = solucion1;
+
+    var camposx23 = camposx22.join("|");
+
+    var archivo1 = "";
+
+    alert("Registra respuesta PC");
+    alert("Datos: " + camposx23);
+    //    archivo1 = servidor + "httpdocs/act_pregunta.php";
+    archivo1 = servidor + "httpdocs/reg_respPC.php";
+
+    var archivo2 = archivo1 + "?Campos=" + camposx23;
+    var xhttp;
+
+    if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+        xhttp = new XMLHttpRequest();
+    } else { // code for IE6, IE5
+        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    xhttp.open("GET", archivo2, true);
+    xhttp.send(null);
+
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            var cadena = xhttp.responseText;
+            alert("Cadena: " + cadena);
+            document.getElementById("mensaje_gral").innerHTML = cadena;
+        }
+    };
+    consultaPregunta();
+}
+
+
+// Registro la respuesta a la pregunta de Opcion Multiple
+function regRespOM() {
+    //    alert("Alta y Actualización de Evaluaciones");
+    var vacio = "";
+    var vacio1 = 0;
+    document.getElementById("mensaje_gral").value = vacio;
+
+    var pregunta_clv = document.getElementById("clave").value;
+    var solucion1 = document.getElementById("solucion1").value;
+    solucion1 = solucion1.replace(/\n/g, "\\n");
+
+    if (solucion1 == 0 || solucion1 == null) {
+        alert("No hay solucion");
+        return;
+    }
+
+    var camposx22 = [];
+    camposx22[0] = evaluacion;
+    camposx22[1] = cand_clv;
+    camposx22[2] = pregunta_clv;
+    camposx22[3] = solucion1;
+
+    var camposx23 = camposx22.join("|");
+
+    var archivo1 = "";
+
+    alert("Registra respuesta OM");
+    alert("Datos: " + camposx23);
+    //    archivo1 = servidor + "httpdocs/act_pregunta.php";
+    archivo1 = servidor + "httpdocs/reg_respOM.php";
+
+    var archivo2 = archivo1 + "?Campos=" + camposx23;
+    var xhttp;
+
+    if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+        xhttp = new XMLHttpRequest();
+    } else { // code for IE6, IE5
+        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    xhttp.open("GET", archivo2, true);
+    xhttp.send(null);
+
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            var cadena = xhttp.responseText;
+            alert("Cadena: " + cadena);
+            document.getElementById("mensaje_gral").innerHTML = cadena;
+        }
+    };
+    consultaPregunta();
 }
