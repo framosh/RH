@@ -9,7 +9,6 @@ for($i1=0;$i1<$elementos;$i1++){
     $campos[$i1] = str_replace('"','\"',$campos[$i1]);
 }
 
-
 /*
     camposx22[1] = evaluacion;
     camposx22[2] = candidato;
@@ -22,7 +21,7 @@ require 'arhsi_connect.php';
 if(mysqli_stmt_prepare($stmt,"INSERT INTO Res_pom (clv_evaluacion,cand_key,clv_preg_om,sol_resp1) 
 VALUES (?,?,?,?)"))
 	{
-	mysqli_stmt_bind_param($stmt,"ssss",$campos[1],$campos[2],$campos[5],$campos[3]);
+	mysqli_stmt_bind_param($stmt,"ssss",$campos[0],$campos[1],$campos[2],$campos[3]);
 	mysqli_stmt_execute($stmt);
 
 	$affected_rows = mysqli_stmt_affected_rows($stmt);

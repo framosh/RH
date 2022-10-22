@@ -115,13 +115,14 @@ function despliega_menu(candidatox1) {
     for (i = 0; i < evaluaciones; i++) {
         examenx1 = examen[i];
         estatusx1 = estatus[i];
+        var conocimiento_desc = conocimiento[i];
         var titulox = "evalua" + (i + 1);
         var estatusx = "estatus" + (i + 1);
         var tecnologia = "tecnologia" + (i + 1);
         var ligax1 = "liga" + (i + 1);
         var logo_url = "../img/" + imagen[i];
         //        var direccion_liga = liga[i];
-        var direccion_liga = "esquema_gral.htm?cand=" + candidatox1 + "&eval=" + examenx1;
+        var direccion_liga = "esquema_gral.htm?cand=" + candidatox1 + "&eval=" + examenx1 + "&desc=" + conocimiento_desc;
         document.getElementById(titulox).innerHTML = conocimiento[i];
         document.getElementById(estatusx).innerHTML = estatus2[estatusx1];
         //        var preview = document.querySelector('.display_image');

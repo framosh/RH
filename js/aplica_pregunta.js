@@ -2,6 +2,7 @@ var cand1 = [];
 var cand_clv;
 var cand_nom;
 var evaluacion;
+var eval_desc;
 var hora_ini;
 var hora_fin;
 var fecha;
@@ -33,6 +34,7 @@ window.onload = function () {
         }
         cand_clv = cand1[0];
         evaluacion = cand1[1];
+        eval_desc = cand1[2];
         aplica_examen();
         //        setTimeout(consultaCandidato(cand_clv), 3000);
     }
@@ -232,12 +234,19 @@ function cargaPreguntas() {
 
 var pregunta265 = 0;
 var pregunta266 = [];
+var preguntas;
 
 function despliega_preguntas(preguntas2) {
     var pregunta = [];
     pregunta = preguntas2;
-    var preguntas = pregunta.length;
+    preguntas = pregunta.length;
     var renglon;
+
+    var today = new Date().toLocaleDateString();
+    fecha = today;
+
+    var tiempo = new Date().toLocaleTimeString();
+    hora_ini = tiempo;
 
     alert("Cantidad de preguntas : " + preguntas);
 
@@ -283,6 +292,8 @@ function despliega(renglon) {
         .catch((err) => alert(err.message));
 }
 
+var pregunta2X = 0;
+
 function consultaPregunta() {
     //    alert("Consulta Pregunta");
     var vacio = "";
@@ -297,6 +308,9 @@ function consultaPregunta() {
 
     var preguntax1 = pregunta266[pregunta265];
     pregunta265--;
+    pregunta2X++;
+    var pregunta_msg = "pregunta: " + pregunta2X + "  de: " + preguntas;
+    document.getElementById("pagina").innerHTML = pregunta_msg;
 
     if (preguntax1.length < 7) {
         return;
@@ -314,10 +328,18 @@ function consultaPregunta() {
     }
 }
 
+var fecha;
+var hora_ini;
+var hora_fin;
+
+// Actualiza datos finales de la aplicación de las evaluaciones del candidato
 function actualizaExamen() {
     alert("Actualiza examen");
-    var estatus = 2;
 
+    var tiempo = new Date().toLocaleTimeString();
+    hora_fin = tiempo;
+
+    var estatus = 2;
     var camposx22 = [];
 
     camposx22[0] = evaluacion;
@@ -466,7 +488,7 @@ function consulta_OM(clave_om) {
 
 
 function consultaCandidato() {
-    //    alert("Consulta Candidato: (" + cand_clv + ")");
+    alert("Consulta Candidato: (" + cand_clv + ")");
 
     var archivo1 = servidor + "httpdocs/consCandNom.php";
     var archivo2 = archivo1 + "?candidato=" + cand_clv;
@@ -506,11 +528,12 @@ function consultaCandidato() {
                 }
             }
 
-            var candido = cand_clv + " - " + ids[0];
+            var candido = ids[0];
             document.getElementById("candidato").innerHTML = candido;
             cargaPreguntas();
         }
     };
+    document.getElementById("examen").innerHTML = eval_desc;
     //    xhttp.disabled();
 }
 
@@ -528,8 +551,8 @@ function pantalla_PC() {
         '<table>\n' +
 
         '<tr><td>Clave pregunta:</td><td><input type="text" name="clave"   id="clave"   disabled></td></tr>\n' +
-        '<tr><td>Pregunta:</td><td><input type="text" name="nombre"   id="nombre"  size="70" required></td></tr>\n' +
-        '<tr><td>Descripción:</td><td><textarea name="descripcion" cols="70"  rows="3" id="descripcion" value=""  required></textarea></td></tr>\n' +
+        '<tr><td>Pregunta:</td><td><input type="text" name="nombre"   id="nombre"  size="70" disabled></td></tr>\n' +
+        '<tr><td>Descripción:</td><td><textarea name="descripcion" cols="70"  rows="3" id="descripcion" value=""  disabled></textarea></td></tr>\n' +
         '</table>\n' +
         '</fieldset>\n' +
         '</form>\n' +
@@ -543,7 +566,7 @@ function pantalla_PC() {
         '<div>\n' +
         '<h3>Gráfico del cuestionamiento</h3>\n' +
         '<div>\n' +
-        '<input type="file" id="image_input" accept="image/jpg" onchange="carga_imagen()">\n' +
+        '<!-- <input type="file" id="image_input" accept="image/jpg" onchange="carga_imagen()">\n -->' +
         '<br>\n' +
         '<br>\n' +
         '<img class="display_image" src="" id="display_image" style="width: 100%; max-width:400px; max-height:400px;" alt="Seleccione un archivo.....">\n' +
@@ -594,9 +617,8 @@ function pantalla_OM() {
         '<table>\n' +
 
         '<tr><td>Clave pregunta:</td><td><input type="text" name="clave"   id="clave"   disabled></td></tr>\n' +
-        '<tr><td>Conocimiento:</td><td><input type="text" name="conocimiento"   id="conocimiento" size="70"  required></td></tr>\n' +
-        '<tr><td>Pregunta:</td><td><input type="text" name="nombre"   id="nombre" size="70"  required></td></tr>\n' +
-        '<tr><td>Descripción:</td><td><textarea name="descripcion" cols="70"  rows="3" id="descripcion" value=""  required></textarea></td></tr>\n' +
+        '<tr><td>Pregunta:</td><td><input type="text" name="nombre"   id="nombre" size="70"  disabled></td></tr>\n' +
+        '<tr><td>Descripción:</td><td><textarea name="descripcion" cols="70"  rows="3" id="descripcion" value=""  disabled></textarea></td></tr>\n' +
         '</table>\n' +
         '</fieldset>\n' +
         '</form>\n' +
@@ -609,7 +631,7 @@ function pantalla_OM() {
         '<fieldset>\n' +
         '          <div>\n' +
         '        <div>\n' +
-        '             <input type="file" id="image_input" accept="image/jpg" onchange="carga_imagen()">\n' +
+        '<!--             <input type="file" id="image_input" accept="image/jpg" onchange="carga_imagen()">\n -->' +
         '            <br>\n' +
         '           <br>\n' +
         '          <img class="display_image" src="" id="display_image"  style="width: 100%; max-width:400px; max-height:400px;" alt="Imagen de pregunta.....">\n' +
@@ -624,11 +646,11 @@ function pantalla_OM() {
         '<form>\n' +
         '<fieldset>\n' +
         '<table>\n' +
-        '<tr><td>Respuesta 1:</td><td><input type="text" name="resp1"   id="resp1" size="70"  required></td></tr>\n' +
-        '<tr><td>Respuesta 2:</td><td><input type="text" name="resp2"   id="resp2" size="70"  required></td></tr>\n' +
-        '<tr><td>Respuesta 3:</td><td><input type="text" name="resp3"   id="resp3" size="70"  required></td></tr>\n' +
-        '<tr><td>Respuesta 4:</td><td><input type="text" name="resp4"   id="resp4" size="70"  required></td></tr>\n' +
-        '<tr><td>Respuesta 5:</td><td><input type="text" name="resp5"   id="resp5" size="70"  required></td></tr>\n' +
+        '<tr><td>Respuesta 1:</td><td><input type="text" name="resp1"   id="resp1" size="70"  disabled></td></tr>\n' +
+        '<tr><td>Respuesta 2:</td><td><input type="text" name="resp2"   id="resp2" size="70"  disabled></td></tr>\n' +
+        '<tr><td>Respuesta 3:</td><td><input type="text" name="resp3"   id="resp3" size="70"  disabled></td></tr>\n' +
+        '<tr><td>Respuesta 4:</td><td><input type="text" name="resp4"   id="resp4" size="70"  disabled></td></tr>\n' +
+        '<tr><td>Respuesta 5:</td><td><input type="text" name="resp5"   id="resp5" size="70"  disabled></td></tr>\n' +
         '<tr><td>Solucion 1:</td><td><input type="text" name="solucion1" id="solucion1" val="0" required></td></tr>\n' +
         '</table>\n' +
         '</fieldset>\n' +

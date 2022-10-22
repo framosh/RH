@@ -351,12 +351,14 @@ function registroVacante() {
     //  actual_url = window.location.href;
     //    alert("Actual Url: " + actual_url);
     //  alert("Archivo1: " + archivo1);
+
+    /*
     funciones = funciones.replace(/\n/g, "\\n");
     requisitos = requisitos.replace(/\n/g, "\\n");
     obs = obs.replace(/\n/g, "\\n");
     lugar = lugar.replace(/\n/g, "\\n");
     horario = horario.replace(/\n/g, "\\n");
-
+*/
     var datosx1 = [];
     datosx1[0] = cliente_clv;
     datosx1[1] = vacante;

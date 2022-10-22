@@ -1,12 +1,13 @@
 <?php 
 $candidato=$_GET['candidato'];
+$estatus ="1";
 
 require 'arhsi_connect.php';
 $query="SELECT Eval_xcand.clv_tipo_eval, Eval_xcand.estatus_eval, conocimientos.cono_desc, 
 conocimientos.imagen, Eval_xcand.eval_liga, Eval_xcand.clv_evaluacion FROM Eval_xcand 
 LEFT JOIN Evaluaciones ON Evaluaciones.clv_tipo_eval = Eval_xcand.clv_tipo_eval
 LEFT JOIN conocimientos ON conocimientos.clv_conocim = Evaluaciones.clv_conocim
-WHERE Eval_xcand.cand_key='$candidato'";
+WHERE ((Eval_xcand.cand_key='$candidato') AND (Eval_xcand.estatus_eval='$estatus'))";
 
 $result = mysqli_query($dbc,$query);
 $numero_filas = mysqli_num_rows($result);

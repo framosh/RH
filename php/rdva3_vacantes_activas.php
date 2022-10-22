@@ -57,16 +57,16 @@ $bgc2="darkgrey";
 $response=mysqli_query($dbc,$query);
 if($response)
 	{
-	echo '<table align="left" style="width:170%;">
+	echo '<table align="left" style="width:200%;">
 	<tr style="background-color:'.$bgc2.';">
 	<td align="Center"    font="./arial"><b>Clave Vac.</b>    </td>
 	<td align="Center"    font="./arial"><b>Puesto</b>    </td>
 	<td align="Center"    font="./arial"><b>Nivel</b>    </td>
-	<td width="6%" align="center"  font="./arial"><b>Fecha registro</b>   </td>
-	<td align="Center"    font="./arial"><b>Requisitos</b>    </td>
-	<td align="Center"    font="./arial"><b>Funciones</b>     </td>
-	<td align="center"    font="./arial"><b>Lugar</b>   </td>
-	<td align="center"    font="./arial"><b>Horario</b>   </td>
+	<td width="5%" align="center"  font="./arial"><b>Fecha registro</b>   </td>
+	<td width="23%"align="Center"    font="./arial"><b>Requisitos del puesto</b>    </td>
+	<td width="23%"align="Center"    font="./arial"><b>Funciones a realizar</b>     </td>
+	<td width="10%" align="center"    font="./arial"><b>Lugar de trabajo</b>   </td>
+	<td width="10%" align="center"    font="./arial"><b>Horario</b>   </td>
 	<td align="center"    font="./arial"><b>Observaciones</b>   </td></tr>';
 
 	while($row = mysqli_fetch_array($response))
