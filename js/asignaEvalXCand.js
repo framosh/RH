@@ -352,7 +352,7 @@ function cargaCandidatos() {
     var vacante = document.getElementById("vacantes").value;
 
     if (vacante == "0-Seleccione una Vacante") {
-        alert("0-Seleccione una Vacante");
+        alert("Seleccione una Vacante");
         return;
     }
 

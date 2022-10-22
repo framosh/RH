@@ -18,6 +18,17 @@ for($i1=0;$i1<$elementos;$i1++){
 
 require 'arhsi_connect.php';
 
+$query="SELECT * FROM Res_pc WHERE clv_evaluacion='$campos[0]' AND clv_preg_pc='$campos[2]'";
+$result = mysqli_query($dbc,$query);
+$numero_filas = mysqli_num_rows($result);
+
+if($numero_filas >0){
+	$mensaje = "Ya existe la pregunta";
+	echo($mensaje);
+    mysqli_close($dbc);
+	return;
+}
+
 if(mysqli_stmt_prepare($stmt,"INSERT INTO Res_pc (clv_evaluacion,cand_key,clv_preg_pc,resp_comp) 
 VALUES (?,?,?,?)"))
 	{

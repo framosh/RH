@@ -3,12 +3,15 @@
 setlocale(LC_ALL,"es_ES");
 $encoding = "UTF-8";
 $evaluacion=$_GET['evaluacion'];
+$estatus=1;
 
 require 'arhsi_connect.php';
 
-$condicion="clv_evaluacion='$evaluacion'";
+$condicion="preg_eval_cand.clv_evaluacion='$evaluacion' AND Eval_xcand.estatus_eval='$estatus'";
 
-$query="SELECT * FROM preg_eval_cand WHERE ($condicion)";
+$query="SELECT preg_eval_cand.clv_evaluacion, preg_eval_cand.clv_tipo_preg, preg_eval_cand.clv_pregunta FROM preg_eval_cand 
+LEFT JOIN Eval_xcand ON Eval_xcand.clv_evaluacion = preg_eval_cand.clv_evaluacion
+WHERE ($condicion)";
 
 $result = mysqli_query($dbc,$query);
 $numero_filas = mysqli_num_rows($result);

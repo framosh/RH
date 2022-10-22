@@ -238,8 +238,8 @@ function modificaPregunta() {
 
     var archivo1 = "";
 
-    alert("Actualiza pregunta");
-    alert("Datos: " + camposx23);
+    //    alert("Actualiza pregunta");
+    //  alert("Datos: " + camposx23);
     archivo1 = servidor + "httpdocs/act_pregunta.php";
 
     var archivo2 = archivo1 + "?Campos=" + camposx23;

@@ -7,7 +7,6 @@ var hora_ini;
 var hora_fin;
 var fecha;
 
-
 window.onload = function () {
     //    alert("Elige servidor");
     elige_servidor();
@@ -192,7 +191,7 @@ function limpiaPantalla_OM() {
     document.getElementById("mensaje_gral").innerHTML = vacio;
 }
 
-var preguntas2 = [];
+//var preguntas2 = [];
 
 function cargaPreguntas() {
     //    limpiaPantalla_preg();
@@ -215,11 +214,12 @@ function cargaPreguntas() {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var cadena = xhttp.responseText;
-            alert("Cadena de preguntas de la evaluacion: " + cadena);
+            //            alert("Cadena de preguntas de la evaluacion: " + cadena);
 
             var cadena2 = cadena.split(":");
             if (cadena2[0] == "No hay Preguntas para la evaluación") {
                 alert(cadena);
+                salir();
                 return;
             }
 
@@ -248,16 +248,19 @@ function despliega_preguntas(preguntas2) {
     var tiempo = new Date().toLocaleTimeString();
     hora_ini = tiempo;
 
-    alert("Cantidad de preguntas : " + preguntas);
+    //   alert("Cantidad de preguntas : " + preguntas);
+    //  alert(pregunta);
 
     for (var i2 = 1; i2 < preguntas; i2++) {
         renglon = pregunta[i2];
 
-        if (renglon.length == 7) {
+        if (renglon.length >= 5) {
             pregunta265++;
             pregunta266[pregunta265] = pregunta[i2];
+            //            alert(pregunta266[pregunta265]);
         }
     }
+    preguntas = pregunta265;
     consultaPregunta();
 }
 
@@ -272,7 +275,7 @@ function temporizador(tiempo, renglon) {
     });
 }
 
-
+/*
 function getData(data) {
     var mensaje = "";
     return new Promise(function (resolve, reject) {
@@ -291,14 +294,14 @@ function despliega(renglon) {
         .then((response) => consultaPregunta(response))
         .catch((err) => alert(err.message));
 }
-
+*/
 var pregunta2X = 0;
 
 function consultaPregunta() {
     //    alert("Consulta Pregunta");
     var vacio = "";
     document.getElementById("mensaje_gral").innerHTML = vacio;
-    //    alert("Pregunta: " + preguntax1);
+    //    alert("Pregunta: " + pregunta265);
 
     if (pregunta265 < 1) {
         alert("Ya no hay mas preguntas");
@@ -307,19 +310,22 @@ function consultaPregunta() {
     }
 
     var preguntax1 = pregunta266[pregunta265];
+    //    alert("Pregunta: " + preguntax1);
+
     pregunta265--;
     pregunta2X++;
     var pregunta_msg = "pregunta: " + pregunta2X + "  de: " + preguntas;
     document.getElementById("pagina").innerHTML = pregunta_msg;
 
-    if (preguntax1.length < 7) {
+    if (preguntax1.length < 5) {
         return;
     }
 
     var pregunta = preguntax1.split("|");
     var pregunta_clv = pregunta[2];
     var tipo_preg = pregunta[1];
-    if (tipo_preg == "1") {
+    //    alert("Tipo pregunta: " + tipo_preg);
+    if (tipo_preg == "2") {
         pantalla_OM();
         consulta_OM(pregunta_clv);
     } else {
@@ -334,7 +340,7 @@ var hora_fin;
 
 // Actualiza datos finales de la aplicación de las evaluaciones del candidato
 function actualizaExamen() {
-    alert("Actualiza examen");
+    //    alert("Actualiza examen");
 
     var tiempo = new Date().toLocaleTimeString();
     hora_fin = tiempo;
@@ -347,6 +353,7 @@ function actualizaExamen() {
     camposx22[2] = hora_ini;
     camposx22[3] = hora_fin;
     camposx22[4] = fecha;
+    camposx22[5] = cand_clv;
 
     var camposx23 = camposx22.join("|");
 
@@ -368,14 +375,25 @@ function actualizaExamen() {
             var cadena = xhttp.responseText;
             //          alert("cadena: " + cadena);
             document.getElementById("mensaje_gral").innerHTML = cadena;
+            salir();
         } else {
             //   alert("readyState="+xhttp.readyState+"        Status="+xhttp.status);
         }
     };
 }
 
+function salir() {
+    /*
+    if (confirm("¿Quiere salir?")) {
+        window.close();
+    }
+    */
+    window.close();
+}
+
+
 function consulta_PC(clave_pc) {
-    //    alert("Consulta Pregunta");
+    //    alert("Clave pregunta PC: " + clave_pc);
     var vacio = "";
     document.getElementById("mensaje_gral").innerHTML = vacio;
 
@@ -383,7 +401,7 @@ function consulta_PC(clave_pc) {
     despliega_foto(foto_url);
     foto_dir = foto_url;
 
-    //    alert("Clave pregunta: " + clave_pc);
+    //    alert("Clave pregunta PC: " + clave_pc);
 
     var archivo1 = servidor + "httpdocs/consultaPregXCOMP.php";
     var archivo2 = archivo1 + "?clave=" + clave_pc;
@@ -434,8 +452,8 @@ function consulta_OM(clave_om) {
     var foto_url = "../img/sin_foto.jpg";
     despliega_foto(foto_url);
 
-    //    var clave_pc = pregunta[2];
-    //    alert("Clave pregunta: " + clave_om);
+    var clave_pc = clave_om;
+    //    alert("Clave pregunta OM: " + clave_om);
 
     var archivo1 = servidor + "httpdocs/consPregOM.php";
     var archivo2 = archivo1 + "?clave=" + clave_om;
@@ -488,7 +506,7 @@ function consulta_OM(clave_om) {
 
 
 function consultaCandidato() {
-    alert("Consulta Candidato: (" + cand_clv + ")");
+    //    alert("Consulta Candidato: (" + cand_clv + ")");
 
     var archivo1 = servidor + "httpdocs/consCandNom.php";
     var archivo2 = archivo1 + "?candidato=" + cand_clv;
@@ -581,7 +599,7 @@ function pantalla_PC() {
         '<form>\n' +
         '<fieldset>\n' +
         '<table>\n' +
-        '<tr><td>Respuesta 1:</td><td><textarea name="resp1" cols="62"  rows="4" id="resp1" value="" ></textarea></td></tr>\n' +
+        '<tr><td>Respuesta 1:</td><td><textarea name="resp1" cols="75"  rows="13" id="resp1" value="" ></textarea></td></tr>\n' +
         '</table>\n' +
         '</fieldset>\n' +
         '</form>\n' +
@@ -676,7 +694,7 @@ function pantalla_OM() {
 // Registro la respuesta a la pregunta de por complemento
 //regRespPC
 function regRespPC() {
-    alert("Registra respuesta por complemento");
+    //    alert("Registra respuesta por complemento");
     var vacio = "";
     var vacio1 = 0;
     document.getElementById("mensaje_gral").value = vacio;
@@ -700,8 +718,8 @@ function regRespPC() {
 
     var archivo1 = "";
 
-    alert("Registra respuesta PC");
-    alert("Datos: " + camposx23);
+    //   alert("Registra respuesta PC");
+    //    alert("Datos: " + camposx23);
     //    archivo1 = servidor + "httpdocs/act_pregunta.php";
     archivo1 = servidor + "httpdocs/reg_respPC.php";
 
@@ -720,7 +738,7 @@ function regRespPC() {
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var cadena = xhttp.responseText;
-            alert("Cadena: " + cadena);
+            //            alert("Cadena: " + cadena);
             document.getElementById("mensaje_gral").innerHTML = cadena;
         }
     };
@@ -754,8 +772,8 @@ function regRespOM() {
 
     var archivo1 = "";
 
-    alert("Registra respuesta OM");
-    alert("Datos: " + camposx23);
+    //    alert("Registra respuesta OM");
+    //  alert("Datos: " + camposx23);
     //    archivo1 = servidor + "httpdocs/act_pregunta.php";
     archivo1 = servidor + "httpdocs/reg_respOM.php";
 
@@ -774,7 +792,7 @@ function regRespOM() {
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var cadena = xhttp.responseText;
-            alert("Cadena: " + cadena);
+            //            alert("Cadena: " + cadena);
             document.getElementById("mensaje_gral").innerHTML = cadena;
         }
     };

@@ -7,7 +7,7 @@
     overflow: auto;
     height: 100%;
     outline-offset: -1px;
-    max-height: 400px;
+    max-height: 800px;
 }
 
 .container {
@@ -131,7 +131,7 @@ body {
 
 .c3 {
     grid-area: respuestas;
-    max-height: 200px;
+    max-height: 300px;
     /*  border-right: 0px; */
     /*    border-left: 0px; */
     /* grid-column: 1/4; */
