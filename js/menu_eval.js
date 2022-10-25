@@ -92,22 +92,17 @@ function despliega_menu(candidatox1) {
     var evaluaciones = examen.length;
     //    alert("examen: " + examen);
     //  alert("examen length: " + evaluaciones);
+    for (i2 = 0; i2 < 6; i2++) {
+        var tecnologia1 = "tecnologia" + (i2 + 1);
+        //        var logo_url1 = "../img/sin_foto.jpg";
+        var logo_url1 = "../img/elicor5.jpg";
+        var preview1 = document.getElementById(tecnologia1);
+        preview1.src = logo_url1;
+    }
+
     if (evaluaciones == 0) {
         alert("No hay evaluaciones por aplicar");
         return;
-    }
-    /*
-                        examen[i2] = evalua[0];
-                        estatus[i2] = evalua[1];
-                        conocimiento[i2] = evalua[2];
-                        imagen[i2] = evalua[3];
-                        liga[i2] = evalua[4];
-        */
-    for (i2 = 0; i2 < 6; i2++) {
-        var tecnologia1 = "tecnologia" + (i2 + 1);
-        var logo_url1 = "../img/sin_foto.jpg";
-        var preview1 = document.getElementById(tecnologia1);
-        preview1.src = logo_url1;
     }
 
     var examenx1 = 0;
@@ -189,7 +184,6 @@ function buscaExamenes(candidatox1) {
             //$query="SELECT Eval_xcand.clv_tipo_eval, Eval_xcand.estatus_eval, conocimientos.cono_desc, 
             //conocimientos.imagen, Eval_xcand.eval_liga, Eval_xcand.clv_evaluacion FROM Eval_xcand 
 
-
             for (var i = 0; i < evaluaciones.length; i++) {
                 var campo = evaluaciones[i];
                 if (campo) {
@@ -207,7 +201,7 @@ function buscaExamenes(candidatox1) {
                     }
 
                     if (imagen[i2] == "" || imagen[i2] == null) {
-                        imagen[i2] = "sin_foto.jpg";
+                        imagen[i2] = "elicor5.jpg";
                     }
                     //           alert("campo: ("+i2+") - ("+cliente2[i2]+")");
                     i2++;
