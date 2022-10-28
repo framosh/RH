@@ -62,6 +62,11 @@ function rep_pantalla() {
     }
 }
 
+function rep_grid() {
+    alert("Reporte de vacantes en Gridjs");
+    window.location.href = servidor + "vacantes.htm";
+}
+
 /* LANZA REPORTE EN EXCEL */
 function rep_excel() {
     var empresa = document.getElementById("empresas").value;

@@ -101,16 +101,6 @@ body {
     /*    float: left; */
 }
 
-.c0 {
-    grid-area: foto;
-    border-left: 0px;
-    /* grid-column: 1/4; */
-    /* grid-row: 1 / span 2; */
-    /*    grid-area: 1/1/3/4; */
-    /*    grid-column: 1 / span 2; */
-    background-color: rgb(220, 226, 240);
-}
-
 .c11 {
     grid-area: logox;
     border-right: 0px;
@@ -133,173 +123,9 @@ body {
 }
 
 .c2 {
-    grid-area: personal;
+    grid-area: reporte;
     /*grid-column: 1/3; */
     /*    grid-column: 1 / span 2; */
-    background-color: rgb(171, 192, 238);
-}
-
-.c3 {
-    grid-area: estudios;
-    /*grid-column: 3/4; */
-    /*    background-color: rgb(171, 192, 238);*/
-    /*    background-color: rgb(64, 236, 241);*/
-    background-color: rgb(171, 192, 238);
-}
-
-.c31 {
-    grid-area: profesion;
-    background-color: rgb(102, 241, 149);
-}
-
-.c32 {
-    grid-area: r-profesion;
-    background-color: rgb(102, 241, 149);
-}
-
-.c33 {
-    grid-area: colegio;
-    background-color: rgb(171, 192, 238);
-}
-
-.c34 {
-    grid-area: r-colegio;
-    background-color: rgb(171, 192, 238);
-}
-
-.c35 {
-    grid-area: campus;
-    background-color: rgb(171, 192, 238);
-}
-
-.c36 {
-    grid-area: r-campus;
-    background-color: rgb(171, 192, 238);
-}
-
-.c37 {
-    grid-area: periodo;
-    background-color: rgb(171, 192, 238);
-}
-
-.c38 {
-    grid-area: r-periodo;
-    background-color: rgb(171, 192, 238);
-}
-
-.c39 {
-    grid-area: certificado;
-    background-color: rgb(171, 192, 238);
-}
-
-.c40 {
-    grid-area: r-certificado;
-    background-color: rgb(171, 192, 238);
-}
-
-.grid-layout2 {
-    /*    font-size: 18px; */
-    font-weight: normal;
-    font-style: normal;
-    display: grid;
-    height: 200px;
-    width: 80%;
-    margin-left: 10%;
-    margin-right: 10%;
-    grid-template-areas: 'profesion r-profesion r-profesion r-profesion'
-        'colegio r-colegio r-colegio r-colegio'
-        'campus r-campus r-campus r-campus'
-        'periodo r-periodo certificado r-certificado';
-    grid-template-rows: 25% 25% 25% 25%;
-    grid-template-columns: 15% auto 15% auto;
-    background-color: chartreuse;
-    /*    border: 1px solid black; */
-}
-
-.grid-layout3 {
-    /*    font-size: 18px;*/
-    font-weight: normal;
-    font-style: normal;
-    display: grid;
-    height: 200px;
-    width: 80%;
-    margin-left: 10%;
-    margin-right: 10%;
-    grid-template-areas: 'profesion r-profesion r-profesion r-profesion'
-        'colegio r-colegio r-colegio r-colegio'
-        'campus r-campus r-campus r-campus'
-        'periodo r-periodo certificado r-certificado';
-    grid-template-rows: 25% 25% 25% 25%;
-    grid-template-columns: 15% auto 15% auto;
-    background-color: chartreuse;
-    /*    border: 1px solid black; */
-}
-
-.grid-layout4 {
-    /*    font-size: 18px;*/
-    font-weight: normal;
-    font-style: normal;
-    display: grid;
-    height: 600px;
-    margin-left: 10%;
-    margin-right: 10%;
-    grid-template-areas: 'experiencia';
-    grid-template-rows: 100%;
-    grid-template-columns: auto;
-    background-color: rgb(125, 236, 14);
-    /*    border: 1px solid black; */
-}
-
-.grid-layout5 {
-    /*    font-size: 18px;*/
-    font-weight: normal;
-    font-style: normal;
-    display: grid;
-    height: 100px;
-    margin-left: 10%;
-    margin-right: 10%;
-    grid-template-areas: 'cursos';
-    grid-template-rows: 100%;
-    grid-template-columns: auto;
-    background-color: rgb(125, 236, 14);
-    /*    border: 1px solid black; */
-}
-
-
-.c4 {
-    grid-area: cursos;
-    width: 100%;
-    /*    grid-column: 1 / span 2; */
-    background-color: rgb(171, 192, 238);
-}
-
-.c5 {
-    grid-area: experiencia;
-    /*    grid-column: 1;*/
-    width: 100%;
-    background-color: rgb(171, 192, 238);
-}
-
-.c6 {
-    grid-area: herramientas;
-    /*    width: 70%; */
-    /*    margin-left: 15%; */
-    /* margin-right: 15%; */
-    /* grid-column: 2/4; */
-    /*    background-color: rgb(171, 192, 238); */
-    background-color: cadetblue;
-}
-
-.c7 {
-    grid-area: idiomas;
-
-    /* grid-column: 2/4; */
-    background-color: rgb(171, 192, 238);
-}
-
-.c8 {
-    grid-area: comentarios;
-    /* grid-column: 2/4; */
     background-color: rgb(171, 192, 238);
 }
 
@@ -309,20 +135,14 @@ body {
     font-style: normal;
 
     display: grid;
-    height: 1800px;
+    height: 600px;
     width: 80%;
     margin-left: 10%;
     margin-right: 10%;
-    grid-template-areas: 'logox cabecera foto'
-        'personal personal personal'
-        'estudios estudios estudios'
-        'cursos cursos cursos'
-        'experiencia experiencia experiencia'
-        'herramientas herramientas herramientas'
-        'idiomas idiomas idiomas'
-        'comentarios comentarios comentarios';
-    grid-template-rows: auto auto auto 15% auto auto 8% auto;
-    grid-template-columns: 25% auto 15%;
+    grid-template-areas: 'logox cabecera'
+        'reporte reporte';
+    grid-template-rows: 18% auto;
+    grid-template-columns: auto auto;
     /*    grid-template-columns: 80% auto; */
     /*    grid-template-rows: 20% 10% 60% auto; */
     /* grid-template-rows: auto; */
