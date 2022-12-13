@@ -84,20 +84,20 @@ $bgc2="darkgrey";
 $response=mysqli_query($dbc,$query);
 if($response)
 	{
-	echo '<table align="left" style="width:170%;">
+	echo '<table align="left" style="width:200%;">
 	<tr style="background-color:'.$bgc2.';">
 	<td aling="left"  font="./arial"><b>Empresa</b>     </td>
 	<td align="Center"    font="./arial"><b>Clave Vac.</b>    </td>
 	<td align="Center"    font="./arial"><b>Puesto</b>    </td>
 	<td align="Center"    font="./arial"><b>Nivel</b>    </td>
-	<td align="Center"    font="./arial"><b>Requisitos</b>    </td>
-	<td align="Center"    font="./arial"><b>Funciones</b>     </td>
-	<td align="center"    font="./arial"><b>Lugar</b>   </td>
-	<td align="center"    font="./arial"><b>Horario</b>   </td>
+	<td width="23%" align="Center"    font="./arial"><b>Requisitos</b>    </td>
+	<td width="23%" align="Center"    font="./arial"><b>Funciones</b>     </td>
+	<td width="10%" align="center"    font="./arial"><b>Lugar</b>   </td>
+	<td width="10%" align="center"    font="./arial"><b>Horario</b>   </td>
 	<td align="center"    font="./arial"><b>Observaciones</b>   </td>
 	<td align="Center"    font="./arial"><b>Rango 1 Sdo</b>    </td>
 	<td align="Center"    font="./arial"><b>Rango 2 Sdo</b>    </td>
-	<td align="center"  font="./arial"><b>Fecha registro</b>   </td></tr>';
+	<td width="5%" align="center"  font="./arial"><b>Fecha registro</b>   </td></tr>';
 
 
 	while($row = mysqli_fetch_array($response))
@@ -120,6 +120,10 @@ if($response)
 			$row[6]=$nivel2;
 
         $fecha = date('d F, Y', strtotime($row[8]));
+		$row[12] = str_replace("\\n","<br>",$row[12]);
+		$row[4] = str_replace("\\n","<br>",$row[4]);
+		$row[5] = str_replace("\\n","<br>",$row[5]);
+
 		echo '<tr><td align="left"  font="arial">'.
 		$row[2]  .'</td><td align="left" >'.
 		$row[0]  .'</td><td align="left" >'.

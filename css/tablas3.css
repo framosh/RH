@@ -5,6 +5,18 @@
     font-size: 12px;
     width: 100%;
     overflow: auto;
+    height: 100%;
+    outline-offset: -1px;
+    /* max-height: 5em; */
+}
+
+.layoutx2 {
+    font-family: arial, sans-serif, verdana;
+    display: block;
+    margin: auto;
+    font-size: 12px;
+    /*  width: 100%; */
+    overflow: auto;
     /*    height: 100%; */
     outline-offset: -1px;
     /*    max-height: 5em; */

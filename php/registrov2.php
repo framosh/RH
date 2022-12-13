@@ -2,25 +2,33 @@
 $campos1 = $_GET['datosx2']; 
 $campos = array();
 $campos = explode('|',$campos1); 
-
 /*
-$campos[0]=$_GET["empresa"];
-$campos[1]=$_GET["vacante"];
-$campos[2]=$_GET["nombre"];
-$campos[3]=$_GET["puesto"];
-$campos[4]=$_GET["nivel"];
-$campos[5]=$_GET["requisitos"];
-$campos[6]=$_GET["funciones"];
-$campos[7]=$_GET["lugar"];
-$campos[8]=$_GET["sueldo1"];
-$campos[9]=$_GET["sueldo2"];
-$campos[10]=$_GET["edad1"];
-$campos[11]=$_GET["edad2"];
-$campos[12]=$_GET["estatus"];
-$campos[13]=$_GET["fecha"];
-$campos[14]=$_GET["horario"];
-$campos[15]=$_GET["obs"];
+    datosx1[0] = cliente_clv;
+    datosx1[1] = vacante;
+    datosx1[2] = nvacante;
+    datosx1[3] = puesto_clv;
+    datosx1[4] = nivel;
+    datosx1[5] = requisitos;
+    datosx1[6] = funciones;
+    datosx1[7] = lugar;
+    datosx1[8] = sueldo1;
+    datosx1[9] = sueldo2;
+    datosx1[10] = edad1;
+    datosx1[11] = edad2;
+    datosx1[12] = estatus;
+    datosx1[13] = fecha;
+    datosx1[14] = horario;
+    datosx1[15] = obs;
+    datosx1[16] = func2;
+    datosx1[17] = req2;
+    datosx1[18] = obs2;
 */
+//if(mysqli_stmt_prepare($stmt,"INSERT INTO Vacantes (emp_clave,vac_desc,clv_puesto,Funciones,Requisitos,
+//Nivel,Lugar,horario,Observaciones,vac_fech_reg,vac_sdo1,vac_sdo2,vac_edad1,vac_edad2,
+//Estatus,func2,req2,obs2) 
+
+//mysqli_stmt_bind_param($stmt,"ssssssssssssssssss",$campos[0],$campos[2],$campos[3],$campos[6],$campos[5],$campos[4],$campos[7],$campos[14],$campos[15],$campos[13],$campos[8],$campos[9],$campos[10],$campos[11],$campos[12],$campos[16],$campos[17],$campos[18]);
+
 $camposx1 = count($campos);
 
 for($i=0;$i< $camposx1;$i++) {
@@ -31,10 +39,10 @@ for($i=0;$i< $camposx1;$i++) {
 
 require 'arhsi_connect.php';
 
-if(mysqli_stmt_prepare($stmt,"INSERT INTO Vacantes (emp_clave,vac_desc,clv_puesto,Funciones,Requisitos,Nivel,Lugar,vac_fech_reg,Estatus,vac_sdo1,vac_sdo2,vac_edad1,vac_edad2,horario,Observaciones) 
-VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"))
+if(mysqli_stmt_prepare($stmt,"INSERT INTO Vacantes (emp_clave,vac_desc,clv_puesto,Funciones,Requisitos,Nivel,Lugar,horario,Observaciones,vac_fech_reg,vac_sdo1,vac_sdo2,vac_edad1,vac_edad2,Estatus,func2,req2,obs2) 
+VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"))
 	{
-	mysqli_stmt_bind_param($stmt,"sssssssssssssss",$campos[0],$campos[2],$campos[3],$campos[6],$campos[5],$campos[4],$campos[7],$campos[13],$campos[12],$campos[8],$campos[9],$campos[10],$campos[11],$campos[14],$campos[15]);
+	mysqli_stmt_bind_param($stmt,"ssssssssssssssssss",$campos[0],$campos[2],$campos[3],$campos[6],$campos[5],$campos[4],$campos[7],$campos[14],$campos[15],$campos[13],$campos[8],$campos[9],$campos[10],$campos[11],$campos[12],$campos[16],$campos[17],$campos[18]);
 	mysqli_stmt_execute($stmt);
 	$affected_rows = mysqli_stmt_affected_rows($stmt);
 

@@ -86,6 +86,9 @@ function limpiaPantalla2() {
     document.getElementById("Lugar").value = vacio;
     document.getElementById("Horario").value = vacio;
     document.getElementById("Obs").value = vacio;
+    document.getElementById("Func2").value = vacio;
+    document.getElementById("Req2").value = vacio;
+    document.getElementById("Obs2").value = vacio;
 
     document.getElementById("sdo1").value = opcion;
     document.getElementById("sdo2").value = opcion;
@@ -211,6 +214,10 @@ function cargaDatos() {
             document.getElementById("edad1").value = ids[13];
             document.getElementById("edad2").value = ids[14];
             document.getElementById("Estatus").selectedIndex = opcion;
+            document.getElementById("Func2").value = ids[16];
+            document.getElementById("Req2").value = ids[17];
+            document.getElementById("Obs2").value = ids[18];
+
             document.getElementById("altav").disabled = true;
             document.getElementById("actualizav").disabled = false;
         }
@@ -237,10 +244,13 @@ function registroVacante() {
     var puesto = document.getElementById("puestos").value;
     var nivel = document.getElementById("Nivel").value;
     var requisitos = document.getElementById("Requisitos").value;
+    var req2 = document.getElementById("Req2").value;
     var funciones = document.getElementById("Funciones").value;
+    var func2 = document.getElementById("Func2").value;
     var lugar = document.getElementById("Lugar").value;
     var horario = document.getElementById("Horario").value;
     var obs = document.getElementById("Obs").value;
+    var obs2 = document.getElementById("Obs2").value;
     var sueldo1 = document.getElementById("sdo1").value;
     var sueldo2 = document.getElementById("sdo2").value;
     var edad1 = document.getElementById("edad1").value;
@@ -359,6 +369,13 @@ function registroVacante() {
     lugar = lugar.replace(/\n/g, "\\n");
     horario = horario.replace(/\n/g, "\\n");
 */
+    func2 = func2.replace(/\n/g, " \\n");
+    req2 = req2.replace(/\n/g, " \\n");
+    obs2 = obs2.replace(/\n/g, " \\n");
+    requisitos = requisitos.replace(/\n/g, " \\n");
+    funciones = funciones.replace(/\n/g, " \\n");
+    obs = obs.replace(/\n/g, " \\n");
+
     var datosx1 = [];
     datosx1[0] = cliente_clv;
     datosx1[1] = vacante;
@@ -376,7 +393,16 @@ function registroVacante() {
     datosx1[13] = fecha;
     datosx1[14] = horario;
     datosx1[15] = obs;
+    datosx1[16] = func2;
+    datosx1[17] = req2;
+    datosx1[18] = obs2;
 
+    /*
+        alert("func2:" + func2);
+        alert("req2:" + req2);
+        alert("obs2:" + obs2);
+        alert("archivo1:" + archivo1);
+    */
     var camposx2 = datosx1.join("|");
     camposx2 = camposx2.replace(/\#/g, " Sharp");
 

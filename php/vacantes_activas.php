@@ -11,7 +11,7 @@ setlocale(LC_MONETARY,'en_US');
 
 require 'arhsi_connect.php';
 
-$query="SELECT Vacantes.clv_vacante, Puestos.puesto_desc, Vacantes.Nivel,Vacantes.Funciones,Vacantes.Requisitos, Vacantes.vac_sdo1, Vacantes.vac_sdo2,Vacantes.horario, Vacantes.Lugar,Vacantes.Observaciones FROM Vacantes 
+$query="SELECT Vacantes.clv_vacante, Puestos.puesto_desc, Vacantes.Nivel,Vacantes.func2,Vacantes.req2, Vacantes.vac_sdo1, Vacantes.vac_sdo2,Vacantes.horario, Vacantes.Lugar,Vacantes.obs2 FROM Vacantes 
 LEFT JOIN Puestos ON Puestos.clv_puesto = Vacantes.clv_puesto
 WHERE $consulta ORDER BY Vacantes.clv_vacante DESC";
 

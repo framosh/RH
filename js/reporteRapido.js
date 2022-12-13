@@ -3,6 +3,7 @@ Generador de reporte de pantalla universal, con columnas ajustables
 a la cantidad especificada y renglones ajustables a la cantidad de lineas
 */
 
+
 var tablax6;
 var cuerpox6;
 var columnas;
@@ -20,14 +21,16 @@ function quickReport(contenido, tabla, cuerpo, subtitulo) {
     linea = contenido;
 
     //    renglones--;
-    //    alert("Renglones a desplegar: " + renglones);
     /*
-        if (renglones < 1) {
-            mensaje1 = "No hay registros";
-            document.getElementById("mensaje_gral").innerHTML = mensaje1;
-            return;
-        }
+    alert("Renglones a desplegar: " + renglones);
+
+    if (renglones < 1) {
+        mensaje1 = "No hay registros";
+        document.getElementById("mensaje_gral").innerHTML = mensaje1;
+        return;
+    }
     */
+
     var renglon4 = 0;
     var i4;
 

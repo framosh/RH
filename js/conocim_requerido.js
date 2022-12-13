@@ -159,11 +159,12 @@ function altaConocimReque() {
     var anios = document.getElementById("anios").value;
     var meses = document.getElementById("meses").value;
     var empresa = document.getElementById("empresas").value;
-
-    if (anios > 0 || meses > 0) {
-        alert("Ya existe este conocimiento en la vacante");
-        return;
-    }
+    /*
+        if (anios > 0 || meses > 0) {
+            alert("Ya existe este conocimiento en la vacante");
+            return;
+        }
+        */
 
     if (empresa == "Seleccione una Empresa") {
         alert("Seleccione una Empresa");
@@ -359,7 +360,8 @@ function despliegaConocimientos() {
     var limpia = "";
     var vacio1 = 0;
 
-    document.getElementById("conocimientos").innerHTML = limpia;
+    //    document.getElementById("conocimientos").innerHTML = limpia;
+    document.getElementById("conocimientos").selectedIndex = vacio1;
     document.getElementById("nivel").selectedIndex = vacio1;
     document.getElementById("anios").valor = vacio1;
     document.getElementById("meses").valor = vacio1;
@@ -401,30 +403,38 @@ function despliegaConocimientos() {
         if ((xhttp.readyState == 4) && (xhttp.status == 200)) {
             //            limpiaTabla();
             var cadena = xhttp.responseText;
+            //            alert("cadena: " + cadena);
             var conocim_cand = cadena.split("\n");
-            var conocimiento_clv = conocim_cand[0];
-            var nombre = conocim_cand[0];
-            var nivel = conocim_cand[1];
-            var anios = conocim_cand[2];
-            var meses = conocim_cand[3];
+            /*
+                        var conocimiento_clv = conocim_cand[0];
+                        var nombre = conocim_cand[0];
+                        var nivel = conocim_cand[1];
+                        var anios = conocim_cand[2];
+                        var meses = conocim_cand[3];
 
-            var llave = 0;
-            var nvo_index = conocim_cand.length;
-            nvo_index++;
-            var nvo_renglon = conocimiento_clv + "|" + nombre + "|" + nivel + "|" + anios + "|" + meses + "\n";
-            if (conocim_cand.length == 0) {
-                conocim_cand[0] = nvo_renglon;
-            } else {
-                conocim_cand[nvo_index] = nvo_renglon;
-            }
+                        var llave = 0;
+                        var nvo_index = conocim_cand.length;
+                        nvo_index++;
+                        var nvo_renglon = conocimiento_clv + "|" + nombre + "|" + nivel + "|" + anios + "|" + meses + "\n";
+                        alert("Nuevo renglon:" + nvo_renglon);
+
+                        if (conocim_cand.length == 0) {
+                            conocim_cand[0] = nvo_renglon;
+                        } else {
+                            conocim_cand[nvo_index] = nvo_renglon;
+                        }
+                        */
             //Despliegan en el cuadro de conocimientos el conocimiento registrado
             //            alert("Conocim_cand: " + conocim_cand);
-            quickReport(conocim_cand);
+            var tabla = "tabla4";
+            var cuerpo = "body10";
+
+            quickReport(conocim_cand, tabla, cuerpo);
 
             // var cadena = xhttp.responseText; // Regresa le mensaje enviado por el servidor en el proceso php 
-            var cadena2 = xhttp.statusText; // Regresa el texto del estatus del proceso
-            var cadena3 = xhttp.responseURL; // Regresa la URL que se proceso
-            var cadena4 = xhttp.getAllResponseHeaders(); // Regresa todo el estatus del proceso completo
+            //var cadena2 = xhttp.statusText; // Regresa el texto del estatus del proceso
+            //var cadena3 = xhttp.responseURL; // Regresa la URL que se proceso
+            //var cadena4 = xhttp.getAllResponseHeaders(); // Regresa todo el estatus del proceso completo
             //          alert("Web server:  " + cadena);
             //            document.getElementById("mensaje_gral").innerHTML = cadena;
             //        alert("Estatus del proceso:  " + cadena2);

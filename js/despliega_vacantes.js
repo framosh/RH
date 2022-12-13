@@ -74,7 +74,8 @@ function leeVacantes() {
                 search: true,
                 sort: false,
                 fixedHeader: true,
-                height: '400px',
+                //                height: '900px',
+                //              width: '2000px',
                 data: function () {
                     return vacantesx1.map(function (datos) {
                         return [datos.datos1, datos.datos2, datos.datos3, datos.datos4,
@@ -84,9 +85,6 @@ function leeVacantes() {
                     });
                 },
                 style: {
-                    table: {
-                        width: '2000px'
-                    },
                     th: {
                         backgroundColor: "#999",
                         color: "#fff",
@@ -101,6 +99,13 @@ function leeVacantes() {
     };
 }
 /*
+                    table: {
+                        width: '100%',
+                        height: '100%'
+                    },
+
+                height: '400px',
+
                 style: {
                     table: {
                         'white-space': 'nowrap'

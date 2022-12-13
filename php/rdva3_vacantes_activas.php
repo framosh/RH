@@ -46,9 +46,9 @@ echo "<div style='font-family:arial;'>Reporte de fecha: $f<br>";
 
 require 'arhsi_connect.php';
 
-$query="SELECT Vacantes.clv_vacante, Vacantes.emp_clave, Empresa.emp_nom, Puestos.puesto_desc, Vacantes.Funciones,
- Vacantes.Requisitos, Vacantes.Nivel, Vacantes.Lugar, Vacantes.vac_fech_reg, Vacantes.vac_sdo1, Vacantes.vac_sdo2, 
- Vacantes.horario, Vacantes.Observaciones, Vacantes.Estatus FROM Vacantes 
+$query="SELECT Vacantes.clv_vacante, Vacantes.emp_clave, Empresa.emp_nom, Puestos.puesto_desc, Vacantes.func2,
+ Vacantes.req2, Vacantes.Nivel, Vacantes.Lugar, Vacantes.vac_fech_reg, Vacantes.vac_sdo1, Vacantes.vac_sdo2, 
+ Vacantes.horario, Vacantes.obs2, Vacantes.Estatus FROM Vacantes 
 LEFT JOIN Empresa ON Empresa.emp_clave = Vacantes.emp_clave
 LEFT JOIN Puestos ON Puestos.clv_puesto = Vacantes.clv_puesto
 WHERE $consulta ORDER BY Vacantes.emp_clave ASC, Vacantes.clv_vacante DESC";
@@ -63,8 +63,8 @@ if($response)
 	<td align="Center"    font="./arial"><b>Puesto</b>    </td>
 	<td align="Center"    font="./arial"><b>Nivel</b>    </td>
 	<td width="5%" align="center"  font="./arial"><b>Fecha registro</b>   </td>
-	<td width="23%"align="Center"    font="./arial"><b>Requisitos del puesto</b>    </td>
-	<td width="23%"align="Center"    font="./arial"><b>Funciones a realizar</b>     </td>
+	<td width="23%" align="Center"    font="./arial"><b>Requisitos del puesto</b>    </td>
+	<td width="23%" align="Center"    font="./arial"><b>Funciones a realizar</b>     </td>
 	<td width="10%" align="center"    font="./arial"><b>Lugar de trabajo</b>   </td>
 	<td width="10%" align="center"    font="./arial"><b>Horario</b>   </td>
 	<td align="center"    font="./arial"><b>Observaciones</b>   </td></tr>';
@@ -73,10 +73,9 @@ if($response)
 		{
 		$row[6]=$nivel[$row[6]];
 		$fecha = date('d/m/Y', strtotime($row[8]));
-		$row[12] = str_replace("\n","<br>",$row[12]);
-		$row[4] = str_replace("\n","<br>",$row[4]);
-		$row[12] = str_replace("\n","<br>",$row[12]);
-		$row[5] = str_replace("\n","<br>",$row[5]);
+		$row[12] = str_replace("\\n","<br>",$row[12]);
+		$row[4] = str_replace("\\n","<br>",$row[4]);
+		$row[5] = str_replace("\\n","<br>",$row[5]);
 
 		echo '<tr><td align="left"  font="arial">'.
 		$row[0]  .'</td><td align="left" >'.

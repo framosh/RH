@@ -20,6 +20,10 @@ $campos = explode('|',$campos1);
     datosx1[13] = fecha;
     datosx1[14] = horario;
     datosx1[15] = obs;
+        datosx1[16] = func2;
+    datosx1[17] = req2;
+    datosx1[18] = obs2;
+
 */
 
 $cantidad = count($campos);
@@ -32,7 +36,11 @@ for($i=0;$i<$cantidad;$i++) {
 
 require 'arhsi_connect.php';
 
-if(mysqli_stmt_prepare($stmt,"UPDATE Vacantes SET clv_puesto='$campos[3]', vac_desc='$campos[2]', Funciones='$campos[6]', Requisitos='$campos[5]', Nivel='$campos[4]', Lugar='$campos[7]', Estatus='$campos[12]', vac_sdo1='$campos[8]', vac_sdo2='$campos[9]', vac_edad2='$campos[11]', vac_edad1='$campos[10]', horario='$campos[14]', Observaciones='$campos[15]' 
+if(mysqli_stmt_prepare($stmt,"UPDATE Vacantes SET clv_puesto='$campos[3]', vac_desc='$campos[2]', 
+Funciones='$campos[6]', Requisitos='$campos[5]', Nivel='$campos[4]', Lugar='$campos[7]', 
+Estatus='$campos[12]', vac_sdo1='$campos[8]', vac_sdo2='$campos[9]', vac_edad2='$campos[11]', 
+vac_edad1='$campos[10]', horario='$campos[14]', Observaciones='$campos[15]', func2='$campos[16]', 
+req2='$campos[17]', obs2='$campos[18]' 
 WHERE ((clv_vacante LIKE '$campos[1]') AND (emp_clave LIKE '$campos[0]'))"))
 	 	{
 	  	mysqli_stmt_execute($stmt);

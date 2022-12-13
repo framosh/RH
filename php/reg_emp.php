@@ -19,7 +19,7 @@ require 'arhsi_connect.php';
 
 if(mysqli_stmt_prepare($stmt,"INSERT INTO Empresa (emp_nom,emp_contacto,emp_correo,emp_tel1,emp_tel2,emp_dir,emp_col,emp_del,estadoclv,emp_obs,Estatus) VALUES (?,?,?,?,?,?,?,?,?,?,?)"))
 	{
-	mysqli_stmt_bind_param($stmt,"sssssssssss",$Empresa,$Contacto,$Correo,$Tel1,$Tel2,$Direccion,$Colonia,$Delegacion,$row[0],$Observaciones,$Estatus);
+	mysqli_stmt_bind_param($stmt,"sssssssssss",$Empresa,$Contacto,$Correo,$Tel1,$Tel2,$Direcci000on,$Colonia,$Delegacion,$Estado,$Observaciones,$Estatus);
 	mysqli_stmt_execute($stmt);
 		
 	$affected_rows = mysqli_stmt_affected_rows($stmt);

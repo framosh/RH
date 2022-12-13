@@ -15,6 +15,7 @@ function quickReport(conocimientos, tabla, cuerpo) {
     var renglones = 0;
 
     var linea = listaConocim;
+    //    var linea = conocimientos;
     renglones = linea.length;
     //    renglones--;
     var mensaje1;
@@ -187,7 +188,7 @@ function creaTabla(renglones, columnas) {
     if (!document.getElementById(tablax6)) {
         //           alert("No existe la tabla, se crea tabla y el cuerpo de la tabla");
         tabla = document.createElement("table", {
-            class: "scroll"
+            //            class: "scroll"
         });
         tabla.id = tablax6;
         tabla.style.width = ancho;
@@ -210,7 +211,9 @@ function creaTabla(renglones, columnas) {
         tblBody = document.getElementById(cuerpox6);
     }
 
-    for (var i = renglones2; i < renglones; i++) {
+    //    var renglonesx2 = renglones + 1;
+
+    for (var i = renglones2; i <= renglones; i++) {
         //                alert("Crea linea: " + i);
         var hilera = document.createElement("tr");
         hilera.id = i;
