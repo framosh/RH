@@ -1,6 +1,6 @@
 <?php
 require 'arhsi_connect.php';
-$query="SELECT clv_puesto, puesto_desc, puesto_niv FROM Puestos WHERE 1 ORDER BY clv_puesto ASC";
+$query="SELECT clv_puesto, puesto_desc, puesto_niv FROM Puestos WHERE 1 ORDER BY puesto_desc ASC";
 
 $result = mysqli_query($dbc,$query);
 $numero_filas = mysqli_num_rows($result);

@@ -19,6 +19,8 @@ function limpiaPantalla_Pue() {
     document.getElementById("mensaje_puesto").innerHTML = "";
 
     var vacio = "";
+    var inicio = 0;
+    document.getElementById("puestos").selectedIndex = inicio;
     document.getElementById("nombre").value = vacio;
     document.getElementById("clave").value = vacio;
     document.getElementById("nivel").selectedIndex = "0";

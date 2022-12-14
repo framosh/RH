@@ -24,24 +24,27 @@ $response=mysqli_query($dbc,$query);
 if($response)
 	{
 	$f=Date("d-m-Y");
+  $nivel = ["","Bajo","Medio","Alto"];
     echo "<div>$empresa</div>";
     echo "<div>Vacante: $vacamte - $nombre</div>";
 	echo "<div>Fecha reporte: $f</div>";
 	echo '<table>
 	<tr><td align="center" font="./arial"><b>Clave</b> </td>
-        <td aling="left" font="./arial"><b>Nombre</b> </td>
-        <td aling="left" font="./arial"><b>Nivel</b> </td>
-        <td aling="left" font="./arial"><b>Año</b> </td>
-        <td aling="left" font="./arial"><b>Mes</b> </td>
+        <td align="left" font="./arial"><b>Nombre</b> </td>
+        <td align="center" font="./arial"><b>Nivel</b> </td>
+        <td align="center" font="./arial"><b>Años de exp.</b> </td>
+        <td align="center" font="./arial"><b>Meses de exp.</b> </td>
         </tr></div>';
 
 	while($row = mysqli_fetch_array($response))
 		{
-       	    echo '<tr><td align="center"  font="arial">'.
+      $row[2]=$nivel[$row[2]];
+
+      echo '<tr><td align="center"  font="arial">'.
 	       $row[0] .'</td><td align="left" >'.
-           $row[1] .'</td><td align="left" >'.
-           $row[2] .'</td><td align="left" >'.
-           $row[3] .'</td><td align="left" >'.
+           $row[1] .'</td><td align="center" >'.
+           $row[2] .'</td><td align="center" >'.
+           $row[3] .'</td><td align="center" >'.
 	       $row[4] .'</td></tr>';
         }
     echo '</table>';

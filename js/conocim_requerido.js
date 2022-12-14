@@ -381,12 +381,9 @@ function despliegaConocimientos() {
     var clavex22 = vacantes2[posicion22].split("|");
     var vacante_clv = clavex22[0];
 
-    //    alert("Vacante: " + vacante_clv);
-
-    var archivo1 = servidor + "httpdocs/catalogoConocimientos.php";
+    var archivo1 = servidor + "httpdocs/catalogoConocimientos3.php";
     var archivo2 = archivo1 + "?Vacante=" + vacante_clv;
     var xhttp;
-    //    alert("Archivo2: " + archivo2);
 
     if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
         xhttp = new XMLHttpRequest();
@@ -395,8 +392,6 @@ function despliegaConocimientos() {
     }
 
     xhttp.open("GET", archivo2, false);
-    //  $query="SELECT Con_candidato.clv_conocim, conocimientos.cono_desc, Con_candidato.con_nivel, 
-    //Con_candidato.con_anios, Con_candidato.con_meses FROM Con_candidato
 
     xhttp.onreadystatechange = function () {
         //        alert("paso 1.7");
@@ -404,43 +399,17 @@ function despliegaConocimientos() {
             //            limpiaTabla();
             var cadena = xhttp.responseText;
             //            alert("cadena: " + cadena);
+
+            if (cadena == "No hay Conocimientos") {
+                alert("No hay Conocimientos");
+                return;
+            }
             var conocim_cand = cadena.split("\n");
-            /*
-                        var conocimiento_clv = conocim_cand[0];
-                        var nombre = conocim_cand[0];
-                        var nivel = conocim_cand[1];
-                        var anios = conocim_cand[2];
-                        var meses = conocim_cand[3];
 
-                        var llave = 0;
-                        var nvo_index = conocim_cand.length;
-                        nvo_index++;
-                        var nvo_renglon = conocimiento_clv + "|" + nombre + "|" + nivel + "|" + anios + "|" + meses + "\n";
-                        alert("Nuevo renglon:" + nvo_renglon);
-
-                        if (conocim_cand.length == 0) {
-                            conocim_cand[0] = nvo_renglon;
-                        } else {
-                            conocim_cand[nvo_index] = nvo_renglon;
-                        }
-                        */
-            //Despliegan en el cuadro de conocimientos el conocimiento registrado
-            //            alert("Conocim_cand: " + conocim_cand);
             var tabla = "tabla4";
             var cuerpo = "body10";
 
             quickReport(conocim_cand, tabla, cuerpo);
-
-            // var cadena = xhttp.responseText; // Regresa le mensaje enviado por el servidor en el proceso php 
-            //var cadena2 = xhttp.statusText; // Regresa el texto del estatus del proceso
-            //var cadena3 = xhttp.responseURL; // Regresa la URL que se proceso
-            //var cadena4 = xhttp.getAllResponseHeaders(); // Regresa todo el estatus del proceso completo
-            //          alert("Web server:  " + cadena);
-            //            document.getElementById("mensaje_gral").innerHTML = cadena;
-            //        alert("Estatus del proceso:  " + cadena2);
-            //            alert("URL del proceso:  " + cadena3);
-            //          alert("Informe general del proceso:  " + cadena4);
-            //            document.getElementById("mensaje_gral").innerHTML = cadena;
         } else {
             //            alert("Estado: " + xhttp.readyState + "  Status: " + xhttp.status);
         }

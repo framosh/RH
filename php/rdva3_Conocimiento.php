@@ -10,7 +10,7 @@
 
 <?php
 require 'arhsi_connect.php';
-$query="SELECT * FROM conocimientos WHERE 1 ORDER BY clv_conocim ASC";
+$query="SELECT * FROM conocimientos WHERE 1 ORDER BY cono_desc ASC";
 
 $response=mysqli_query($dbc,$query);
 if($response)

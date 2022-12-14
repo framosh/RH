@@ -10,7 +10,7 @@
 
 <?php
 require 'arhsi_connect.php';
-$query="SELECT clv_puesto, puesto_desc, puesto_niv FROM Puestos WHERE 1 ORDER BY clv_puesto ASC";
+$query="SELECT clv_puesto, puesto_desc, puesto_niv FROM Puestos WHERE 1 ORDER BY puesto_desc ASC";
 
 $response=mysqli_query($dbc,$query);
 if($response)
