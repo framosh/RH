@@ -124,7 +124,7 @@ $bgc2="darkgrey";
 $response=mysqli_query($dbc,$query);
 if($response)
 	{
-	echo '<table align="left" style="width:170%;">
+	echo '<table align="left" style="width:200%;">
 	<tr style="background-color:'.$bgc2.';">
 	<td aling="left"  font="./arial"><b>Empresa</b>     </td>
 	<td align="Center"    font="./arial"><b>Clave Vac.</b>    </td>
@@ -146,6 +146,10 @@ if($response)
 		{
 		$row[6]=$nivel[$row[6]];
         $row[13]=$estatus_vac[$row[13]];
+		$row[12] = str_replace("\n","<br>",$row[12]);
+		$row[4] = str_replace("\n","<br>",$row[4]);
+		$row[5] = str_replace("\n","<br>",$row[5]);
+
 		$fecha = date('d/m/Y', strtotime($row[8]));
 		$de = money_format('%(#10.0n',$row[9]);
 		$a = money_format('%(#10.0n',$row[10]);

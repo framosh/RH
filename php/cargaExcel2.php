@@ -1,3 +1,9 @@
+//Carga archivos de excel con datos de los candidatos registrados en excel
+//Datos cargados a la base de datos
+//(cand_nom,cand_tel1,cand_tel2,cand_corr,clv_vacante,cand_fecha_nac,cand_direccion,
+//cand_edad,cand_sdo_sol,cand_obs_reclu) 
+
+
 <!DOCTYPE html>
 <html lang="es">
 

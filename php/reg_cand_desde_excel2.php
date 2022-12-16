@@ -97,10 +97,10 @@ function graba_registro($campo){
         return;
     } 
 
-if(mysqli_stmt_prepare($stmt,"INSERT INTO Candidatos (cand_nom,cand_tel1,cand_tel2,cand_corr,clv_vacante) 
-VALUES (?,?,?,?,?)"))
+if(mysqli_stmt_prepare($stmt,"INSERT INTO Candidatos (cand_nom,cand_tel1,cand_tel2,cand_corr,clv_vacante,cand_fecha_nac,cand_direccion,cand_edad,cand_sdo_sol,cand_obs_reclu) 
+VALUES (?,?,?,?,?,?,?,?,?,?)"))
 {
-	mysqli_stmt_bind_param($stmt,"sssss",$campo[0],$campo[1],$campo[2],$campo[3],$campo[4]);
+	mysqli_stmt_bind_param($stmt,"ssssssssss",$campo[0],$campo[1],$campo[2],$campo[3],$campo[4],$campo[5],$campo[6],$campo[7],$campo[8],$campo[9]);
 
     mysqli_stmt_execute($stmt);
 
@@ -150,13 +150,16 @@ function registroCand_x_vac($candidato,$vacante,$campo) {
 			echo "<p style='text-align:left; color: red;'>Fallo la grabación de datos del candidato</p>";
 		}
 }
+//(cand_nom,cand_tel1,cand_tel2,cand_corr,clv_vacante,cand_fecha_nac,cand_direccion,
+//cand_edad,cand_sdo_sol,cand_obs_reclu) 
 
 // Actualiza registro en DB
 function actualiza($campos){
     require 'arhsi_connect.php';
 
     if(mysqli_stmt_prepare($stmt,"UPDATE Candidatos SET cand_nom='$campos[0]', cand_tel2='$campos[2]', 
-	cand_corr='$campos[3]', clv_vacante='$campos[4]' WHERE cand_tel1='$campos[1]'"))
+	cand_corr='$campos[3]', clv_vacante='$campos[4]',cand_fecha_nac='$campos[5]',cand_direccion='$campos[6]',
+    cand_edad='$campos[7]',cand_sdo_sol='$campos[8]',cand_obs_reclu='$campos[9]' WHERE cand_tel1='$campos[1]'"))
 	{
 	   mysqli_stmt_execute($stmt);
 	   $affected_rows = mysqli_stmt_affected_rows($stmt);
