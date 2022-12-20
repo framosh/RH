@@ -88,7 +88,7 @@ function graba_registro($campo){
 
     require 'arhsi_connect.php';
 
-    $query="SELECT * FROM Candidatos WHERE cand_tel1='$campo[1]'";
+    $query="SELECT * FROM Candidatos WHERE (cand_tel1='$campo[1]' AND cand_tel2='$campo[2]')";
     $result = mysqli_query($dbc,$query);
     $numero_filas = mysqli_num_rows($result);
 
@@ -157,9 +157,7 @@ function registroCand_x_vac($candidato,$vacante,$campo) {
 function actualiza($campos){
     require 'arhsi_connect.php';
 
-    if(mysqli_stmt_prepare($stmt,"UPDATE Candidatos SET cand_nom='$campos[0]', cand_tel2='$campos[2]', 
-	cand_corr='$campos[3]', clv_vacante='$campos[4]',cand_fecha_nac='$campos[5]',cand_direccion='$campos[6]',
-    cand_edad='$campos[7]',cand_sdo_sol='$campos[8]',cand_obs_reclu='$campos[9]' WHERE cand_tel1='$campos[1]'"))
+    if(mysqli_stmt_prepare($stmt,"UPDATE Candidatos SET cand_nom='$campos[0]', cand_tel2='$campos[2]',cand_corr='$campos[3]', clv_vacante='$campos[4]',cand_fecha_nac='$campos[5]',cand_direccion='$campos[6]',cand_edad='$campos[7]',cand_sdo_sol='$campos[8]',cand_obs_reclu='$campos[9]' WHERE (cand_tel1='$campos[1]' AND cand_tel2='$campos[2]')"))
 	{
 	   mysqli_stmt_execute($stmt);
 	   $affected_rows = mysqli_stmt_affected_rows($stmt);
