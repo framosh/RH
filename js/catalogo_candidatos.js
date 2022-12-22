@@ -206,3 +206,47 @@ function leeCandidatos(vacante_clv) {
     xhttp.send();
     //    xhttp.disabled();
 }
+
+var ww;
+
+function lanzaRegistro(candidato_clv, candidato_nom) {
+    //    var candidatoxx1 = document.getElementById(idcampo).value;
+    alert("Candidato: " + candidato_nom);
+    /*
+        $(document).ready(function () {
+            var pagina = servidor + "cap-candidato-b.htm" + "?candidato=" + candidato_clv + "&cand_nom=" + candidato_nom;
+            //        ww = window.open(pagina, 'New Window', 'height=630,width=850,top=10,left=250');
+            ww = window.open(pagina, 'New Window', 'height=750,width=850,top=10,left=250');
+        });
+        */
+}
+
+function cambiaColor(campo1, campo2, campo3) {
+    //    alert("Cambia de color para el campo: " + campo1);
+    var campox1 = document.getElementById(campo1);
+    campox1.style.backgroundColor = "SpringGreen";
+    campox1.style.Color = "black";
+
+    var campox2 = document.getElementById(campo2);
+    campox2.style.backgroundColor = "SpringGreen";
+    campox2.style.Color = "black";
+
+    var campox3 = document.getElementById(campo3);
+    campox3.style.backgroundColor = "SpringGreen";
+    campox3.style.Color = "black";
+}
+
+function regresaColor(campo1, campo2, campo3) {
+    //    alert("Cambia de color para el campo: " + campo1);
+    var campox1 = document.getElementById(campo1);
+    campox1.style.backgroundColor = "LightCyan";
+    campox1.style.Color = "black";
+
+    var campox2 = document.getElementById(campo2);
+    campox2.style.backgroundColor = "LightCyan";
+    campox2.style.Color = "black";
+
+    var campox3 = document.getElementById(campo3);
+    campox3.style.backgroundColor = "LightCyan";
+    campox3.style.Color = "black";
+}

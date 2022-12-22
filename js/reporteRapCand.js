@@ -77,6 +77,51 @@ function despliega(linea, renglon) {
     document.getElementById(campo1).innerHTML = clave;
     document.getElementById(campo2).innerHTML = nombre;
     document.getElementById(campo3).innerHTML = estatus;
+
+    document.getElementById(campo1).addEventListener('mouseover', function () {
+        //        alert("renglon seleccionado: " + campo1 + "  Clave: " + clave);
+        cambiaColor(campo1, campo2, campo3);
+    });
+
+    document.getElementById(campo1).addEventListener('mouseout', function () {
+        //        alert("renglon seleccionado: " + campo1 + "  Clave: " + clave);
+        regresaColor(campo1, campo2, campo3);
+    });
+
+    document.getElementById(campo2).addEventListener('mouseover', function () {
+        //        alert("renglon seleccionado: " + campo1 + "  Clave: " + clave);
+        cambiaColor(campo1, campo2, campo3);
+    });
+
+    document.getElementById(campo2).addEventListener('mouseout', function () {
+        //        alert("renglon seleccionado: " + campo1 + "  Clave: " + clave);
+        regresaColor(campo1, campo2, campo3);
+    });
+
+    document.getElementById(campo3).addEventListener('mouseover', function () {
+        //        alert("renglon seleccionado: " + campo1 + "  Clave: " + clave);
+        cambiaColor(campo1, campo2, campo3);
+    });
+
+    document.getElementById(campo3).addEventListener('mouseout', function () {
+        //        alert("renglon seleccionado: " + campo1 + "  Clave: " + clave);
+        regresaColor(campo1, campo2, campo3);
+    });
+
+    document.getElementById(campo1).addEventListener('click', function () {
+        //        alert("renglon seleccionado: " + campo1 + "  Clave: " + clave);
+        lanzaRegistro(clave, nombre);
+    });
+
+    document.getElementById(campo2).addEventListener('click', function () {
+        //        alert("renglon seleccionado: " + campo1 + "  Clave: " + clave);
+        lanzaRegistro(clave, nombre);
+    });
+
+    document.getElementById(campo3).addEventListener('click', function () {
+        //        alert("renglon seleccionado: " + campo1 + "  Clave: " + clave);
+        lanzaRegistro(clave, nombre);
+    });
 }
 
 var renglones2 = 0;
