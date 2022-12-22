@@ -2,16 +2,16 @@ var tablax6;
 var cuerpox6;
 
 // Reporte rapido en pantalla
-function quickReport(conocimientos, tabla, cuerpo) {
+function quickReport(candidatos, tabla, cuerpo) {
     tablax6 = tabla;
     cuerpox6 = cuerpo;
+    var registros = candidatos.length;
 
     //    alert("Crea tabla de conocimientos, entra a QuickReport");
-    var listaConocim = new Array(30);
-    listaConocim = conocimientos;
-    limpiaTabla();
+    var listaConocim = new Array(registros);
+    listaConocim = candidatos;
 
-    var titulo = "LISTA DE CONOCIMIENTOS";
+    var titulo = "RELACION DE CANDIDATOS";
     var renglones = 0;
 
     var linea = listaConocim;
@@ -31,16 +31,19 @@ function quickReport(conocimientos, tabla, cuerpo) {
     var renglon4 = 0;
     var i4;
 
-    columnas = 4;
+    columnas = 3;
     renglon4 = 0;
     if (columnas2 < columnas) {
         columnas2 = columnas;
     }
+    limpiaTabla();
+
+    //  $query="SELECT Candidatos.cand_key, Candidatos.cand_nom, Est_cand.desc_est_cand FROM Cand_x_vac  
 
     var limpiax1 = [];
     var encabezadox = [];
     encabezadox = limpiax1;
-    encabezadox = ["HERRAMIENTA", "NIVEL", "AÑOS", "MESES"];
+    encabezadox = ["CLAVE", "NOMBRE", "ESTATUS"];
     creaEncabezado(encabezadox, columnas, titulo);
     creaTabla(renglones, columnas);
 
@@ -62,30 +65,18 @@ function despliega(linea, renglon) {
     var campoxx = linea.split("|");
     var renglon2 = renglon;
 
-    var herramienta = campoxx[1].replace(/"/g, "");
-    var nivel = campoxx[2];
-    var años = campoxx[3];
-    var meses = campoxx[4];
+    var clave = campoxx[0].replace(/"/g, "");
+    var nombre = campoxx[1].replace(/"/g, "");
+    var estatus = campoxx[2].replace(/"/g, "");
 
-    if (nivel == 1) {
-        nivel = "Basico";
-    }
-    if (nivel == 2) {
-        nivel = "Medio";
-    }
-    if (nivel == 3) {
-        nivel = "Avanzado";
-    }
 
     var campo1 = "camp0-reng" + renglon2;
     var campo2 = "camp1-reng" + renglon2;
     var campo3 = "camp2-reng" + renglon2;
-    var campo4 = "camp3-reng" + renglon2;
 
-    document.getElementById(campo1).innerHTML = herramienta;
-    document.getElementById(campo2).innerHTML = nivel;
-    document.getElementById(campo3).innerHTML = años;
-    document.getElementById(campo4).innerHTML = meses;
+    document.getElementById(campo1).innerHTML = clave;
+    document.getElementById(campo2).innerHTML = nombre;
+    document.getElementById(campo3).innerHTML = estatus;
 }
 
 var renglones2 = 0;
@@ -123,6 +114,13 @@ function creaEncabezado(textoth, columnas, titulo) {
             celdath.style.paddingRight = "10px";
             celdath.style.paddingLeft = "10px";
             celdath.style.textAlign = "center";
+            if (i3 == 0 || i3 == 2) {
+                celdath.style.width = "20%";
+            }
+            if (i3 == 1) {
+                celdath.style.width = "60%";
+            }
+
             hilera.appendChild(celdath);
         }
 
@@ -213,12 +211,14 @@ function creaTabla(renglones, columnas) {
             celda.id = idcampo;
             //          celda.appendChild(parrafo);
 
-            if (i2 == 2 || i2 == 3) {
+            if (i2 == 0 || i2 == 2) {
                 celda.style.textAlign = "center";
                 celda.style.paddingRight = "9px";
+                celda.style.width = "20%";
             } else {
                 celda.style.textAlign = "left";
-                celda.style.paddingRight = "20px";
+                celda.style.paddingRight = "9px";
+                celda.style.width = "60%";
             }
             hilera.appendChild(celda);
         }

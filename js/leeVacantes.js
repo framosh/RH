@@ -1,7 +1,7 @@
 var vacantes2 = [];
 
 function leeVacantes(cliente_clv) {
-    //    alert("lee vacantes del cliente: " + cliente_clv);
+    alert("lee vacantes del cliente: " + cliente_clv);
     var limpia = "";
     document.getElementById("vacantes").innerHTML = limpia;
 

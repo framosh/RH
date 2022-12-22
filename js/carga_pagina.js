@@ -60,6 +60,7 @@ window.onload = function () {
 
       clave_empresa = dato4[5];
       //      alert("Empresa: (" + clave_empresa + ")");
+      //      alert("Pagina: " + pagina);
 
       document.getElementById("usuario1").innerHTML = dato4[1];
       buscaEmpresa(clave_empresa); // Busca el nombre de la empresa a donde pertenece el usuario
@@ -196,6 +197,11 @@ window.onload = function () {
             document.getElementById("empresas").textContent = leeClientes2(); // Carga el catalogo de Clientes
             document.getElementById("estado").textContent = leeEstados2(); // Carga el catalogo de Estados
             //        document.getElementById("conocimientos").textContent = leeConocimientos(); // Carga el catalogo de Conocimientos
+      }
+
+      if (pagina == "consulta_candidatos.htm") {
+            //alert("Entra a consulta_candidatos");
+            document.getElementById("empresas").textContent = leeClientes2(); // Carga el catalogo de Clientes
       }
 
       if (pagina == "edu_x_cand_p.htm") {
