@@ -333,8 +333,9 @@ function consultaConocimiento() {
 
 var conocim_cand = [];
 
+// Conocimientio por candidato
 function leeConocimCand(candidato_clv) {
-    //    alert("Lee Conocimientos de candidato: " + candidato_clv);
+    alert("Lee Conocimientos de candidato: " + candidato_clv);
     //    limpiaPantalla_Con();
     //    limpiaTabla(); // Limpia tabla de conocimientos del candidato consultado anteriormente
     var limpia = "";
@@ -342,14 +343,16 @@ function leeConocimCand(candidato_clv) {
 
     document.getElementById("conocimientos").selectedIndex = vacio1;
     document.getElementById("nivel").selectedIndex = vacio1;
-    document.getElementById("anios").valor = limpia;
-    document.getElementById("meses").valor = limpia;
+    document.getElementById("anios").valor = vacio1;
+    document.getElementById("meses").valor = vacio1;
     document.getElementById("mensaje_gral").innerHTML = limpia;
     document.getElementById("mensaje_conocimiento").innerHTML = limpia;
 
     var archivo1 = servidor + "httpdocs/cat_cono_x_cand.php";
     var archivo2 = archivo1 + "?Candidato=" + candidato_clv;
     var xhttp;
+
+    alert("Consulta el php de conocimientos del candidato: " + archivo2);
 
     if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
         xhttp = new XMLHttpRequest();
@@ -361,6 +364,12 @@ function leeConocimCand(candidato_clv) {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var cadena = xhttp.responseText;
+            alert("Catalogo de conocimientos: " + cadena);
+
+            if (cadena == "0|No hay Conocimientos") {
+                alert("El candidato no tiene conocimientos registrados");
+                return;
+            }
             var conocimientos = cadena.split("\n");
             var i2 = 0;
             var camposxx1 = conocimientos[0].split("|");
@@ -371,14 +380,14 @@ function leeConocimCand(candidato_clv) {
                 //Si el candidato ya tiene conocimientos registrados se despliegan en el cuadro de conocimientos
                 var tabla = "tabla9";
                 var cuerpo = "body9";
-                quickReport(conocimientos, tabla, cuerpo);
+                conoReport(conocimientos, tabla, cuerpo);
                 conocim_cand = conocimientos;
             } else {
                 var limpiax1 = [];
                 conocim_cand = limpiax1;
             }
         } else {
-            //            alert("Estado: " + xhttp.readyState + "  Status: " + xhttp.status);
+            // alert("conocimientos: " + xhttp.readyState + "  Status: " + xhttp.status);
         }
     };
     xhttp.send();

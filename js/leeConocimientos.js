@@ -2,7 +2,12 @@
 var conocimientos2 = [];
 
 function leeConocimientos(vacante_clv) {
-    //    alert("Lee Conocimientos de la vacante: " + vacante_clv);
+    if (vacante_clv == "" || vacante_clv == null) {
+        alert("No hay vacante asignada");
+        return;
+    }
+
+    alert("Lee Conocimientos de la vacante: " + vacante_clv);
     //    limpiaTabla();
     //    limpiaPantalla_Con();
     var archivo1 = servidor + "httpdocs/catalogoConocimientos.php";

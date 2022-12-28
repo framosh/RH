@@ -177,30 +177,6 @@ function leeCandidatos(vacante_clv) {
             var tabla = "tabla15";
             var cuerpo = "cuerpo15";
             quickReport(candidatos, tabla, cuerpo);
-
-            /*
-                        var i2 = 0;
-
-                        for (var i = 0; i < candidatos.length; i++) {
-                            var campo = candidatos[i];
-                            if (campo) {
-                                candidatos2[i2] = campo.trim();
-                                candidatos2[i2] = candidatos2[i2].replace(/\"/g, "");
-                                //                    alert("campo: (" + i2 + ") - (" + puestos2[i2] + ")");
-                                i2++;
-                            }
-                        }
-
-                        candidatos2[i2] = "0|Seleccione el Candidato";
-                        var select = document.getElementById("candidatos");
-
-                        for (var i1 = i2; i1 >= 0; i1--) {
-                            var option = document.createElement('option');
-                            var nombre = candidatos2[i1].split("|");
-                            option.text = option.value = nombre[1];
-                            select.add(option);
-                        }
-                        */
         }
     };
     xhttp.send();
@@ -211,15 +187,36 @@ var ww;
 
 function lanzaRegistro(candidato_clv, candidato_nom) {
     //    var candidatoxx1 = document.getElementById(idcampo).value;
-    alert("Candidato: " + candidato_nom);
-    /*
-        $(document).ready(function () {
-            var pagina = servidor + "cap-candidato-b.htm" + "?candidato=" + candidato_clv + "&cand_nom=" + candidato_nom;
-            //        ww = window.open(pagina, 'New Window', 'height=630,width=850,top=10,left=250');
-            ww = window.open(pagina, 'New Window', 'height=750,width=850,top=10,left=250');
-        });
-        */
+    //    alert("Candidato: " + candidato_nom);
+
+    $(document).ready(function () {
+        var configura_ventana = "menubar=yes, location=yes, resizable=yes, scrollbars=yes, status=yes, height=750,width=1200,top=10,left=250";
+        var pagina = servidor + "cap-candidato-b.htm" + "?candidato=" + candidato_clv + "&cand_nom=" + candidato_nom;
+        //        ww = window.open(pagina, 'New Window', 'height=630,width=850,top=10,left=250');
+        //        ww = window.open(pagina, 'New Window', 'height=750,width=1200,top=10,left=250');
+        ww = window.open(pagina, 'New Window', configura_ventana);
+    });
+
 }
+/*
+function generaCV() {
+    //    alert("Genera cv del candidato");
+
+    $(document).ready(function () {
+        var configura_ventana = "menubar=yes, location=yes, resizable=yes, scrollbars=yes, status=yes";
+        var pagina = servidor + "ArhsiCV.html" + "?candidato=" + candidato_clv + "&cand_nom=" + candidato_nombre;
+        ww = window.open(pagina, 'New Window7', configura_ventana);
+    });
+}
+
+*/
+
+function sale() {
+    if (confirm("¿Quiere salir?")) {
+        ww.close();
+    }
+}
+
 
 function cambiaColor(campo1, campo2, campo3) {
     //    alert("Cambia de color para el campo: " + campo1);

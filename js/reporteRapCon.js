@@ -2,14 +2,14 @@ var tablax6;
 var cuerpox6;
 
 // Reporte rapido en pantalla
-function quickReport(conocimientos, tabla, cuerpo) {
+function conoReport(conocimientos, tabla, cuerpo) {
     tablax6 = tabla;
     cuerpox6 = cuerpo;
 
     //    alert("Crea tabla de conocimientos, entra a QuickReport");
     var listaConocim = new Array(30);
     listaConocim = conocimientos;
-    limpiaTabla();
+    limpiaTablaCono();
 
     var titulo = "LISTA DE CONOCIMIENTOS";
     var renglones = 0;
@@ -41,13 +41,13 @@ function quickReport(conocimientos, tabla, cuerpo) {
     var encabezadox = [];
     encabezadox = limpiax1;
     encabezadox = ["HERRAMIENTA", "NIVEL", "AÑOS", "MESES"];
-    creaEncabezado(encabezadox, columnas, titulo);
-    creaTabla(renglones, columnas);
+    creaEncabezadoCono(encabezadox, columnas, titulo);
+    creaTablaCono(renglones, columnas);
 
     if (document.getElementById(tablax6)) {
         for (i4 = 0; i4 < renglones; i4++) {
             if ((linea[i4] != null) && (linea[i4] != "")) {
-                despliega(linea[i4], renglon4);
+                despliegaCono(linea[i4], renglon4);
                 renglon4++;
             }
         }
@@ -57,8 +57,8 @@ function quickReport(conocimientos, tabla, cuerpo) {
 //  $query="SELECT Con_candidato.clv_conocim, conocimientos.cono_desc, Con_candidato.con_nivel, 
 //Con_candidato.con_anios, Con_candidato.con_meses FROM Con_candidato
 
-function despliega(linea, renglon) {
-    //    alert("Despliega linea: " + linea + " Renglon: " + renglon);
+function despliegaCono(linea, renglon) {
+    alert("Despliega linea: " + linea + " Renglon: " + renglon);
     var campoxx = linea.split("|");
     var renglon2 = renglon;
 
@@ -96,8 +96,8 @@ var thead;
 var h4;
 var col22;
 
-function creaEncabezado(textoth, columnas, titulo) {
-    //    alert("Crea Encabezado: " + textoth + "  columnas: " + columnas);
+function creaEncabezadoCono(textoth, columnas, titulo) {
+    alert("Crea Encabezado: " + textoth + "  columnas: " + columnas);
 
     if (document.getElementById('encabezadoy2')) {
         return;
@@ -131,8 +131,8 @@ function creaEncabezado(textoth, columnas, titulo) {
 }
 
 
-function limpiaTabla() {
-    //    alert("Limpia Tabla renglones: " + renglones2);
+function limpiaTablaCono() {
+    alert("Limpia Tabla renglones: " + renglones2);
     var vacio = "";
     var col2;
 
@@ -149,8 +149,8 @@ function limpiaTabla() {
     }
 }
 
-function creaTabla(renglones, columnas) {
-    //    alert("Crea formato de tabla, renglones:  " + renglones + " columnas: " + columnas);
+function creaTablaCono(renglones, columnas) {
+    alert("Crea formato de tabla, renglones:  " + renglones + " columnas: " + columnas);
     if ((renglones <= 0) || (renglones < renglones2)) {
         //        alert("No hay renglones a crear - renglones2:  " + renglones2 + "  renglones:" + renglones);
         return;

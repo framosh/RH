@@ -1,7 +1,7 @@
 var cliente2 = [];
 
 function leeClientes() {
-    //    alert("Entra a leeClientes ");
+    //alert("Entra a leeClientes ");
     //    var archivo2 = "https://admonarh.arhsi.com.mx/httpdocs/catalogoClientes.php";
     var archivo2 = servidor + "httpdocs/catalogoClientes.php";
     var xhttp;

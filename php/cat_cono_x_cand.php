@@ -4,7 +4,8 @@ $candidato=$_GET["Candidato"];
 
 require 'arhsi_connect.php';
 
-  $query="SELECT Con_candidato.clv_conocim, conocimientos.cono_desc, Con_candidato.con_nivel, Con_candidato.con_anios, Con_candidato.con_meses FROM Con_candidato 
+  $query="SELECT Con_candidato.clv_conocim, conocimientos.cono_desc, Con_candidato.con_nivel, Con_candidato.con_anios, Con_candidato.con_meses 
+  FROM Con_candidato 
   LEFT JOIN conocimientos ON conocimientos.clv_conocim = Con_candidato.clv_conocim
   WHERE Con_candidato.cand_key='$candidato' 
   ORDER BY conocimientos.cono_desc";
@@ -16,7 +17,13 @@ if($numero_filas >0){
     Archivo($result);
     mysqli_close($dbc);
 } else {
-      $query="SELECT * FROM conocimientos WHERE 1 ORDER BY clv_conocim";
+//  echo("0|No hay Conocimientos");
+  //mysqli_close($dbc);
+
+//      mysqli_close($dbc);
+  //    require 'arhsi_connect.php';
+
+      $query="SELECT clv_conocim, cono_desc FROM conocimientos WHERE 1 ORDER BY clv_conocim";
       $result = mysqli_query($dbc,$query);
       $numero_filas = mysqli_num_rows($result);
       if($numero_filas >0){
@@ -24,6 +31,7 @@ if($numero_filas >0){
         mysqli_close($dbc);
         } else {
             echo("0|No hay Conocimientos");
+            mysqli_close($dbc);
             }
     }
 
