@@ -7,7 +7,7 @@ function conoReport(conocimientos, tabla, cuerpo) {
     cuerpox6 = cuerpo;
 
     //    alert("Crea tabla de conocimientos, entra a QuickReport");
-    var listaConocim = new Array(30);
+    var listaConocim = new Array(60);
     listaConocim = conocimientos;
     limpiaTablaCono();
 

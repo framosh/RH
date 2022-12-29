@@ -460,7 +460,7 @@ function consultaCandidato() {
     //    limpiaPantalla2(); // Limpia campos
 
     // Lee los conocimientos del candidato solicitado y los despliega en el widget de conocimientos
-    leeConocimCand(candidato_clv);
+    //    leeConocimCand(candidato_clv);
     //    alert("Consultar candidato: " + candidato_clv + "-" + cand_nombre);
     //var archivo1 = "https://svr.itbp.com.mx/httpdocs/consultaContacto.php";
 
@@ -482,7 +482,7 @@ function consultaCandidato() {
         if (this.readyState == 4 && this.status == 200) {
             //          alert("paso 1.8");
             var cadena = xhttp.responseText;
-            alert("Cadena del candidato: " + cadena);
+            //            alert("Cadena del candidato: " + cadena);
 
             if (cadena == "No existe el Candidato") {
                 document.getElementById("mensaje_gral").innerHTML = cadena;
@@ -499,14 +499,23 @@ function consultaCandidato() {
                 if (campo != "") {
                     ids[i1] = ids[i1].replace(/\"/g, "");
                     ids[i1] = ids[i1].trim();
-                    alert("campo: (" + i1 + ") - (" + ids[i1] + ")");
+                    //alert("campo: (" + i1 + ") - (" + ids[i1] + ")");
                 }
             }
+
+            var cliente_clv = ids[38];
+            var vacante_clv = ids[39];
+            vacante = 0;
+            leeVacantes2(cliente_clv, vacante_clv);
+
+            consultaVacante(vacante_clv);
 
             var estado = 0;
             var opcion4 = 0;
 
             if (ids[8] != "" && ids[8] != "0") {
+                //                alert("Busca estado");
+
                 var cantEstados = estados2.length;
                 cantEstados--;
 
@@ -518,7 +527,7 @@ function consultaCandidato() {
                         if (clave[0] == ids[8]) {
                             estado = opcion4;
                             //                            estado--;
-                            alert("Estado: " + estados2[i1] + "  opcion4:(" + opcion4 + ")  ids[8]:(" + ids[8] + ")   longitud:" + estados2.length);
+                            //                        alert("Estado: " + estados2[i1] + "  opcion4:(" + opcion4 + ")  ids[8]:(" + ids[8] + ")   longitud:" + estados2.length);
                             break;
                         }
                     }
@@ -527,16 +536,15 @@ function consultaCandidato() {
                 estado = 0;
             }
 
-            var cant_campos = ids.length;
-            alert("Cantidad de campos: " + cant_campos);
-
-            var cliente_clv = ids[38];
-            leeVacantes(cliente_clv);
+            //            var cant_campos = ids.length;
+            //          alert("Cantidad de campos: " + cant_campos);
 
             var cliente = 0;
             var opcion5 = 0;
 
             if (ids[38] != "" && ids[38] != "0") {
+                //                alert("Busca cliente");
+
                 var cantEmpresas = cliente2.length;
                 cantEmpresas--;
 
@@ -545,10 +553,10 @@ function consultaCandidato() {
                     var clave3 = campo3.split("|");
                     if (campo3 && clave3[0] != "0") {
                         opcion5++;
-                        if (clave3[0] == ids[38]) {
+                        if (clave3[0] == cliente_clv) {
                             cliente = opcion5;
                             //                            estado--;
-                            alert("Cliente: " + cliente2[i1] + "  opcion5:(" + opcion5 + ")  ids[38]:(" + ids[38] + ")   longitud:" + estado2.length);
+                            //                          alert("Cliente: " + cliente2[i1] + "  opcion5:(" + opcion5 + ")  ids[38]:(" + ids[38] + ")   longitud:" + cantEmpresas);
                             break;
                         }
                     }
@@ -557,38 +565,6 @@ function consultaCandidato() {
                 cliente = 0;
             }
 
-            var vacante_clv = ids[39];
-            consultaVacante(vacante_clv);
-
-            var vacante = 0;
-            var opcion6 = 0;
-
-            var cantVacantes = vacantes2.length;
-            cantVacantes--;
-
-            if (ids[39] != "" && ids[39] != "0") {
-
-                for (i1 = cantVacantes; i1 >= 0; i1--) {
-                    var campo4 = vacantes2[i1];
-                    var clave4 = campo4.split("|");
-                    if (campo4 && clave4[0] != "0") {
-                        opcion6++;
-                        if (clave4[0] == vacante_clv) {
-                            vacante = opcion6;
-                            //                            estado--;
-                            alert("Vacante: " + vacante_clv + "  opcion6:(" + opcion6 + ")  ids[25]:(" + ids[25] + ")   longitud:" + vacantes2.length);
-                            break;
-                        }
-                    }
-                }
-            } else {
-                vacante = 0;
-            }
-
-            alert("Vacante: " + vacante);
-            alert("Longitud: " + vacantes2.length);
-
-
             var edo_civil = ids[10];
             var est_cand = ids[19];
             var est_cv = ids[16];
@@ -596,7 +572,10 @@ function consultaCandidato() {
             var est_eval = ids[18];
             var anios = 0;
 
-            if (ids[6] != "") {
+
+            if (ids[6] != "" && ids[6] > 0) {
+                //                alert("Determina edad");
+
                 var dia_de_hoy = new Date();
                 var anio_hoy = dia_de_hoy.getFullYear();
                 var mes_hoy = dia_de_hoy.getMonth();
@@ -620,9 +599,9 @@ function consultaCandidato() {
                 anios = 0;
             }
 
-            alert("Despliega datos de candidato");
+            //            alert("Despliega datos de candidato");
             document.getElementById("empresas").selectedIndex = cliente; // Estatus de entrevista
-            document.getElementById("vacantes").selectedIndex = vacante;
+            //            document.getElementById("vacantes").selectedIndex = vacante;
 
             document.getElementById("cand_key").value = ids[0];
             document.getElementById("cand_nom").value = ids[1];

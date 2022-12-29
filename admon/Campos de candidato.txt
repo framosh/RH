@@ -36,4 +36,5 @@
 35-Candidatos.foto_dir, 
 36-Candidatos.foto_nom, 
 37-Vacantes.vac_desc, 
-38-Vacantes.emp_clave  
+38-Vacantes.emp_clave
+39-Vacantes.clv_vacante 

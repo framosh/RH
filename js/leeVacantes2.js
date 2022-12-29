@@ -1,17 +1,14 @@
 var vacantes2 = [];
 
-function leeVacantes(cliente_clv) {
+function leeVacantes2(cliente_clv, vacante_clv) {
     if (cliente_clv == 0 || cliente_clv == null || cliente_clv == "") {
-        //        cliente_clv = clave_empresa;
         alert("No hay cliente asignado");
-        return;
     }
 
-    alert("lee vacantes del cliente: " + cliente_clv);
+    //    alert("lee vacantes del cliente: " + cliente_clv);
     var limpia = "";
     document.getElementById("vacantes").innerHTML = limpia;
 
-    //    var archivo2 = "https://admonarh.arhsi.com.mx/httpdocs/catalogoClientes.php";
     var archivo1 = servidor + "httpdocs/catalogoVacantes3.php";
     var archivo2 = archivo1 + "?Empresa=" + cliente_clv;
     var xhttp;
@@ -23,24 +20,21 @@ function leeVacantes(cliente_clv) {
     }
 
     xhttp.open("GET", archivo2, true);
+    xhttp.send();
+
     xhttp.onreadystatechange = function () {
-        //  alert("paso 1.7");
         if (this.readyState == 4 && this.status == 200) {
-            //    alert("paso 1.8");
             var cadena = xhttp.responseText;
-
-            //            document.getElementById("mensaje_gral").textContent = "(" + cadena + ")" + "        longitud: (" + cadena.length + ")";
-
             var vacantes = cadena.split("\n");
-            alert("Vacantes: " + vacantes);
+            //            alert("Vacantes: " + vacantes);
             var i2 = 0;
 
             for (var i = 0; i < vacantes.length; i++) {
                 var campo = vacantes[i];
-                if (campo) {
+                if (campo[0] != "" && campo[0] != null) {
                     vacantes2[i2] = campo.trim();
                     vacantes2[i2] = vacantes2[i2].replace(/\"/g, "");
-                    //           alert("campo: ("+i2+") - ("+cliente2[i2]+")");
+                    //                    alert("campo: (" + i2 + ") - (" + vacantes2[i2] + ")");
                     i2++;
                 }
             }
@@ -55,8 +49,44 @@ function leeVacantes(cliente_clv) {
                 option.text = option.value = vac1;
                 select.add(option);
             }
+            //            alert("Vacantes leidas y cargadas");
+            posiciona_apuntador(vacante_clv);
         }
     };
-    xhttp.send();
     //    xhttp.disabled();
+}
+
+var vacante;
+
+function posiciona_apuntador(vacante_clv) {
+    var cantVacantes = vacantes2.length;
+    cantVacantes--;
+
+    //  alert("Cantidad de vacantes: " + cantVacantes);
+    //alert("Vacante: " + vacante_clv);
+    //alert("Vacantes2: " + vacantes2);
+
+    if (cantVacantes > 0) {
+        //        alert("Busca posicion de la vacante");
+        var opcion6 = 0;
+
+        if (vacante_clv != "" && vacante_clv != "0") {
+            for (var i1 = cantVacantes; i1 >= 0; i1--) {
+                var campo4 = vacantes2[i1].trim();
+                //                alert("campo4: " + campo4);
+                var clave4 = campo4.split("|");
+                if (clave4[0] != "0" && clave4[0] != "") {
+                    opcion6++;
+                    if (clave4[0] == vacante_clv) {
+                        vacante = opcion6;
+                        //                      alert("Vacante: " + vacante_clv + "  opcion6:(" + opcion6 + ")");
+                        break;
+                    }
+                }
+            }
+        } else {
+            vacante = 0;
+        }
+        document.getElementById("vacantes").selectedIndex = vacante;
+    }
 }
