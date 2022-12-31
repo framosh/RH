@@ -7,7 +7,7 @@ function leeConocimientos(vacante_clv) {
         return;
     }
 
-    alert("Lee Conocimientos de la vacante: " + vacante_clv);
+    //    alert("Lee Conocimientos de la vacante: " + vacante_clv);
     //    limpiaTabla();
     //    limpiaPantalla_Con();
     var archivo1 = servidor + "httpdocs/catalogoConocimientos.php";

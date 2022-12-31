@@ -8,8 +8,6 @@ var sinActividad = 300000;
 window.onload = function () {
     //  alert("Entra a candidato2");
 
-    //    window.setInterval(startTimeOut, intervalo);
-
     elige_servidor();
     //alert("Servidor: "+servidor);
 
@@ -43,12 +41,11 @@ window.onload = function () {
     document.getElementById("cand_key").value = candidato_clv;
     document.getElementById("cand_nom").value = candidato_nombre;
 
-    alert("Clave candidato: (" + candidato_clv + ")");
-    alert("Nombre candidato: " + candidato_nombre);
+    //    alert("Clave candidato: (" + candidato_clv + ")");
+    //  alert("Nombre candidato: " + candidato_nombre);
 
     leeClientes2(); // Empresas a signar al candidato
     leeEstados(); // Lee catalogo de estados
-
     consultaCandidato(); // Consulta candidato
 };
 
@@ -113,7 +110,7 @@ function fileUpload(img) {
             //          alert("Directorio: " + foto_dir);
             //        alert("Nombre de foto: " + foto_nom);
 
-            document.getElementById("mensaje_gral2").value = cadena;
+            //            document.getElementById("mensaje_gral2").value = cadena;
         } else {
             //                  alert("Estado: " + xhttp.readyState + "  Status: " + xhttp.status);
         }
@@ -138,7 +135,7 @@ function limpiaPantalla1() {
 
 function limpiaPantalla2() {
     //    alert("Limpia Pantalla 2");
-    limpiaTablaCono();
+    //    limpiaTablaCono();
     var foto_url = "../img/elicor9.jpg";
     despliega_foto(foto_url);
     var valor = "";
@@ -206,7 +203,6 @@ function actualizaCandidato() {
 
     var aviso;
     var camposx22 = [];
-    //    var candidato_clv = document.getElementById("cand_key").value;
 
     //cand_nom,cand_tel1,cand_tel2,cand_corr,cand_skype,cand_fecha_nac,cand_direccion,cand_estado,cand_edad,
     //cand_edoc,cand_hijos,clv_est_cand,cand_sdo_sol,clv_vacante,cand_sdo_ult,cand_ult_trab,cand_ult_pue,clv_est_cv,
@@ -424,7 +420,6 @@ function calcula_edad() {
 }
 
 function leeConocimientos2() {
-    alert("Lee Conocimientos de candidato: " + candidato_clv);
     //    limpiaPantalla_Con();
     var limpia = "";
     var vacio1 = 0;
@@ -460,15 +455,11 @@ function consultaCandidato() {
     //    limpiaPantalla2(); // Limpia campos
 
     // Lee los conocimientos del candidato solicitado y los despliega en el widget de conocimientos
-    //    leeConocimCand(candidato_clv);
-    //    alert("Consultar candidato: " + candidato_clv + "-" + cand_nombre);
-    //var archivo1 = "https://svr.itbp.com.mx/httpdocs/consultaContacto.php";
+    leeConocimCand(candidato_clv);
 
     var archivo1 = servidor + "httpdocs/consultaCandidato3.php";
     var archivo2 = archivo1 + "?candidato=" + candidato_clv;
     var xhttp;
-
-    //    alert("Archivo de consulta de candidato:" + archivo2);
 
     if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
         xhttp = new XMLHttpRequest();
@@ -536,9 +527,6 @@ function consultaCandidato() {
                 estado = 0;
             }
 
-            //            var cant_campos = ids.length;
-            //          alert("Cantidad de campos: " + cant_campos);
-
             var cliente = 0;
             var opcion5 = 0;
 
@@ -572,9 +560,8 @@ function consultaCandidato() {
             var est_eval = ids[18];
             var anios = 0;
 
-
-            if (ids[6] != "" && ids[6] > 0) {
-                //                alert("Determina edad");
+            if ((ids[6] != "") && (ids[6].length > 5)) {
+                //                alert("Determina edad de: " + ids[6]);
 
                 var dia_de_hoy = new Date();
                 var anio_hoy = dia_de_hoy.getFullYear();
@@ -641,6 +628,7 @@ function consultaCandidato() {
                 ids[35] = foto_url;
             }
 
+            //            alert("Foto: " + ids[35]);
             despliega_foto(ids[35]);
         } else {
             // alert("Estado: " + xhttp.readyState + "  Status: " + xhttp.status);
@@ -653,7 +641,6 @@ function consultaCandidato() {
 
 function leeClientes2() {
     //    alert("Lee Clientes 2");
-    //  alert("limpia Pantalla");
     limpiaPantalla1(); // Limpia pantalla
     var limpia = "";
     document.getElementById("vacantes").innerHTML = limpia;
@@ -707,7 +694,7 @@ function consultaVacante(vacante_clv) {
             document.getElementById("puesto").value = ids[0];
             document.getElementById("sdo3").value = ids[1];
             document.getElementById("sdo4").value = ids[2];
-            leeConocimientos2(); // Lee los conocimientos de la vacante a la que se apunto el candidato
+            leeConocimientos(vacante_clv); // Lee los conocimientos de la vacante a la que se apunto el candidato
 
         } else {
             //            alert("Estado: " + xhttp.readyState + "  Status: " + xhttp.status);
@@ -718,7 +705,7 @@ function consultaVacante(vacante_clv) {
 }
 
 function leeVacantes2() {
-    alert("Lee Vacantes 2");
+    //    alert("Lee Vacantes 2");
     var limpia = "";
     //    var vacio1 = 0;
     //    document.getElementById("vacantes").innerHTML = limpia;
@@ -763,8 +750,8 @@ function Estudios() {
 }
 
 function sale() {
-    if (confirm("¿Quiere salir?")) {
-        ww.close();
+    if (confirm("¿Quiere regresar?")) {
+        window.close();
     }
 }
 

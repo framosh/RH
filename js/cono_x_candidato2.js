@@ -17,7 +17,7 @@ function limpiaPantalla_Con() {
 }
 
 function actualizaConocim() {
-    alert("Actualiza Conocimiento del Candidato");
+    //    alert("Actualiza Conocimiento del Candidato");
     var vacio = "";
     var vacio1 = 0;
     document.getElementById("mensaje_gral").innerHTML = vacio;
@@ -67,16 +67,16 @@ function actualizaConocim() {
     clavex22 = conocimientos2[indice].split("|");
     var conocimiento_clv = clavex22[0];
 
-
-    if (candidato_clv == "" || candidato_clv == null) {
-        renglones = candidatos2.length;
-        renglones--;
-        indice = document.getElementById("candidatos").selectedIndex;
-        indice = (renglones - indice);
-        clavex22 = candidatos2[indice].split("|");
-        candidato_clv = clavex22[0];
-    }
-
+    /*
+        if (candidato_clv == "" || candidato_clv == null) {
+            renglones = candidatos2.length;
+            renglones--;
+            indice = document.getElementById("candidatos").selectedIndex;
+            indice = (renglones - indice);
+            clavex22 = candidatos2[indice].split("|");
+            candidato_clv = clavex22[0];
+        }
+    */
     var nivel22 = 4;
     renglones = nivel22;
     renglones--;
@@ -116,19 +116,19 @@ function altaConocim() {
     document.getElementById("mensaje_gral").innerHTML = vacio;
     document.getElementById("mensaje_conocimiento").innerHTML = vacio;
 
-    var candidato = document.getElementById("candidatos").value;
-    var candidato_clv = document.getElementById("cand_key").value;
+    //    var candidato = document.getElementById("candidatos").value;
+    //    var candidato_clv = document.getElementById("cand_key").value;
     var conocimiento = document.getElementById("conocimientos").value;
     var nivel = document.getElementById("nivel").value;
     var anios = document.getElementById("anios").value;
     var meses = document.getElementById("meses").value;
     //    var empresa = document.getElementById("empresas").value;
-
-    if (candidato_clv == "" || candidato_clv == null) {
-        alert("Seleccione el Candidato o realice su alta primero");
-        return;
-    }
-
+    /*
+        if (candidato_clv == "" || candidato_clv == null) {
+            alert("Seleccione el Candidato o realice su alta primero");
+            return;
+        }
+    */
     if (conocimiento == "Seleccione el Conocimiento") {
         alert("Seleccione la Vacante");
         return;
@@ -168,16 +168,16 @@ function altaConocim() {
     clavex22 = conocimientos2[indice].split("|");
     var conocimiento_clv = clavex22[0];
     var nombre = clavex22[1];
-
-    if (candidato_clv == "" || candidato_clv == null) {
-        renglones = candidatos2.length;
-        renglones--;
-        indice = document.getElementById("candidatos").selectedIndex;
-        indice = (renglones - indice);
-        clavex22 = candidatos2[indice].split("|");
-        candidato_clv = clavex22[0];
-    }
-
+    /*
+        if (candidato_clv == "" || candidato_clv == null) {
+            renglones = candidatos2.length;
+            renglones--;
+            indice = document.getElementById("candidatos").selectedIndex;
+            indice = (renglones - indice);
+            clavex22 = candidatos2[indice].split("|");
+            candidato_clv = clavex22[0];
+        }
+    */
     var nivel22 = 4;
     renglones = nivel22;
     renglones--;
@@ -188,11 +188,13 @@ function altaConocim() {
         alert("Conocimiento no seleccionado: " + conocimiento_clv);
         return;
     }
-
-    if (candidato_clv == 0 || candidato_clv == "") {
-        alert("Candidato no seleccionado: " + candidato_clv);
-        return;
-    }
+    /*
+        if (candidato_clv == 0 || candidato_clv == "") {
+            alert("Candidato no seleccionado: " + candidato_clv);
+            return;
+        }
+    */
+    //    alert("Candidato: " + candidato_clv + "  Conocimiento: " + conocimiento_clv);
 
     var archivo1 = servidor + "httpdocs/reg_Con_x_Cand.php";
     var archivo2 = archivo1 + "?Conocimiento=" + conocimiento_clv + "&Candidato=" + candidato_clv + "&Nivel=" + nivel_clv + "&Anio=" + anios + "&Mes=" + meses;
@@ -213,20 +215,6 @@ function altaConocim() {
         //        alert("paso 1.7");
         if ((xhttp.readyState == 4) && (xhttp.status == 200)) {
             //            limpiaTabla();
-            /*
-                        var llave = 0;
-                        var nvo_index = conocim_cand.length;
-                        nvo_index++;
-                        var nvo_renglon = conocimiento_clv + "|" + nombre + "|" + nivel + "|" + anios + "|" + meses + "\n";
-                        if (conocim_cand.length == 0) {
-                            conocim_cand[0] = nvo_renglon;
-                        } else {
-                            conocim_cand[nvo_index] = nvo_renglon;
-                        }
-                        //Despliegan en el cuadro de conocimientos el conocimiento registrado
-                        //            alert("Conocim_cand: " + conocim_cand);
-                        quickReport(conocim_cand);
-            */
             //            alert("paso 1.8");
             var cadena = xhttp.responseText; // Regresa le mensaje enviado por el servidor en el proceso php 
             var cadena2 = xhttp.statusText; // Regresa el texto del estatus del proceso
@@ -257,7 +245,7 @@ function consultaConocimiento() {
     document.getElementById("meses").value = vacio;
     document.getElementById("mensaje_conocimiento").innerHTML = vacio;
 
-    var candidato = document.getElementById("candidatos").value;
+    // var candidato = document.getElementById("candidatos").value;
     var conocimiento = document.getElementById("conocimientos").value;
 
     if (conocimiento == "Seleccione el Conocimiento") {
@@ -272,14 +260,14 @@ function consultaConocimiento() {
     conocimientox22 = (renglones - conocimientox22);
     clavex22 = conocimientos2[conocimientox22].split("|");
     var conocimiento_clv = clavex22[0];
-
-    renglones = candidatos2.length;
-    renglones--;
-    var posicion22 = document.getElementById("candidatos").selectedIndex;
-    posicion22 = (renglones - posicion22);
-    clavex22 = candidatos2[posicion22].split("|");
-    var candidato_clv = clavex22[0];
-
+    /*
+        renglones = candidatos2.length;
+        renglones--;
+        var posicion22 = document.getElementById("candidatos").selectedIndex;
+        posicion22 = (renglones - posicion22);
+        clavex22 = candidatos2[posicion22].split("|");
+        var candidato_clv = clavex22[0];
+    */
     var archivo1 = servidor + "httpdocs/con_Con_Cand.php";
     var archivo2 = archivo1 + "?candidato=" + candidato_clv + "&conocimiento=" + conocimiento_clv;
     var xhttp;
@@ -331,11 +319,11 @@ function consultaConocimiento() {
     xhttp.send();
 }
 
-var conocim_cand = [];
+//var conocim_cand = [];
 
 // Conocimientio por candidato
 function leeConocimCand(candidato_clv) {
-    alert("Lee Conocimientos de candidato: " + candidato_clv);
+    //    alert("Lee Conocimientos de candidato: " + candidato_clv);
     //    limpiaPantalla_Con();
     //    limpiaTabla(); // Limpia tabla de conocimientos del candidato consultado anteriormente
     var limpia = "";
@@ -352,8 +340,6 @@ function leeConocimCand(candidato_clv) {
     var archivo2 = archivo1 + "?Candidato=" + candidato_clv;
     var xhttp;
 
-    alert("Consulta el php de conocimientos del candidato: " + archivo2);
-
     if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
         xhttp = new XMLHttpRequest();
     } else { // code for IE6, IE5
@@ -364,28 +350,16 @@ function leeConocimCand(candidato_clv) {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var cadena = xhttp.responseText;
-            alert("Catalogo de conocimientos: " + cadena);
+            //            var conox1 = cadena.split(/\r?\n/);
 
-            if (cadena == "0|No hay Conocimientos") {
+            if (cadena == "No hay Conocimientos") {
                 alert("El candidato no tiene conocimientos registrados");
                 return;
             }
-            var conocimientos = cadena.split("\n");
-            var i2 = 0;
-            var camposxx1 = conocimientos[0].split("|");
-            var long_campo = camposxx1.length;
 
-            if (long_campo > 2) {
-                //quickReport(conocimientos, tabla, cuerpo)
-                //Si el candidato ya tiene conocimientos registrados se despliegan en el cuadro de conocimientos
-                var tabla = "tabla9";
-                var cuerpo = "body9";
-                conoReport(conocimientos, tabla, cuerpo);
-                conocim_cand = conocimientos;
-            } else {
-                var limpiax1 = [];
-                conocim_cand = limpiax1;
-            }
+            var tabla = "tablaCon";
+            var cuerpo = "body9";
+            conoReport(cadena, tabla, cuerpo);
         } else {
             // alert("conocimientos: " + xhttp.readyState + "  Status: " + xhttp.status);
         }

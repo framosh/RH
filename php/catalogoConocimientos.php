@@ -28,7 +28,7 @@ if($numero_filas >0){
     Archivo($result);
     mysqli_close($dbc);
 } else {
-      $query="SELECT * FROM conocimientos WHERE 1 ORDER BY clv_conocim";
+      $query="SELECT * FROM conocimientos WHERE 1 ORDER BY cono_desc DESC";
       $result = mysqli_query($dbc,$query);
       $numero_filas = mysqli_num_rows($result);
       if($numero_filas >0){

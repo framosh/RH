@@ -15,27 +15,11 @@ $numero_filas = mysqli_num_rows($result);
 
 if($numero_filas >0){
     Archivo($result);
-    mysqli_close($dbc);
 } else {
-//  echo("0|No hay Conocimientos");
-  //mysqli_close($dbc);
+  echo("No hay Conocimientos");
+}
 
-//      mysqli_close($dbc);
-  //    require 'arhsi_connect.php';
-
-      $query="SELECT clv_conocim, cono_desc FROM conocimientos WHERE 1 ORDER BY clv_conocim";
-      $result = mysqli_query($dbc,$query);
-      $numero_filas = mysqli_num_rows($result);
-      if($numero_filas >0){
-        Archivo($result);
-        mysqli_close($dbc);
-        } else {
-            echo("0|No hay Conocimientos");
-            mysqli_close($dbc);
-            }
-    }
-
-        function Archivo($result) {
+function Archivo($result) {
            return creArchivo('php://output', $result);
           }
 
@@ -44,18 +28,20 @@ if($numero_filas >0){
          $rc = llenaDatos($fp, $result);
          fclose($fp);
          if($rc==0) {
-            echo("0|No hay Conocimientos");
+            echo("No hay Conocimientos");
             }
          return $rc;
          }
 
        function llenaDatos($stream, $result) {
          $nrows = 0;
-         $delimiter='|';
+         $delimiter=chr(124);
+         $enclosure=chr(34);
          while($row = mysqli_fetch_row($result)) {
            fputcsv($stream, $row, $delimiter);
            $nrows++;
            }
          return $nrows;
-         }       
+         }
+mysqli_close($dbc);   
 ?>

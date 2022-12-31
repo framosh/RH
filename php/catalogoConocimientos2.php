@@ -4,13 +4,13 @@ $condicion = "1";
 require 'arhsi_connect.php';
 
 if($vacante ==""){
-  $query="SELECT * FROM conocimientos WHERE 1 ORDER BY clv_conocim";
+  $query="SELECT * FROM conocimientos WHERE 1 ORDER BY cono_desc DESC";
 } else {
   $query="SELECT Con_req.clv_conocim, conocimientos.cono_desc, Con_req.nivel_conocim, Con_req.exp_anio_min, Con_req.exp_mes_min 
   FROM Con_req 
   LEFT JOIN conocimientos ON conocimientos.clv_conocim = Con_req.clv_conocim
   WHERE $condicion 
-  ORDER BY clv_conocim";
+  ORDER BY cono_desc DESC";
 }
 
 $result = mysqli_query($dbc,$query);
@@ -20,7 +20,7 @@ if($numero_filas >0){
     Archivo($result);
     mysqli_close($dbc);
 } else {
-      $query="SELECT * FROM conocimientos WHERE 1 ORDER BY clv_conocim";
+      $query="SELECT * FROM conocimientos WHERE 1 ORDER BY cono_desc DESC";
       $result = mysqli_query($dbc,$query);
       $numero_filas = mysqli_num_rows($result);
       if($numero_filas >0){
