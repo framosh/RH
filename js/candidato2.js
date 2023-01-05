@@ -49,7 +49,7 @@ window.onload = function () {
     consultaCandidato(); // Consulta candidato
 };
 
-
+// SECCION DE CARGAY VISUALIZACION DE FOTOGRAFIAS DEL CANDIDATO
 function despliega_foto(foto_url) {
     //    alert("Muestra foto: " + foto_url);
     if (foto_url.length > 1) {
@@ -62,7 +62,7 @@ function despliega_foto(foto_url) {
 
 function carga_imagen() {
     var preview = document.querySelector(".display_image");
-    var file = document.querySelector('input[type=file]').files[0];
+    var file = document.querySelector("input[name='foto']").files[0];
     var reader = new FileReader();
 
     reader.addEventListener("load", function () {
@@ -75,14 +75,12 @@ function carga_imagen() {
     }
 }
 
-function imprime() {
-    window.print();
-}
-
-// Sube la imagen de la foto del candidato al servidor web
 var foto_dir;
 var foto_nom;
+var file_dir;
+var file_nom;
 
+// Sube la imagen de la foto del candidato al servidor web
 function fileUpload(img) {
     elige_servidor();
     var xhttp;
@@ -107,10 +105,6 @@ function fileUpload(img) {
             foto_dir = cadena1[1];
             var cadena2 = foto_dir.split("/");
             foto_nom = cadena2[2];
-            //          alert("Directorio: " + foto_dir);
-            //        alert("Nombre de foto: " + foto_nom);
-
-            //            document.getElementById("mensaje_gral2").value = cadena;
         } else {
             //                  alert("Estado: " + xhttp.readyState + "  Status: " + xhttp.status);
         }
@@ -120,8 +114,68 @@ function fileUpload(img) {
     xhttp.send(fd);
 }
 
-//var servidor_local = "/svr_local/httpdocs/";
-//var servidor_web = "https://svr.itbp.com.mx/httpdocs/";
+// SECCION DE CARGA Y DESPLIEGUE DE LA IMAGEN DEL CV. DEL CANDIDATO
+function PreviewImage() {
+    var pdffile = document.getElementById("uploadPDF").files[0];
+    var pdffile_url = URL.createObjectURL(pdffile);
+    $('#viewer').attr('src', pdffile_url);
+}
+
+function carga_file() {
+    var preview = document.querySelector("input[id='uploadPDF']");
+    var file = document.querySelector("input[id='uploadPDF']").files[0];
+    var reader = new FileReader();
+
+    reader.addEventListener("load", function () {
+        preview.src = reader.result;
+        subeArchivo(file);
+    }, false);
+
+    if (file) {
+        reader.readAsDataURL(file);
+    }
+}
+
+// Sube el cv. del candidato al servidor
+function subeArchivo(archivo) {
+    //    alert("Sube archivo");
+    elige_servidor();
+    var xhttp;
+
+    if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+        xhttp = new XMLHttpRequest();
+    } else { // code for IE6, IE5
+        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    var archivo2 = servidor + "httpdocs/cargaArchivo.php";
+    var fd = new FormData();
+
+    xhttp.open("POST", archivo2, true);
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            // $archivox ="Archivo cargado:".$archivo.": Tamaño:".$tamanio.": Tipo:".$tipo; 
+
+            var cadena = xhttp.responseText;
+            var cadena1 = cadena.split(":");
+            file_dir = cadena1[1];
+            //            var cadena2 = file_dir.split("/");
+            file_tamanio = cadena1[3];
+            file_tipo = cadena1[5];
+        } else {
+            //            alert("Estado: " + xhttp.readyState + "  Status: " + xhttp.status);
+        }
+    };
+    fd.append('myFile', archivo);
+    xhttp.send(fd);
+}
+
+var file_tamanio;
+var file_tipo;
+
+function imprime() {
+    window.print();
+}
 
 /* LIMPIA PANTALLA */
 function limpiaPantalla1() {
@@ -165,7 +219,6 @@ function limpiaPantalla2() {
     document.getElementById("estatus_eval").selectedIndex = opcion2;
     document.getElementById("estados").selectedIndex = opcion2;
     document.getElementById("act_cand").disabled = false;
-    document.getElementById("edad").disabled = true;
 
     document.getElementById("conocimientos").selectedIndex = opcion2;
     document.getElementById("nivel").selectedIndex = opcion2;
@@ -342,15 +395,36 @@ function actualizaCandidato() {
         posicion22 = document.getElementById("estatus_eval").selectedIndex;
         est_evaluacion = posicion22;
         camposx22[19] = est_evaluacion;
-        alert("Estatus evaluación: " + est_evaluacion);
+        //        alert("Estatus evaluación: " + est_evaluacion);
     }
 
     if (foto_dir == "" || foto_dir == null) {
         foto_dir = "../img/elicor9.jpg";
     }
 
+    if (foto_dir == null) {
+        foto_dir = "";
+    }
+
+    if (foto_nom == null) {
+        foto_nom = "";
+    }
+
+    if (file_dir == null) {
+        file_dir = "";
+    }
+
+    if (file_nom == null) {
+        file_nom = "";
+    }
+
     camposx22[32] = foto_dir;
     camposx22[33] = foto_nom;
+    camposx22[34] = file_dir;
+    camposx22[35] = file_nom;
+
+    //    alert("Cv: " + file_nom + "  directorio: " + file_dir);
+    alert("Cv: " + file_nom + "  tamaño: " + file_tamanio + "  tipo: " + file_tipo);
 
     var cantidad_campos = camposx22.length;
 
@@ -388,11 +462,47 @@ function actualizaCandidato() {
     //    xhttp.disabled();
 }
 
+function borraCandidato() {
+    //    alert("Borra candidato: " + candidato_clv);
+
+    //var archivo1 = "https://svr.itbp.com.mx/httpdocs/svr_reg_contacto.php";
+    var archivo1 = servidor + "httpdocs/borraCandidato.php";
+    var archivo2 = archivo1 + "?candidato=" + candidato_clv;
+    var xhttp;
+
+    if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+        xhttp = new XMLHttpRequest();
+    } else { // code for IE6, IE5
+        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    xhttp.open("GET", archivo2, true);
+    xhttp.onreadystatechange = function () {
+        //  alert("paso 1.7");
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            //      alert("paso 1.8");
+            var cadena = xhttp.responseText;
+            //            alert("Cadena: " + cadena);
+            var cadena2 = cadena.split(/\r?\n/);
+            var cadena3 = cadena2[0].split(":");
+            document.getElementById("mensaje_gral").innerHTML = cadena2[0];
+            if (cadena3[0] == "Candidato borrado") {
+                limpiaPantalla1();
+                sale();
+            }
+        } else {
+            //            alert("Estado: " + xhttp.readyState + "  Status: " + xhttp.status);
+        }
+    };
+    xhttp.send();
+    //    xhttp.disabled();    
+}
+
 
 function calcula_edad() {
     var nacimiento = document.getElementById("fnac").value;
 
-    if (nacimiento != null && nacimiento != "") {
+    if (nacimiento != null && nacimiento != "0000-00-00" && nacimiento != "") {
         var dia_de_hoy = new Date();
         var anio_hoy = dia_de_hoy.getFullYear();
         var mes_hoy = dia_de_hoy.getMonth();
@@ -416,6 +526,7 @@ function calcula_edad() {
         //          var edad2 = edad.getDay();
         //    alert("Años: " + anios);
         document.getElementById("edad").value = anios;
+        document.getElementById("edad").disabled = true;
     }
 }
 
@@ -497,9 +608,9 @@ function consultaCandidato() {
             var cliente_clv = ids[38];
             var vacante_clv = ids[39];
             vacante = 0;
-            leeVacantes2(cliente_clv, vacante_clv);
-
-            consultaVacante(vacante_clv);
+            //            leeVacantes2(cliente_clv, vacante_clv);
+            leeVacantes2(cliente_clv, vacante_clv); // Carga el Spinner de las vacantes activas del cliente
+            consultaVacante(vacante_clv); // Consulta los datos de la vacante registrada para el candidato
 
             var estado = 0;
             var opcion4 = 0;
@@ -558,9 +669,11 @@ function consultaCandidato() {
             var est_cv = ids[16];
             var est_entre = ids[17];
             var est_eval = ids[18];
-            var anios = 0;
+            var anios = ids[9];
 
-            if ((ids[6] != "") && (ids[6].length > 5)) {
+            //            alert("Edad: " + ids[6]);
+
+            if ((ids[6] != "0000-00-00") && (ids[6] != "") && (ids[6] != null)) {
                 //                alert("Determina edad de: " + ids[6]);
 
                 var dia_de_hoy = new Date();
@@ -582,8 +695,7 @@ function consultaCandidato() {
                     aniox = -1;
                 }
                 anios = anios + aniox;
-            } else {
-                anios = 0;
+                document.getElementById("edad").disabled = true;
             }
 
             //            alert("Despliega datos de candidato");
@@ -627,9 +739,8 @@ function consultaCandidato() {
                 var foto_url = "../img/elicor9.jpg";
                 ids[35] = foto_url;
             }
-
-            //            alert("Foto: " + ids[35]);
             despliega_foto(ids[35]);
+            //           document.getElementById("uploadPDF").value = ids[40]; // archivo de cv
         } else {
             // alert("Estado: " + xhttp.readyState + "  Status: " + xhttp.status);
         }
@@ -704,35 +815,6 @@ function consultaVacante(vacante_clv) {
     //    xhttp.disabled();
 }
 
-function leeVacantes2() {
-    //    alert("Lee Vacantes 2");
-    var limpia = "";
-    //    var vacio1 = 0;
-    //    document.getElementById("vacantes").innerHTML = limpia;
-    document.getElementById("mensaje_gral").innerHTML = limpia;
-
-    var empresa = document.getElementById("empresas").value;
-    var cliente_clv = "";
-
-    if (empresa == "Seleccione una Empresa") {
-        alert("Seleccione una Empresa");
-        return;
-    }
-
-    var nombre1 = "";
-
-    for (var i4 = 0; i4 < cliente2.length; i4++) {
-        var nombre3 = cliente2[i4].split("|");
-        var campo3 = nombre3[1];
-        if (campo3 == empresa) {
-            cliente_clv = nombre3[0];
-            nombre1 = nombre3[1];
-            //            alert("Cliente: (" + cliente_clv + ") - (" + nombre1 + ")");
-            break;
-        }
-    }
-    leeVacantes(cliente_clv);
-}
 
 function leeEstados2() {
     leeEstados();
@@ -744,8 +826,9 @@ function Estudios() {
     //alert("Entra a estudios");
 
     $(document).ready(function () {
+        var configura_ventana = "menubar=no, location=yes, resizable=yes, scrollbars=yes, status=yes, height=620,width=700,top=100,left=300";
         var pagina = servidor + "edu_x_cand.htm" + "?candidato=" + candidato_clv + "&cand_nom=" + candidato_nombre;
-        ww2 = window.open(pagina, 'New Window4', 'height=500,width=700,top=100,left=300');
+        ww2 = window.open(pagina, 'New Window4', configura_ventana);
     });
 }
 

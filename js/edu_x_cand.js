@@ -1,8 +1,11 @@
+//Pantalla de mtto. de educacion por candidato
 var cand1 = [];
 var cand_clv;
 var cand_nom;
 
 window.onload = function () {
+    $('[lang="es"]');
+
     elige_servidor();
     leeInstituciones();
     leeTipoEdu();
@@ -25,10 +28,10 @@ window.onload = function () {
     }
     cand_clv = cand1[0];
     cand_nom = cand1[1];
-    var nombre_candidato = cand_clv + " - " + cand_nom;
+    //    var nombre_candidato = cand_clv + " - " + cand_nom;
     //    alert(nombre_candidato);
-    document.getElementById("nombre_candidato").innerHTML = nombre_candidato;
-    LeeEducacion();
+    //  document.getElementById("nombre_candidato").innerText = nombre_candidato;
+    LeeEducacion(cand_clv, cand_nom);
 };
 
 function reporteEduPant() {
@@ -58,7 +61,7 @@ function limpiaPantallaEC() {
     document.getElementById("campus").value = vacio;
     document.getElementById("generacion").value = vacio;
     document.getElementById("secuencial").value = vacio1;
-    document.getElementById("mensaje_gral_edu").value = vacio;
+    document.getElementById("mensaje_gral_edu").innerHTML = vacio;
 }
 
 function actualizaEdu() {
@@ -98,7 +101,7 @@ function altaEdu(tipo_mov) {
     var vacio = "";
     var vacio1 = "0";
 
-    document.getElementById("mensaje_gral_edu").value = vacio;
+    document.getElementById("mensaje_gral_edu").innerHTML = vacio;
 
     var institucion = document.getElementById("instituciones").value;
     var carrera = document.getElementById("carrera").value;
@@ -345,10 +348,15 @@ function leeTipoEdu() {
 
 var carreras2 = [];
 
-function LeeEducacion() {
+function LeeEducacion(cand_clv, cand_nom) {
     //    alert("Lee Educacion del candidato: " + cand_clv);
     //    document.getElementById("clv_tipo_edu").disabled = true;
     //    limpiaPantalla();
+    var nombre_candidato = cand_clv + " - " + cand_nom;
+    alert(nombre_candidato);
+    //    document.getElementById("nombre_candidato").innerText = nombre_candidato;
+    document.getElementById("candidato").innerHTML = nombre_candidato;
+
     var archivo1 = servidor + "httpdocs/catalogoEduXCand.php";
     var archivo2 = archivo1 + "?Candidato=" + cand_clv;
     var xhttp;

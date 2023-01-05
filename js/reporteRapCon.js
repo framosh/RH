@@ -129,11 +129,9 @@ function limpiaTablaCono() {
         //        alert("No hay tabla a limpiar");
         return;
     }
+    //    alert("Limpia Tabla renglones: " + renglones2 + "  Columnas:" + columnas2);
 
-    alert("Limpia Tabla renglones: " + renglones2 + "  Columnas:" + columnas2);
-
-
-    for (var renglon2 = 0; renglon2 <= renglones2; renglon2++) {
+    for (var renglon2 = 0; renglon2 < renglones2; renglon2++) {
         for (col2 = 0; col2 < columnas2; col2++) {
             var campox1 = "camp" + col2 + "-reng" + renglon2;
             document.getElementById(campox1).innerHTML = vacio;
@@ -192,7 +190,7 @@ function creaTablaCono(renglones, columnas) {
 
     //    var renglonesx2 = renglones + 1;
 
-    for (var i = renglones2; i <= renglones; i++) {
+    for (var i = renglones2; i < renglones; i++) {
         //                alert("Crea linea: " + i);
         var hilera = document.createElement("tr");
         hilera.id = i;

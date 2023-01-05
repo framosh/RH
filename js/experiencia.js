@@ -31,19 +31,7 @@ window.onload = function () {
 
 function reporteExpPant() {
     var clv_exp = document.getElementById("experiencias").value;
-    var exp_clv;
-
-    if (clv_exp == "Seleccione la Experiencia") {
-        exp_clv = 0;
-    } else {
-        var renglones = experiencia2.length;
-        renglones--;
-        var experienciax22 = document.getElementById("experiencias").selectedIndex;
-        experienciax22 = (renglones - experienciax22);
-        var clavex22 = [];
-        clavex22 = experiencia2[experienciax22].split("|");
-        exp_clv = clavex22[0];
-    }
+    var exp_clv = 0;
 
     $(document).ready(function () {
         var pagina = servidor + "httpdocs/rdva3_ExpxCand.php" + "?Candidato=" + cand_clv + "&Nombre=" + cand_nom + "&Experiencia=" + exp_clv;
@@ -174,9 +162,9 @@ function altaExp(tipo_mov) {
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var cadena = xhttp.responseText;
-            alert(cadena);
+            //            alert(cadena);
             var campos = cadena.split(":");
-            document.getElementById("mensaje_gral_exp").value = cadena;
+            document.getElementById("mensaje_gral_exp").innerHTML = cadena[0];
             if (campos[1] > 0 && tipo_mov != 2) {
                 document.getElementById("clv_exp").value = campos[1];
                 document.getElementById("altaexp").disabled = false;

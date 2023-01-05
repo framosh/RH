@@ -39,7 +39,10 @@ ingles='$campos[28]',
 espaniol='$campos[29]',
 otro='$campos[30]',
 foto_dir='$campos[32]',
-foto_nom='$campos[33]'
+foto_nom='$campos[33]',
+file_dir='$campos[34]',
+file_nom='$campos[35]'
+ 
  WHERE cand_key='$campos[31]'"))
 	{
 	   mysqli_stmt_execute($stmt);

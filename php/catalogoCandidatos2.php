@@ -8,12 +8,12 @@ if($vacante != "" && $vacante != null){
   $query="SELECT Candidatos.cand_key, Candidatos.cand_nom, Cand_x_vac.estatus FROM Cand_x_vac  
   LEFT JOIN Candidatos ON Candidatos.cand_key = Cand_x_vac.cand_key
   LEFT JOIN Est_cand ON Est_cand.clv_est_cand = Candidatos.clv_est_cand
-  WHERE Cand_x_vac.clv_vacante='$vacante' ORDER BY Candidatos.cand_nom DESC";  
+  WHERE Cand_x_vac.clv_vacante='$vacante' ORDER BY Candidatos.cand_nom ASC";  
 } else {
   $query="SELECT Candidatos.cand_key, Candidatos.cand_nom, Cand_x_vac.estatus FROM Cand_x_vac  
   LEFT JOIN Candidatos ON Candidatos.cand_key = Cand_x_vac.cand_key
   LEFT JOIN Est_cand ON Est_cand.clv_est_cand = Candidatos.clv_est_cand
-  WHERE $todos ORDER BY Candidatos.cand_nom DESC";  
+  WHERE $todos ORDER BY Candidatos.cand_nom ASC";  
 }
 
 $result = mysqli_query($dbc,$query);

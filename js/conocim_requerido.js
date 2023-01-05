@@ -143,6 +143,7 @@ function actualizaConocimReque() {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var cadena = xhttp.responseText;
             document.getElementById("con_requeridos_msg").innerHTML = cadena;
+            despliegaConocimientos();
         }
     };
 }
@@ -159,12 +160,6 @@ function altaConocimReque() {
     var anios = document.getElementById("anios").value;
     var meses = document.getElementById("meses").value;
     var empresa = document.getElementById("empresas").value;
-    /*
-        if (anios > 0 || meses > 0) {
-            alert("Ya existe este conocimiento en la vacante");
-            return;
-        }
-        */
 
     if (empresa == "Seleccione una Empresa") {
         alert("Seleccione una Empresa");
@@ -243,7 +238,7 @@ function altaConocimReque() {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var cadena = xhttp.responseText;
             document.getElementById("con_requeridos_msg").innerHTML = cadena;
-            limpiaTabla();
+            //            limpiaTabla();
             despliegaConocimientos();
         }
     };
@@ -357,6 +352,7 @@ function consultaConocimiento() {
 
 //Despliega conocimientos registrados para la vacante en la ventana inferior
 function despliegaConocimientos() {
+    //    alert("Despliega conocimientos");
     var limpia = "";
     var vacio1 = 0;
 
@@ -404,12 +400,12 @@ function despliegaConocimientos() {
                 alert("No hay Conocimientos");
                 return;
             }
-            var conocim_cand = cadena.split("\n");
+            //            var conocim_cand = cadena.split("\n");
 
             var tabla = "tabla4";
-            var cuerpo = "body10";
+            var cuerpo = "body9";
 
-            quickReport(conocim_cand, tabla, cuerpo);
+            conoReport(cadena, tabla, cuerpo);
         } else {
             //            alert("Estado: " + xhttp.readyState + "  Status: " + xhttp.status);
         }
@@ -417,7 +413,7 @@ function despliegaConocimientos() {
     xhttp.send();
 }
 
-// Despliega el catalogo general de conocimientos para asignar a la vacante
+// Lee los conocimientos en general y los asignados a la vacante
 var conocimientos2 = [];
 
 function leeConocimientos() {

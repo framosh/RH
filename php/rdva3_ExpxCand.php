@@ -32,14 +32,14 @@ if($response)
 	echo '<table style="width:150%;">
 	<tr align="center" font="./arial"><td>
 	<b>Clave Experiencia</b> </td>
-	<td><b>Empresa</b></td>
-	<td><b>Puesto</b></td>
-	<td><b>Periodo</b></td>
-	<td><b>Sueldo</b></td>
-	<td><b>Jefe</b></td>
-	<td><b>Actividades</b></td>
-    <td><b>Motivo de separación</b></td>
-	<td><b>Herramientas</b> </td></tr>';
+	<td style="width:10%;"><b>Empresa</b></td>
+	<td style="width:10%;"><b>Puesto</b></td>
+	<td style="width:5%;"><b>Periodo</b></td>
+	<td style="width:5%;"><b>Sueldo</b></td>
+	<td style="width:10%;"><b>Jefe</b></td>
+	<td style="width:25%;"><b>Actividades</b></td>
+    <td style="width:15%;"><b>Motivo de separación</b></td>
+	<td style="width:20%;"><b>Herramientas</b> </td></tr>';
 
 //$query="SELECT Edu_xcand.clv_tip_edu,inst_educativa.inst_nombre,Edu_xcand.carrera,Edu_xcand.campus,Edu_xcand.edu_generacion,Edu_xcand.edu_estatus FROM Edu_xcand
 

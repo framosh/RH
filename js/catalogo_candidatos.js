@@ -196,7 +196,7 @@ function lanzaRegistro(candidato_clv, candidato_nom) {
         //        ww = window.open(pagina, 'New Window', 'height=750,width=1200,top=10,left=250');
         ww = window.open(pagina, 'New Window', configura_ventana);
     });
-
+    cargaCandidatos();
 }
 /*
 function generaCV() {

@@ -32,7 +32,7 @@ if($numero_filas >0){
          $rc = llenaDatos($fp, $result);
          fclose($fp);
          if($rc==0) {
-            echo("0|No hay Conocimientos");
+            echo("No hay Conocimientos");
             }
          return $rc;
          }
