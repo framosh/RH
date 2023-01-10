@@ -146,100 +146,13 @@ body {
     background-color: rgb(171, 192, 238);
 }
 
-.c31 {
-    grid-area: profesion;
-    background-color: rgb(102, 241, 149);
-}
-
-.c32 {
-    grid-area: r-profesion;
-    background-color: rgb(102, 241, 149);
-}
-
-.c33 {
-    grid-area: colegio;
-    background-color: rgb(171, 192, 238);
-}
-
-.c34 {
-    grid-area: r-colegio;
-    background-color: rgb(171, 192, 238);
-}
-
-.c35 {
-    grid-area: campus;
-    background-color: rgb(171, 192, 238);
-}
-
-.c36 {
-    grid-area: r-campus;
-    background-color: rgb(171, 192, 238);
-}
-
-.c37 {
-    grid-area: periodo;
-    background-color: rgb(171, 192, 238);
-}
-
-.c38 {
-    grid-area: r-periodo;
-    background-color: rgb(171, 192, 238);
-}
-
-.c39 {
-    grid-area: certificado;
-    background-color: rgb(171, 192, 238);
-}
-
-.c40 {
-    grid-area: r-certificado;
-    background-color: rgb(171, 192, 238);
-}
-
-.grid-layout2 {
-    /*    font-size: 18px; */
-    font-weight: normal;
-    font-style: normal;
-    display: grid;
-    height: 200px;
-    width: 80%;
-    margin-left: 10%;
-    margin-right: 10%;
-    grid-template-areas: 'profesion r-profesion r-profesion r-profesion'
-        'colegio r-colegio r-colegio r-colegio'
-        'campus r-campus r-campus r-campus'
-        'periodo r-periodo certificado r-certificado';
-    grid-template-rows: 25% 25% 25% 25%;
-    grid-template-columns: 15% auto 15% auto;
-    background-color: chartreuse;
-    /*    border: 1px solid black; */
-}
-
-.grid-layout3 {
-    /*    font-size: 18px;*/
-    font-weight: normal;
-    font-style: normal;
-    display: grid;
-    height: 200px;
-    width: 80%;
-    margin-left: 10%;
-    margin-right: 10%;
-    grid-template-areas: 'profesion r-profesion r-profesion r-profesion'
-        'colegio r-colegio r-colegio r-colegio'
-        'campus r-campus r-campus r-campus'
-        'periodo r-periodo certificado r-certificado';
-    grid-template-rows: 25% 25% 25% 25%;
-    grid-template-columns: 15% auto 15% auto;
-    background-color: chartreuse;
-    /*    border: 1px solid black; */
-}
 
 .grid-layout4 {
     /*    font-size: 18px;*/
     font-weight: normal;
     font-style: normal;
     display: grid;
-    height: 600px;
+    /*    height: 600px; */
     margin-left: 10%;
     margin-right: 10%;
     grid-template-areas: 'experiencia';
@@ -308,7 +221,7 @@ body {
     font-style: normal;
 
     display: grid;
-    height: 1800px;
+    height: 100%;
     width: 80%;
     margin-left: 10%;
     margin-right: 10%;
@@ -329,7 +242,7 @@ body {
 
     /*    width: 80%; */
     /*  margin: 0 auto; */
-    background-color: chartreuse;
+    /*    background-color: chartreuse;*/
     /*    padding: 20px; */
     /*    border: 1px solid black; */
 }

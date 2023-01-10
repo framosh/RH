@@ -39,10 +39,11 @@ window.onload = function () {
         //       alert("Candidato: (" + cand_clv + ")");
 
         document.getElementById("nombre").innerHTML = nombre_candidato;
-        setTimeout(consultaCandidato(), 3000);
-        setTimeout(consultaEdu(), 3000);
-        setTimeout(consultaExp(), 3000);
-        setTimeout(consultaConocimientos(cand_clv), 3000);
+        var tiempo = 3000;
+        setTimeout(consultaCandidato(), tiempo);
+        setTimeout(consultaEdu(), tiempo);
+        setTimeout(consultaExp(), tiempo);
+        setTimeout(consultaConocimientos(cand_clv), tiempo);
 
         //        consultaCandidato();
         //        consultaEdu();
@@ -157,29 +158,31 @@ function consultaCandidato() {
             var estado = ids[8];
             consultaEstado(estado);
 
-            var edo_civil = 4 - ids[10];
-            var estado_civil;
 
-            switch (edo_civil) {
-                case 1:
-                    estado_civil = "Soltero";
-                    break;
-                case 2:
-                    estado_civil = "Casado";
-                    break;
-                case 3:
-                    estado_civil = "Viudo";
-                    break;
-                case 4:
-                    estado_civil = "Divorciado";
-                    break;
-                case 5:
-                    estado_civil = "Union libre";
-                    break;
-                default:
-                    estado_civil = "Estado no asignado";
-                    break;
-            }
+            var estado_civil = ["", "Soltero", "Casado", "Viudo", "Divorciado", "Union libre"];
+            var edo_civil = estado_civil[ids[10]];
+            /*
+                        switch (edo_civil) {
+                            case 1:
+                                estado_civil = "Soltero";
+                                break;
+                            case 2:
+                                estado_civil = "Casado";
+                                break;
+                            case 3:
+                                estado_civil = "Viudo";
+                                break;
+                            case 4:
+                                estado_civil = "Divorciado";
+                                break;
+                            case 5:
+                                estado_civil = "Union libre";
+                                break;
+                            default:
+                                estado_civil = "Estado no asignado";
+                                break;
+                        }
+                        */
 
             document.getElementById("nombre").innerHTML = ids[1];
             document.getElementById("tel_casa").innerHTML = ids[2];
@@ -191,7 +194,7 @@ function consultaCandidato() {
             document.getElementById("colonia").innerHTML = ids[20];
             document.getElementById("delegacion").innerHTML = ids[21];
             document.getElementById("edad").innerHTML = ids[9];
-            document.getElementById("edo_civil").innerHTML = estado_civil;
+            document.getElementById("edo_civil").innerHTML = edo_civil;
             document.getElementById("hijos").innerHTML = ids[11];
             document.getElementById("sdo1").innerHTML = ids[12]; // Ultimo sueldo percibido
             document.getElementById("sdo2").innerHTML = ids[13]; // Sueldo solicitado
@@ -279,7 +282,7 @@ function consultaExp() {
 
             if (num_reg > 0) {
                 var tabla = "tabla5";
-                var cuerpo = "cuerpo5";
+                var cuerpo = "body8";
                 quickReport2(cadena2, tabla, cuerpo);
             }
         } else {
@@ -332,29 +335,8 @@ function consultaEdu() {
                             }
                         }
 
-                        var cedula = "";
-                        cedula = ids[5];
-                        var cedula2;
-                        switch (cedula) {
-                            case "1":
-                                cedula2 = "Titulado";
-                                break;
-                            case "2":
-                                cedula2 = "Pasante";
-                                break;
-                            case "3":
-                                cedula2 = "Certificado";
-                                break;
-                            case "4":
-                                cedula2 = "Trunca";
-                                break;
-                            case "5":
-                                cedula2 = "Cursando";
-                                break;
-                            default:
-                                cedula2 = "Sin estatus";
-                                break;
-                        }
+                        var cedula = ["", "Titulado", "Pasante", "Certificado", "Trunca", "Cursando"];
+                        var cedula2 = cedula[ids[5]];
 
                         //  $query="SELECT Edu_xcand.clv_tip_edu, inst_educativa.inst_nombre, Edu_xcand.carrera, Edu_xcand.campus, 
                         //Edu_xcand.edu_generacion, Edu_xcand.edu_estatus FROM Edu_xcand 
@@ -385,7 +367,7 @@ function consultaEdu() {
                 if (curso > 0) {
                     //                    alert("Arranca QuickReport2");
                     var tabla = "tabla4";
-                    var cuerpo = "cuerpo4";
+                    var cuerpo = "body10";
                     quickReport2(desp2, tabla, cuerpo);
                 } else {
                     //                    alert("No hay cursos adicionales: " + curso);
@@ -404,7 +386,7 @@ function salir() {
 var conocim_cand = [];
 
 function consultaConocimientos(candidato_clv) {
-    //    alert("Lee Conocimientos de candidato: " + candidato_clv);
+    alert("Lee Conocimientos de candidato: " + candidato_clv);
     //    limpiaPantalla_Con();
     //    limpiaTabla(); // Limpia tabla de conocimientos del candidato consultado anteriormente
     var limpia = "";
@@ -424,19 +406,19 @@ function consultaConocimientos(candidato_clv) {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var cadena = xhttp.responseText;
-            //          alert(cadena);
+            alert(cadena);
             var conocimientos = cadena.split("\n");
-            var i2 = 0;
-            var camposxx1 = conocimientos[0].split("|");
-            var long_campo = camposxx1.length;
+            //            var i2 = 0;
+            //            var camposxx1 = conocimientos[0].split("|");
+            var registros = conocimientos.length;
 
-            //            alert("Cantidad de conocimientos registrados para el candidato: " + long_campo);
+            alert("Conocimientos registrados para el candidato: " + registros);
 
-            if (long_campo > 2) {
+            if (registros > 1) {
                 //Si el candidato ya tiene conocimientos registrados se despliegan en el cuadro de conocimientos
-                var tabla = "tablaCon";
-                var cuerpo = "cuerpoCon";
-                quickReport(conocimientos, tabla, cuerpo);
+                var tabla = "tConocimientos";
+                var cuerpo = "body11";
+                quickReport2(conocimientos, tabla, cuerpo);
                 conocim_cand = conocimientos;
             } else {
                 var limpiax1 = [];

@@ -130,14 +130,27 @@ function leeVacantes3(cliente_clv) {
 //var candidatos2 = [];
 
 function cargaCandidatos() {
+    limpiaTabla();
+    var aviso = "";
+    document.getElementById("mensaje_gral").innerHTML = aviso;
+
     var vacante_clv = document.getElementById("vacantes").value;
-    var aviso;
+    var estatus_clv = document.getElementById("estatus_cand").selectedIndex;
+
+    //    alert("Estatus seleccionado: " + estatus_clv);
 
     if (vacante_clv == "0-Seleccione una Vacante") {
         aviso = "Por favor seleccione una vacante";
         document.getElementById("mensaje_gral").innerHTML = aviso;
         return;
     }
+
+    if (estatus_clv == 0) {
+        aviso = "Por favor seleccione el estatus de los candidatos a consultar";
+        document.getElementById("mensaje_gral").innerHTML = aviso;
+        return;
+    }
+
 
     var renglones = vacantes2.length;
     renglones--;
@@ -147,17 +160,17 @@ function cargaCandidatos() {
     vacante_clv = clavex22[0];
     //camposx22[13] = vacante_clv;
 
-    leeCandidatos(vacante_clv);
+    leeCandidatos(vacante_clv, estatus_clv);
 }
 
 
-function leeCandidatos(vacante_clv) {
-    //    alert("Entra a candidatos de la vacante: " + vacante_clv);
+function leeCandidatos(vacante_clv, estatus) {
+    //    alert("Entra a candidatos de la vacante: " + vacante_clv + "  Estatus: " + estatus);
     //    var limpia = "";
     //  document.getElementById("candidatos").innerHTML = limpia;
 
     var archivo1 = servidor + "httpdocs/catalogoCandidatos2.php";
-    var archivo2 = archivo1 + "?vacante=" + vacante_clv;
+    var archivo2 = archivo1 + "?vacante=" + vacante_clv + "&estatus=" + estatus;
     var xhttp;
 
     if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -171,6 +184,12 @@ function leeCandidatos(vacante_clv) {
         if (this.readyState == 4 && this.status == 200) {
             var cadena = xhttp.responseText;
             //            alert("cadena: " + cadena);
+
+            if (cadena == "0|No hay Candidatos") {
+                var aviso = "No hay Candidatos con esas caracteristicas";
+                document.getElementById("mensaje_gral").innerHTML = aviso;
+                return;
+            }
             //            document.getElementById("mensaje_gral").textContent = "(" + cadena + ")" + "   longitud: (" + cadena.length + ")";
 
             var candidatos = cadena.split("\n");

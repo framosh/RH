@@ -75,13 +75,19 @@ function carga_imagen() {
     }
 }
 
-var foto_dir;
-var foto_nom;
-var file_dir;
-var file_nom;
+var foto_dir = "";
+var foto_nom = "";
+var file_dir = "";
+var file_nom = "";
+var file_tipo = "";
+var file_tamanio = "";
 
 // Sube la imagen de la foto del candidato al servidor web
 function fileUpload(img) {
+    if (img == null || img == undefined) {
+        return;
+    }
+
     elige_servidor();
     var xhttp;
 
@@ -101,11 +107,13 @@ function fileUpload(img) {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var cadena = xhttp.responseText;
             //            alert("Cadena: " + cadena);
-            var cadena1 = cadena.split(":");
+            var cadena1 = cadena.split(':');
             foto_dir = cadena1[1];
-            var cadena2 = foto_dir.split("/");
+            var cadena2 = foto_dir.split('/');
             foto_nom = cadena2[2];
         } else {
+            foto_dir = "error en carga";
+            foto_nom = "error en carga";
             //                  alert("Estado: " + xhttp.readyState + "  Status: " + xhttp.status);
         }
     };
@@ -114,15 +122,27 @@ function fileUpload(img) {
     xhttp.send(fd);
 }
 
-// SECCION DE CARGA Y DESPLIEGUE DE LA IMAGEN DEL CV. DEL CANDIDATO
 function PreviewImage() {
     var pdffile = document.getElementById("uploadPDF").files[0];
     var pdffile_url = URL.createObjectURL(pdffile);
     $('#viewer').attr('src', pdffile_url);
+    carga_cv();
+}
+
+var carga;
+
+function stopTimer() {
+    clearTimeout(carga);
+}
+
+function carga_cv() {
+    var tiempo = 10000;
+    //    window.carga(startTimeOut, tiempo);
+    carga = setTimeout(carga_file, tiempo);
 }
 
 function carga_file() {
-    var preview = document.querySelector("input[id='uploadPDF']");
+    var preview = document.querySelector("input[id='uploadPDF']").files[0];
     var file = document.querySelector("input[id='uploadPDF']").files[0];
     var reader = new FileReader();
 
@@ -134,11 +154,13 @@ function carga_file() {
     if (file) {
         reader.readAsDataURL(file);
     }
+    stopTimer();
 }
 
 // Sube el cv. del candidato al servidor
 function subeArchivo(archivo) {
     //    alert("Sube archivo");
+
     elige_servidor();
     var xhttp;
 
@@ -154,24 +176,23 @@ function subeArchivo(archivo) {
     xhttp.open("POST", archivo2, true);
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
-            // $archivox ="Archivo cargado:".$archivo.": Tamaño:".$tamanio.": Tipo:".$tipo; 
-
             var cadena = xhttp.responseText;
-            var cadena1 = cadena.split(":");
+            var cadena1 = cadena.split(':');
             file_dir = cadena1[1];
-            //            var cadena2 = file_dir.split("/");
-            file_tamanio = cadena1[3];
+            //            var cadena2 = file_dir.split(/\//);
+            var cadena2 = file_dir.split('/');
+            file_nom = cadena2[2];
             file_tipo = cadena1[5];
+            file_tamanio = cadena1[3];
         } else {
-            //            alert("Estado: " + xhttp.readyState + "  Status: " + xhttp.status);
+            file_dir = "error en carga";
+            file_nom = "error en carga";
+            file_tamanio = "error";
         }
     };
     fd.append('myFile', archivo);
     xhttp.send(fd);
 }
-
-var file_tamanio;
-var file_tipo;
 
 function imprime() {
     window.print();
@@ -301,7 +322,7 @@ function actualizaCandidato() {
     camposx22[26] = camposx22[26].replace(/\n/g, "\\n");
     camposx22[27] = camposx22[27].replace(/\n/g, "\\n");
 
-    var usuario2 = dato4[0];
+    //    var usuario2 = dato4[0];
 
     if (cliente == "Seleccione una Empresa") {
         aviso = "Por favor Seleccione una Empresa";
@@ -424,7 +445,7 @@ function actualizaCandidato() {
     camposx22[35] = file_nom;
 
     //    alert("Cv: " + file_nom + "  directorio: " + file_dir);
-    alert("Cv: " + file_nom + "  tamaño: " + file_tamanio + "  tipo: " + file_tipo);
+    alert("  File dir: " + file_dir + "    Cv: " + file_nom + "  Tipo:" + file_tipo + "  Tamaño:" + file_tamanio);
 
     var cantidad_campos = camposx22.length;
 
@@ -739,8 +760,12 @@ function consultaCandidato() {
                 var foto_url = "../img/elicor9.jpg";
                 ids[35] = foto_url;
             }
+            foto_dir = ids[35];
+            file_dir = ids[40];
             despliega_foto(ids[35]);
-            //           document.getElementById("uploadPDF").value = ids[40]; // archivo de cv
+            //            alert("File dir a desplegar: " + file_dir);
+            var curriculum = document.getElementById("viewer");
+            curriculum.src = file_dir;
         } else {
             // alert("Estado: " + xhttp.readyState + "  Status: " + xhttp.status);
         }

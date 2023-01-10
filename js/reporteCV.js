@@ -1,14 +1,13 @@
 /*
 Generación de tabla dinamica configurable con renglones y columnas definidos a voluntad
 */
-
 var tablax;
 var cuerpox;
 
 // Reporte rapido en pantalla de estudios
 function quickReport2(registros, tablax1, cuerpox1) {
-    //    alert("tabla: " + tablax1);
-    //  alert("cuerpo: " + cuerpox1);
+    alert("tabla: " + tablax1);
+    alert("cuerpo: " + cuerpox1);
     var renglones = registros.length;
 
     var listaInforme = new Array(30);
@@ -41,7 +40,7 @@ function quickReport2(registros, tablax1, cuerpox1) {
         encabezadox = ["CURSO", "COLEGIO", "CAMPUS", "FECHA", "ESTATUS"];
 
         creaEncabezado2(encabezadox, columnas);
-        creaTabla2(renglones, columnas);
+        creaTabla1(renglones, columnas);
 
         if (document.getElementById(tablax)) {
             for (i4 = 0; i4 < renglones; i4++) {
@@ -67,6 +66,38 @@ function quickReport2(registros, tablax1, cuerpox1) {
             }
         }
     }
+
+    if (tablax == "tConocimientos") {
+        var i6;
+        var columnas6 = 5;
+        var renglon6 = 0;
+        //        renglones = renglones - 1;
+        if (columnas2 < columnas6) {
+            columnas2 = columnas6;
+        }
+        //  Con_candidato.clv_conocim, conocimientos.cono_desc, Con_candidato.con_nivel, 
+        //Con_candidato.con_anios, Con_candidato.con_meses 
+
+        var limpiax6 = [];
+        var encabezado6 = [];
+        encabezado6 = limpiax6;
+        encabezado6 = ["CLAVE", "HERRAMIENTA", "NIVEL", "AÑOS", "MESES"];
+
+        creaEncabezado2(encabezado6, columnas6);
+        creaTabla2(renglones, columnas6);
+
+        if (document.getElementById(tablax)) {
+            for (i6 = 1; i6 <= renglones; i6++) {
+                if ((listaInforme[i6] != null) && (listaInforme[i6] != "")) {
+                    despliega2(listaInforme[i6], renglon6);
+                    renglon6++;
+                }
+            }
+        } else {
+            alert("No existe la tablax: " + tablax);
+        }
+    }
+
 }
 
 // Vacia datos a los campos asignados para el registro requerido
@@ -82,6 +113,7 @@ function despliega5(linea, registro) {
     }
 }
 
+// DESPLIEGA HERRAMIENTAS MANEJADAS POR EL CANDIDATO
 function despliega2(linea, renglon) {
     // alert("Despliega linea: " + linea + " Renglon: " + renglon);
     var campoxx = linea.split("|");
@@ -128,9 +160,18 @@ function creaEncabezado2(textoth, columnas) {
             celdath.style.paddingRight = "10px";
             celdath.style.paddingLeft = "10px";
             celdath.style.textAlign = "center";
-            if (i3 == 0) {
-                celdath.style.columnWidth = "200px";
+            if ((i3 == 0 || i3 == 1) && tablax != "tConocimientos") {
+                //        encabezadox = ["CURSO", "COLEGIO", "CAMPUS", "FECHA", "ESTATUS"];
+                celdath.style.columnWidth = "30%";
             }
+            if (i3 == 1 && tablax == "tConocimientos") {
+                //        encabezado6 = ["CLAVE", "HERRAMIENTA", "NIVEL", "AÑOS", "MESES"];
+                celdath.style.columnWidth = "40%";
+            }
+            if (((i3 == 0) || (i3 > 1)) && (tablax == "tConocimientos")) {
+                celdath.style.columnWidth = "20%";
+            }
+
             hilera.appendChild(celdath);
         }
         thead.appendChild(hilera);
@@ -178,7 +219,7 @@ function creaTabla55(registros) {
     }
 
     var altura = 0;
-    altura = (registros * 600);
+    altura = (registros * 300);
     var altura_max = altura + "px";
 
     document.getElementById("myDiv").style.maxHeight = altura_max;
@@ -193,7 +234,7 @@ function creaTabla55(registros) {
         tabla.id = "tabla5";
         tabla.style.width = "100%";
         //    tabla.style.width = "100%";
-        tabla.style.maxHeight = "600px";
+        tabla.style.maxHeight = altura_max;
         tblBody = document.createElement("tbody");
         tblBody.id = cuerpox;
     } else {
@@ -202,18 +243,7 @@ function creaTabla55(registros) {
         tblBody = document.getElementById(cuerpox);
     }
 
-    /*
-    if (!document.getElementById("cuerpo5")) {
-        //           alert("No existe la tabla, se crea tabla y el cuerpo de la tabla");
-        tblBody = document.createElement("tbody");
-        tblBody.id = "cuerpo5";
-    } else {
-        tblBody = document.getElementById("cuerpo5");
-    }
-    */
-
     //    alert("Registros: " + registros);
-
     for (var i = 0; i < registros; i++) { // Experiencias laborales
         for (var i2 = 0; i2 <= 7; i2++) { // Renglon del registro - informacion de cada experiencia
             var color = "rgb(133, 228, 235)";
@@ -294,7 +324,8 @@ function creaTabla55(registros) {
 }
 
 
-// Crea tabla para datos desplegados por linea individual de formación complementaria
+// Crea tabla para datos desplegados por linea individual de  
+// herramientas que maneja
 function creaTabla2(renglones, columnas) {
     //    alert("Crea formato de tabla:  " + tablax + "  renglones: " + renglones);
 
@@ -305,7 +336,8 @@ function creaTabla2(renglones, columnas) {
     document.getElementById("myDiv2").style.maxHeight = altura_max;
     var div = document.getElementById("myDiv2");
 
-    var body = document.getElementsByTagName("body4")[0];
+    //    var body = document.getElementsByTagName(body2)[0];
+    var body = document.getElementsByTagName("body11")[0];
     body.className = "container";
     //    body.style.maxHeight = "5em";
 
@@ -317,7 +349,7 @@ function creaTabla2(renglones, columnas) {
         tabla.style.width = "100%";
         //        tabla.style.marginLeft = "10%";
         //      tabla.style.marginRight = "10%";
-        tabla.style.maxHeight = "100px";
+        tabla.style.maxHeight = altura_max;
 
         tblBody = document.createElement("tbody");
         tblBody.id = cuerpox;
@@ -340,7 +372,77 @@ function creaTabla2(renglones, columnas) {
             celda.id = idcampo;
             //    celda.appendChild(parrafo);
 
-            if (i2 == 2 || i2 == 3) {
+            if (i2 == 0 || i2 == 2 || i2 == 3) {
+                celda.style.textAlign = "center";
+                celda.style.paddingRight = "9px";
+            } else {
+                celda.style.textAlign = "left";
+                celda.style.paddingRight = "20px";
+            }
+            hilera.appendChild(celda);
+        }
+        tblBody.appendChild(hilera);
+    }
+
+    if (renglones2 < renglones) {
+        renglones2 = renglones;
+    }
+    //    alert("Arma secuencia de tabla y body");
+    tabla.appendChild(tblBody);
+    tabla.appendChild(thead);
+    body.appendChild(tabla);
+    div.appendChild(body);
+}
+
+//Formacion complementaria
+function creaTabla1(renglones, columnas) {
+    //    alert("Crea formato de tabla:  " + tablax + "  renglones: " + renglones);
+
+    var altura = 0;
+    altura = (renglones * 100);
+    var altura_max = altura + "px";
+
+    document.getElementById("myDiv2").style.maxHeight = altura_max;
+    var div = document.getElementById("myDiv2");
+
+    //    var body = document.getElementsByTagName(body2)[0];
+    var body = document.getElementsByTagName("body10")[0];
+    body.className = "container";
+    //    body.style.maxHeight = "5em";
+
+    //    alert("valida existencia de tabla: " + tablax + "  si no la encuentra la crea");
+    if (!document.getElementById(tablax)) {
+        //      alert("No existe la tabla, se crea tabla y el cuerpo de la tabla");
+        tabla = document.createElement("table");
+        tabla.id = tablax;
+        tabla.style.width = "100%";
+        //        tabla.style.marginLeft = "10%";
+        //      tabla.style.marginRight = "10%";
+        tabla.style.maxHeight = altura_max;
+
+        tblBody = document.createElement("tbody");
+        tblBody.id = cuerpox;
+    } else {
+        tabla = document.getElementById(tablax);
+        tblBody = document.getElementById(cuerpox);
+    }
+
+    //alert("Crea los renglones de la tabla: " + tablax);
+    for (var i = 0; i < renglones; i++) {
+        //  alert("Crea linea: " + i);
+        var hilera = document.createElement("tr");
+        hilera.id = i;
+
+        for (var i2 = 0; i2 < columnas; i2++) {
+            //    alert("Crea campo: " + i2 + "  linea:" + i);
+            var idcampo = "camp" + i2 + "-reng" + i;
+            var celda = document.createElement("td");
+            //     var parrafo = document.createElement("p");
+            celda.id = idcampo;
+            //    celda.appendChild(parrafo);
+            //        encabezadox = ["CURSO", "COLEGIO", "CAMPUS", "FECHA", "ESTATUS"];
+
+            if (i2 == 3 || i2 == 4) {
                 celda.style.textAlign = "center";
                 celda.style.paddingRight = "9px";
             } else {
