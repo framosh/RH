@@ -11,7 +11,6 @@
     <script type="text/javascript" src="progjs/Servidor.js" defer></script>
     <script type="text/javascript" src="progjs/cv_arhsi.js?dev='+ Math.floor(Math.random()*100)+'" defer></script>
     <script type="text/javascript" src="progjs/reporteCV.js?dev='+ Math.floor(Math.random()*100)+'" defer></script>
-    <script type="text/javascript" src="progjs/reporteRapCon.js?dev='+ Math.floor(Math.random()*100)+'" defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- <link href="../css/material-kit.css" rel="stylesheet" /> -->
@@ -43,6 +42,10 @@
                             <td style="border-right: 0px;">
                                 <p id="vacante_sol"></p>
                             </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: normal;">Fecha:</td>
+                            <td style="font-weight: normal;" id="fecha"></td>
                         </tr>
                     </table>
                 </div>
@@ -203,11 +206,9 @@
                 <form>
                     <h3 style="text-align:center; color: blue;">FORMACION COMPLEMENTARIA</h3>
                     <fieldset>
-                        <div class="layout container">
-                            <div class="grid-layout5">
-                                <div id="myDiv2">
-                                    <body10></body10>
-                                </div>
+                        <div class="grid-layout5">
+                            <div id="myDiv2">
+                                <body10></body10>
                             </div>
                         </div>
                     </fieldset>
@@ -235,8 +236,10 @@
                 <form>
                     <h3 style="text-align:center; color: blue;">HERRAMIENTAS TECNOLOGICAS QUE MANEJA</h3>
                     <fieldset>
-                        <div id="myDiv">
-                            <body11></body11>
+                        <div class="grid-layout6">
+                            <div id="myDiv3">
+                                <body11></body11>
+                            </div>
                         </div>
                     </fieldset>
                 </form>
@@ -248,18 +251,15 @@
                     <h2 style="text-align:center; color: blue;">IDIOMAS QUE CONOCE</h2>
                     <fieldset>
                         <div>
-                            <table style="width:80%; margin-left: 10%; margin-right: 10%;">
+                            <table style="width:80%; margin-left: 10%; margin-right: 10%; border: 1px solid black;">
                                 <tbody>
                                     <tr>
-                                        <td style="border-right: 0px;">Ingles:</td>
-                                        <td td style="border-right: 0px;"><input type="text" name="ingles" id="ingles"
-                                                value="" disabled></td>
-                                        <td style="border-right: 0px;">Español:</td>
-                                        <td style="border-right: 0px;"><input type="text" name="espaniol" id="espaniol"
-                                                value="" disabled></td>
-                                        <td style="border-right: 0px;">Otro:</td>
-                                        <td style="border-right: 0px;"><input type="text" name="otro" id="otro" value=""
-                                                disabled></td>
+                                        <td>Ingles:</td>
+                                        <td style="text-align:left;" id="ingles"></td>
+                                        <td>Español:</td>
+                                        <td style="text-align:left;" id="espaniol"></td>
+                                        <td>Otro:</td>
+                                        <td style="text-align:left;" id="otro"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -299,7 +299,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="border-right: 0px;"><textarea name="com_eval" cols="125" rows="2"
+                                        <td style="border-right: 0px;"><textarea name="com_eval" cols="125" rows="4"
                                                 id="com_eval" value="" disabled></textarea></td>
                                     </tr>
                                     <tr>
@@ -308,7 +308,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="border-right: 0px;"><textarea name="com_entre" cols="125" rows="2"
+                                        <td style="border-right: 0px;"><textarea name="com_entre" cols="125" rows="4"
                                                 id="com_entre" value="" disabled></textarea></td>
                                     </tr>
                                     <tr>
@@ -317,7 +317,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="border-right: 0px;"><textarea name="com_cand" cols="125" rows="2"
+                                        <td style="border-right: 0px;"><textarea name="com_cand" cols="125" rows="4"
                                                 id="com_cand" value="" disabled></textarea></td>
                                     </tr>
 

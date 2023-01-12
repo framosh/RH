@@ -41,6 +41,9 @@ window.onload = function () {
     document.getElementById("cand_key").value = candidato_clv;
     document.getElementById("cand_nom").value = candidato_nombre;
 
+    var fecha = new Date().toLocaleDateString();
+    document.getElementById("fecha").innerHTML = fecha;
+
     //    alert("Clave candidato: (" + candidato_clv + ")");
     //  alert("Nombre candidato: " + candidato_nombre);
 
@@ -184,6 +187,8 @@ function subeArchivo(archivo) {
             file_nom = cadena2[2];
             file_tipo = cadena1[5];
             file_tamanio = cadena1[3];
+            document.getElementById("cv_personal").innerHTML = file_nom; // Direccion del cv. personal
+
         } else {
             file_dir = "error en carga";
             file_nom = "error en carga";
@@ -274,6 +279,8 @@ function limpiaPantalla3() {
 
 function actualizaCandidato() {
     //    alert("Actualiza Candidato");
+    var limpia = "";
+    document.getElementById("mensaje_gral").innerHTML = limpia;
 
     var aviso;
     var camposx22 = [];
@@ -445,7 +452,7 @@ function actualizaCandidato() {
     camposx22[35] = file_nom;
 
     //    alert("Cv: " + file_nom + "  directorio: " + file_dir);
-    alert("  File dir: " + file_dir + "    Cv: " + file_nom + "  Tipo:" + file_tipo + "  Tamaño:" + file_tamanio);
+    //    alert("  File dir: " + file_dir + "    Cv: " + file_nom + "  Tipo:" + file_tipo + "  Tamaño:" + file_tamanio);
 
     var cantidad_campos = camposx22.length;
 
@@ -637,26 +644,23 @@ function consultaCandidato() {
             var opcion4 = 0;
 
             if (ids[8] != "" && ids[8] != "0") {
-                //                alert("Busca estado");
-
                 var cantEstados = estados2.length;
                 cantEstados--;
+                //                alert("Busca estado:" + cantEstados);
 
                 for (i1 = cantEstados; i1 >= 0; i1--) {
                     var campo2 = estados2[i1];
                     var clave = campo2.split("|");
-                    if (campo2 && clave[0] != "0") {
+                    if (campo2 != "") {
                         opcion4++;
                         if (clave[0] == ids[8]) {
                             estado = opcion4;
-                            //                            estado--;
-                            //                        alert("Estado: " + estados2[i1] + "  opcion4:(" + opcion4 + ")  ids[8]:(" + ids[8] + ")   longitud:" + estados2.length);
+                            estado--;
+                            //                            alert("Estado: " + estados2[i1] + "  opcion4:(" + opcion4 + ")  ids[8]:(" + ids[8] + ")   longitud:" + estados2.length);
                             break;
                         }
                     }
                 }
-            } else {
-                estado = 0;
             }
 
             var cliente = 0;
@@ -685,6 +689,23 @@ function consultaCandidato() {
                 cliente = 0;
             }
 
+            var formatter = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+            });
+
+            if (ids[12] != "") {
+                ids[12] = formatter.format(ids[12]);
+            }
+
+            if (ids[13] != "") {
+                ids[13] = formatter.format(ids[13]);
+            }
+
+            if (ids[23] != "") {
+                ids[23] = formatter.format(ids[23]);
+            }
+
             var edo_civil = ids[10];
             var est_cand = ids[19];
             var est_cv = ids[16];
@@ -696,7 +717,6 @@ function consultaCandidato() {
 
             if ((ids[6] != "0000-00-00") && (ids[6] != "") && (ids[6] != null)) {
                 //                alert("Determina edad de: " + ids[6]);
-
                 var dia_de_hoy = new Date();
                 var anio_hoy = dia_de_hoy.getFullYear();
                 var mes_hoy = dia_de_hoy.getMonth();
@@ -756,6 +776,7 @@ function consultaCandidato() {
             document.getElementById("ingles").value = ids[32]; // Nivel de ingles
             document.getElementById("espaniol").value = ids[33]; // Nivel de español
             document.getElementById("otro").value = ids[34]; // Otro idioma
+            document.getElementById("cv_personal").innerHTML = ids[41]; // Direccion del cv. personal
             if (ids[35] == "") {
                 var foto_url = "../img/elicor9.jpg";
                 ids[35] = foto_url;
@@ -764,7 +785,7 @@ function consultaCandidato() {
             file_dir = ids[40];
             despliega_foto(ids[35]);
             //            alert("File dir a desplegar: " + file_dir);
-            var curriculum = document.getElementById("viewer");
+            var curriculum = document.getElementById("viewer"); // Renderiza cv en PDF
             curriculum.src = file_dir;
         } else {
             // alert("Estado: " + xhttp.readyState + "  Status: " + xhttp.status);

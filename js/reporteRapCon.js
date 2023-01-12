@@ -7,21 +7,17 @@ var tblBody;
 var thead;
 var h4;
 var col22;
+var encabezadoCon;
 
 // Reporte rapido en pantalla
 function conoReport(conocimientos, tabla, cuerpo) {
     //    alert("Crea tabla de conocimientos, entra a conoReport");
 
     var caracteres = "";
-    /*
-        for (var i3 = 0; i3 < conocimientos.length; i3++) {
-            var code = conocimientos.charCodeAt(i3);
-            caracteres = caracteres + "-" + code;
-        }
-        */
 
-    tablax6 = tabla;
     cuerpox6 = cuerpo;
+    tablax6 = tabla;
+    encabezadoCon = cuerpo + "en";
 
     var listaConocim = conocimientos.split(/\r?\n/);
     var renglones = listaConocim.length;
@@ -31,7 +27,8 @@ function conoReport(conocimientos, tabla, cuerpo) {
     var titulo = "LISTA DE CONOCIMIENTOS";
     var mensaje1;
     //    alert("listaConocim de 0: " + listaConocim[0] + "  Codes:" + caracteres);
-    //  alert("Renglones a desplegar: " + renglones);
+    //    alert("listaConocim : " + listaConocim);
+    //  alert("Conocimientos a desplegar: " + renglones);
 
     if (renglones < 1) {
         mensaje1 = "No hay registros";
@@ -63,12 +60,12 @@ function despliegaCono(linea, renglon) {
     //    alert("Despliega linea: " + linea + " Renglon: " + renglon);
     var campoxx = linea.split("|");
     var renglon2 = renglon;
-    var nivelx = ["", "Basico", "Medio", "Avanzado"];
+    //    var nivelx = ["", "Basico", "Medio", "Avanzado"];
 
-    var herramienta = campoxx[1].replace(/"/g, "");
-    var nivel = nivelx[campoxx[2]];
-    var anios = campoxx[3];
-    var meses = campoxx[4];
+    var herramienta = campoxx[0].replace(/"/g, "");
+    var nivel = campoxx[1];
+    var anios = campoxx[2];
+    var meses = campoxx[3];
 
     var campo1 = "camp0-reng" + renglon2;
     var campo2 = "camp1-reng" + renglon2;
@@ -85,18 +82,18 @@ function despliegaCono(linea, renglon) {
 function creaEncabezadoCono(textoth, columnas, titulo) {
     //    alert("Crea Encabezado: " + textoth + "  columnas: " + columnas);
 
-    if (document.getElementById('encabezadoy2')) {
+    if (document.getElementById(encabezadoCon)) {
         return;
     }
 
     //    tblBody = document.getElementById("cuerpo4");
 
-    if (!document.getElementById("encabezadoy2")) { // Si no existe encabezado, lo crea
+    if (!document.getElementById(encabezadoCon)) { // Si no existe encabezado, lo crea
         //        alert("Crea el encabezado");
         thead = document.createElement("thead", {
             class: "formato"
         });
-        thead.id = "encabezadoy2";
+        thead.id = encabezadoCon;
 
         var hilera = document.createElement("tr");
         hilera.id = "enc_hilera1";
@@ -125,7 +122,7 @@ function limpiaTablaCono() {
     var vacio = "";
     var col2;
 
-    if (!document.getElementById("encabezadoy2")) {
+    if (!document.getElementById(encabezadoCon)) {
         //        alert("No hay tabla a limpiar");
         return;
     }
@@ -146,7 +143,7 @@ function creaTablaCono(renglones, columnas) {
         return;
     }
 
-    var body = document.getElementsByTagName("body9")[0];
+    var body = document.getElementsByTagName(cuerpox6)[0];
     //    body.style.maxHeight = "200px";
 
     //    body.className = "container";
@@ -188,8 +185,6 @@ function creaTablaCono(renglones, columnas) {
         tblBody = document.getElementById(cuerpox6);
     }
 
-    //    var renglonesx2 = renglones + 1;
-
     for (var i = renglones2; i < renglones; i++) {
         //                alert("Crea linea: " + i);
         var hilera = document.createElement("tr");
@@ -199,9 +194,7 @@ function creaTablaCono(renglones, columnas) {
             //            alert("Crea campo: " + i2 + "  linea:" + i);
             var idcampo = "camp" + i2 + "-reng" + i;
             var celda = document.createElement("td");
-            //            var parrafo = document.createElement("p");
             celda.id = idcampo;
-            //          celda.appendChild(parrafo);
 
             if (i2 == 2 || i2 == 3) {
                 celda.style.textAlign = "center";

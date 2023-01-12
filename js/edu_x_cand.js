@@ -353,7 +353,7 @@ function LeeEducacion(cand_clv, cand_nom) {
     //    document.getElementById("clv_tipo_edu").disabled = true;
     //    limpiaPantalla();
     var nombre_candidato = cand_clv + " - " + cand_nom;
-    alert(nombre_candidato);
+    //    alert(nombre_candidato);
     //    document.getElementById("nombre_candidato").innerText = nombre_candidato;
     document.getElementById("candidato").innerHTML = nombre_candidato;
 

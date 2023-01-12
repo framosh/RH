@@ -4,7 +4,7 @@ $candidato=$_GET["Candidato"];
 
 require 'arhsi_connect.php';
 
-  $query="SELECT Con_candidato.clv_conocim, conocimientos.cono_desc, Con_candidato.con_nivel, Con_candidato.con_anios, Con_candidato.con_meses 
+  $query="SELECT conocimientos.cono_desc, Con_candidato.con_nivel, Con_candidato.con_anios, Con_candidato.con_meses 
   FROM Con_candidato 
   LEFT JOIN conocimientos ON conocimientos.clv_conocim = Con_candidato.clv_conocim
   WHERE Con_candidato.cand_key='$candidato' 
@@ -36,8 +36,10 @@ function Archivo($result) {
        function llenaDatos($stream, $result) {
          $nrows = 0;
          $delimiter=chr(124);
-         $enclosure=chr(34);
+         $nivel=["","Bajo","Medio","Alto"];
+//         $enclosure=chr(34);
          while($row = mysqli_fetch_row($result)) {
+          $row[1]=$nivel[$row[1]];
            fputcsv($stream, $row, $delimiter);
            $nrows++;
            }

@@ -37,6 +37,8 @@ window.onload = function () {
         var nombre_candidato = cand_clv + " - " + cand_nom;
 
         //       alert("Candidato: (" + cand_clv + ")");
+        var fecha = new Date().toLocaleDateString();
+        document.getElementById("fecha").innerHTML = fecha;
 
         document.getElementById("nombre").innerHTML = nombre_candidato;
         var tiempo = 3000;
@@ -157,32 +159,27 @@ function consultaCandidato() {
 
             var estado = ids[8];
             consultaEstado(estado);
+            if (ids[6] == "0000-00-00") {
+                ids[6] = "";
+            }
 
+            var formatter = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+            });
+
+            if (ids[12] != "") {
+                ids[12] = formatter.format(ids[12]);
+            }
+
+            if (ids[13] != "") {
+                ids[13] = formatter.format(ids[13]);
+            }
+
+            alert("Ingles:" + ids[25]);
 
             var estado_civil = ["", "Soltero", "Casado", "Viudo", "Divorciado", "Union libre"];
             var edo_civil = estado_civil[ids[10]];
-            /*
-                        switch (edo_civil) {
-                            case 1:
-                                estado_civil = "Soltero";
-                                break;
-                            case 2:
-                                estado_civil = "Casado";
-                                break;
-                            case 3:
-                                estado_civil = "Viudo";
-                                break;
-                            case 4:
-                                estado_civil = "Divorciado";
-                                break;
-                            case 5:
-                                estado_civil = "Union libre";
-                                break;
-                            default:
-                                estado_civil = "Estado no asignado";
-                                break;
-                        }
-                        */
 
             document.getElementById("nombre").innerHTML = ids[1];
             document.getElementById("tel_casa").innerHTML = ids[2];
@@ -213,6 +210,7 @@ function consultaCandidato() {
     };
     //    xhttp.disabled();
 }
+
 
 function consultaEstado(estado) {
     var archivo2 = servidor + "httpdocs/consultaEstado.php" + "?Estado=" + estado;
@@ -277,6 +275,7 @@ function consultaExp() {
             //            alert("Cadena: " + cadena);
 
             var cadena2 = cadena.split("\n");
+            //           cadena2 = cadena2.replace("\\n", "<br>");
             var num_reg = cadena2.length;
             //          alert("Registros de experiencia: " + num_reg);
 
@@ -383,10 +382,11 @@ function salir() {
     }
 }
 
+// Herramientas manejadas por el candidato
 var conocim_cand = [];
 
 function consultaConocimientos(candidato_clv) {
-    alert("Lee Conocimientos de candidato: " + candidato_clv);
+    //    alert("Lee Conocimientos de candidato: " + candidato_clv);
     //    limpiaPantalla_Con();
     //    limpiaTabla(); // Limpia tabla de conocimientos del candidato consultado anteriormente
     var limpia = "";
@@ -406,13 +406,15 @@ function consultaConocimientos(candidato_clv) {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var cadena = xhttp.responseText;
-            alert(cadena);
+            cadena = cadena.replace(/\"/g, "");
+            //            alert(cadena);
             var conocimientos = cadena.split("\n");
+            //            var conocimientos = cadena.split(/\r?\n/);
             //            var i2 = 0;
             //            var camposxx1 = conocimientos[0].split("|");
             var registros = conocimientos.length;
 
-            alert("Conocimientos registrados para el candidato: " + registros);
+            //            alert("Conocimientos registrados para el candidato: " + registros);
 
             if (registros > 1) {
                 //Si el candidato ya tiene conocimientos registrados se despliegan en el cuadro de conocimientos

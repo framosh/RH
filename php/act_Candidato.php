@@ -40,9 +40,8 @@ otro='$campos[30]',
 foto_dir='$campos[32]',
 foto_nom='$campos[33]',
 file_dir='$campos[34]',
-file_nom='$campos[35]'
- 
- WHERE cand_key='$campos[31]'"))
+file_nom='$campos[35]' 
+WHERE cand_key='$campos[31]'"))
 	{
 	   mysqli_stmt_execute($stmt);
 	   $affected_rows = mysqli_stmt_affected_rows($stmt);
@@ -51,7 +50,8 @@ file_nom='$campos[35]'
                $candidato=$campos[31];
                $estatus=$campos[11];
                $vacante=$campos[13];
-            actualiza_cand_x_vac($candidato,$vacante,$estatus);}
+            actualiza_cand_x_vac($candidato,$vacante,$estatus);
+           }
            else { 
               $mensaje = "Fallo la actualización de datos del candidato: ".$campos[31];
               echo ($mensaje);
@@ -62,10 +62,11 @@ file_nom='$campos[35]'
 
 function actualiza_cand_x_vac($candidato,$vacante,$estatus)
 {
-global $dbc;
+require 'arhsi_connect.php';
+
 if(mysqli_stmt_prepare($stmt,"UPDATE Cand_x_vac 
 SET estatus='$estatus'
-WHERE cand_key='$candidato' AND clv_vacante='$vacante'"))
+WHERE (Cand_x_vac.cand_key='$candidato' AND Cand_x_vac.clv_vacante='$vacante')"))
 	{
 	   mysqli_stmt_execute($stmt);
 	   $affected_rows = mysqli_stmt_affected_rows($stmt);

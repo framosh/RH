@@ -1,24 +1,30 @@
 /*
 Generación de tabla dinamica configurable con renglones y columnas definidos a voluntad
 */
-var tablax;
+var renglones2 = 0;
+var columnas2 = 0;
+var thead1;
+var thead2;
+
+var tablah;
 var cuerpox;
+var tbodyx1;
+var encabezadox11;
 
 // Reporte rapido en pantalla de estudios
-function quickReport2(registros, tablax1, cuerpox1) {
-    alert("tabla: " + tablax1);
-    alert("cuerpo: " + cuerpox1);
+function quickReport2(registros, tablah1, cuerpox1) {
     var renglones = registros.length;
+    //    alert("Renglones: " + renglones);
+    //  alert("Registros:" + registros);
 
     var listaInforme = new Array(30);
     listaInforme = registros;
-    tablax = tablax1;
+    //    tablah = tablah1;
     cuerpox = cuerpox1;
-    //    limpiaTabla();
-
+    tablah = cuerpox + "99";
+    tbodyx1 = cuerpox + "tb";
+    encabezadox11 = cuerpox + "en";
     var mensaje1;
-    //    alert("Renglones a desplegar: " + renglones);
-    //  alert("Registros: " + registros);
 
     if (renglones < 1) {
         mensaje1 = "No hay registros a desplegar";
@@ -27,7 +33,7 @@ function quickReport2(registros, tablax1, cuerpox1) {
     }
 
     //Despliega Formación Complementaria
-    if (tablax == "tabla4") {
+    if (cuerpox == "body10") {
         var i4;
         var columnas = 5;
         var renglon4 = 0;
@@ -39,10 +45,10 @@ function quickReport2(registros, tablax1, cuerpox1) {
         encabezadox = limpiax1;
         encabezadox = ["CURSO", "COLEGIO", "CAMPUS", "FECHA", "ESTATUS"];
 
-        creaEncabezado2(encabezadox, columnas);
+        creaEncabezado1(encabezadox, columnas);
         creaTabla1(renglones, columnas);
 
-        if (document.getElementById(tablax)) {
+        if (document.getElementById(tablah)) {
             for (i4 = 0; i4 < renglones; i4++) {
                 if ((listaInforme[i4] != null) && (listaInforme[i4] != "")) {
                     despliega2(listaInforme[i4], renglon4);
@@ -50,15 +56,15 @@ function quickReport2(registros, tablax1, cuerpox1) {
                 }
             }
         } else {
-            alert("No existe la tablax: " + tablax);
+            alert("No existe la tablah: " + tablah);
         }
     }
 
     // Tabla a llenar de la experiencia
-    if (tablax == "tabla5") {
+    if (cuerpox == "body8") {
         creaTabla55(renglones);
 
-        if (document.getElementById(tablax)) {
+        if (document.getElementById(tablah)) {
             for (var i5 = 0; i5 < renglones; i5++) {
                 if ((listaInforme[i5] != null) && (listaInforme[i5] != "")) {
                     despliega5(listaInforme[i5], i5);
@@ -67,9 +73,10 @@ function quickReport2(registros, tablax1, cuerpox1) {
         }
     }
 
-    if (tablax == "tConocimientos") {
+    // Tabla de herramientas manejadas
+    if (cuerpox == "body11") {
         var i6;
-        var columnas6 = 5;
+        var columnas6 = 4;
         var renglon6 = 0;
         //        renglones = renglones - 1;
         if (columnas2 < columnas6) {
@@ -81,12 +88,12 @@ function quickReport2(registros, tablax1, cuerpox1) {
         var limpiax6 = [];
         var encabezado6 = [];
         encabezado6 = limpiax6;
-        encabezado6 = ["CLAVE", "HERRAMIENTA", "NIVEL", "AÑOS", "MESES"];
+        encabezado6 = ["HERRAMIENTA", "NIVEL", "AÑOS", "MESES"];
 
         creaEncabezado2(encabezado6, columnas6);
         creaTabla2(renglones, columnas6);
 
-        if (document.getElementById(tablax)) {
+        if (document.getElementById(tablah)) {
             for (i6 = 1; i6 <= renglones; i6++) {
                 if ((listaInforme[i6] != null) && (listaInforme[i6] != "")) {
                     despliega2(listaInforme[i6], renglon6);
@@ -94,13 +101,13 @@ function quickReport2(registros, tablax1, cuerpox1) {
                 }
             }
         } else {
-            alert("No existe la tablax: " + tablax);
+            alert("No existe la tablah: " + tablah);
         }
     }
 
 }
 
-// Vacia datos a los campos asignados para el registro requerido
+// Despliega datos de experiencia
 function despliega5(linea, registro) {
     //    alert("Despliega datos de experiencia");
     //    alert("Información: " + linea + "  registro: " + registro);
@@ -108,8 +115,13 @@ function despliega5(linea, registro) {
 
     for (var i = 0; i <= 7; i++) {
         var campox2 = i + 2;
+        var informacion = campoxx[campox2];
+        if (i == 5) {
+            informacion = informacion.replace("\\n", "<br>");
+        }
+
         var campo1 = "reg-" + registro + "ren-" + i + "col-" + 1;
-        document.getElementById(campo1).innerHTML = campoxx[campox2];
+        document.getElementById(campo1).innerHTML = informacion;
     }
 }
 
@@ -123,32 +135,25 @@ function despliega2(linea, renglon) {
     var campo2 = "camp1-reng" + renglon2;
     var campo3 = "camp2-reng" + renglon2;
     var campo4 = "camp3-reng" + renglon2;
-    var campo5 = "camp4-reng" + renglon2;
+    //    var campo5 = "camp4-reng" + renglon2;
 
     document.getElementById(campo1).innerHTML = campoxx[0];
     document.getElementById(campo2).innerHTML = campoxx[1];
     document.getElementById(campo3).innerHTML = campoxx[2];
     document.getElementById(campo4).innerHTML = campoxx[3];
-    document.getElementById(campo5).innerHTML = campoxx[4];
+    //  document.getElementById(campo5).innerHTML = campoxx[4];
 }
 
-var renglones2 = 0;
-var columnas2 = 0;
-var tabla;
-var tblBody;
-var thead;
-var h4;
-var col22;
-
-function creaEncabezado2(textoth, columnas) {
+// Encabezado de capacitación adicional
+function creaEncabezado1(textoth, columnas) {
     //   alert("Crea Encabezado: " + textoth);
 
-    if (!document.getElementById("encabezado4")) { // Si no existe encabezado, lo crea
+    if (!document.getElementById(encabezadox11)) { // Si no existe encabezado, lo crea
         //        alert("Crea el encabezado");
-        thead = document.createElement("thead", {
+        thead1 = document.createElement("thead", {
             class: "formato"
         });
-        thead.id = "encabezado4";
+        thead1.id = encabezadox11;
 
         var hilera = document.createElement("tr");
 
@@ -160,24 +165,75 @@ function creaEncabezado2(textoth, columnas) {
             celdath.style.paddingRight = "10px";
             celdath.style.paddingLeft = "10px";
             celdath.style.textAlign = "center";
-            if ((i3 == 0 || i3 == 1) && tablax != "tConocimientos") {
+            //            alert("i3: " + i3 + "  cuerpox: " + cuerpox);
+            if (i3 == 0 || i3 == 1) {
                 //        encabezadox = ["CURSO", "COLEGIO", "CAMPUS", "FECHA", "ESTATUS"];
                 celdath.style.columnWidth = "30%";
             }
-            if (i3 == 1 && tablax == "tConocimientos") {
-                //        encabezado6 = ["CLAVE", "HERRAMIENTA", "NIVEL", "AÑOS", "MESES"];
+            if (i3 == 2) {
+                //        encabezadox = ["CURSO", "COLEGIO", "CAMPUS", "FECHA", "ESTATUS"];
+                celdath.style.columnWidth = "20%";
+            }
+            if ((i3 == 3) || (i3 == 4)) {
+                //        encabezadox = ["CURSO", "COLEGIO", "CAMPUS", "FECHA", "ESTATUS"];
+                celdath.style.columnWidth = "10%";
+            }
+
+            hilera.appendChild(celdath);
+        }
+        thead1.appendChild(hilera);
+    }
+
+    if (document.getElementById(encabezadox11)) {
+        for (var col23 = 0; col23 < columnas; col23++) {
+            var encabezadox1 = "enca" + col23;
+            var etiqueta = textoth[col23];
+            if (etiqueta.length == 0) {
+                etiqueta = " ";
+            }
+            document.getElementById(encabezadox1).innerHTML = etiqueta;
+        }
+    }
+}
+
+// Encabezado de herramientas
+function creaEncabezado2(textoth, columnas) {
+    //   alert("Crea Encabezado: " + textoth);
+
+    if (!document.getElementById(encabezadox11)) { // Si no existe encabezado, lo crea
+        //        alert("Crea el encabezado");
+        thead2 = document.createElement("thead", {
+            class: "formato"
+        });
+        thead2.id = encabezadox11;
+
+        var hilera = document.createElement("tr");
+
+        for (var i3 = 0; i3 < columnas; i3++) {
+            var celdath = document.createElement("th");
+            celdath.id = "enca" + i3;
+            var textoCelda = document.createTextNode(textoth[i3]);
+            celdath.appendChild(textoCelda);
+            celdath.style.paddingRight = "10px";
+            celdath.style.paddingLeft = "10px";
+            celdath.style.textAlign = "center";
+            //            alert("i3: " + i3 + "  cuerpox: " + cuerpox);
+
+            if (i3 == 0) {
+                //        encabezado6 = ["HERRAMIENTA", "NIVEL", "AÑOS", "MESES"];
                 celdath.style.columnWidth = "40%";
             }
-            if (((i3 == 0) || (i3 > 1)) && (tablax == "tConocimientos")) {
+            if (i3 > 0) {
+                //        encabezado6 = ["HERRAMIENTA", "NIVEL", "AÑOS", "MESES"];
                 celdath.style.columnWidth = "20%";
             }
 
             hilera.appendChild(celdath);
         }
-        thead.appendChild(hilera);
+        thead2.appendChild(hilera);
     }
 
-    if (document.getElementById("encabezado4")) {
+    if (document.getElementById(encabezadox11)) {
         for (var col23 = 0; col23 < columnas; col23++) {
             var encabezadox1 = "enca" + col23;
             var etiqueta = textoth[col23];
@@ -195,7 +251,7 @@ function limpiaTabla2() {
     var vacio = "";
     var col2;
 
-    if (!document.getElementById(tablax)) {
+    if (!document.getElementById(tablah)) {
         alert("No hay tabla a limpiar");
         return;
     }
@@ -221,6 +277,8 @@ function creaTabla55(registros) {
     var altura = 0;
     altura = (registros * 300);
     var altura_max = altura + "px";
+    var tabla;
+    var tblBody;
 
     document.getElementById("myDiv").style.maxHeight = altura_max;
     var div = document.getElementById("myDiv");
@@ -231,16 +289,16 @@ function creaTabla55(registros) {
     if (!document.getElementById("tabla5")) {
         //           alert("No existe la tabla, se crea tabla y el cuerpo de la tabla");
         tabla = document.createElement("table");
-        tabla.id = "tabla5";
+        tabla.id = tablah;
         tabla.style.width = "100%";
         //    tabla.style.width = "100%";
         tabla.style.maxHeight = altura_max;
         tblBody = document.createElement("tbody");
-        tblBody.id = cuerpox;
+        tblBody.id = tbodyx1;
     } else {
         //        tabla = document.getElementById("tabla5");
-        tabla = document.getElementById(tablax);
-        tblBody = document.getElementById(cuerpox);
+        tabla = document.getElementById(tablah);
+        tblBody = document.getElementById(tbodyx1);
     }
 
     //    alert("Registros: " + registros);
@@ -254,7 +312,7 @@ function creaTabla55(registros) {
             hilera.id = i2;
             hilera.style.backgroundColor = color;
 
-            for (i3 = 0; i3 < 2; i3++) { // Columna del registro - columna de titulo y columna de datos 
+            for (var i3 = 0; i3 < 2; i3++) { // Columna del registro - columna de titulo y columna de datos 
                 var idcampo = "reg-" + i + "ren-" + i2 + "col-" + i3;
                 var celda = document.createElement("td");
                 //                var parrafo = document.createElement("p");
@@ -323,42 +381,42 @@ function creaTabla55(registros) {
     div.appendChild(body);
 }
 
-
 // Crea tabla para datos desplegados por linea individual de  
 // herramientas que maneja
 function creaTabla2(renglones, columnas) {
-    //    alert("Crea formato de tabla:  " + tablax + "  renglones: " + renglones);
-
+    //    alert("Crea formato de tabla:  " + tablah + "  renglones: " + renglones);
     var altura = 0;
     altura = (renglones * 100);
     var altura_max = altura + "px";
+    var tabla;
+    var tblBody;
 
-    document.getElementById("myDiv2").style.maxHeight = altura_max;
-    var div = document.getElementById("myDiv2");
+    document.getElementById("myDiv3").style.maxHeight = altura_max;
+    var div = document.getElementById("myDiv3");
 
     //    var body = document.getElementsByTagName(body2)[0];
-    var body = document.getElementsByTagName("body11")[0];
-    body.className = "container";
+    var body = document.getElementsByTagName(cuerpox)[0];
+    //    body.className = "container";
     //    body.style.maxHeight = "5em";
 
-    //    alert("valida existencia de tabla: " + tablax + "  si no la encuentra la crea");
-    if (!document.getElementById(tablax)) {
+    //    alert("valida existencia de tabla: " + tablah + "  si no la encuentra la crea");
+    if (!document.getElementById(tablah)) {
         //      alert("No existe la tabla, se crea tabla y el cuerpo de la tabla");
         tabla = document.createElement("table");
-        tabla.id = tablax;
+        tabla.id = tablah;
         tabla.style.width = "100%";
         //        tabla.style.marginLeft = "10%";
         //      tabla.style.marginRight = "10%";
         tabla.style.maxHeight = altura_max;
 
         tblBody = document.createElement("tbody");
-        tblBody.id = cuerpox;
+        tblBody.id = tbodyx1;
     } else {
-        tabla = document.getElementById(tablax);
-        tblBody = document.getElementById(cuerpox);
+        tabla = document.getElementById(tablah);
+        tblBody = document.getElementById(tbodyx1);
     }
 
-    //alert("Crea los renglones de la tabla: " + tablax);
+    //alert("Crea los renglones de la tabla: " + tablah);
     for (var i = 0; i < renglones; i++) {
         //  alert("Crea linea: " + i);
         var hilera = document.createElement("tr");
@@ -371,12 +429,20 @@ function creaTabla2(renglones, columnas) {
             //     var parrafo = document.createElement("p");
             celda.id = idcampo;
             //    celda.appendChild(parrafo);
+            /*
+                                celda.style.paddingRight = "5px";
+                                celda.style.paddingLeft = "5px";
+                                celda.style.textAlign = "left";
+                                celda.style.columnWidth = "20%";
+                                celda.style.fontWeight = "bold";
+                        */
 
-            if (i2 == 0 || i2 == 2 || i2 == 3) {
-                celda.style.textAlign = "center";
-                celda.style.paddingRight = "9px";
-            } else {
+            if (i2 == 0) {
                 celda.style.textAlign = "left";
+                celda.style.paddingRight = "9px";
+                celda.style.columnWidth = "40%";
+            } else {
+                celda.style.textAlign = "center";
                 celda.style.paddingRight = "20px";
             }
             hilera.appendChild(celda);
@@ -389,45 +455,44 @@ function creaTabla2(renglones, columnas) {
     }
     //    alert("Arma secuencia de tabla y body");
     tabla.appendChild(tblBody);
-    tabla.appendChild(thead);
+    tabla.appendChild(thead2);
     body.appendChild(tabla);
     div.appendChild(body);
 }
 
 //Formacion complementaria
 function creaTabla1(renglones, columnas) {
-    //    alert("Crea formato de tabla:  " + tablax + "  renglones: " + renglones);
+    //    alert("Crea formato de tabla:  " + tablah + "  renglones: " + renglones);
 
     var altura = 0;
     altura = (renglones * 100);
     var altura_max = altura + "px";
+    var tabla;
+    var tblBody;
 
-    document.getElementById("myDiv2").style.maxHeight = altura_max;
+    //  document.getElementById("myDiv2").style.maxHeight = altura_max;
     var div = document.getElementById("myDiv2");
 
-    //    var body = document.getElementsByTagName(body2)[0];
     var body = document.getElementsByTagName("body10")[0];
-    body.className = "container";
-    //    body.style.maxHeight = "5em";
 
-    //    alert("valida existencia de tabla: " + tablax + "  si no la encuentra la crea");
-    if (!document.getElementById(tablax)) {
+    //    alert("valida existencia de tabla: " + tablah + "  si no la encuentra la crea");
+    if (!document.getElementById(tablah)) {
         //      alert("No existe la tabla, se crea tabla y el cuerpo de la tabla");
         tabla = document.createElement("table");
-        tabla.id = tablax;
+        tabla.id = tablah;
         tabla.style.width = "100%";
         //        tabla.style.marginLeft = "10%";
         //      tabla.style.marginRight = "10%";
-        tabla.style.maxHeight = altura_max;
+        //        tabla.style.maxHeight = altura_max;
 
         tblBody = document.createElement("tbody");
-        tblBody.id = cuerpox;
+        tblBody.id = tbodyx1;
     } else {
-        tabla = document.getElementById(tablax);
-        tblBody = document.getElementById(cuerpox);
+        tabla = document.getElementById(tablah);
+        tblBody = document.getElementById(tbodyx1);
     }
 
-    //alert("Crea los renglones de la tabla: " + tablax);
+    //alert("Crea los renglones de la tabla: " + tablah);
     for (var i = 0; i < renglones; i++) {
         //  alert("Crea linea: " + i);
         var hilera = document.createElement("tr");
@@ -440,15 +505,29 @@ function creaTabla1(renglones, columnas) {
             //     var parrafo = document.createElement("p");
             celda.id = idcampo;
             //    celda.appendChild(parrafo);
-            //        encabezadox = ["CURSO", "COLEGIO", "CAMPUS", "FECHA", "ESTATUS"];
 
-            if (i2 == 3 || i2 == 4) {
-                celda.style.textAlign = "center";
-                celda.style.paddingRight = "9px";
-            } else {
+            //        encabezadox = ["CURSO", "COLEGIO", "CAMPUS", "FECHA", "ESTATUS"];
+            if (i2 == 0 || i2 == 1) {
+                //        encabezadox = ["CURSO", "COLEGIO", "CAMPUS", "FECHA", "ESTATUS"];
+                //alert("Formatea col: " + i2 + "  de renglon: " + i);
+                celda.style.columnWidth = "30%";
+                //celda.style.columnWidth = "100px";
                 celda.style.textAlign = "left";
                 celda.style.paddingRight = "20px";
             }
+            if (i2 == 2) {
+                //        encabezadox = ["CURSO", "COLEGIO", "CAMPUS", "FECHA", "ESTATUS"];
+                celda.style.columnWidth = "20%";
+                celda.style.textAlign = "left";
+                celda.style.paddingRight = "20px";
+            }
+            if ((i2 == 3) || (i2 == 4)) {
+                //        encabezadox = ["CURSO", "COLEGIO", "CAMPUS", "FECHA", "ESTATUS"];
+                celda.style.columnWidth = "10%";
+                celda.style.textAlign = "center";
+                celda.style.paddingRight = "9px";
+            }
+
             hilera.appendChild(celda);
         }
         tblBody.appendChild(hilera);
@@ -459,7 +538,7 @@ function creaTabla1(renglones, columnas) {
     }
     //    alert("Arma secuencia de tabla y body");
     tabla.appendChild(tblBody);
-    tabla.appendChild(thead);
+    tabla.appendChild(thead1);
     body.appendChild(tabla);
     div.appendChild(body);
 }

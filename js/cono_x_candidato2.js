@@ -319,7 +319,6 @@ function consultaConocimiento() {
     xhttp.send();
 }
 
-//var conocim_cand = [];
 
 // Conocimientio por candidato
 function leeConocimCand(candidato_clv) {
@@ -350,6 +349,9 @@ function leeConocimCand(candidato_clv) {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var cadena = xhttp.responseText;
+            cadena = cadena.replace(/\"/g, "");
+            //cadena = cadena.split("\n");
+            //            alert(cadena);
             //            var conox1 = cadena.split(/\r?\n/);
 
             if (cadena == "No hay Conocimientos") {

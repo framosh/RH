@@ -30,12 +30,10 @@ require 'arhsi_connect.php';
 if($vacante != "" && $vacante != null){
   $query="SELECT Candidatos.cand_key, Candidatos.cand_nom, Cand_x_vac.estatus FROM Cand_x_vac  
   LEFT JOIN Candidatos ON Candidatos.cand_key = Cand_x_vac.cand_key
-  LEFT JOIN Est_cand ON Est_cand.clv_est_cand = Candidatos.clv_est_cand
   WHERE $condicion ORDER BY Candidatos.cand_nom ASC";  
 } else {
   $query="SELECT Candidatos.cand_key, Candidatos.cand_nom, Cand_x_vac.estatus FROM Cand_x_vac  
   LEFT JOIN Candidatos ON Candidatos.cand_key = Cand_x_vac.cand_key
-  LEFT JOIN Est_cand ON Est_cand.clv_est_cand = Candidatos.clv_est_cand
   WHERE $todos ORDER BY Candidatos.cand_nom ASC";  
 }
 
@@ -63,7 +61,7 @@ if($numero_filas >0){
 
        function llenaDatos($stream, $result) {
         $nrows = 0;
-        $estatus3=["","Entrevistar","Enviar con cliente","Contratado","Rechazado","No localizable","No disponible","Fuera de presupuesto","No aplica","Rechazo la oferta"];
+        $estatus3=["","Entrevistar","Enviar a evaluación","Contratado","Rechazado","No localizable","No disponible","Fuera de presupuesto","No aplica","Rechazo la oferta"];
 
          $delimiter=chr(124);
          $enclosure=chr(34);
