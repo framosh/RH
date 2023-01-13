@@ -1,8 +1,9 @@
 <?php 
 $empresa=$_GET["Empresa"];
+$estatus=$_GET["Estatus"];
 
 require 'arhsi_connect.php';
-$query="SELECT clv_vacante, vac_desc FROM Vacantes WHERE (emp_clave LIKE '$empresa') ORDER BY clv_vacante DESC";
+$query="SELECT clv_vacante, vac_desc FROM Vacantes WHERE ((emp_clave LIKE '$empresa') AND (Estatus LIKE '$estatus')) ORDER BY clv_vacante DESC";
 
 $result = mysqli_query($dbc,$query);
 $numero_filas = mysqli_num_rows($result);

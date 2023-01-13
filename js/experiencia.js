@@ -59,6 +59,7 @@ function limpiaPantallaEXP() {
     document.getElementById("mensaje_gral_exp").value = vacio;
     document.getElementById("altaexp").disabled = false;
     document.getElementById("actuaexp").disabled = true;
+    document.getElementById("mensaje_gral_exp").innerHTML = vacio;
 }
 
 var tipo_mov = 1;
@@ -164,7 +165,7 @@ function altaExp(tipo_mov) {
             var cadena = xhttp.responseText;
             //            alert(cadena);
             var campos = cadena.split(":");
-            document.getElementById("mensaje_gral_exp").innerHTML = cadena[0];
+            document.getElementById("mensaje_gral_exp").innerHTML = campos[0];
             if (campos[1] > 0 && tipo_mov != 2) {
                 document.getElementById("clv_exp").value = campos[1];
                 document.getElementById("altaexp").disabled = false;
@@ -226,6 +227,7 @@ function consultaExp() {
                         //             alert("campo: ("+i+") - ("+ids[i]+")");
                     }
                 }
+                ids[7] = ids[7].replace(/\\n/g, '\n');
 
                 document.getElementById("empresa").value = ids[2];
                 document.getElementById("puesto").value = ids[3];

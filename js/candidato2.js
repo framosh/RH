@@ -880,6 +880,7 @@ function Estudios() {
 
 function sale() {
     if (confirm("¿Quiere regresar?")) {
+        actualizaCandidato();
         window.close();
     }
 }
@@ -891,7 +892,7 @@ function Experiencia() {
     $(document).ready(function () {
         var pagina = servidor + "experiencia.htm" + "?candidato=" + candidato_clv + "&cand_nom=" + candidato_nombre;
         //        ww = window.open(pagina, 'New Window', 'height=630,width=850,top=10,left=250');
-        ww2 = window.open(pagina, 'New Window5', 'height=750,width=850,top=10,left=250');
+        ww2 = window.open(pagina, 'New Window5', 'height=700,width=850,top=10,left=250');
     });
 }
 

@@ -73,15 +73,22 @@ function leeVacantes3(cliente_clv) {
     //    alert("lee vacantes del cliente: " + cliente_clv);
     var limpia = "";
     document.getElementById("vacantes").innerHTML = limpia;
+    var estatus = document.getElementById("estatus_vac").selectedIndex;
 
-    var estatus = 1;
     if (cliente_clv == 0 || cliente_clv == null || cliente_clv == "") {
         cliente_clv = clave_empresa;
     }
 
+    if (estatus == 0 || estatus == null || estatus == "") {
+        estatus = 1;
+        document.getElementById("estatus_vac").selectedIndex = estatus;
+    }
+
+    alert("Estatus: " + estatus);
+
     //    var archivo2 = "https://admonarh.arhsi.com.mx/httpdocs/catalogoClientes.php";
     var archivo1 = servidor + "httpdocs/catalogoVacantes3.php";
-    var archivo2 = archivo1 + "?Empresa=" + cliente_clv + "&estatus=" + estatus;
+    var archivo2 = archivo1 + "?Empresa=" + cliente_clv + "&Estatus=" + estatus;
     var xhttp;
 
     if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
