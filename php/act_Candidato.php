@@ -53,7 +53,7 @@ WHERE cand_key='$campos[31]'"))
             actualiza_cand_x_vac($candidato,$vacante,$estatus);
            }
            else { 
-              $mensaje = "Fallo la actualización de datos del candidato: ".$campos[31];
+              $mensaje = "Fallo la actualización del candidato: ".$campos[31];
               echo ($mensaje);
             }
            mysqli_stmt_close($stmt);

@@ -1,56 +1,7 @@
 var candidato_clv;
 var candidato_nombre;
-var timeOutId;
-var intervalo = 300000;
-var sinActividad = 300000;
 var vacante_clv;
-
-// Carga foto del candidato desde un archivo local
-window.onload = function () {
-    //  alert("Entra a candidato2");
-
-    elige_servidor();
-    //alert("Servidor: "+servidor);
-
-    var url = document.location.href,
-        params = url.split('?')[1].split('&'),
-        data = {},
-        tmp;
-    var l = params.length;
-
-    var url2 = document.location.href;
-
-    for (var i = 0; i < l; i++) {
-        tmp = params[i].split('=');
-        data[tmp[0]] = tmp[1].replace(/%20/g, " ");
-        dato4[i] = data[tmp[0]];
-        dato4[i] = dato4[i].trim();
-        //        alert("Dato4: " + i + "  contiene: " + dato4[i]);
-    }
-
-    var direccion2 = url2.split("?")[0].split("/");
-    direccion2[3] = direccion2[3].trim();
-    var mensa = direccion2[3];
-
-    /*
-          dato4[0]  //  Candidato clv
-          dato4[1]   //  Candidato nombre
-          dato4[2]   //  vacante clv
-    */
-
-    candidato_clv = dato4[0];
-    candidato_nombre = dato4[1];
-    vacante_clv = dato4[2];
-
-    document.getElementById("cand_key").value = candidato_clv;
-    document.getElementById("cand_nom").value = candidato_nombre;
-
-    var fecha = new Date().toLocaleDateString();
-    document.getElementById("fecha").innerHTML = fecha;
-
-    leeEstados(); // Lee catalogo de estados
-    consultaCandidato(); // Consulta candidato
-};
+var cliente_clv;
 
 // SECCION DE CARGAY VISUALIZACION DE FOTOGRAFIAS DEL CANDIDATO
 function despliega_foto(foto_url) {
@@ -199,6 +150,63 @@ function subeArchivo(archivo) {
     xhttp.send(fd);
 }
 
+function leeVacantes2() {
+    //    alert("Lee Vacantes 2");
+    var limpia = "";
+    //    var vacio1 = 0;
+    //    document.getElementById("vacantes").innerHTML = limpia;
+    document.getElementById("candidatos").innerHTML = limpia;
+    document.getElementById("mensaje_gral").innerHTML = limpia;
+
+    var empresa = document.getElementById("empresas").value;
+    cliente_clv = "";
+
+    if (empresa == "Seleccione una Empresa") {
+        alert("Seleccione una Empresa");
+        return;
+    }
+
+    var nombre1 = "";
+
+    for (var i4 = 0; i4 < cliente2.length; i4++) {
+        var nombre3 = cliente2[i4].split("|");
+        var campo3 = nombre3[1];
+        if (campo3 == empresa) {
+            cliente_clv = nombre3[0];
+            nombre1 = nombre3[1];
+            //            alert("Cliente: (" + cliente_clv + ") - (" + nombre1 + ")");
+            break;
+        }
+    }
+    leeVacantes(cliente_clv);
+}
+
+function leeCandidatos2() {
+    //    alert("Lee Candidatos:");
+    limpiaPantalla2();
+    consultaVacante();
+    var limpia = "";
+
+    document.getElementById("mensaje_gral").innerHTML = limpia;
+    document.getElementById("candidatos").innerHTML = limpia;
+
+    var vacante = document.getElementById("vacantes").value;
+
+    if (vacante == "0-Seleccione una Vacante") {
+        alert("0-Seleccione una Vacante");
+        return;
+    }
+
+    var renglones = vacantes2.length;
+    renglones--;
+    var posicion22 = document.getElementById("vacantes").selectedIndex;
+    posicion22 = (renglones - posicion22);
+    var clavex22 = vacantes2[posicion22].split("|");
+    vacante_clv = clavex22[0];
+    leeCandidatos(vacante_clv);
+    leeConocimientos2();
+}
+
 
 /* LIMPIA PANTALLA */
 function limpiaPantalla1() {
@@ -323,6 +331,7 @@ function actualizaCandidato() {
     camposx22[26] = camposx22[26].replaceAll('#', ' Sharp');
     camposx22[27] = camposx22[27].replaceAll('#', ' Sharp');
 
+
     camposx22[13] = vacante_clv;
     camposx22[31] = candidato_clv;
 
@@ -426,8 +435,6 @@ function actualizaCandidato() {
 
     var camposx23 = camposx22.join("|");
 
-    //    alert("Campos: " + camposx23);
-
     //var archivo1 = "https://svr.itbp.com.mx/httpdocs/svr_reg_contacto.php";
     var archivo1 = servidor + "httpdocs/act_Candidato.php";
     var archivo2 = archivo1 + "?campos=" + camposx23;
@@ -489,7 +496,6 @@ function borraCandidato() {
     //    xhttp.disabled();    
 }
 
-
 function calcula_edad() {
     var nacimiento = document.getElementById("fnac").value;
 
@@ -539,7 +545,31 @@ function consultaCandidato() {
     //    alert("Consulta Candidato: " + candidato_clv);
     var aviso = "";
     document.getElementById("mensaje_gral").innerHTML = aviso;
-    //    limpiaPantalla2(); // Limpia campos
+
+    var candidato = document.getElementById("candidatos").value;
+    limpiaPantalla2(); // Limpia campos
+
+    if (candidato == "Seleccione el Candidato") {
+        aviso = "Por favor seleccione un Candidato";
+        document.getElementById("mensaje_gral").innerHTML = aviso;
+        return;
+    }
+
+    for (var i = 0; i < candidatos2.length; i++) {
+        var nombre = candidatos2[i].split("|");
+        var campo = nombre[1];
+        if (campo == candidato) {
+            candidato_clv = nombre[0].trim();
+            candidato_nombre = nombre[1].trim();
+            break;
+        }
+    }
+
+    document.getElementById("cand_key").value = candidato_clv;
+    document.getElementById("cand_nom").value = candidato_nombre;
+
+    var fecha = new Date().toLocaleDateString();
+    document.getElementById("fecha").innerHTML = fecha;
 
     // Lee los conocimientos del candidato solicitado y los despliega en el widget de conocimientos
     leeConocimCand(candidato_clv);
@@ -708,6 +738,32 @@ function consultaCandidato() {
     //    xhttp.disabled();
 }
 
+var alta = false;
+var baja = false;
+var cambio = false;
+var consulta = false;
+
+function checaPermisos() {
+    var tipoPermiso = dato4[4].split("-");
+    var alta1 = tipoPermiso[0];
+    var baja1 = tipoPermiso[1];
+    var cambio1 = tipoPermiso[2];
+    var consulta1 = tipoPermiso[3];
+
+    if (alta1 == "1") {
+        alta = true;
+    }
+    if (baja1 == "1") {
+        baja = true;
+    }
+    if (cambio1 == "1") {
+        cambio = true;
+    }
+    if (consulta1 == "1") {
+        consulta = true;
+    }
+}
+
 function consultaVacante() {
     // alert("vacante: " + vacante_clv);
 
@@ -765,6 +821,44 @@ function consultaVacante() {
     };
     xhttp.send();
     //    xhttp.disabled();
+}
+
+function leeCandidatos2() {
+    //    alert("Lee Candidatos:");
+    limpiaPantalla2();
+    consultaVacante();
+    var limpia = "";
+
+    document.getElementById("mensaje_gral").innerHTML = limpia;
+    document.getElementById("candidatos").innerHTML = limpia;
+
+    var vacante = document.getElementById("vacantes").value;
+
+    if (vacante == "0-Seleccione una Vacante") {
+        alert("0-Seleccione una Vacante");
+        return;
+    }
+
+    var renglones = vacantes2.length;
+    renglones--;
+    var posicion22 = document.getElementById("vacantes").selectedIndex;
+    posicion22 = (renglones - posicion22);
+    var clavex22 = vacantes2[posicion22].split("|");
+    var vacante_clv = clavex22[0];
+    leeCandidatos(vacante_clv);
+}
+
+function leeClientes2() {
+    //    alert("Checa permisos");
+    checaPermisos();
+    //    alert("Lee Clientes 2");
+    //  alert("limpia Pantalla");
+    limpiaPantalla1(); // Limpia pantalla
+    var limpia = "";
+    document.getElementById("vacantes").innerHTML = limpia;
+    document.getElementById("candidatos").innerHTML = limpia;
+    //alert("Lee Clientes");
+    leeClientes();
 }
 
 

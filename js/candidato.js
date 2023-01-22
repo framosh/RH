@@ -69,9 +69,6 @@ function fileUpload(img) {
     xhttp.send(fd);
 }
 
-//var servidor_local = "/svr_local/httpdocs/";
-//var servidor_web = "https://svr.itbp.com.mx/httpdocs/";
-
 /* GENERA CV DEL CANDIDATO */
 function generaCV() {
     //    alert("Genera cv del candidato");
@@ -96,12 +93,10 @@ function generaCV() {
         }
     }
 
-    //    alert("Candidato: " + candidato_clv);
-
     $(document).ready(function () {
         var configura_ventana = "menubar=yes, location=yes, resizable=yes, scrollbars=yes, status=yes";
-        var pagina = servidor + "ArhsiCV.html" + "?candidato=" + candidato_clv + "&cand_nom=" + candidato;
-        ww = window.open(pagina, 'New Window7', configura_ventana);
+        var pagina = servidor + "ArhsiCV.html" + "?candidato=" + candidato_clv + "&cand_nom=" + cand_nombre;
+        ww2 = window.open(pagina, 'New Window7', configura_ventana);
     });
 }
 

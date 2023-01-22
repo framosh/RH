@@ -31,6 +31,7 @@ function limpiaPantalla1() {
     var opcion2 = 0;
     document.getElementById("empresas").selectedIndex = opcion2;
     document.getElementById("vacantes").selectedIndex = opcion2;
+    document.getElementById("estatus_vac").selectedIndex = opcion2;
     //    limpiaPantalla2(); // Limpia datos generales
 }
 
@@ -48,7 +49,7 @@ function leeClientes2() {
 }
 
 function leeVacantes2() {
-    //alert("Lee Vacantes");
+    //    alert("Lee Vacantes");
     var cliente = document.getElementById("empresas").value;
 
     if (cliente == "Seleccione una Empresa") {
@@ -75,6 +76,8 @@ function leeVacantes3(cliente_clv) {
     document.getElementById("vacantes").innerHTML = limpia;
     var estatus = document.getElementById("estatus_vac").selectedIndex;
 
+    //    alert("estatus vac: " + estatus);
+
     if (cliente_clv == 0 || cliente_clv == null || cliente_clv == "") {
         cliente_clv = clave_empresa;
     }
@@ -84,7 +87,7 @@ function leeVacantes3(cliente_clv) {
         document.getElementById("estatus_vac").selectedIndex = estatus;
     }
 
-    alert("Estatus: " + estatus);
+    //    alert("Estatus: " + estatus);
 
     //    var archivo2 = "https://admonarh.arhsi.com.mx/httpdocs/catalogoClientes.php";
     var archivo1 = servidor + "httpdocs/catalogoVacantes3.php";
@@ -202,6 +205,11 @@ function leeCandidatos(vacante_clv, estatus) {
             var candidatos = cadena.split("\n");
             var tabla = "tabla15";
             var cuerpo = "cuerpo15";
+            var total = candidatos.length;
+            total--;
+            document.getElementById("total").value = total;
+            //            alert("Total: " + total);
+
             quickReport(candidatos, tabla, cuerpo);
         }
     };
@@ -212,12 +220,35 @@ function leeCandidatos(vacante_clv, estatus) {
 var ww;
 
 function lanzaRegistro(candidato_clv, candidato_nom) {
-    //    var candidatoxx1 = document.getElementById(idcampo).value;
     //    alert("Candidato: " + candidato_nom);
+
+    var aviso;
+    var vacante = document.getElementById("vacantes").value;
+
+    if (vacante == "0-Seleccione una Vacante") {
+        aviso = "Por favor seleccione una vacante";
+        document.getElementById("mensaje_gral").innerHTML = aviso;
+        return;
+    }
+
+    renglones = vacantes2.length;
+    renglones--;
+    posicion22 = document.getElementById("vacantes").selectedIndex;
+    posicion22 = (renglones - posicion22);
+    clavex22 = vacantes2[posicion22].split("|");
+    vacante_clv = clavex22[0];
+
+    /*
+          dato4[0]  //  Candidato clv
+          dato4[1]   //  Candidato nombre
+          dato4[2]   //  vacante clv
+*/
 
     $(document).ready(function () {
         var configura_ventana = "menubar=yes, location=yes, resizable=yes, scrollbars=yes, status=yes, height=750,width=1200,top=10,left=250";
-        var pagina = servidor + "cap-candidato-b.htm" + "?candidato=" + candidato_clv + "&cand_nom=" + candidato_nom;
+        var pagina = servidor + "cap-candidato-b.htm" + "?candidato=" + candidato_clv +
+            "&cand_nom=" + candidato_nom +
+            "&vacante_clv=" + clavex22[0];
         //        ww = window.open(pagina, 'New Window', 'height=630,width=850,top=10,left=250');
         //        ww = window.open(pagina, 'New Window', 'height=750,width=1200,top=10,left=250');
         ww = window.open(pagina, 'New Window', configura_ventana);

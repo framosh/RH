@@ -32,6 +32,8 @@ function limpiaPantalla() {
     document.getElementById("nombre").value = vacio;
     document.getElementById("clv_tipo_edu").value = vacio;
     document.getElementById("mensaje_gral_tedu").innerHTML = vacio;
+    document.getElementById("alta").disabled = false;
+    document.getElementById("actualiza").disabled = true;
 }
 
 function actualizaTipoEdu() {
@@ -104,6 +106,8 @@ function altaTipoEdu() {
             var campos = cadena.split(":");
             document.getElementById("mensaje_gral_tedu").innerHTML = cadena;
             document.getElementById("clv_tipo_edu").value = campos[1];
+            document.getElementById("alta").disabled = true;
+            document.getElementById("actualiza").disabled = false;
             leeTipoEdu();
         }
     };

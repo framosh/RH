@@ -32,6 +32,8 @@ function limpiaPantalla() {
     document.getElementById("nombre").value = vacio;
     document.getElementById("clv_inst").value = vacio;
     document.getElementById("mensaje_gral_inst").innerHTML = vacio;
+    document.getElementById("alta").disabled = false;
+    document.getElementById("actualiza").disabled = true;
 }
 
 function actualizaInstitucion() {
@@ -104,6 +106,8 @@ function altaInstitucion() {
             var campos = cadena.split(":");
             document.getElementById("mensaje_gral_inst").innerHTML = cadena;
             document.getElementById("clv_inst").value = campos[1];
+            document.getElementById("alta").disabled = true;
+            document.getElementById("actualiza").disabled = false;
             leeInstituciones();
         }
     };

@@ -192,10 +192,10 @@ window.onload = function () {
             document.getElementById("empresas").textContent = leeClientes2(); // Carga el catalogo de Clientes
       }
 
-      if (pagina == "cap-candidato-a.htm") {
+      if (pagina == "candidatos.htm") {
             //            alert("Entra a cap-candidato");
             document.getElementById("empresas").textContent = leeClientes2(); // Carga el catalogo de Clientes
-            document.getElementById("estado").textContent = leeEstados2(); // Carga el catalogo de Estados
+            document.getElementById("estados").textContent = leeEstados2(); // Carga el catalogo de Estados
             //        document.getElementById("conocimientos").textContent = leeConocimientos(); // Carga el catalogo de Conocimientos
       }
 

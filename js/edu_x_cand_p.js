@@ -6,6 +6,8 @@ function limpiaPantalla1() {
     document.getElementById("empresas").selectedIndex = opcion2;
     document.getElementById("candidatos").selectedIndex = opcion2;
     document.getElementById("vacantes").selectedIndex = opcion2;
+    //    document.getElementById("alta").disabled = false;
+    //  document.getElementById("actualiza").disabled = true;
 }
 
 var alta = false;

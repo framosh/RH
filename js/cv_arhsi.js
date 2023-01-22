@@ -159,8 +159,16 @@ function consultaCandidato() {
 
             var estado = ids[8];
             consultaEstado(estado);
-            if (ids[6] == "0000-00-00") {
+            //            alert("ids de 6:" + ids[6]);
+
+            var cumple = "";
+            if (ids[6] == "0000-00-00" || ids[6] == null) {
                 ids[6] = "";
+            } else {
+                //                var fecha = new Date().toLocaleDateString();
+                var cumplex = ids[6].split("-");
+                cumplex = cumplex[2] + "/" + cumplex[1] + "/" + cumplex[0];
+                ids[6] = cumplex;
             }
 
             var formatter = new Intl.NumberFormat('en-US', {
@@ -176,7 +184,7 @@ function consultaCandidato() {
                 ids[13] = formatter.format(ids[13]);
             }
 
-            alert("Ingles:" + ids[25]);
+            //            alert("Ingles:" + ids[25]);
 
             var estado_civil = ["", "Soltero", "Casado", "Viudo", "Divorciado", "Union libre"];
             var edo_civil = estado_civil[ids[10]];
@@ -255,6 +263,7 @@ function consultaExp() {
     //    alert("Consulta Experiencia del candidato: " + cand_clv);
     var exp_clv = "";
 
+
     var archivo1 = servidor + "httpdocs/consExp_x_Cand.php";
     var archivo2 = archivo1 + "?Candidato=" + cand_clv + "&Experiencia=" + exp_clv;
     var xhttp;
@@ -272,14 +281,15 @@ function consultaExp() {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var cadena = xhttp.responseText;
             cadena = cadena.replace(/\"/g, "");
-            //            alert("Cadena: " + cadena);
-
-            var cadena2 = cadena.split("\n");
+            //            alert("Cadena de experiencia: " + cadena);
+            var cadena2 = cadena.split('\n');
+            //            var cadena2 = cadena.split(/\r/);
+            //            var cadena2 = cadena.match(/[^\r\n]+/g);
             //           cadena2 = cadena2.replace("\\n", "<br>");
             var num_reg = cadena2.length;
-            //          alert("Registros de experiencia: " + num_reg);
+            //          alert("Registros de experiencia V : " + num_reg);
 
-            if (num_reg > 0) {
+            if (num_reg > 1) {
                 var tabla = "tabla5";
                 var cuerpo = "body8";
                 quickReport2(cadena2, tabla, cuerpo);
@@ -290,6 +300,7 @@ function consultaExp() {
     };
 }
 
+// Consulta y despliega Educacion formal y complementaria
 function consultaEdu() {
     //    alert("Consulta Educacion recibida");
     var tipo_edu = "";
@@ -318,11 +329,8 @@ function consultaEdu() {
             var desp2 = [];
 
             if (renglones > 0) {
-                //            alert("Renglones: " + renglones);
                 for (var i2 = 0; i2 < renglones; i2++) {
-                    //                    alert("Mensaje 1 Cadena2: " + i2 + " - (" + cadena2[i2] + ")");
                     if ((cadena2[i2] != "0|No hay Institución") && (cadena2[i2] != "")) {
-                        //                      alert("Mensaje 2 Cadena2: " + i2 + " - " + cadena2[i2]);
 
                         var ids = cadena2[i2].split("|");
 
@@ -341,7 +349,7 @@ function consultaEdu() {
                         //Edu_xcand.edu_generacion, Edu_xcand.edu_estatus FROM Edu_xcand 
 
                         // Educacion profesional
-                        if (ids[0] == 5) {
+                        if ((ids[0] == 3) || (ids[0] == 4) || (ids[0] == 5)) {
                             document.getElementById("profesion").innerHTML = ids[2];
                             document.getElementById("colegio").innerHTML = ids[1];
                             document.getElementById("campus").innerHTML = ids[3];
@@ -356,7 +364,8 @@ function consultaEdu() {
                                 document.getElementById("periodo2").innerHTML = ids[4];
                                 document.getElementById("certificado").innerHTML = cedula2;
                             } else {
-                                desp2[curso] = ids[2] + "|" + ids[1] + "|" + ids[3] + "|" + ids[4] + "|" + cedula2;
+                                //                                desp2[curso] = ids[2] + "|" + ids[1] + "|" + ids[3] + "|" + ids[4] + "|" + cedula2;
+                                desp2[curso] = ids[2] + "|" + ids[1] + "|" + ids[4] + "|" + cedula2;
                                 curso = curso + 1;
                             }
                         }

@@ -1,6 +1,6 @@
 <?php
-$edux=$_GET["datos_edu_cand"];
-$edux = explode(',',$edux);
+$edux=$_GET["datos_edu_cand"]; //datos_edu_cand
+$edux = explode('|',$edux);
 
 /*
     datos_edu_cand[0] = cand_clv;
@@ -17,7 +17,9 @@ require 'arhsi_connect.php';
 //if(mysqli_stmt_prepare($stmt,"UPDATE Edu_xcand SET campus='$edux[4]',edu_generacion='$edux[5]',edu_estatus='$edux[6]', clv_institucion='$edux[2]', secuencial='$edux[7]'
 //WHERE (cand_key='$edux[0]' AND clv_tip_edu='$edux[1]')"))
 
-if(mysqli_stmt_prepare($stmt,"UPDATE Edu_xcand SET campus='$edux[4]',edu_generacion='$edux[5]',edu_estatus='$edux[6]'
+if(mysqli_stmt_prepare($stmt,"UPDATE Edu_xcand SET campus='$edux[4]',
+edu_generacion='$edux[5]',
+edu_estatus='$edux[6]'
 WHERE (cand_key='$edux[0]' AND secuencial='$edux[7]')"))
     {
 	mysqli_stmt_execute($stmt);		
@@ -27,7 +29,11 @@ WHERE (cand_key='$edux[0]' AND secuencial='$edux[7]')"))
 //        $registro = mysqli_stmt_insert_id($stmt);
 		echo "Educacion actualizada";
 		} 
-    else { echo "Fallo actualizacion de educacion";}
+    else { 
+//        $mensaje = "Fallo actualizacion de educacion de Candidato:".$edux[0]."  Secuencia: ".$edux[7]." Campus: ".$edux[4]."  Generación: ".$edux[5]." Estatus: ".$edux[6];
+        $mensaje = "Fallo actualizacion de educacion de Candidato: ".$edux[0];
+        echo $mensaje;
+    }
     mysqli_stmt_close($stmt);
     mysqli_close($dbc);
     }

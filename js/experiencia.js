@@ -95,10 +95,11 @@ function altaExp(tipo_mov) {
     experiencia[7] = document.getElementById("motivo").value;
     experiencia[8] = document.getElementById("herramientas").value;
     experiencia[9] = cand_clv;
-
-    experiencia[6] = experiencia[6].replace(/\n/g, "\\n");
-    experiencia[7] = experiencia[7].replace(/\n/g, "\\n");
-    experiencia[8] = experiencia[8].replace(/\n/g, "\\n");
+    /*
+        experiencia[6] = experiencia[6].replace(/\n/g, "\\n");
+        experiencia[7] = experiencia[7].replace(/\n/g, "\\n");
+        experiencia[8] = experiencia[8].replace(/\n/g, "\\n");
+    */
 
     if (experiencia[4].length > 1) {
         experiencia[4] = experiencia[4].replace(/[^a-zA-Z0-9]/g, '_');
@@ -130,15 +131,7 @@ function altaExp(tipo_mov) {
         return;
     }
 
-    for (var i1 = 0; i1 < 9; i1++) {
-        if (experiencia[i1].length < 1) {
-            experiencia[i1] = " ";
-        }
-        experiencia[i1] = experiencia[i1] + "|";
-    }
-
-    //    alert("Experiencia: " + experiencia[0]);
-
+    var camposx23 = experiencia.join("|");
     var archivo1;
 
     if (tipo_mov == 2) {
@@ -148,7 +141,7 @@ function altaExp(tipo_mov) {
         archivo1 = servidor + "httpdocs/reg_exp_x_cand.php";
     }
 
-    var archivo2 = archivo1 + "?Experiencia=" + experiencia;
+    var archivo2 = archivo1 + "?Experiencia=" + camposx23;
     var xhttp;
 
     if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -166,10 +159,10 @@ function altaExp(tipo_mov) {
             //            alert(cadena);
             var campos = cadena.split(":");
             document.getElementById("mensaje_gral_exp").innerHTML = campos[0];
-            if (campos[1] > 0 && tipo_mov != 2) {
+            if (campos[1] > 0) {
                 document.getElementById("clv_exp").value = campos[1];
-                document.getElementById("altaexp").disabled = false;
-                document.getElementById("actuaexp").disabled = true;
+                document.getElementById("altaexp").disabled = true;
+                document.getElementById("actuaexp").disabled = false;
             }
         }
     };
@@ -227,7 +220,7 @@ function consultaExp() {
                         //             alert("campo: ("+i+") - ("+ids[i]+")");
                     }
                 }
-                ids[7] = ids[7].replace(/\\n/g, '\n');
+                //                ids[7] = ids[7].replace(/\\n/g, '\n');
 
                 document.getElementById("empresa").value = ids[2];
                 document.getElementById("puesto").value = ids[3];

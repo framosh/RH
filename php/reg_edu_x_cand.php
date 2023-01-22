@@ -1,8 +1,9 @@
 <?php
 //  Registro de la educación recivida por el candidato
 $edux=$_GET["datos_edu_cand"];
-$edux = explode(',',$edux);
+$edux = explode('|',$edux);
 $secuencial=0;
+
 
 require 'arhsi_connect.php';
 $query="SELECT * FROM Edu_xcand WHERE (cand_key='$edux[0]')";
@@ -10,9 +11,7 @@ $query="SELECT * FROM Edu_xcand WHERE (cand_key='$edux[0]')";
 $result = mysqli_query($dbc,$query);
 $numero_filas = mysqli_num_rows($result);
 
-if($numero_filas >0){
-	$secuencial=$numero_filas+1;
-} else { $secuencial=1;}
+$secuencial=$numero_filas+1;
 
 if(mysqli_stmt_prepare($stmt,"INSERT INTO Edu_xcand (cand_key,clv_tip_edu,clv_institucion,carrera,campus,edu_generacion,edu_estatus,secuencial) VALUES (?,?,?,?,?,?,?,?)"))
 	{

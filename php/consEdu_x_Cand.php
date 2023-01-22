@@ -6,7 +6,9 @@ $Tipo_edu=$_GET["Tipo_edu"];
 require 'arhsi_connect.php';
 
 if($Instituto=="" && $Tipo_edu==""){
-  $query="SELECT Edu_xcand.clv_tip_edu, inst_educativa.inst_nombre, Edu_xcand.carrera, Edu_xcand.campus, Edu_xcand.edu_generacion, Edu_xcand.edu_estatus FROM Edu_xcand 
+  $query="SELECT Edu_xcand.clv_tip_edu, inst_educativa.inst_nombre, Edu_xcand.carrera, Edu_xcand.campus, 
+  Edu_xcand.edu_generacion, Edu_xcand.edu_estatus 
+  FROM Edu_xcand 
   LEFT JOIN inst_educativa ON inst_educativa.clv_institucion = Edu_xcand.clv_institucion
   WHERE (Edu_xcand.cand_key='$Candidato')";
 } else {

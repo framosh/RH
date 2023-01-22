@@ -62,6 +62,9 @@ function limpiaPantallaEC() {
     document.getElementById("generacion").value = vacio;
     document.getElementById("secuencial").value = vacio1;
     document.getElementById("mensaje_gral_edu").innerHTML = vacio;
+    document.getElementById("alta").disabled = false;
+    document.getElementById("actualiza").disabled = true;
+    document.getElementById("borra").disabled = true;
 }
 
 function actualizaEdu() {
@@ -69,6 +72,7 @@ function actualizaEdu() {
     altaEdu(tipo_mov);
 }
 
+/*
 function validaEstatusEdu(estatus) {
     var estatus_edu;
     switch (estatus) {
@@ -94,6 +98,41 @@ function validaEstatusEdu(estatus) {
             estatus_edu = 0;
     }
     return estatus_edu;
+}
+*/
+
+function borraEdu() {
+    alert("Borra registro");
+    var secuencial = document.getElementById("secuencial").value;
+
+    var datos_edu_cand = [];
+    datos_edu_cand[0] = cand_clv;
+    datos_edu_cand[1] = secuencial;
+
+    var camposx23 = datos_edu_cand.join("|");
+
+    var archivo1 = servidor + "httpdocs/borra_edu_x_cand.php";
+    var archivo2 = archivo1 + "?borra_edu_cand=" + camposx23;
+    var xhttp;
+
+    if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+        xhttp = new XMLHttpRequest();
+    } else { // code for IE6, IE5
+        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    xhttp.open("GET", archivo2, true);
+    xhttp.send(null);
+
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            var cadena = xhttp.responseText;
+            //          alert("cadena:" + cadena);
+            document.getElementById("mensaje_gral_edu").innerHTML = cadena;
+            document.getElementById("alta").disabled = false;
+            document.getElementById("actualiza").disabled = true;
+        }
+    };
 }
 
 function altaEdu(tipo_mov) {
@@ -135,7 +174,8 @@ function altaEdu(tipo_mov) {
     clavex22 = tipoedu2[tipoedux22].split("|");
     var tipo_edu_clv = clavex22[0];
 
-    var estatus_edu = validaEstatusEdu(estatus);
+    var estatus_edu = document.getElementById("estatus").selectedIndex;
+    //    var estatus_edu = validaEstatusEdu(estatus);
 
     var datos_edu_cand = [];
     datos_edu_cand[0] = cand_clv;
@@ -147,6 +187,8 @@ function altaEdu(tipo_mov) {
     datos_edu_cand[6] = estatus_edu;
     datos_edu_cand[7] = secuencial;
 
+    var camposx23 = datos_edu_cand.join("|");
+
     var archivo1;
 
     if (tipo_mov == 2) {
@@ -155,7 +197,7 @@ function altaEdu(tipo_mov) {
         archivo1 = servidor + "httpdocs/reg_edu_x_cand.php";
     }
 
-    var archivo2 = archivo1 + "?datos_edu_cand=" + datos_edu_cand;
+    var archivo2 = archivo1 + "?datos_edu_cand=" + camposx23;
     var xhttp;
 
     //    alert("archivo2: " + archivo2);
@@ -174,6 +216,9 @@ function altaEdu(tipo_mov) {
             var cadena = xhttp.responseText;
             //          alert("cadena:" + cadena);
             document.getElementById("mensaje_gral_edu").innerHTML = cadena;
+            document.getElementById("alta").disabled = true;
+            document.getElementById("actualiza").disabled = false;
+            document.getElementById("borra").disabled = false;
         }
     };
 }
@@ -191,7 +236,7 @@ function determinaInstitucion() {
 }
 
 function despliegaEdu() {
-    //    alert("Desplirga Edu");
+    //    alert("Despliega Educacion");
     var carrera = document.getElementById("carreras").value;
 
     var renglones = carreras2.length;
@@ -240,7 +285,9 @@ function despliegaEdu() {
     document.getElementById("campus").value = campus;
     document.getElementById("generacion").value = ids[5];
     document.getElementById("estatus").selectedIndex = estatus2;
-    document.getElementById("secuencial").selectedIndex = ids[7];
+    document.getElementById("secuencial").value = ids[7];
+    document.getElementById("alta").disabled = true;
+    document.getElementById("actualiza").disabled = false;
 }
 
 

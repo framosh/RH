@@ -5,10 +5,11 @@ $Experiencia=$_GET["Experiencia"];
 
 require 'arhsi_connect.php';
 
+
 if($Experiencia != ""){
-  $query="SELECT * FROM Experiencia 
-  WHERE ((cand_key='$Candidato') AND (exp_clv='$Experiencia'))";  
+  $query="SELECT * FROM Experiencia WHERE ((cand_key LIKE '$Candidato') AND (exp_clv LIKE '$Experiencia'))";
 } else {
+//  $query="SELECT * FROM Experiencia WHERE (cand_key='$Candidato') ORDER BY periodo DESC";  
   $query="SELECT * FROM Experiencia WHERE (cand_key='$Candidato')";  
 }
 
@@ -36,12 +37,20 @@ if($numero_filas >0){
          return $rc;
          }
 
+
        function llenaDatos($stream, $result) {
          $nrows = 0;
          $delimiter='|';
+//         $separator='|';
+//         $eol=chr(13);
+//         $delimiter=chr(124);
 //         $escape_char ="\";
          while($row = mysqli_fetch_row($result)) {
-           $row = str_replace("\n","<br>",$row);
+
+          $row[7] = str_replace("\n","<br>",$row[7]);
+          $row[8] = str_replace("\n","<br>",$row[8]);
+          $row[9] = str_replace("\n","<br>",$row[9]);
+
            fputcsv($stream, $row, $delimiter);
            $nrows++;
            }

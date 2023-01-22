@@ -45,7 +45,7 @@ if($response)
 
 	while($row = mysqli_fetch_array($response))
 		{
-			$row[7]=str_replace("\\n","<br>",$row[7]);
+			$row[7]=str_replace("\n","<br>",$row[7]);
 
        	 echo '<tr><td align="center"  font="arial">'.
 	       $row[1] .'</td><td align="left" >'.

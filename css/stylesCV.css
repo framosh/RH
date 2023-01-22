@@ -172,7 +172,7 @@ body {
     margin-right: 10%;
     grid-template-areas: 'cursos';
     grid-template-rows: 100%;
-    grid-template-columns: auto;
+    /*    grid-template-columns: auto;*/
     /*    background-color: rgb(125, 236, 14);*/
     /*    border: 1px solid black; */
 }
