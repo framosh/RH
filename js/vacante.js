@@ -57,6 +57,14 @@ function rep_excel() {
     window.location.href = "httpdocs/sp_vacantes.php?Estatus=" + estatus + "&empresa=" + cliente_clv + "&nombre=" + empresa;
 }
 
+function correo_cand() {
+    // Configura el correo de invitación a enviar a los candidatos
+}
+
+function correo_clie() {
+    // Configura el correo a enviar al cliente con los cvs. de candidatos
+}
+
 
 function limpiaPantalla() {
     //    alert("limpiaPantalla");
@@ -96,6 +104,10 @@ function limpiaPantalla2() {
     document.getElementById("edad2").value = opcion;
     document.getElementById("fechar").value = vacio;
     document.getElementById("mensaje_vacante").textContent = "";
+    document.getElementById("correo1").value = vacio;
+    document.getElementById("correo2").value = vacio;
+    document.getElementById("correo3").value = vacio;
+    document.getElementById("subject").value = vacio;
 }
 
 // Consulta vacante
@@ -218,6 +230,11 @@ function cargaDatos() {
             document.getElementById("Req2").value = ids[17];
             document.getElementById("Obs2").value = ids[18];
 
+            document.getElementById("correo1").value = ids[19];
+            document.getElementById("correo2").value = ids[20];
+            document.getElementById("correo3").value = ids[21];
+            document.getElementById("subject").value = ids[22];
+
             document.getElementById("altav").disabled = true;
             document.getElementById("actualizav").disabled = false;
         }
@@ -257,6 +274,11 @@ function registroVacante() {
     var edad2 = document.getElementById("edad2").value;
     var fecha = document.getElementById("fechar").value;
     var estatus = document.getElementById("Estatus").value;
+    var corr1 = document.getElementById("correo1").value;
+    var corr2 = document.getElementById("correo2").value;
+    var corr3 = document.getElementById("correo3").value;
+    var subj = document.getElementById("subject").value;
+
     var cliente_clv = 0;
     var puesto_clv = 0;
 
@@ -396,6 +418,10 @@ function registroVacante() {
     datosx1[16] = func2;
     datosx1[17] = req2;
     datosx1[18] = obs2;
+    datosx1[19] = corr1;
+    datosx1[20] = corr2;
+    datosx1[21] = corr3;
+    datosx1[22] = subj;
 
     /*
         alert("func2:" + func2);

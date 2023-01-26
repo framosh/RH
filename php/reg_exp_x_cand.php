@@ -1,3 +1,4 @@
+
 <?php
 $edux1=$_GET["Experiencia"];
 $edux1 = str_replace(',','',$edux1);

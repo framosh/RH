@@ -23,7 +23,10 @@ $campos = explode('|',$campos1);
         datosx1[16] = func2;
     datosx1[17] = req2;
     datosx1[18] = obs2;
-
+    datosx1[19] = corr1;
+    datosx1[20] = corr2;
+    datosx1[21] = corr3;
+    datosx1[22] = motivo;
 */
 
 $cantidad = count($campos);
@@ -40,7 +43,8 @@ if(mysqli_stmt_prepare($stmt,"UPDATE Vacantes SET clv_puesto='$campos[3]', vac_d
 Funciones='$campos[6]', Requisitos='$campos[5]', Nivel='$campos[4]', Lugar='$campos[7]', 
 Estatus='$campos[12]', vac_sdo1='$campos[8]', vac_sdo2='$campos[9]', vac_edad2='$campos[11]', 
 vac_edad1='$campos[10]', horario='$campos[14]', Observaciones='$campos[15]', func2='$campos[16]', 
-req2='$campos[17]', obs2='$campos[18]' 
+req2='$campos[17]', obs2='$campos[18]',correo1='$campos[19]',correo2='$campos[20]',correo3='$campos[21]',
+motivo='$campos[22]' 
 WHERE ((clv_vacante LIKE '$campos[1]') AND (emp_clave LIKE '$campos[0]'))"))
 	 	{
 	  	mysqli_stmt_execute($stmt);

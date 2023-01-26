@@ -199,6 +199,22 @@ function subeArchivo(archivo) {
     xhttp.send(fd);
 }
 
+var corrCandidato;
+var carbonCopia = "proyectosfrh@gmail.com";
+var titulo;
+var cuerpo;
+
+function enviaCorreo() {
+    alert("Envia correo de invitación al Candidato");
+    var encabezado1 = "Estimado Sr. %0d%0a %0d%0a Le envío el detalle de la vacante, para cualquier duda quedo a sus órdenes: %0d%0a %0d%0a";
+    //    var encabezado2 = "Por favor consulte la página web de la empresa para conocer mas sobre ella: https://www.power-street.com/";
+    var encabezado2 = "";
+    var cuerpo2 = encabezado1 + encabezado2 + cuerpo;
+    var mail = document.createElement("a");
+    mail.href = "mailto:" + corrCandidato + "?bcc=" + carbonCopia + "&subject=" + titulo + "&body=" + cuerpo2;
+    mail.click();
+}
+
 
 /* LIMPIA PANTALLA */
 function limpiaPantalla1() {
@@ -230,8 +246,12 @@ function limpiaPantalla2() {
     document.getElementById("sdo2").value = valor;
     document.getElementById("trabajo").value = valor;
     document.getElementById("puesto2").value = valor;
-    document.getElementById("fecha1").value = valor;
+    document.getElementById("fecha_env").value = valor;
     document.getElementById("fecha2").value = valor;
+
+    document.getElementById("fecha_ent").value = valor;
+    document.getElementById("hora_ent").value = valor;
+    document.getElementById("lugar_ent").value = valor;
     //    document.getElementById("sdo5").value = valor;
     document.getElementById("civil").selectedIndex = opcion2;
     document.getElementById("estatus_cand").selectedIndex = opcion2;
@@ -280,10 +300,13 @@ function actualizaCandidato() {
     //cand_edoc,cand_hijos,clv_est_cand,cand_sdo_sol,clv_vacante,cand_sdo_ult,cand_ult_trab,cand_ult_pue,clv_est_cv,
     //clv_est_ent,clv_est_eval,cand_fech_env,cand_fech_ingre,cand_sdo_contr,cand_obs_reclu,cand_obs_eval,
 
+
     camposx22[0] = document.getElementById("cand_nom").value;
     camposx22[1] = document.getElementById("cand_tel1").value;
     camposx22[2] = document.getElementById("cand_tel2").value;
     camposx22[3] = document.getElementById("cand_corr").value;
+    corrCandidato = camposx22[3];
+
     camposx22[4] = document.getElementById("skype").value;
     camposx22[5] = document.getElementById("fnac").value;
     camposx22[6] = document.getElementById("direccion").value;
@@ -299,8 +322,13 @@ function actualizaCandidato() {
     var est_cv = document.getElementById("estatus_cv").value; // Estatus de cv.
     var est_entrevista = document.getElementById("estatus_entre").value; // Estatus de entrevista
     var est_evaluacion = document.getElementById("estatus_eval").value; // Estatus de evaluacion
-    camposx22[20] = document.getElementById("fecha1").value; // fecha de envio de cv. al cliente
+    camposx22[20] = document.getElementById("fecha_env").value; // fecha de envio de cv. al cliente
     camposx22[21] = document.getElementById("fecha2").value; // fecha de contratacion
+
+    var fecha_ent = document.getElementById("fecha_ent").value;
+    var hora_ent = document.getElementById("hora_ent").value;
+    var lugar_ent = document.getElementById("lugar_ent").value;
+
     camposx22[22] = document.getElementById("sdo5").value; // Sueldo contratado
     camposx22[23] = document.getElementById("cand_obs1").value; // Comentario reclutador
     camposx22[24] = document.getElementById("cand_obs2").value; // Comentarios evaluador
@@ -415,6 +443,9 @@ function actualizaCandidato() {
     camposx22[33] = foto_nom;
     camposx22[34] = file_dir;
     camposx22[35] = file_nom;
+    camposx22[36] = fecha_ent;
+    camposx22[37] = hora_ent;
+    camposx22[38] = lugar_ent;
 
     var cantidad_campos = camposx22.length;
 
@@ -533,6 +564,26 @@ function leeConocimientos2() {
     document.getElementById("mensaje_gral").innerHTML = limpia;
 
     leeConocimientos(vacante_clv); // Lee el catalogo general de conocimientos de la DB
+}
+
+function actFechaEnvio() {
+    //    alert("Actualiza fecha de envio");
+    var posicion22 = document.getElementById("estatus_cand").selectedIndex;
+    //    alert("Actualiza 3 fecha de envio, posicion: " + posicion22);
+
+    if (posicion22 == 2) {
+        var dia_de_hoy = new Date();
+        var anio = dia_de_hoy.getFullYear();
+        var mes = dia_de_hoy.getMonth();
+        var dia = dia_de_hoy.getDate();
+        mes++;
+        //      var fechax1 = anio + "-" + mes + "-" + dia;
+        var fechax2 = dia + "-" + mes + "-" + anio;
+        //    alert("fecha de hoy: " + dia_de_hoy);
+        //  alert("fecha 2: " + fechax1);
+        document.getElementById("fecha_env").value = fechax2;
+        enviaCorreo();
+    }
 }
 
 function consultaCandidato() {
@@ -656,6 +707,9 @@ function consultaCandidato() {
                 document.getElementById("edad").disabled = true;
             }
 
+            //            alert("Sueldo solicitado: " + ids[13]);
+            corrCandidato = ids[4];
+
             document.getElementById("cand_key").value = ids[0];
             document.getElementById("cand_nom").value = ids[1];
             document.getElementById("cand_tel1").value = ids[2];
@@ -680,7 +734,11 @@ function consultaCandidato() {
             document.getElementById("cand_obs2").value = ids[21]; // Comentarios evaluador
             document.getElementById("fecha2").value = ids[22]; // Fecha de contratación
             document.getElementById("sdo5").value = ids[23]; // Sueldo contratado          
-            document.getElementById("fecha1").value = ids[24]; // Fecha de envio de cv a Cliente
+            document.getElementById("fecha_env").value = ids[24]; // Fecha de envio de cv a Cliente
+
+            document.getElementById("fecha_ent").value = ids[42];
+            document.getElementById("hora_ent").value = ids[43];
+            document.getElementById("lugar_ent").value = ids[44];
 
             document.getElementById("act_cand").disabled = false;
             document.getElementById("cand_obs3").value = ids[29]; // Comentarios del candidato
@@ -756,6 +814,20 @@ function consultaVacante() {
             var est_vac = ["", "Activa", "Cerrada", "Cancelada"];
             var vacante_est = est_vac[ids[4]];
             document.getElementById("vacante_est").value = vacante_est;
+
+            titulo = "Vacante de: " + ids[0];
+
+            ids[5] = ids[5].replace(/\\n/g, "%0d%0a"); // Funciones
+            ids[6] = ids[6].replace(/\\n/g, "%0d%0a"); // Requisitos
+            ids[7] = ids[7].replace(/\\n/g, "%0d%0a"); // Lugar de trabajo
+            ids[9] = ids[9].replace(/\\n/g, "%0d%0a"); // Observaciones
+
+            cuerpo = "Requisitos:" + "%0d%0a" + ids[6] + "%0d%0a" + "%0d%0a" + "Funciones: %0d%0a" + ids[5] +
+                "%0d%0a" + "%0d%0a" + "Lugar de trabajo: " + ids[7] +
+                "%0d%0a" + "%0d%0a Observaciones: %0d%0a" + ids[9] + "%0d%0a";
+
+            //$query="SELECT Vacantes.vac_desc, Vacantes.vac_sdo1, Vacantes.vac_sdo2, Empresa.emp_nom, Vacantes.Estatus,
+            //Vacantes.Funciones, Vacantes.Requisitos, Vacantes.Lugar, Vacantes.horario, Vacantes.Observaciones 
 
             leeConocimientos(vacante_clv); // Lee los conocimientos de la vacante a la que se apunto el candidato
 

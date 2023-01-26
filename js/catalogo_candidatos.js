@@ -49,7 +49,7 @@ function leeClientes2() {
 }
 
 function leeVacantes2() {
-    //    alert("Lee Vacantes");
+    //    alert("Lee Vacantes 2");
     var cliente = document.getElementById("empresas").value;
 
     if (cliente == "Seleccione una Empresa") {
@@ -106,6 +106,7 @@ function leeVacantes3(cliente_clv) {
         if (this.readyState == 4 && this.status == 200) {
             //    alert("paso 1.8");
             var cadena = xhttp.responseText;
+            //            alert("Cadena de vacantes: " + cadena);
             //            document.getElementById("mensaje_gral").textContent = "(" + cadena + ")" + "        longitud: (" + cadena.length + ")";
 
             var clientes = cadena.split("\n");

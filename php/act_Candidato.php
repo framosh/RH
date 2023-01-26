@@ -40,7 +40,10 @@ otro='$campos[30]',
 foto_dir='$campos[32]',
 foto_nom='$campos[33]',
 file_dir='$campos[34]',
-file_nom='$campos[35]' 
+file_nom='$campos[35]',
+fecha_ent='$campos[36]', 
+hora_ent='$campos[37]', 
+lugar_ent='$campos[38]'
 WHERE cand_key='$campos[31]'"))
 	{
 	   mysqli_stmt_execute($stmt);

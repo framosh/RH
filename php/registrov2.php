@@ -22,6 +22,10 @@ $campos = explode('|',$campos1);
     datosx1[16] = func2;
     datosx1[17] = req2;
     datosx1[18] = obs2;
+    datosx1[19] = corr1;
+    datosx1[20] = corr2;
+    datosx1[21] = corr3;
+    datosx1[22] = subject;
 */
 //if(mysqli_stmt_prepare($stmt,"INSERT INTO Vacantes (emp_clave,vac_desc,clv_puesto,Funciones,Requisitos,
 //Nivel,Lugar,horario,Observaciones,vac_fech_reg,vac_sdo1,vac_sdo2,vac_edad1,vac_edad2,
@@ -39,10 +43,10 @@ for($i=0;$i< $camposx1;$i++) {
 
 require 'arhsi_connect.php';
 
-if(mysqli_stmt_prepare($stmt,"INSERT INTO Vacantes (emp_clave,vac_desc,clv_puesto,Funciones,Requisitos,Nivel,Lugar,horario,Observaciones,vac_fech_reg,vac_sdo1,vac_sdo2,vac_edad1,vac_edad2,Estatus,func2,req2,obs2) 
-VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"))
+if(mysqli_stmt_prepare($stmt,"INSERT INTO Vacantes (emp_clave,vac_desc,clv_puesto,Funciones,Requisitos,Nivel,Lugar,horario,Observaciones,vac_fech_reg,vac_sdo1,vac_sdo2,vac_edad1,vac_edad2,Estatus,func2,req2,obs2,correo1,correo2,correo3,motivo) 
+VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"))
 	{
-	mysqli_stmt_bind_param($stmt,"ssssssssssssssssss",$campos[0],$campos[2],$campos[3],$campos[6],$campos[5],$campos[4],$campos[7],$campos[14],$campos[15],$campos[13],$campos[8],$campos[9],$campos[10],$campos[11],$campos[12],$campos[16],$campos[17],$campos[18]);
+	mysqli_stmt_bind_param($stmt,"ssssssssssssssssssssss",$campos[0],$campos[2],$campos[3],$campos[6],$campos[5],$campos[4],$campos[7],$campos[14],$campos[15],$campos[13],$campos[8],$campos[9],$campos[10],$campos[11],$campos[12],$campos[16],$campos[17],$campos[18],$campos[19],$campos[20],$campos[21],$campos[22]);
 	mysqli_stmt_execute($stmt);
 	$affected_rows = mysqli_stmt_affected_rows($stmt);
 
@@ -51,13 +55,15 @@ VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"))
 		$registro = mysqli_stmt_insert_id($stmt); 
 		$to = "soporte@arhsi.com.mx";
 		$subjet = "Alta de nueva vacante";
-		$message = nl2br("Clave vacante: $registro\n Puesto: $campos[2]\n  Nivel: $campos[5]\n Vacante: $campos[2]\n
-		  Funciones: $campos[6]\n  Requisitos: $campos[5]\n   Lugar de trabajo: $campos[7]\n  
-		  Fecha de registro: $campos[13]\n  Sueldo de: $campos[8]\n  Sueldo a: $campos[9]\n  Estatus: $campos[12]\n",false);
+		$message = nl2br("Clave vacante: $registro"."\r\n"." Puesto:". $campos[2]."\r\n"."Nivel:". $campos[5]."\r\n".
+		  "Vacante:". $campos[2]."\r\n"."Funciones:". $campos[6]."\r\n"."Requisitos:". $campos[5].
+		  "\r\n"."Lugar de trabajo:". $campos[7]."\r\n"."Fecha de registro:". $campos[13]."\r\n"."Sueldo de:". $campos[8].
+		  "\r\n"."Sueldo a:". $campos[9]."\r\n"."Estatus:". $campos[12]."\r\n",false);
+//		  $message = wordwrap($message,70,"\r\n");
 		$from = "federico.ramos@arhsi.com.mx";
-		$header = "MIME-Version: 1.0\r\n";
-		$header .= "Content-type: text/html\r\n";
-		$header .= "From:".$from;
+		$header = "MIME-Version: 1.0"."\r\n";
+		$header .= "Content-type: text/html; charset=utf-8"."\r\n";
+		$header .= "From:".$from."\r\n".'X-Mailer: PHP/'.phpversion();
 		$retval = mail($to,$subjet,$message,$header);
 		if($retval == true){
 			echo ("Alta de vacante, correo enviado, vacante numero:".$registro);

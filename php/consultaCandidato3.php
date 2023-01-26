@@ -15,7 +15,8 @@ Candidatos.cand_obs_reclu, Candidatos.cand_obs_eval, Candidatos.cand_fech_ingre,
 Candidatos.cand_fech_env, Candidatos.clv_vacante, Candidatos.nacionalidad, Candidatos.colonia, 
 Candidatos.municipio, Candidatos.com_cand, Candidatos.act_recrea, Candidatos.act_cult, Candidatos.ingles, 
 Candidatos.espaniol, Candidatos.otro, Candidatos.foto_dir, Candidatos.foto_nom, Vacantes.vac_desc, 
-Vacantes.emp_clave, Vacantes.clv_vacante, Candidatos.file_dir, Candidatos.file_nom 
+Vacantes.emp_clave, Vacantes.clv_vacante, Candidatos.file_dir, Candidatos.file_nom, Candidatos.fecha_ent,
+Candidatos.hora_ent, Candidatos.lugar_ent  
 FROM Candidatos 
 LEFT JOIN Cand_x_vac ON Cand_x_vac.cand_key = Candidatos.cand_key
 LEFT JOIN Vacantes ON Vacantes.clv_vacante = Cand_x_vac.clv_vacante

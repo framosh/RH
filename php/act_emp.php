@@ -14,6 +14,7 @@ $delegacion=$campos[7];
 $estado=$campos[8];
 $estatus=$campos[9];
 $observaciones=$campos[10];
+$dir_web=$campos[11];
 
 require 'arhsi_connect.php';
 
@@ -27,7 +28,8 @@ emp_col='$colonia',
 emp_del='$delegacion', 
 estadoclv='$estado',
 Estatus='$estatus', 
-emp_obs='$observaciones' 
+emp_obs='$observaciones',
+dir_web='$dir_web' 
 WHERE emp_clave='$clave'"))
 	{
 	   mysqli_stmt_execute($stmt);

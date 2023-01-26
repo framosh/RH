@@ -36,6 +36,7 @@ function limpiaPantalla_emp() {
     document.getElementById("estatus").selectedIndex = opcion0;
     document.getElementById("estados").selectedIndex = opcion0;
     document.getElementById("observaciones").value = campo;
+    document.getElementById("dir_web").value = campo;
     document.getElementById("alta").disabled = false;
     document.getElementById("actualiza").disabled = true;
 }
@@ -56,6 +57,7 @@ function actualizaEmpresa() {
     var estatus = document.getElementById("estatus").value;
     var estado = document.getElementById("estados").value;
     var observaciones = document.getElementById("observaciones").value;
+    var dir_web = document.getElementById("dir_web").value;
     observaciones = observaciones.replace(/\n/g, "\\n");
 
     if (estado == "Seleccione un Estado") {
@@ -97,6 +99,7 @@ function actualizaEmpresa() {
     campos[8] = estado_clv;
     campos[9] = estatus;
     campos[10] = observaciones;
+    campos[11] = dir_web;
 
     var camposx2 = campos.join("|");
 
@@ -145,6 +148,7 @@ function altaEmpresa() {
     var estatus = document.getElementById("estatus").value;
     var estado = document.getElementById("estados").value;
     var observaciones = document.getElementById("observaciones").value;
+    var dir_web = document.getElementById("dir_web").value;
     observaciones = observaciones.replace(/\n/g, "\\n");
 
     //alert("Alta Empresa: ("+empresa+")");
@@ -174,6 +178,7 @@ function altaEmpresa() {
     campos[8] = estado_clv;
     campos[9] = estatus;
     campos[10] = observaciones;
+    campos[11] = dir_web;
 
     var camposx2 = campos.join("|");
 
@@ -318,6 +323,7 @@ function consultaEmpresa() {
             document.getElementById("estatus").selectedIndex = opcion3;
             document.getElementById("estados").selectedIndex = estado;
             document.getElementById("observaciones").value = ids[8];
+            document.getElementById("dir_web").value = ids[12];
             document.getElementById("alta").disabled = true;
             document.getElementById("actualiza").disabled = false;
         } else {

@@ -1,3 +1,4 @@
+
 <?php 
 $empresa=$_GET["Empresa"];
 $estatus=$_GET["Estatus"];
