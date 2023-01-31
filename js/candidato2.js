@@ -199,22 +199,58 @@ function subeArchivo(archivo) {
     xhttp.send(fd);
 }
 
-var corrCandidato;
-var carbonCopia = "proyectosfrh@gmail.com";
-var titulo;
-var cuerpo;
 
-function enviaCorreo() {
-    alert("Envia correo de invitación al Candidato");
-    var encabezado1 = "Estimado Sr. %0d%0a %0d%0a Le envío el detalle de la vacante, para cualquier duda quedo a sus órdenes: %0d%0a %0d%0a";
-    //    var encabezado2 = "Por favor consulte la página web de la empresa para conocer mas sobre ella: https://www.power-street.com/";
-    var encabezado2 = "";
-    var cuerpo2 = encabezado1 + encabezado2 + cuerpo;
-    var mail = document.createElement("a");
-    mail.href = "mailto:" + corrCandidato + "?bcc=" + carbonCopia + "&subject=" + titulo + "&body=" + cuerpo2;
-    mail.click();
+var corrCandidato;
+var corCopia = "contacto@arhsi.com.mx";
+var titulo = "Información de la vacante de: " + puesto;
+var cuerpo;
+var puesto;
+
+function enviaCorreo2() {
+    var cuerpox2 = "Estimado Sr. " + candidato_nombre + "%0d%0a" + "%0d%0a" + " Como le comenté tenemos la vacante para el puesto de: " + puesto +
+        ", sobre la cual le envío información, adicionalmente ingrese a la página web de la empresa para que conozca mas sobre ella: www.power-street.com" +
+        "%0d%0a" + " Su cv. será enviado a la gerencia para que se le programe una entrevista técnica." +
+        "%0d%0a" + "%0d%0a";
+    //        "%0d%0a" + "%0d%0a" + cuerpo + "%0d%0a" + "%0d%0a";
+    window.location.href = 'mailto:' + corrCandidato + "?bcc=" + corCopia + "&subject=" + titulo + "&body=" + cuerpox2;
 }
 
+
+/*
+function enviaCorreo() {
+
+    if (!confirm("¿Quiere enviar correo al candidato?")) {
+        return;
+    }
+
+    alert("Envia correo de invitación al Candidato");
+
+    var archivo1 = servidor + "httpdocs/correoCandidato.php";
+    var archivo2 = archivo1 + "?vacante=" + vacante_clv + "&candidato=" + candidato_nombre + "&correo=" + corrCandidato;
+    var xhttp;
+
+    if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+        xhttp = new XMLHttpRequest();
+    } else { // code for IE6, IE5
+        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    xhttp.open("GET", archivo2, true);
+    xhttp.onreadystatechange = function () {
+        //  alert("paso 1.7");
+        if (this.readyState == 4 && this.status == 200) {
+            //   alert("paso 1.8");
+            var cadena = xhttp.responseText;
+            alert("Cadena de correo: " + cadena);
+            document.getElementById("mensaje_gral").innerHTML = cadena;
+        } else {
+            //            alert("Estado: " + xhttp.readyState + "  Status: " + xhttp.status);
+        }
+    };
+    xhttp.send();
+    //    xhttp.disabled();    
+}
+*/
 
 /* LIMPIA PANTALLA */
 function limpiaPantalla1() {
@@ -806,7 +842,9 @@ function consultaVacante() {
                 }
             }
 
-            document.getElementById("puesto").value = ids[0];
+            puesto = ids[0];
+
+            document.getElementById("puesto").value = puesto;
             document.getElementById("sdo3").value = ids[1];
             document.getElementById("sdo4").value = ids[2];
             document.getElementById("empresa").value = ids[3];
