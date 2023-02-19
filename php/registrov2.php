@@ -60,7 +60,7 @@ VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"))
 		  "\r\n"."Lugar de trabajo:". $campos[7]."\r\n"."Fecha de registro:". $campos[13]."\r\n"."Sueldo de:". $campos[8].
 		  "\r\n"."Sueldo a:". $campos[9]."\r\n"."Estatus:". $campos[12]."\r\n",false);
 //		  $message = wordwrap($message,70,"\r\n");
-		$from = "federico.ramos@arhsi.com.mx";
+		$from = "framos@arhsi.com.mx";
 		$header = "MIME-Version: 1.0"."\r\n";
 		$header .= "Content-type: text/html; charset=utf-8"."\r\n";
 		$header .= "From:".$from."\r\n".'X-Mailer: PHP/'.phpversion();

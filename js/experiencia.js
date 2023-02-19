@@ -46,7 +46,7 @@ function limpiaPantallaEXP() {
     //    alert("Limpia Pantalla");
     var vacio = "";
     var vacio1 = 0;
-    document.getElementById("experiencias").selectedIndex = vacio1;
+    //    document.getElementById("experiencias").selectedIndex = vacio1;
     document.getElementById("clv_exp").value = vacio1;
     document.getElementById("empresa").value = vacio;
     document.getElementById("puesto").value = vacio;
@@ -56,7 +56,6 @@ function limpiaPantallaEXP() {
     document.getElementById("actividades").value = vacio;
     document.getElementById("motivo").value = vacio;
     document.getElementById("herramientas").value = vacio;
-    document.getElementById("mensaje_gral_exp").value = vacio;
     document.getElementById("altaexp").disabled = false;
     document.getElementById("actuaexp").disabled = true;
     document.getElementById("mensaje_gral_exp").innerHTML = vacio;
@@ -68,6 +67,45 @@ function actualizaExp() {
     //    alert("Actualiza Experiencia");
     tipo_mov = 2; // Estatus para modificación de registro
     altaExp(tipo_mov);
+}
+
+function borraExp() {
+
+    if (!confirm("¿Quiere borrar el registro de experiencia actual?")) {
+        return;
+    }
+
+    var experienciax = document.getElementById("experiencias").value;
+
+    if (experienciax == "Teclee la experiencia" && tipo_mov == 2) {
+        alert("Seleccione la experiencia a actualizar");
+        return;
+    }
+
+    var clv_exp = document.getElementById("clv_exp").value;
+
+    var archivo1 = servidor + "httpdocs/borra_exp_x_cand.php";
+
+    var archivo2 = archivo1 + "?candidato=" + cand_clv + "&experiencia=" + clv_exp;
+    var xhttp;
+
+    if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+        xhttp = new XMLHttpRequest();
+    } else { // code for IE6, IE5
+        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    xhttp.open("GET", archivo2, true);
+    xhttp.send(null);
+
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            var cadena = xhttp.responseText;
+            //            alert(cadena);
+            document.getElementById("mensaje_gral_exp").innerHTML = cadena;
+            leeExperiencias();
+        }
+    };
 }
 
 
@@ -170,8 +208,9 @@ function altaExp(tipo_mov) {
 
 function consultaExp() {
     //    alert("Consulta Institucion");
-    var vacio = "";
-    document.getElementById("mensaje_gral_exp").value = vacio;
+    limpiaPantallaEXP();
+    //    var vacio = "";
+    //  document.getElementById("mensaje_gral_exp").innerHTML = vacio;
 
     var clv_exp = document.getElementById("experiencias").value;
 

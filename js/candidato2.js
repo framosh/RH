@@ -783,7 +783,20 @@ function consultaCandidato() {
             document.getElementById("ingles").value = ids[32]; // Nivel de ingles
             document.getElementById("espaniol").value = ids[33]; // Nivel de español
             document.getElementById("otro").value = ids[34]; // Otro idioma
-            document.getElementById("cv_personal").innerHTML = ids[41]; // Direccion del cv. personal
+
+            var arch_long = ids[40].length;
+            var archivo2;
+            if (arch_long > 5) {
+                var archivo = ids[40].split('/');
+                archivo2 = archivo[2];
+            } else {
+                archivo2 = "";
+            }
+            file_nom = archivo2;
+            //            document.getElementById("cv_personal").innerHTML = ids[41]; // Direccion del cv. personal
+            document.getElementById("cv_personal").innerHTML = archivo2; // Direccion del cv. personal
+            //            alert("cv: " + archivo2 + "   longitud:" + arch_long);
+
             if (ids[35] == "") {
                 var foto_url = "../img/elicor9.jpg";
                 ids[35] = foto_url;
@@ -800,6 +813,11 @@ function consultaCandidato() {
     };
     xhttp.send();
     //    xhttp.disabled();
+}
+
+function cambia_Estatus_Eval() {
+    var evaluacion = 1;
+    document.getElementById("estatus_eval").selectedIndex = evaluacion;
 }
 
 function consultaVacante() {
@@ -895,10 +913,8 @@ function Estudios() {
 }
 
 function sale() {
-    if (confirm("¿Quiere regresar?")) {
-        actualizaCandidato();
-        window.close();
-    }
+    actualizaCandidato();
+    window.close();
 }
 
 function Experiencia() {
