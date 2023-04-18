@@ -174,6 +174,8 @@ function altaEdu(tipo_mov) {
     clavex22 = tipoedu2[tipoedux22].split("|");
     var tipo_edu_clv = clavex22[0];
 
+    //    alert("Tipo edu: " + tipo_edu_clv);
+
     var estatus_edu = document.getElementById("estatus").selectedIndex;
     //    var estatus_edu = validaEstatusEdu(estatus);
 

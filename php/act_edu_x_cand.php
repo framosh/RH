@@ -18,6 +18,8 @@ require 'arhsi_connect.php';
 //WHERE (cand_key='$edux[0]' AND clv_tip_edu='$edux[1]')"))
 
 if(mysqli_stmt_prepare($stmt,"UPDATE Edu_xcand SET campus='$edux[4]',
+clv_tip_edu = '$edux[1]',
+carrera = '$edux[3]',
 edu_generacion='$edux[5]',
 edu_estatus='$edux[6]'
 WHERE (cand_key='$edux[0]' AND secuencial='$edux[7]')"))

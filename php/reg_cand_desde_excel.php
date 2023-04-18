@@ -21,6 +21,9 @@
 <?php
 //setlocale(LC_ALL,"es_ES");
 setlocale(LC_CTYPE,'POSIX');
+
+// actualiza_cand_x_vac();  // Actualiza tabla de Cand_x_vac por emergencia
+
 //setlocale(LC_MONETARY,'en_US');
 header('Content-Type: text/html; charset=utf-8');
 echo("<h1><p style='text-align:center; color: #3633FF; font-family: arial;'>CARGA DE ARCHIVO EXCEL A BASE DE DATOS</p></h1>");
@@ -268,6 +271,11 @@ function registroCand_x_vac($candidato,$vacante) {
 	$estatus="1";
 	require 'arhsi_connect.php';
 
+	$query="SELECT * FROM Cand_x_vac WHERE clv_vacante='$vacante' AND cand_key='$candidato' AND estatus='1'";
+    $result = mysqli_query($dbc,$query);
+    $numero_filas = mysqli_num_rows($result);
+    
+    if($numero_filas ==0){
 	if(mysqli_stmt_prepare($stmt,"INSERT INTO Cand_x_vac (clv_vacante, cand_key, estatus) VALUES (?,?,?)"))
 		{
 		mysqli_stmt_bind_param($stmt,"sss",$vacante,$candidato,$estatus);
@@ -286,6 +294,7 @@ function registroCand_x_vac($candidato,$vacante) {
 		} else {
 			echo "<p style='text-align:left; color: red;'>Fallo la grabación de datos del candidato</p>";
 		}
+	}
 }
 
 function actualiza($campos){
@@ -315,5 +324,30 @@ function actualiza($campos){
 	mysqli_close($dbc);
 	}
 	echo("<br><button class='button button3' type='submit' onclick='history.go(-1);'>Regresar a pantalla anterior</button>");
+
+	//Restituye Cand_x_vac 
+function actualiza_cand_x_vac(){
+    require 'arhsi_connect.php';
+    $query="SELECT * FROM Candidatos WHERE 1";
+    $result = mysqli_query($dbc,$query);
+    $numero_filas = mysqli_num_rows($result);
+    
+    if($numero_filas >0){
+        while($row = mysqli_fetch_row($result)) {
+            $est2 = $row[19];
+/*
+			if($est2 == null){
+				$est2 = "1";
+            }
+*/
+            $vacante=$row[25];  // vacante
+            $candidato=$row[0]; // candidato 
+            $estatus=$est2;  // estatus
+            registroCand_x_vac($candidato,$vacante);
+        }
+    }
+    mysqli_free_result($result);
+    return;
+}
 ?>
 

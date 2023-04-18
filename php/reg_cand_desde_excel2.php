@@ -23,6 +23,8 @@
 //setlocale(LC_ALL,"es_ES");
 setlocale(LC_CTYPE,'POSIX');
 //setlocale(LC_MONETARY,'en_US');
+//actualiza_cand_x_vac();  // Actualiza tabla de Cand_x_vac por emergencia
+
 header('Content-Type: text/html; charset=utf-8');
 echo("<h1><p style='text-align:center; color: #3633FF; font-family: arial;'>CARGA DE ARCHIVO EXCEL A BASE DE DATOS</p></h1>");
 echo("<div style='text-align:left; color: #1B1B24; font-family: arial;'>");
@@ -85,6 +87,11 @@ if (isset($_POST['import']))
 // Alta de registro en DB
 function graba_registro($campo){
     echo("Campo 1: ".$campo[1]);
+    $longitud = strlen($campo[4]);
+    if($longitud < 1 ){
+        echo("No tiene vacante asignada");
+        return;
+    }
 
     require 'arhsi_connect.php';
 
@@ -127,10 +134,18 @@ else {
 echo("</div>");
 
 // Alta de registro de candidato por vacante en DB
-function registroCand_x_vac($candidato,$vacante,$campo) {
-	$estatus="1";
+function registroCand_x_vac($candidato,$vacante,$estatus) {
+//	$estatus="1";
+if($estatus == null || $estatus == 0){
+    $estatus = "1";
+}
 	require 'arhsi_connect.php';
 
+    $query="SELECT * FROM Cand_x_vac WHERE clv_vacante='$vacante' AND cand_key='$candidato' AND estatus='1'";
+    $result = mysqli_query($dbc,$query);
+    $numero_filas = mysqli_num_rows($result);
+    
+    if($numero_filas ==0){
 	if(mysqli_stmt_prepare($stmt,"INSERT INTO Cand_x_vac (clv_vacante, cand_key, estatus) VALUES (?,?,?)"))
 		{
 		mysqli_stmt_bind_param($stmt,"sss",$vacante,$candidato,$estatus);
@@ -149,11 +164,12 @@ function registroCand_x_vac($candidato,$vacante,$campo) {
 		} else {
 			echo "<p style='text-align:left; color: red;'>Fallo la grabación de datos del candidato</p>";
 		}
+    }
 }
 //(cand_nom,cand_tel1,cand_tel2,cand_corr,clv_vacante,cand_fecha_nac,cand_direccion,
 //cand_edad,cand_sdo_sol,cand_obs_reclu) 
 
-// Actualiza registro en DB
+// Actualiza registro de Candidato en DB
 function actualiza($campos){
     require 'arhsi_connect.php';
 
@@ -177,5 +193,24 @@ function actualiza($campos){
 	}
 
 echo("<br><button class='button button3' type='submit' onclick='history.go(-1);'>Regresar a pantalla anterior</button>");
+
+//Restituye Cand_x_vac 
+function actualiza_cand_x_vac(){
+    require 'arhsi_connect.php';
+    $query="SELECT * FROM Candidatos WHERE 1";
+    $result = mysqli_query($dbc,$query);
+    $numero_filas = mysqli_num_rows($result);
+    
+    if($numero_filas >0){
+        while($row = mysqli_fetch_row($result)) {
+            $vacante=$row[25];  // vacante
+            $candidato=$row[0]; // candidato 
+            $estatus=$row[19];  // estatus
+            registroCand_x_vac($candidato,$vacante,$estatus);
+        }
+    }
+    mysqli_free_result($result);
+    return;
+}
 ?>
 
