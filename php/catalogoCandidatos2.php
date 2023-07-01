@@ -3,7 +3,7 @@ $vacante=$_GET["vacante"];
 $estatus=$_GET["estatus"];
 $todos="1";
 $condicion="";
-$condicion1="";
+$condicion1="1";
 $condicion2="";
 $estatus2=0;
 
@@ -15,7 +15,7 @@ if($estatus != "" && $estatus != "1" && $estatus != "0"){
   $estatus2 = $estatus-1;
   $condicion2 = "Cand_x_vac.estatus='$estatus2'";
 } else {
-  $condicion2 = "Cand_x_vac.estatus >=1";
+  $condicion2 = "";
 }
 
 if($condicion1 != ""){

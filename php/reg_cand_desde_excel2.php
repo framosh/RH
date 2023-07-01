@@ -84,7 +84,7 @@ if (isset($_POST['import']))
   }
 }
 
-// Alta de registro en DB
+// Alta de registro de candidato nuevo en DB
 function graba_registro($campo){
     echo("Campo 1: ".$campo[1]);
     $longitud = strlen($campo[4]);
@@ -102,12 +102,13 @@ function graba_registro($campo){
     if($numero_filas >0){
         actualiza($campo);
         return;
-    } 
+    }
+    $estatus_cand ="1"; 
 
-if(mysqli_stmt_prepare($stmt,"INSERT INTO Candidatos (cand_nom,cand_tel1,cand_tel2,cand_corr,clv_vacante,cand_fecha_nac,cand_direccion,cand_edad,cand_sdo_sol,cand_obs_reclu) 
-VALUES (?,?,?,?,?,?,?,?,?,?)"))
+if(mysqli_stmt_prepare($stmt,"INSERT INTO Candidatos (cand_nom,cand_tel1,cand_tel2,cand_corr,clv_vacante,cand_fecha_nac,cand_direccion,cand_edad,cand_sdo_sol,cand_obs_reclu,clv_est_cand) 
+VALUES (?,?,?,?,?,?,?,?,?,?,?)"))
 {
-	mysqli_stmt_bind_param($stmt,"ssssssssss",$campo[0],$campo[1],$campo[2],$campo[3],$campo[4],$campo[5],$campo[6],$campo[7],$campo[8],$campo[9]);
+	mysqli_stmt_bind_param($stmt,"sssssssssss",$campo[0],$campo[1],$campo[2],$campo[3],$campo[4],$campo[5],$campo[6],$campo[7],$campo[8],$campo[9],$estatus_cand);
 
     mysqli_stmt_execute($stmt);
 
@@ -118,7 +119,7 @@ VALUES (?,?,?,?,?,?,?,?,?,?)"))
 		$candidato = mysqli_stmt_insert_id($stmt);
 		echo "<p style='text-align:left; color: green;'>Candidato grabado: ".$campo[0].'</p>';
 		$vacante=$campo[4];
-		registroCand_x_vac($candidato,$vacante,$campo);
+		registroCand_x_vac($candidato,$vacante,$estatus_cand);
 		} 
 	else {
 		echo "<p style='text-align:left; color: red;'>Error de grabacion: ".mysqli_error($dbc).'</p>';
